@@ -1,0 +1,9 @@
+# Editor / local tooling
+.claude/
+CLAUDE.md
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Raw source video (not used on the web; AVI also exceeds GitHub's 100MB limit)
+*.avi

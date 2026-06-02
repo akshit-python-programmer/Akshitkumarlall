@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Next Gen Camera — Akshit Kumar Lall</title>
+<meta name="description" content="Next Gen Camera — an AI security layer for existing CCTV. Patent filed. By Akshit Kumar Lall.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/neo-brutal.css">
+<style>
+    /* ===== Base tokens (mirrors the subset of index.html the NGC section uses) ===== */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+        --bg:#fff;--bg2:#f4f4f4;--dark:#0a0a0a;
+        --fg:#0a0a0a;--fg2:#333;--fg3:#777;--fg4:#aaa;
+        --border:rgba(0,0,0,.08);--border2:rgba(0,0,0,.16);
+        --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+        --ease:cubic-bezier(.25,.46,.45,.94);
+        --cur-arrow:url('assets/cursors/pixel-arrow.png') 1 1, auto;
+        --cur-point:url('assets/cursors/pixel-hand.png') 7 1, pointer;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--neo-lavender);color:var(--fg);overflow-x:hidden;cursor:var(--cur-arrow)}
+    a{cursor:var(--cur-point)}
+    .s-max{max-width:1300px;margin:0 auto}
+    .s-label{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--fg3);margin-bottom:16px}
+    .s-label::before{content:'';width:32px;height:1.5px;background:var(--fg)}
+
+    /* ===== Top bar (back to portfolio) ===== */
+    .ngp-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+        padding:16px 32px;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+        border-bottom:3px solid var(--neo-black)}
+    .ngp-logo{font-family:var(--font-pixel);font-size:.7rem;letter-spacing:.04em;color:var(--neo-black);text-decoration:none}
+    .ngp-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-code);font-size:.66rem;letter-spacing:.12em;
+        text-decoration:none;color:var(--neo-black);border:2px solid var(--neo-black);background:var(--neo-yellow);
+        padding:9px 16px;box-shadow:3px 3px 0 var(--neo-black);transition:transform .15s,box-shadow .15s}
+    .ngp-back:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--neo-black)}
+
+    /* ===== Innovation / NGC layout (copied from index.html base styles) ===== */
+    .innov-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .innov-scene{position:relative;aspect-ratio:1;background:var(--dark);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:20px}
+    .ngen-console{width:100%;max-width:420px;position:relative;z-index:2;display:flex;flex-direction:column;gap:10px}
+    .ngen-header{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;color:rgba(255,255,255,.45);padding:0 4px}
+    .ngen-status{margin-top:6px;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;color:rgba(255,255,255,.62);max-width:320px}
+    .ngen-live{display:flex;align-items:center;gap:8px;color:#ef4444;font-weight:700}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:livePulse 1.2s ease-in-out infinite}
+    @keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+    .ngen-feed{position:relative;aspect-ratio:4/3;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:#0a0a0a}
+    .ngen-feed img{width:100%;height:100%;object-fit:cover;filter:contrast(1.05) saturate(.85)}
+    .ngen-scan{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,rgba(34,197,94,.08) 48%,rgba(34,197,94,.25) 50%,rgba(34,197,94,.08) 52%,transparent 100%);background-size:100% 200%;animation:ngenScan 3.5s linear infinite;pointer-events:none}
+    @keyframes ngenScan{0%{background-position:0 -100%}100%{background-position:0 200%}}
+    .ngen-reticle{position:absolute;inset:12%;border:1px solid rgba(34,197,94,.35);pointer-events:none}
+    .ngen-reticle::before,.ngen-reticle::after{content:'';position:absolute;background:rgba(34,197,94,.5)}
+    .ngen-reticle::before{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
+    .ngen-reticle::after{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%)}
+    .ngen-corner{position:absolute;width:14px;height:14px;border-color:rgba(34,197,94,.7);border-style:solid;pointer-events:none}
+    .ngen-corner.tl{top:8%;left:8%;border-width:2px 0 0 2px}.ngen-corner.tr{top:8%;right:8%;border-width:2px 2px 0 0}
+    .ngen-corner.bl{bottom:8%;left:8%;border-width:0 0 2px 2px}.ngen-corner.br{bottom:8%;right:8%;border-width:0 2px 2px 0}
+    .ngen-hud{position:absolute;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;color:rgba(255,255,255,.55);pointer-events:none}
+    .ngen-modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px}
+    .ngen-mod{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);padding:7px 5px;min-height:43px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;transition:all .35s var(--ease);cursor:var(--cur-point)}
+    .ngen-mod:hover{background:rgba(255,255,255,.08)}
+    .ngen-mod i{display:block;font-size:1rem;color:rgba(0,0,0,.75);margin-bottom:8px;transition:color .35s}
+    .ngen-mod span{display:block;font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;color:rgba(0,0,0,.75);line-height:1.3;transition:color .35s}
+    .ngen-mod.active{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.45);box-shadow:0 0 20px rgba(34,197,94,.15)}
+    .ngen-mod.active i,.ngen-mod.active span{color:#4ade80}
+    .ngen-mod.active span{font-weight:700}
+    .patent-badge{position:absolute;top:64px;left:24px;z-index:5;width:110px;height:110px;padding:14px;background:transparent;border:0;display:flex;align-items:center;justify-content:center;border-radius:16px;transition:transform .35s ease}
+    .patent-badge img{width:200%;height:200%;object-fit:contain}
+    .patent-badge:hover{transform:translateY(-2px) scale(1.02)}
+    .scene-lbl{position:absolute;bottom:16px;left:16px;font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;color:rgba(255,255,255,.2)}
+    .scene-badge{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:8px 14px;font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.4);letter-spacing:.1em;display:flex;align-items:center;gap:8px}
+    .innov-content h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:18px;line-height:1.1}
+    .innov-content p{color:var(--fg3);line-height:1.8;margin-bottom:14px;font-size:1.05rem}
+    .program-stack{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+    .ngc-chip{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid rgba(15,23,42,.12);border-radius:999px;background:rgba(255,255,255,.94);color:var(--dark);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;box-shadow:0 10px 35px rgba(15,23,42,.06)}
+    .ngc-chip i,.prog-chip i{font-size:1rem;color:var(--dark)}
+    .prog-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(15,23,42,.12);border-radius:999px;background:rgba(255,255,255,.94);color:var(--dark);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;box-shadow:0 10px 30px rgba(15,23,42,.05)}
+    .innov-feats{margin-top:36px;display:flex;flex-direction:column;gap:10px}
+    .if-item{display:flex;align-items:flex-start;gap:14px;padding:18px;border:1px solid var(--border);background:rgba(255,255,255,.5);transition:all .3s}
+    .if-item:hover{border-color:var(--fg);background:rgba(255,255,255,.85);box-shadow:0 6px 24px rgba(0,0,0,.06)}
+    .if-txt h4{font-size:.88rem;font-weight:600;margin-bottom:3px}.if-txt p{font-size:.78rem;color:var(--fg3);margin:0}
+    /* scroll-highlight rendered always-on (no scroll observer on this page) */
+    .scroll-hl{display:inline;background:linear-gradient(to top,rgba(255,215,0,.42) 40%,transparent 40%);background-repeat:no-repeat;background-position:0 100%;background-size:100% 100%}
+
+    footer{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:64px 24px;border-top:3px solid var(--neo-black);background:#f4f4f4}
+    .ngp-foot-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-code);font-size:.72rem;letter-spacing:.12em;text-decoration:none;color:#fff;background:var(--neo-black);padding:14px 26px;border-radius:999px;transition:transform .2s}
+    .ngp-foot-cta:hover{transform:translateY(-2px)}
+    .ngp-foot-note{font-family:var(--mono);font-size:.7rem;color:var(--fg3)}
+
+    @media(max-width:900px){.innov-grid{grid-template-columns:1fr;gap:48px}#innovation.neo-zone{padding:64px 20px 80px}}
+    @media(max-width:768px){
+        .ngp-nav{padding:12px 18px}
+        .innov-scene{aspect-ratio:auto;padding:72px 16px 40px;height:auto}
+        .patent-badge{top:12px;right:auto;left:12px;width:56px;height:56px;padding:6px;border-radius:12px}
+        .patent-badge img{width:100%;height:100%}
+        .scene-badge{top:12px;right:12px;padding:6px 10px;font-size:.5rem;max-width:42%;text-align:right}
+        .ngen-modules{grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:6px}
+        .ngen-mod{min-height:60px;padding:6px;border-radius:8px}
+        .ngen-console{width:100%}
+        .scene-lbl{left:12px;bottom:12px;font-size:.5rem}
+    }
+</style>
+</head>
+<body>
+
+<nav class="ngp-nav">
+    <a href="index.html" class="ngp-logo">AKL_</a>
+    <a href="index.html#projects" class="ngp-back"><i class="fas fa-arrow-left"></i> BACK TO PORTFOLIO</a>
+</nav>
+
+<!-- INNOVATION — NEXT GEN CAMERA (moved off the main page to its own page) -->
+<section id="innovation" class="neo-zone">
+    <div class="s-max">
+        <div class="innov-grid">
+            <div class="innov-scene">
+                <a href="index.html#certificates" class="patent-badge" title="Patent filed — Next Gen Camera">
+                    <img src="assets/icons/patent_filed.png" alt="Patent filed">
+                </a>
+                <div class="ngen-console">
+                    <div class="ngen-header">
+                        <div>
+                            <span class="ngen-live"><span class="live-dot"></span> LIVE FEED</span>
+                            <div class="ngen-status" id="ngenDetail">Five AI modules rotating through live detection modes.</div>
+                        </div>
+                        <span id="ngenClock">00:00:00</span>
+                    </div>
+                    <div class="ngen-feed">
+                        <img src="assets/explaining next gen camera to foreign researchers.jpg" alt="Next Gen Camera in action">
+                        <div class="ngen-scan"></div>
+                        <div class="ngen-reticle"></div>
+                        <span class="ngen-corner tl"></span><span class="ngen-corner tr"></span>
+                        <span class="ngen-corner bl"></span><span class="ngen-corner br"></span>
+                        <div class="ngen-hud"><span>NGC-OS v2.0</span><span id="ngenActiveLbl">SCANNING…</span></div>
+                    </div>
+                    <div class="ngen-modules" id="ngenModules">
+                        <div class="ngen-mod active" data-lbl="ROBBER DETECT" data-desc="Detects armed intruders and suspicious movement instantly."><i class="fas fa-user-shield"></i><span>ROBBER</span></div>
+                        <div class="ngen-mod" data-lbl="FIRE DETECT" data-desc="Flags flames and smoke in real time for faster response."><i class="fas fa-fire"></i><span>FIRE</span></div>
+                        <div class="ngen-mod" data-lbl="FACE MATCH" data-desc="Matches faces against stored profiles for identity alerts."><i class="fas fa-id-card"></i><span>FACE</span></div>
+                        <div class="ngen-mod" data-lbl="FAINT ALERT" data-desc="Detects collapse or fainting using pose and movement data."><i class="fas fa-heartbeat"></i><span>FAINT</span></div>
+                        <div class="ngen-mod" data-lbl="MOTION ZONE" data-desc="Monitors restricted zones and warns on unusual activity."><i class="fas fa-running"></i><span>MOTION</span></div>
+                    </div>
+                </div>
+                <div class="scene-lbl">NEXT GEN CAMERA · 5 AI MODULES</div>
+                <div class="scene-badge"><i class="fas fa-trophy"></i> 8+ AWARDS WON</div>
+            </div>
+            <div class="innov-content">
+                <div class="s-label font-code">FLAGSHIP · INEX 2022</div>
+                <h2><span class="scroll-hl">Next Gen<br>Camera System</span></h2>
+
+                <div class="ngc-intro">
+                    <span class="font-pixel">NGC v2.0</span>
+                    AI + existing CCTV infrastructure — a smart security layer that <strong>detects threats in real time</strong>, sounds a buzzer, and alerts owners (calls/messages) instead of only recording footage. Built in <strong>Python</strong> with neural networks; presented at <strong>INEX India</strong> &amp; <strong>Bihar Innovation Challenge</strong>.
+                </div>
+
+                <div class="ngc-spec-grid">
+                    <div class="ngc-spec">
+                        <div class="ngc-spec-tag font-code">// PROBLEM</div>
+                        <h4>CCTV records — it doesn’t act</h4>
+                        <p>Robberies and fires still happen while cameras only archive the event. Guards are costly; smoke detectors have limits.</p>
+                    </div>
+                    <div class="ngc-spec">
+                        <div class="ngc-spec-tag font-code">// SOLUTION</div>
+                        <h4>Plug-in AI box</h4>
+                        <p>Add-on unit (~₹500–1000 one-time) with backup power — works with cameras you already have. Sustainable for homes &amp; societies.</p>
+                    </div>
+                    <div class="ngc-spec">
+                        <div class="ngc-spec-tag font-code">// VALIDATION</div>
+                        <h4>Surveys &amp; demos</h4>
+                        <p>Pre/post project surveys (50 respondents); tested at home; improved after national judge feedback (weapon detect, calls, app).</p>
+                    </div>
+                    <div class="ngc-spec">
+                        <div class="ngc-spec-tag font-code">// IP</div>
+                        <h4>Patent filed</h4>
+                        <p>Full research paper: <em>To Create an AI Camera for Real-Time Security</em> — DPS Patna · IYIIC CUB · Age 15 at submission.</p>
+                    </div>
+                </div>
+
+                <div class="ngc-chips font-code">
+                    <span class="ngc-chip">YOLO · OpenCV</span>
+                    <span class="ngc-chip">POSE · FAINT</span>
+                    <span class="ngc-chip">TWILIO ALERTS</span>
+                    <span class="ngc-chip">MOBILE APP</span>
+                    <span class="ngc-chip">ANOMALY / TAMPER</span>
+                </div>
+                <div class="program-stack">
+                    <span class="prog-chip"><i class="fab fa-python"></i> Python</span>
+                    <span class="prog-chip"><i class="fas fa-code"></i> Django</span>
+                    <span class="prog-chip"><i class="fas fa-fire"></i> Flask</span>
+                    <span class="prog-chip"><i class="fab fa-react"></i> React</span>
+                    <span class="prog-chip"><i class="fas fa-cube"></i> OpenCV</span>
+                    <span class="prog-chip"><i class="fas fa-bolt"></i> TensorFlow</span>
+                </div>
+
+                <div class="innov-feats">
+                    <div class="if-item"><div class="if-ic"><i class="fas fa-fire"></i></div><div class="if-txt"><h4>Fire Detection</h4><p>Neural-network fire recognition — buzzer + owner alert; cheaper vs traditional smoke detectors per room.</p></div></div>
+                    <div class="if-item"><div class="if-ic"><i class="fas fa-user-shield"></i></div><div class="if-txt"><h4>Robber &amp; Weapon Detection</h4><p>Intruder + gun/weapon detection; 24×7 without human guards; calls police/owner on trigger.</p></div></div>
+                    <div class="if-item"><div class="if-ic"><i class="fas fa-heartbeat"></i></div><div class="if-txt"><h4>Faint Detection</h4><p>Pose estimation detects collapse — critical for elderly living alone.</p></div></div>
+                    <div class="if-item"><div class="if-ic"><i class="fas fa-id-card"></i></div><div class="if-txt"><h4>Face Recognition</h4><p>Match suspects against databases via public cameras — assist law enforcement.</p></div></div>
+                    <div class="if-item"><div class="if-ic"><i class="fas fa-running"></i></div><div class="if-txt"><h4>Motion &amp; Anomaly</h4><p>Zone-based motion; detects camera tampering (e.g. cloth over lens).</p></div></div>
+                </div>
+
+                <a href="assets/next%20gen%20camera/Final%20NEXT%20GEN%20CAMERA_Akshit%20Kumar%20Lall_Bihar-INEX.docx" class="ngc-doc-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-file-lines"></i> READ FULL INEX RESEARCH DOC
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <a href="index.html" class="ngp-foot-cta"><i class="fas fa-arrow-left"></i> BACK TO PORTFOLIO</a>
+    <div class="ngp-foot-note">© Akshit Kumar Lall · Next Gen Camera · Patent filed</div>
+</footer>
+
+<script>
+    // Standalone copy of the NGC console logic (clock + rotating modules).
+    (function(){
+        const clock = document.getElementById('ngenClock');
+        const tick = () => { if (clock) clock.textContent = new Date().toTimeString().slice(0, 8); };
+        tick(); setInterval(tick, 1000);
+
+        const mods = [...document.querySelectorAll('.ngen-mod')];
+        const lbl = document.getElementById('ngenActiveLbl');
+        const detail = document.getElementById('ngenDetail');
+        const set = (m) => {
+            mods.forEach(x => x.classList.remove('active'));
+            m.classList.add('active');
+            if (lbl) lbl.textContent = m.dataset.lbl || 'ACTIVE';
+            if (detail) detail.textContent = m.dataset.desc || '';
+        };
+        if (mods.length) {
+            set(mods[0]);
+            let i = 1;
+            setInterval(() => { set(mods[i]); i = (i + 1) % mods.length; }, 2200);
+            mods.forEach((m, k) => m.addEventListener('click', () => { i = k; set(m); }));
+        }
+    })();
+</script>
+</body>
+</html>

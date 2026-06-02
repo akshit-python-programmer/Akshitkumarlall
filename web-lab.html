@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Studio | Akshit Kumar Lall</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/labs.css" />
+  <style>
+    .demo-vid-wrap {
+      margin-top: 20px;
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+    }
+    .demo-vid-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    .demo-vid-wrap video.ready {
+      display: block;
+    }
+    .demo-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      width: 100%;
+    }
+    .demo-play i {
+      font-size: 2rem;
+    }
+    .demo-play.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="lab-nav">
+    <a href="index.html" class="lab-nav-logo">← AKL_ HOME</a>
+    <ul class="lab-nav-links">
+      <li><a href="cv-lab.html">CV LAB</a></li>
+      <li><a href="web-lab.html" class="active">WEB STUDIO</a></li>
+      <li><a href="create-lab.html">CREATE</a></li>
+      <li><a href="innovation-lab.html">INNOVATION</a></li>
+    </ul>
+    <button type="button" class="lab-sfx" data-sfx-toggle aria-pressed="true" aria-label="Toggle sound effects"><i class="fas fa-volume-high"></i></button>
+  </nav>
+
+  <header class="lab-hero">
+    <p class="tag">// WEB STUDIO</p>
+    <h1>Pick a stack. See how I ship.</h1>
+    <p>
+      I build client sites and full apps with React, Django, Flask, and vanilla HTML/CSS/JS.
+      Select a stack to explore architecture and a real delivered project.
+    </p>
+  </header>
+
+  <main class="lab-main">
+    <section class="lab-panel">
+      <h2>STACK EXPLORER</h2>
+      <div class="stack-pick" id="stackPick">
+        <button type="button" class="stack-btn active" data-stack="react">REACT</button>
+        <button type="button" class="stack-btn" data-stack="django">DJANGO</button>
+        <button type="button" class="stack-btn" data-stack="flask">FLASK</button>
+        <button type="button" class="stack-btn" data-stack="vanilla">HTML · CSS · JS</button>
+      </div>
+
+      <div class="browser-mock">
+        <div class="browser-bar">
+          <span></span><span></span><span></span>
+          <div class="browser-url" id="browserUrl">react-app.client-build.dev</div>
+        </div>
+        <div class="browser-body" id="browserBody">
+          <h3>React front-end</h3>
+          <p>Component-driven UI, state management, API integration, responsive layouts for production clients.</p>
+          <ul>
+            <li>SPA architecture & reusable components</li>
+            <li>REST / JSON APIs from Django or Flask backends</li>
+            <li>Deployed client websites with modern UX</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="demo-vid-wrap" id="vidWrap">
+        <video id="demoVid" muted loop playsinline preload="none"></video>
+        <button type="button" class="demo-play" id="demoPlay">
+          <i class="fas fa-play"></i>
+          PLAY CLIENT SITE DEMO
+        </button>
+      </div>
+
+      <p style="margin-top: 16px; font-size: 0.9rem; color: #666">
+        <a href="index.html#projects" style="font-family: var(--mono); font-size: 0.65rem">→ All web & client projects on main portfolio</a>
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const STACKS = {
+      react: {
+        url: "react-app.client-build.dev",
+        html: `<h3>React front-end</h3>
+          <p>Component-driven UI, state management, API integration, responsive layouts for production clients.</p>
+          <ul><li>SPA architecture & reusable components</li><li>REST APIs from Django or Flask</li><li>Modern UX for paying clients</li></ul>`,
+        video: "assets/my projects/[medium]client website-1.mp4",
+      },
+      django: {
+        url: "api.yourproduct.com/admin",
+        html: `<h3>Django full-stack</h3>
+          <p>ORM, auth, admin panels, REST frameworks — backend power for AI products and client dashboards.</p>
+          <ul><li>Models, migrations, PostgreSQL</li><li>User auth & role-based access</li><li>Serves React or template front-ends</li></ul>`,
+        video: "assets/my projects/[medium]client website-1.mp4",
+      },
+      flask: {
+        url: "cv-api.flask-service.local",
+        html: `<h3>Flask microservices</h3>
+          <p>Lightweight APIs wrapping OpenCV & ML models — perfect for inference endpoints and rapid prototypes.</p>
+          <ul><li>CV/ML inference routes</li><li>File upload & batch processing</li><li>Pairs with Python desktop GUIs</li></ul>`,
+        video: "assets/my projects/[medium] document scanner with full GUI.mp4",
+      },
+      vanilla: {
+        url: "portfolio.akshit.dev",
+        html: `<h3>HTML · CSS · JavaScript</h3>
+          <p>This portfolio, client landing pages, animations — no framework required when speed and control matter.</p>
+          <ul><li>Semantic HTML & accessible markup</li><li>Custom CSS, scroll experiences</li><li>Vanilla JS for interactivity</li></ul>`,
+        video: null,
+      },
+    };
+
+    const btns = document.querySelectorAll(".stack-btn");
+    const body = document.getElementById("browserBody");
+    const url = document.getElementById("browserUrl");
+    const vid = document.getElementById("demoVid");
+    const play = document.getElementById("demoPlay");
+    const wrap = document.getElementById("vidWrap");
+    let loaded = false;
+
+    function resetVideo() {
+      vid.pause();
+      vid.classList.remove("ready");
+      vid.removeAttribute("src");
+      loaded = false;
+      play.classList.remove("hidden");
+      wrap.style.display = "block";
+    }
+
+    function setStack(key) {
+      const s = STACKS[key];
+      btns.forEach((b) => b.classList.toggle("active", b.dataset.stack === key));
+      body.style.opacity = "0";
+      setTimeout(() => {
+        body.innerHTML = s.html;
+        body.style.opacity = "1";
+      }, 120);
+      url.textContent = s.url;
+      resetVideo();
+      if (!s.video) {
+        wrap.style.display = "none";
+        return;
+      }
+      wrap.style.display = "block";
+      vid.dataset.src = s.video;
+    }
+
+    play.addEventListener("click", () => {
+      if (window.SFX) SFX.play("play");
+      const src = vid.dataset.src;
+      if (!src) return;
+      if (!loaded) {
+        vid.src = src;
+        vid.load();
+        loaded = true;
+      }
+      vid.muted = false;
+      vid.controls = true;
+      vid.classList.add("ready");
+      play.classList.add("hidden");
+      vid.play().catch(() => {});
+    });
+
+    btns.forEach((b) =>
+      b.addEventListener("click", () => {
+        if (window.SFX) SFX.play("switch");
+        setStack(b.dataset.stack);
+      })
+    );
+    setStack("react");
+  </script>
+  <script src="js/sfx.js"></script>
+</body>
+</html>

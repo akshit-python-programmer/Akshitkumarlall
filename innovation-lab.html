@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Next Gen Camera Lab | Akshit Kumar Lall</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/labs.css" />
+  <style>
+    .ngen-lab {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .ngen-feed-lg {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: #0a0a0a;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .ngen-feed-lg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ngen-scan-lg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(34, 197, 94, 0.15) 50%,
+        transparent
+      );
+      background-size: 100% 200%;
+      animation: scan 3s linear infinite;
+    }
+    @keyframes scan {
+      0% {
+        background-position: 0 -100%;
+      }
+      100% {
+        background-position: 0 200%;
+      }
+    }
+    .mod-grid {
+      display: grid;
+      gap: 10px;
+    }
+    .mod-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .mod-card.active {
+      background: var(--dark);
+      color: white;
+      border-color: var(--dark);
+      transform: translateX(8px);
+    }
+    .mod-card i {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+    .mod-card.active i {
+      opacity: 1;
+      color: #4ade80;
+    }
+    .mod-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .mod-card p {
+      font-size: 0.82rem;
+      opacity: 0.75;
+    }
+    .awards-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .aw-pill {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 900px) {
+      .ngen-lab {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="lab-nav">
+    <a href="index.html" class="lab-nav-logo">← AKL_ HOME</a>
+    <ul class="lab-nav-links">
+      <li><a href="cv-lab.html">CV LAB</a></li>
+      <li><a href="web-lab.html">WEB STUDIO</a></li>
+      <li><a href="create-lab.html">CREATE</a></li>
+      <li><a href="innovation-lab.html" class="active">INNOVATION</a></li>
+    </ul>
+    <button type="button" class="lab-sfx" data-sfx-toggle aria-pressed="true" aria-label="Toggle sound effects"><i class="fas fa-volume-high"></i></button>
+  </nav>
+
+  <header class="lab-hero">
+    <p class="tag">// NEXT GEN CAMERA · FLAGSHIP</p>
+    <h1>5 AI modules. One smart camera.</h1>
+    <p>
+      My award-winning innovation runs real-time detection on-device — no cloud. Click each module
+      to see what it does and how it connects to my computer vision work.
+    </p>
+  </header>
+
+  <main class="lab-main">
+    <section class="lab-panel">
+      <div class="ngen-lab">
+        <div class="ngen-feed-lg">
+          <img
+            id="ngenImg"
+            src="assets/explaining next gen camera to foreign researchers.jpg"
+            alt="Next Gen Camera"
+          />
+          <div class="ngen-scan-lg"></div>
+        </div>
+        <div>
+          <h2 style="margin-bottom: 16px">DETECTION MODULES</h2>
+          <div class="mod-grid" id="modGrid">
+            <div class="mod-card active" data-img="assets/explaining next gen camera to foreign researchers.jpg" data-title="Robber detection" data-desc="Intruder detection with automated alerts — core security module presented to international researchers.">
+              <i class="fas fa-user-shield"></i>
+              <div><h4>Robber detection</h4><p>Real-time intruder alerts</p></div>
+            </div>
+            <div class="mod-card" data-img="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" data-title="Fire detection" data-desc="Instant fire and smoke detection with emergency response triggers.">
+              <i class="fas fa-fire"></i>
+              <div><h4>Fire detection</h4><p>Smoke & flame analysis</p></div>
+            </div>
+            <div class="mod-card" data-img="assets/recieving BIC award on state.jpg" data-title="Face recognition" data-desc="Multi-face matching against a local database — presented at Bihar Innovation Challenge.">
+              <i class="fas fa-id-card"></i>
+              <div><h4>Face recognition</h4><p>On-device face matching</p></div>
+            </div>
+            <div class="mod-card" data-img="assets/presenting in BIT Meshra patna about next gen camera-2.jpg" data-title="Faint detection" data-desc="Detects person collapse and triggers immediate alerts for safety applications.">
+              <i class="fas fa-heartbeat"></i>
+              <div><h4>Faint detection</h4><p>Collapse & safety alerts</p></div>
+            </div>
+            <div class="mod-card" data-img="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" data-title="Motion detection" data-desc="Configurable motion zones — foundation module for all other detections.">
+              <i class="fas fa-running"></i>
+              <div><h4>Motion detection</h4><p>Zone-based sensing</p></div>
+            </div>
+          </div>
+          <div class="awards-row">
+            <span class="aw-pill">BIC 1ST PRIZE</span>
+            <span class="aw-pill">INEX SILVER</span>
+            <span class="aw-pill">8+ AWARDS</span>
+            <span class="aw-pill">BIT MESRA DEMO</span>
+          </div>
+          <p style="margin-top: 24px">
+            <a href="index.html#innovation" class="proj-link" style="display: inline-flex">FULL STORY ON PORTFOLIO →</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cards = document.querySelectorAll(".mod-card");
+    const img = document.getElementById("ngenImg");
+    cards.forEach((c) => {
+      c.addEventListener("click", () => {
+        if (window.SFX) SFX.play("scan");
+        cards.forEach((x) => x.classList.remove("active"));
+        c.classList.add("active");
+        img.src = c.dataset.img;
+      });
+    });
+  </script>
+  <script src="js/sfx.js"></script>
+</body>
+</html>

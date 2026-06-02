@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Lab | Akshit Kumar Lall</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/labs.css" />
+</head>
+<body>
+  <nav class="lab-nav">
+    <a href="index.html" class="lab-nav-logo">← AKL_ HOME</a>
+    <ul class="lab-nav-links">
+      <li><a href="cv-lab.html" class="active">CV LAB</a></li>
+      <li><a href="web-lab.html">WEB STUDIO</a></li>
+      <li><a href="create-lab.html">CREATE</a></li>
+      <li><a href="innovation-lab.html">INNOVATION</a></li>
+    </ul>
+    <button type="button" class="lab-sfx" data-sfx-toggle aria-pressed="true" aria-label="Toggle sound effects"><i class="fas fa-volume-high"></i></button>
+  </nav>
+
+  <header class="lab-hero">
+    <p class="tag">// COMPUTER VISION LAB</p>
+    <h1>See how I build vision systems.</h1>
+    <p>
+      Click each pipeline stage to preview what happens in my real projects — detection,
+      tracking, pose estimation, and on-device inference. This mirrors how I ship CV for clients.
+    </p>
+  </header>
+
+  <main class="lab-main">
+    <section class="lab-panel">
+      <h2>PIPELINE STAGES</h2>
+      <div class="pipeline" id="pipeline">
+        <button type="button" class="pipe-step active" data-stage="capture">
+          <i class="fas fa-camera"></i> CAPTURE
+        </button>
+        <button type="button" class="pipe-step" data-stage="preprocess">
+          <i class="fas fa-sliders"></i> PREPROCESS
+        </button>
+        <button type="button" class="pipe-step" data-stage="detect">
+          <i class="fas fa-crosshairs"></i> DETECT
+        </button>
+        <button type="button" class="pipe-step" data-stage="track">
+          <i class="fas fa-route"></i> TRACK
+        </button>
+        <button type="button" class="pipe-step" data-stage="output">
+          <i class="fas fa-chart-line"></i> OUTPUT
+        </button>
+      </div>
+
+      <div class="cv-stage">
+        <div class="cv-preview" id="cvPreview">
+          <img
+            id="cvImg"
+            src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png"
+            alt="Vision preview"
+          />
+          <div class="cv-box" id="cvBox" style="top: 22%; left: 18%; width: 38%; height: 52%">
+            <span class="lbl" id="cvLabel">OBJECT</span>
+          </div>
+        </div>
+        <div class="cv-output">
+          <h3 id="cvTitle">Frame capture</h3>
+          <p id="cvDesc">
+            Webcam or file input — raw frames at full resolution. Every project starts here:
+            football tracking, sports pose, surveillance, passport segmentation.
+          </p>
+          <a class="proj-link" id="cvLink" href="index.html#projects">
+            VIEW CV PROJECTS <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const STAGES = {
+      capture: {
+        title: "Frame capture",
+        desc: "Webcam or file input — raw frames at full resolution. Every project starts here: football tracking, sports pose, surveillance, passport segmentation.",
+        label: "FRAME",
+        box: { top: "8%", left: "5%", width: "90%", height: "84%" },
+        img: "assets/my projects/[basic]pose estimation 2 .png",
+        link: "index.html#projects",
+      },
+      preprocess: {
+        title: "Preprocess & normalize",
+        desc: "Resize, denoise, color space conversion, ROI cropping. OpenCV pipelines I use before feeding models — critical for real-time speed on CPU/GPU.",
+        label: "ROI",
+        box: { top: "15%", left: "12%", width: "76%", height: "70%" },
+        img: "assets/my projects/[advanced[face sementizer for automatch passport image generator.png",
+        link: "index.html#projects",
+      },
+      detect: {
+        title: "Detection & classification",
+        desc: "YOLO, MediaPipe, custom CNNs — robbers, fire, faces, violence, balls, players. This is the core of my Next Gen Camera and client surveillance work.",
+        label: "PERSON 0.94",
+        box: { top: "22%", left: "18%", width: "38%", height: "52%" },
+        img: "assets/explaining next gen camera to foreign researchers.jpg",
+        link: "innovation-lab.html",
+      },
+      track: {
+        title: "Tracking & identity",
+        desc: "Multi-object tracking across frames — ball trajectory, player IDs, optical flow. Powers my football analyzer and sports activity classifier.",
+        label: "ID #12",
+        box: { top: "30%", left: "25%", width: "45%", height: "40%" },
+        img: "assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png",
+        link: "index.html#projects",
+      },
+      output: {
+        title: "Analytics & alerts",
+        desc: "Scores, rep counts, alerts, dashboards, API hooks. Production output for clients — not just a demo window.",
+        label: "ALERT",
+        box: { top: "10%", left: "60%", width: "28%", height: "22%" },
+        img: "assets/presenting in BIT Meshra patna about next gen camera-1.jpg",
+        link: "index.html#contact",
+      },
+    };
+
+    const steps = document.querySelectorAll(".pipe-step");
+    const title = document.getElementById("cvTitle");
+    const desc = document.getElementById("cvDesc");
+    const label = document.getElementById("cvLabel");
+    const box = document.getElementById("cvBox");
+    const img = document.getElementById("cvImg");
+    const link = document.getElementById("cvLink");
+
+    function setStage(key) {
+      const s = STAGES[key];
+      steps.forEach((el) => el.classList.toggle("active", el.dataset.stage === key));
+      title.textContent = s.title;
+      desc.textContent = s.desc;
+      label.textContent = s.label;
+      Object.assign(box.style, s.box);
+      img.src = s.img;
+      link.href = s.link;
+    }
+
+    steps.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (window.SFX) SFX.play("switch");
+        setStage(btn.dataset.stage);
+      });
+    });
+  </script>
+  <script src="js/sfx.js"></script>
+</body>
+</html>

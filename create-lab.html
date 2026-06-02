@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Lab | Akshit Kumar Lall</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/labs.css" />
+</head>
+<body>
+  <nav class="lab-nav">
+    <a href="index.html" class="lab-nav-logo">← AKL_ HOME</a>
+    <ul class="lab-nav-links">
+      <li><a href="cv-lab.html">CV LAB</a></li>
+      <li><a href="web-lab.html">WEB STUDIO</a></li>
+      <li><a href="create-lab.html" class="active">CREATE</a></li>
+      <li><a href="innovation-lab.html">INNOVATION</a></li>
+    </ul>
+    <button type="button" class="lab-sfx" data-sfx-toggle aria-pressed="true" aria-label="Toggle sound effects"><i class="fas fa-volume-high"></i></button>
+  </nav>
+
+  <header class="lab-hero">
+    <p class="tag">// CREATE LAB</p>
+    <h1>CAD, 3D, video — how I build physical & visual work.</h1>
+    <p>
+      Engineering isn’t only code. I model in CAD, prototype with 3D printing, and edit video for
+      demos, clients, and YouTube. Explore each workflow below.
+    </p>
+  </header>
+
+  <main class="lab-main">
+    <section class="lab-panel">
+      <div class="tab-row" id="tabRow">
+        <button type="button" class="tab-btn active" data-tab="cad">CAD &amp; FUSION 360</button>
+        <button type="button" class="tab-btn" data-tab="3d">3D DESIGN</button>
+        <button type="button" class="tab-btn" data-tab="video">VIDEO EDITING</button>
+      </div>
+
+      <div class="tab-pane active" id="pane-cad">
+        <div class="workflow">
+          <div class="wf-item">
+            <span class="wf-num">01</span>
+            <div>
+              <h4>Concept &amp; constraints</h4>
+              <p>Sketch dimensions, tolerances, and material limits for robot parts and camera housings.</p>
+            </div>
+          </div>
+          <div class="wf-item">
+            <span class="wf-num">02</span>
+            <div>
+              <h4>Fusion 360 modeling</h4>
+              <p>Parametric CAD — joints, enclosures, mounts for servos and sensors on humanoid prototypes.</p>
+            </div>
+          </div>
+          <div class="wf-item">
+            <span class="wf-num">03</span>
+            <div>
+              <h4>Export &amp; 3D print</h4>
+              <p>STL export, slicing, physical iteration — ties directly to AKL Tech robotics work.</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 20px">
+          <a href="index.html#about" class="proj-link" style="display: inline-flex">ROBOTICS ON PORTFOLIO →</a>
+        </p>
+      </div>
+
+      <div class="tab-pane" id="pane-3d">
+        <div class="workflow">
+          <div class="wf-item">
+            <span class="wf-num">01</span>
+            <div>
+              <h4>Game &amp; simulation 3D</h4>
+              <p>Ursina engine, OpenGL demos, Python 3D games — full Squid Game recreation in code.</p>
+            </div>
+          </div>
+          <div class="wf-item">
+            <span class="wf-num">02</span>
+            <div>
+              <h4>Shaders &amp; rendering</h4>
+              <p>Lighting, materials, real-time pipelines — foundation for visual software I ship.</p>
+            </div>
+          </div>
+          <div class="wf-item">
+            <span class="wf-num">03</span>
+            <div>
+              <h4>Product visualization</h4>
+              <p>Presenting hardware innovations clearly for judges, clients, and research panels.</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 20px">
+          <a href="index.html#projects" class="proj-link" style="display: inline-flex">3D &amp; GAME PROJECTS →</a>
+        </p>
+      </div>
+
+      <div class="tab-pane" id="pane-video">
+        <div class="workflow">
+          <div class="wf-item">
+            <span class="wf-num">01</span>
+            <div>
+              <h4>Project demos</h4>
+              <p>Screen recordings of CV/AI software — every bento card on my portfolio is real footage.</p>
+            </div>
+          </div>
+          <div class="wf-item">
+            <span class="wf-num">02</span>
+            <div>
+              <h4>Client &amp; pitch edits</h4>
+              <p>Polished cuts for presentations, Fiverr deliveries, and competition stage demos.</p>
+            </div>
+          </div>
+          <div class="wf-item">
+            <span class="wf-num">03</span>
+            <div>
+              <h4>YouTube &amp; content</h4>
+              <p>Long-form and short-form content about builds, tutorials, and innovation journey.</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 20px">
+          <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" class="proj-link" style="display: inline-flex">YOUTUBE CHANNEL →</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab-btn");
+    const panes = document.querySelectorAll(".tab-pane");
+    tabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (window.SFX) SFX.play("switch");
+        const id = btn.dataset.tab;
+        tabs.forEach((t) => t.classList.toggle("active", t === btn));
+        panes.forEach((p) => p.classList.toggle("active", p.id === "pane-" + id));
+      });
+    });
+  </script>
+  <script src="js/sfx.js"></script>
+</body>
+</html>

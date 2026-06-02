@@ -1,0 +1,2758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshit Kumar Lall </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/neo-brutal.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
+    <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+        --bg:#fff;--bg2:#f4f4f4;--dark:#0a0a0a;
+        --fg:#0a0a0a;--fg2:#333;--fg3:#777;--fg4:#aaa;
+        --border:rgba(0,0,0,.08);--border2:rgba(0,0,0,.16);
+        --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+        --ease:cubic-bezier(.25,.46,.45,.94);
+        --cur-arrow:url('assets/cursors/pixel-arrow.png') 1 1, auto;
+        --cur-point:url('assets/cursors/pixel-hand.png') 7 1, pointer;
+    }
+    
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--bg);color:var(--fg);overflow-x:hidden;cursor:var(--cur-arrow);
+        background-image:radial-gradient(circle,rgba(0,0,0,.04) 1px,transparent 1px);background-size:24px 24px}
+    ::selection{background:var(--fg);color:var(--bg)}
+
+    #progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--fg);z-index:10000}
+
+    /* Nav */
+    nav{position:fixed;top:0;left:0;right:0;z-index:2000;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:all .4s var(--ease)}
+    nav.scrolled{padding:14px 48px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;text-decoration:none;color:var(--fg);font-weight:700}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-decoration:none;color:var(--fg3);transition:color .3s;position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--fg);transition:width .3s var(--ease)}
+    .nav-links a:hover{color:var(--fg)}.nav-links a:hover::after{width:100%}
+    .nav-toggle{display:none;background:none;border:1.5px solid var(--border2);color:var(--fg);padding:7px 12px;cursor:var(--cur-point);font-size:.85rem}
+    .mob-menu{display:none;position:fixed;inset:0;z-index:1900;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:36px}
+    .mob-menu.open{display:flex}
+    .mob-menu a{font-family:var(--mono);font-size:1.5rem;text-decoration:none;color:var(--fg);letter-spacing:.1em}
+    .mob-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:1.4rem;cursor:var(--cur-point);color:var(--fg)}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-decoration:none;cursor:var(--cur-point);border:none;position:relative;overflow:hidden;transition:all .4s var(--ease)}
+    .btn span,.btn i{position:relative;z-index:1}
+    .btn-dark{background:var(--fg);color:var(--bg)}
+    .btn-dark::before{content:'';position:absolute;inset:0;background:var(--fg2);transform:translateX(-101%);transition:transform .45s cubic-bezier(.77,0,.175,1)}
+    .btn-dark:hover::before{transform:translateX(0)}.btn-dark:hover{box-shadow:0 10px 40px rgba(0,0,0,.25)}
+    .btn-line{background:transparent;color:var(--fg);border:1.5px solid var(--border2)}
+    .btn-line:hover{border-color:var(--fg);box-shadow:0 6px 24px rgba(0,0,0,.08)}
+
+    /* Reveal */
+    .rv{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    .rv-l{opacity:0;transform:translateX(-40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    .rv-r{opacity:0;transform:translateX(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    .rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none}
+
+    .s-label{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--fg3);margin-bottom:16px}
+    .s-label::before{content:'';width:32px;height:1.5px;background:var(--fg)}
+    .s-max{max-width:1300px;margin:0 auto}
+
+    @keyframes fu{to{opacity:1;transform:translateY(0)}}
+    @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+    /* Glow card */
+    .gc{position:relative;--lx:-999px;--ly:-999px}
+    .gc::before{content:'';position:absolute;inset:-1px;z-index:0;border-radius:inherit;background:radial-gradient(350px circle at var(--lx) var(--ly),rgba(0,0,0,.12),transparent 50%);opacity:0;transition:opacity .35s;pointer-events:none}
+    .gc:hover::before{opacity:1}.gc>*{position:relative;z-index:1}
+
+    /* ===== HERO ===== */
+    #home{min-height:100vh;display:flex;align-items:center;padding:0 48px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;max-width:1300px;margin:0 auto;width:100%;align-items:center}
+    .hero-left{padding:40px 0}
+    .hero-badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;color:var(--fg3);margin-bottom:24px;opacity:0;transform:translateY(16px);animation:fu .7s var(--ease) forwards .2s}
+    .hero-badge::before{content:'//';color:var(--fg4)}
+    .hero-intro{font-size:clamp(1.1rem,2vw,1.5rem);color:var(--fg3);font-weight:400;margin-bottom:6px;opacity:0;transform:translateY(16px);animation:fu .7s var(--ease) forwards .3s}
+    .hero-name{font-size:clamp(3.8rem,8.5vw,7rem);font-weight:900;line-height:.92;letter-spacing:-.045em;margin-bottom:18px;opacity:0;transform:translateY(40px);animation:fu .8s var(--ease) forwards .4s}
+    .hero-highlight{position:relative;display:inline;background:linear-gradient(to top,rgba(255,215,0,.35) 38%,transparent 38%);background-size:100% 100%;background-repeat:no-repeat;background-position:0 100%;animation:hlBg 1s ease forwards 1.4s;background-size:0% 100%}
+    @keyframes hlBg{to{background-size:100% 100%}}
+    .hero-iit{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--fg2);margin-bottom:16px;padding:8px 18px;border:1px solid var(--border2);background:var(--bg2);opacity:0;transform:translateY(16px);animation:fu .7s var(--ease) forwards .55s}
+    .hero-iit strong{color:var(--fg);font-weight:800}
+    .iit-pulse{width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+    .hero-sub{font-family:var(--mono);font-size:clamp(.95rem,1.6vw,1.15rem);color:var(--fg3);margin-bottom:20px;min-height:1.6em;opacity:0;transform:translateY(20px);animation:fu .7s var(--ease) forwards .65s}
+    #typed{color:var(--fg);font-weight:600}
+    .caret{display:inline-block;width:2px;height:1em;background:var(--fg);vertical-align:middle;margin-left:2px;animation:blink .8s infinite}
+    .hero-desc{max-width:560px;font-size:1.1rem;color:var(--fg3);line-height:1.8;margin-bottom:44px;opacity:0;transform:translateY(20px);animation:fu .7s var(--ease) forwards .8s}
+    .hero-desc strong{color:var(--fg);font-weight:600}
+    .hero-cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0;transform:translateY(20px);animation:fu .7s var(--ease) forwards 1s}
+    .hero-right{position:relative;opacity:0;transform:translateY(30px);animation:fu .9s var(--ease) forwards .6s}
+    .hero-img-wrap{position:relative;width:100%;max-width:460px;aspect-ratio:3/4;overflow:hidden;margin-left:auto}
+    .hero-img-wrap img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%);transition:filter .6s}
+    .hero-img-wrap:hover img{filter:grayscale(0%)}
+    .hero-img-wrap::after{content:'';position:absolute;inset:0;border:1px solid var(--border2);pointer-events:none}
+    .hero-deco{position:absolute;top:28px;right:-28px;bottom:-28px;left:28px;border:1.5px solid var(--border2);z-index:-1}
+    .hero-tag{position:absolute;bottom:24px;left:0;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;padding:12px 18px;z-index:2}
+    .hero-exp{position:absolute;top:24px;right:-20px;font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;writing-mode:vertical-rl;color:var(--fg3);z-index:2}
+
+    /* Stats */
+    .stats-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);max-width:1300px;margin:0 auto}
+    .stat-item{padding:32px;text-align:center;border-right:1px solid var(--border);transition:background .3s}
+    .stat-item:last-child{border-right:none}.stat-item:hover{background:var(--bg2)}
+    .stat-num{font-family:var(--mono);font-size:2.8rem;font-weight:800;line-height:1;display:block}
+    .stat-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:var(--fg3);margin-top:8px;display:block}
+
+    /* Marquee */
+    .marquee-wrap{border-bottom:1px solid var(--border);padding:18px 0;overflow:hidden}
+    .marquee-track{display:flex;animation:marq 28s linear infinite;white-space:nowrap}
+    .m-i{display:inline-flex;align-items:center;gap:20px;padding:0 32px;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--fg3)}
+    .m-i::after{content:'·';font-size:1.2rem;color:var(--fg4)}
+
+    /* ===== ABOUT ===== */
+    #about{padding:140px 48px;background:var(--bg2)}
+    .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center}
+    .about-left h2{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.04;margin-bottom:32px}
+    .about-left p{color:var(--fg2);line-height:1.85;margin-bottom:18px;font-size:1.05rem}
+    .about-left p strong{color:var(--fg);font-weight:600}
+    .about-right{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .about-hi{display:flex;align-items:flex-start;gap:12px;padding:20px 18px;border:1px solid var(--border);background:var(--bg);transition:all .3s}
+    .about-hi:hover{border-color:var(--fg);box-shadow:0 6px 24px rgba(0,0,0,.05);transform:translateY(-3px)}
+    .about-hi i{margin-top:2px;font-size:.65rem;color:var(--fg)}
+    .about-hi span{font-family:var(--mono);font-size:.82rem;color:var(--fg2);line-height:1.5;letter-spacing:.02em}
+
+    /* ===== SKILLS ===== */
+    #skills{padding:140px 48px;background:var(--bg)}
+    .skills-header{margin-bottom:72px}
+    .skills-header h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:14px}
+    .skills-header p{font-size:1.05rem;color:var(--fg3);line-height:1.75;max-width:540px}
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+    .sk-card{background:var(--bg);padding:40px 32px;transition:background .3s,transform .4s var(--ease)}
+    .sk-card:hover{background:var(--bg2)}
+    .sk-ic{font-size:2rem;margin-bottom:20px;display:block;transition:transform .4s var(--ease)}
+    .sk-card:hover .sk-ic{transform:translateY(-5px) scale(1.12)}
+    .sk-name{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:var(--fg3);font-weight:700;margin-bottom:20px}
+    .sk-tags{display:flex;flex-wrap:wrap;gap:7px}
+    .sk-tag{font-family:var(--mono);font-size:.78rem;padding:6px 14px;border:1px solid var(--border2);color:var(--fg2);transition:all .3s}
+    .sk-card:hover .sk-tag{border-color:var(--fg);color:var(--fg)}
+
+    /* ============================================================
+       PROJECT SHOWCASE — DARK BENTO GRID
+    ============================================================ */
+    @property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+    #projects{background:#08080c;padding:130px 48px 140px;position:relative;overflow:hidden}
+    /* Ambient animated aurora + grid */
+    #projects::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;will-change:transform,opacity;
+        background:radial-gradient(40% 32% at 18% 18%,rgba(139,123,255,.22),transparent 64%),radial-gradient(38% 30% at 84% 24%,rgba(77,212,255,.17),transparent 62%),radial-gradient(46% 38% at 64% 92%,rgba(255,110,196,.15),transparent 64%);
+        animation:projAurora 22s ease-in-out infinite alternate}
+    @keyframes projAurora{0%{transform:translate3d(0,0,0) scale(1);opacity:.85}50%{transform:translate3d(2%,-2%,0) scale(1.06);opacity:1}100%{transform:translate3d(-2%,2%,0) scale(1.03);opacity:.9}}
+    #projects::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+        background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;
+        -webkit-mask:radial-gradient(125% 80% at 50% 0%,#000 28%,transparent 78%);mask:radial-gradient(125% 80% at 50% 0%,#000 28%,transparent 78%)}
+    #projects>.s-max{position:relative;z-index:1}
+
+    /* Section header */
+    .ph{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:46px;flex-wrap:wrap;gap:32px}
+    .ph-left{max-width:640px}
+    .ph-left .s-label{color:rgba(255,255,255,.5);font-family:var(--font-code);align-items:center}
+    .ph-left .s-label::before{background:linear-gradient(90deg,#8b7bff,#4dd4ff)}
+    .ph-kicker-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4dd4ff;box-shadow:0 0 10px #4dd4ff;animation:blink 1.4s infinite}
+    .ph-left h2{font-size:clamp(2.8rem,7vw,5.6rem);font-weight:900;letter-spacing:-.05em;line-height:.92;margin-top:14px;
+        background:linear-gradient(100deg,#fff 18%,#bcb4ff 38%,#8be9ff 52%,#fff 72%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:projSheen 7s linear infinite}
+    @keyframes projSheen{to{background-position:240% 0}}
+    .ph-left p{font-size:.98rem;color:rgba(255,255,255,.5);line-height:1.75;max-width:520px;margin-top:18px}
+    .ph-right{text-align:right;flex-shrink:0}
+    .ph-counter{font-family:var(--sans);font-size:clamp(3.4rem,7vw,5.6rem);font-weight:900;line-height:1;letter-spacing:-.05em;
+        background:linear-gradient(180deg,#fff,rgba(255,255,255,.22));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 26px rgba(139,123,255,.4))}
+    .ph-counter-sub{font-family:var(--font-pixel);font-size:.42rem;letter-spacing:.1em;color:rgba(255,255,255,.45);margin-top:8px}
+
+    /* Filter */
+    .proj-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:42px}
+    .pfb{position:relative;font-family:var(--font-code);font-size:.6rem;font-weight:600;letter-spacing:.12em;padding:11px 20px;border:1px solid rgba(255,255,255,.14);border-radius:40px;background:rgba(255,255,255,.03);color:rgba(255,255,255,.55);cursor:var(--cur-point);transition:color .3s,border-color .3s,background .3s,transform .2s,box-shadow .3s}
+    .pfb .cnt{opacity:.5;margin-left:7px;font-size:.92em}
+    .pfb:hover{border-color:rgba(255,255,255,.4);color:#fff;transform:translateY(-2px)}
+    .pfb.active{background:linear-gradient(100deg,#8b7bff,#4dd4ff);color:#06060a;border-color:transparent;box-shadow:0 10px 28px -8px rgba(77,212,255,.7)}
+    .pfb.active .cnt{opacity:.8}
+
+    /* Bento grid */
+    .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:300px;gap:14px}
+
+    /* Reveal stagger — enhances on scroll-in; cards stay visible even if JS/observer never runs */
+    #projects .bento.rv{opacity:1;transform:none}
+    #projects .bento.on .bc{animation:bcIn .6s var(--ease) backwards;animation-delay:calc(var(--i,0)*50ms)}
+    @keyframes bcIn{from{opacity:0;transform:translateY(34px) scale(.95)}to{opacity:1;transform:none}}
+
+    /* Card base */
+    .bc{position:relative;overflow:hidden;cursor:var(--cur-point);border-radius:16px;background:#0e0e16;isolation:isolate;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 14px 30px -18px rgba(0,0,0,.9);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+    .bc:hover{transform:translateY(-7px);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5),0 30px 60px -22px rgba(0,0,0,.95),0 0 50px -14px var(--glow,#8b7bff)}
+    .bc-featured{grid-column:span 2;grid-row:span 2}
+    .bc-hidden{display:none}
+    .bc:nth-child(6n+1){--glow:#8b7bff}
+    .bc:nth-child(6n+2){--glow:#4dd4ff}
+    .bc:nth-child(6n+3){--glow:#ff6ec4}
+    .bc:nth-child(6n+4){--glow:#5eead4}
+    .bc:nth-child(6n+5){--glow:#ffb347}
+    .bc:nth-child(6n+6){--glow:#a78bfa}
+
+    /* cursor spotlight */
+    .bc::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .4s;
+        background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.16),transparent 60%)}
+    .bc:hover::before{opacity:1}
+
+    /* Media */
+    .bc video,.bc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9);transition:transform .8s var(--ease),filter .6s}
+    .bc:hover video,.bc:hover img{transform:scale(1.07);filter:saturate(1.15)}
+
+    /* Gradient overlay */
+    .bc-grad{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(8,8,12,.1) 0%,transparent 26%,transparent 38%,rgba(8,8,12,.62) 66%,rgba(6,6,10,.94) 100%);transition:background .4s}
+    .bc:hover .bc-grad{background:linear-gradient(to bottom,rgba(8,8,12,.42) 0%,rgba(8,8,12,.12) 28%,rgba(8,8,12,.4) 52%,rgba(6,6,10,.85) 74%,rgba(4,4,8,.98) 100%)}
+
+    /* Animated gradient ring on hover */
+    .bc-frame{position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:inherit;padding:1.5px;
+        background:conic-gradient(from var(--a),transparent 0%,var(--glow,#8b7bff) 16%,#fff 26%,transparent 42%,transparent 100%);
+        -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .45s}
+    .bc:hover .bc-frame{opacity:.95;animation:bcSpin 3.2s linear infinite}
+    @keyframes bcSpin{to{--a:360deg}}
+
+    /* Shine sweep */
+    .bc-shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.16) 48%,transparent 62%);transform:translateX(-130%);transition:transform .9s var(--ease)}
+    .bc:hover .bc-shine{transform:translateX(130%)}
+
+    /* Ghost number */
+    .bc-num{position:absolute;top:8px;left:18px;font-family:var(--sans);font-weight:900;font-size:4.6rem;line-height:1;z-index:2;pointer-events:none;letter-spacing:-.05em;
+        background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.1));-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.16;transition:opacity .4s,transform .4s}
+    .bc-featured .bc-num{font-size:7.5rem}
+    .bc:hover .bc-num{opacity:.34;transform:translateY(-4px)}
+
+    /* Badge */
+    .bc-badge{position:absolute;top:14px;right:14px;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-code);font-size:.5rem;font-weight:600;letter-spacing:.14em;padding:6px 11px;z-index:5;border-radius:30px;background:rgba(255,255,255,.92);color:#0a0a0a}
+    .bc-badge.accent{background:rgba(255,255,255,.08);color:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.2)}
+    .bc-badge.paid{background:linear-gradient(100deg,#8b7bff,#4dd4ff);color:#06060a}
+    .bc-badge-dot{width:6px;height:6px;border-radius:50%;background:#06d6a0;animation:badgePulse 1.8s infinite}
+    @keyframes badgePulse{0%{box-shadow:0 0 0 0 rgba(6,214,160,.6)}70%{box-shadow:0 0 0 7px rgba(6,214,160,0)}100%{box-shadow:0 0 0 0 rgba(6,214,160,0)}}
+
+    /* Content */
+    .bc-content{position:absolute;bottom:0;left:0;right:0;padding:20px 20px 22px;z-index:5}
+    .bc-featured .bc-content{padding:30px 30px 32px}
+    .bc-level{display:flex;align-items:center;gap:8px;font-family:var(--font-code);font-size:.56rem;letter-spacing:.16em;color:var(--glow,#9b8cff);margin-bottom:9px;text-shadow:0 0 14px var(--glow,#9b8cff)}
+    .bc-dot{width:5px;height:5px;border-radius:50%;background:var(--glow,#9b8cff);box-shadow:0 0 8px var(--glow,#9b8cff);flex-shrink:0}
+    .bc-title{font-size:1.05rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.22;margin-bottom:10px}
+    .bc-featured .bc-title{font-size:1.55rem}
+    .bc-blurb{font-size:.78rem;color:rgba(255,255,255,.62);line-height:1.55;margin-bottom:12px;max-height:0;opacity:0;overflow:hidden;transition:max-height .45s var(--ease),opacity .4s,margin .4s}
+    .bc:hover .bc-blurb{max-height:90px;opacity:1}
+    .bc-featured .bc-blurb{max-height:90px;opacity:1}
+    .bc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;opacity:0;transform:translateY(8px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+    .bc:hover .bc-tags,.bc-featured .bc-tags{opacity:1;transform:none}
+    .bc-tag{font-family:var(--font-code);font-size:.6rem;letter-spacing:.05em;color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:4px 11px;background:rgba(255,255,255,.04)}
+    .bc-expand{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-code);font-size:.62rem;font-weight:600;letter-spacing:.1em;color:#06060a;background:#fff;border:none;border-radius:30px;padding:10px 18px;cursor:var(--cur-point);opacity:0;transform:translateY(10px);transition:opacity .35s .05s var(--ease),transform .35s .05s var(--ease),box-shadow .3s}
+    .bc:hover .bc-expand,.bc-featured .bc-expand{opacity:1;transform:none}
+    .bc-expand:hover{box-shadow:0 0 24px -3px var(--glow,#fff)}
+    .bc-expand i{transition:transform .3s}
+    .bc-expand:hover i{transform:translate(2px,-2px)}
+
+    /* Multi-video grid (sports card) */
+    .bc-multi{position:absolute;inset:0;z-index:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px}
+    .bc-multi video{position:relative;inset:auto;width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease)}
+    .bc-multi .main-vid{grid-row:span 2}
+
+    /* Projects responsive */
+    @media(max-width:1024px){.bento{grid-template-columns:repeat(2,1fr)}.bc-featured{grid-column:span 2;grid-row:span 1}}
+    @media(prefers-reduced-motion:reduce){
+        #projects::before,.ph-left h2,.ph-kicker-dot,.bc-frame,.bc-badge-dot{animation:none!important}
+        #projects .bento.on .bc{animation:none}
+        #projects .bento:not(.on) .bc{opacity:1}
+    }
+
+    /* ===== PROJECT MODAL ===== */
+    .proj-modal{position:fixed;inset:0;z-index:9500;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .4s}
+    .proj-modal.active{opacity:1;pointer-events:all}
+    .pm-bg{position:absolute;inset:0;background:rgba(0,0,0,.82)}
+    .pm-main-playbar{display:flex;align-items:center;gap:16px;padding:16px;background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,.08)}
+    .pm-main-play{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;padding:12px 24px;background:white;color:var(--dark);border:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:transform .2s,box-shadow .2s}
+    .pm-main-play:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,255,255,.15)}
+    .pm-main-hint{font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.35);letter-spacing:.08em}
+    .pm-gal-item{position:relative}
+    .pm-vid-play{position:absolute;inset:0;margin:auto;width:fit-content;height:fit-content;padding:10px 18px;font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;background:rgba(0,0,0,.75);color:white;border:1px solid rgba(255,255,255,.25);cursor:pointer;display:flex;align-items:center;gap:8px;z-index:2;transition:background .25s}
+    .pm-vid-play:hover{background:rgba(255,255,255,.15)}
+    .bc video,.bc img{will-change:auto}
+    @media(prefers-reduced-motion:reduce){
+        .bc video,.film-track,.marquee-track,.ngen-scan{animation:none!important}
+        .bc:hover video,.bc:hover img{transform:none}
+    }
+
+    /* Labs hub */
+    #labs{padding:100px 48px;background:var(--dark);color:white;border-top:1px solid rgba(255,255,255,.06)}
+    .labs-intro{margin-bottom:48px;max-width:640px}
+    .labs-intro .s-label{color:rgba(255,255,255,.35)}.labs-intro .s-label::before{background:rgba(255,255,255,.35)}
+    .labs-intro h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.05;margin:12px 0 14px;color:white}
+    .labs-intro p{color:rgba(255,255,255,.45);line-height:1.75}
+    .labs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .lab-card{display:flex;flex-direction:column;justify-content:space-between;min-height:220px;padding:28px 24px;border:1px solid rgba(255,255,255,.1);text-decoration:none;color:white;transition:all .35s var(--ease);position:relative;overflow:hidden}
+    .lab-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent);opacity:0;transition:opacity .35s}
+    .lab-card:hover{border-color:rgba(255,255,255,.35);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+    .lab-card:hover::before{opacity:1}
+    .lab-card-ic{font-size:1.6rem;margin-bottom:20px;opacity:.5}
+    .lab-card:hover .lab-card-ic{opacity:1}
+    .lab-card-tag{font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;color:rgba(255,255,255,.35);margin-bottom:8px}
+    .lab-card h3{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:8px}
+    .lab-card p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.55;margin-bottom:16px}
+    .lab-card-go{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.6)}
+    .lab-card:hover .lab-card-go{color:white}
+    @media(max-width:1024px){.labs-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.labs-grid{grid-template-columns:1fr}#labs{padding:80px 20px}}
+    .pm-panel{position:relative;z-index:1;background:var(--bg);width:100%;max-height:90vh;display:grid;grid-template-columns:1.15fr 1fr;transform:translateY(100%);transition:transform .55s cubic-bezier(.16,1,.3,1);will-change:transform;backface-visibility:hidden}
+    .proj-modal.active .pm-panel{transform:translateY(0)}
+    .pm-close{position:absolute;top:20px;right:20px;z-index:10;width:44px;height:44px;background:var(--dark);border:none;color:white;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:var(--cur-point);transition:background .3s}
+    .pm-close:hover{background:var(--fg2)}
+
+    /* Modal left — media */
+    .pm-media{background:#050505;overflow-y:auto;max-height:90vh}
+    .pm-main-vid,.pm-main-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+    .pm-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;padding:3px 0 0}
+    .pm-gal-item{position:relative;overflow:hidden;aspect-ratio:16/10}
+    .pm-gal-item video,.pm-gal-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+    .pm-gal-item:hover video,.pm-gal-item:hover img{transform:scale(1.05)}
+    .pm-gal-label{position:absolute;bottom:6px;left:8px;font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;background:rgba(0,0,0,.7);color:white;padding:3px 8px}
+    .pm-ba{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:3px 0 0}
+    .pm-ba-side{position:relative;overflow:hidden;aspect-ratio:4/3}
+    .pm-ba-side img{width:100%;height:100%;object-fit:cover;display:block}
+    .pm-ba-tag{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;background:var(--dark);color:white;padding:4px 10px}
+
+    /* Modal right — info */
+    .pm-info{padding:52px 48px;overflow-y:auto;max-height:90vh;display:flex;flex-direction:column}
+    .pm-level{font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;color:var(--fg4);margin-bottom:10px}
+    .pm-num{font-family:var(--mono);font-size:4.5rem;font-weight:900;color:var(--bg2);line-height:1;margin-bottom:8px;letter-spacing:-.04em}
+    .pm-title{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:900;letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
+    .pm-client{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--fg3);margin-bottom:20px;display:flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--border);width:fit-content}
+    .pm-client i{color:var(--fg)}
+    .pm-divider{height:1px;background:var(--border);margin:20px 0}
+    .pm-desc{font-size:.9rem;color:var(--fg3);line-height:1.8;margin-bottom:24px}
+    .pm-desc strong{color:var(--fg);font-weight:600}
+    .pm-stack-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;color:var(--fg4);margin-bottom:10px}
+    .pm-stack{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:24px}
+    .pm-st{font-family:var(--mono);font-size:.62rem;padding:6px 14px;border:1px solid var(--border2);color:var(--fg2);transition:all .3s}
+    .pm-st:hover{border-color:var(--fg);color:var(--fg)}
+    .pm-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:24px;border-top:1px solid var(--border)}
+    .pm-badge{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;padding:6px 14px;background:var(--dark);color:white;display:flex;align-items:center;gap:7px}
+    .pm-badge.outline{background:transparent;color:var(--fg);border:1.5px solid var(--border2)}
+
+    /* ===== AWARDS ===== */
+    #awards{padding:160px 48px;background:var(--dark);color:white}
+    .aw-header{margin-bottom:96px}
+    .aw-header .s-label{color:rgba(255,255,255,.3)}.aw-header .s-label::before{background:rgba(255,255,255,.3)}
+    .aw-header h2{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;letter-spacing:-.04em;line-height:1;color:white;margin-bottom:16px}
+    .aw-header p{font-size:1rem;color:rgba(255,255,255,.45);line-height:1.75;max-width:560px}
+    .aw-entry{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:2px;min-height:440px;overflow:hidden;border:1px solid rgba(255,255,255,.08);transition:border-color .4s}
+    .aw-entry:hover{border-color:rgba(255,255,255,.2)}
+    .aw-entry.reverse .aw-img{order:2}.aw-entry.reverse .aw-text{order:1}
+    .aw-img{position:relative;overflow:hidden;background:#111;height:420px}
+    .aw-img img,.aw-img video{width:100%;height:100%;object-fit:cover;filter:grayscale(60%);transition:filter .6s,transform .6s}
+    .aw-entry:hover .aw-img img,.aw-entry:hover .aw-img video{filter:grayscale(0%);transform:scale(1.03)}
+    .aw-img-num{position:absolute;top:24px;left:24px;font-family:var(--mono);font-size:4rem;font-weight:900;color:rgba(255,255,255,.1);line-height:1;z-index:2}
+    .aw-text{padding:52px 48px;display:flex;flex-direction:column;justify-content:center;background:rgba(255,255,255,.02)}
+    .aw-cat{font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;color:rgba(255,255,255,.3);margin-bottom:16px}
+    .aw-title{font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;letter-spacing:-.025em;line-height:1.2;margin-bottom:8px;color:white}
+    .aw-venue{font-family:var(--mono);font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:20px;line-height:1.6;padding:10px 16px;border-left:3px solid rgba(255,215,0,.5);background:rgba(255,255,255,.03)}
+    .aw-venue strong{color:rgba(255,215,0,.8);font-weight:700}
+    .aw-desc{font-size:1rem;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:24px}
+    .aw-badges{display:flex;gap:10px;flex-wrap:wrap}
+    .aw-badge{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;padding:8px 16px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);display:flex;align-items:center;gap:8px;transition:all .3s}
+    .aw-entry:hover .aw-badge{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
+    .aw-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:80px;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+    .aw-stat{padding:36px 32px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
+    .aw-stat:last-child{border-right:none}
+    .aw-stat-num{font-family:var(--mono);font-size:2.6rem;font-weight:900;color:white;display:block;line-height:1}
+    .aw-stat-lbl{font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;color:rgba(255,255,255,.3);margin-top:8px;display:block}
+
+    /* ===== INNOVATION ===== */
+    #innovation:not(.neo-zone){padding:140px 48px;background:var(--bg)}
+    .innov-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .innov-scene{position:relative;aspect-ratio:1;background:var(--dark);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:20px}
+    .innov-scene-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+    .ngen-console{width:100%;max-width:420px;position:relative;z-index:2;display:flex;flex-direction:column;gap:10px}
+    .ngen-header{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;color:rgba(255,255,255,.45);padding:0 4px}
+    .ngen-status{margin-top:6px;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;color:rgba(255,255,255,.62);max-width:320px}
+    .ngen-live{display:flex;align-items:center;gap:8px;color:#ef4444;font-weight:700}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:livePulse 1.2s ease-in-out infinite}
+    @keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+    .ngen-feed{position:relative;aspect-ratio:4/3;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:#0a0a0a}
+    .ngen-feed img,.ngen-feed video{width:100%;height:100%;object-fit:cover;filter:contrast(1.05) saturate(.85)}
+    .aw-carousel{position:relative;width:100%;height:100%}
+    .aw-slide{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;display:flex;align-items:center;justify-content:center}
+    .aw-slide.active{opacity:1}
+    .aw-slide img,.aw-slide video{width:100%;height:100%;object-fit:cover}
+    .aw-img.placeholder{background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.08));display:grid;place-items:center;color:rgba(255,255,255,.85)}
+    .aw-img.placeholder .aw-placeholder-inner{display:grid;gap:12px;place-items:center;text-align:center;padding:24px}
+    .aw-img.placeholder .aw-placeholder-inner i{font-size:2.6rem;color:rgba(255,255,255,.55)}
+    .aw-img.placeholder .aw-placeholder-inner p{font-family:var(--mono);font-size:.88rem;letter-spacing:.12em;line-height:1.5;color:rgba(255,255,255,.75);max-width:220px}
+    .ngen-scan{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,rgba(34,197,94,.08) 48%,rgba(34,197,94,.25) 50%,rgba(34,197,94,.08) 52%,transparent 100%);background-size:100% 200%;animation:ngenScan 3.5s linear infinite;pointer-events:none}
+    @keyframes ngenScan{0%{background-position:0 -100%}100%{background-position:0 200%}}
+    .ngen-reticle{position:absolute;inset:12%;border:1px solid rgba(34,197,94,.35);pointer-events:none}
+    .ngen-reticle::before,.ngen-reticle::after{content:'';position:absolute;background:rgba(34,197,94,.5)}
+    .ngen-reticle::before{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
+    .ngen-reticle::after{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%)}
+    .ngen-corner{position:absolute;width:14px;height:14px;border-color:rgba(34,197,94,.7);border-style:solid;pointer-events:none}
+    .ngen-corner.tl{top:8%;left:8%;border-width:2px 0 0 2px}.ngen-corner.tr{top:8%;right:8%;border-width:2px 2px 0 0}
+    .ngen-corner.bl{bottom:8%;left:8%;border-width:0 0 2px 2px}.ngen-corner.br{bottom:8%;right:8%;border-width:0 2px 2px 0}
+    .ngen-hud{position:absolute;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;color:rgba(255,255,255,.55);pointer-events:none}
+    .ngen-modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px}
+    .ngen-mod{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);padding:7px 5px;min-height:43px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;transition:all .35s var(--ease);cursor:var(--cur-point)}
+    .ngen-mod:hover{background:rgba(255,255,255,.08)}
+    .ngen-mod i{display:block;font-size:1rem;color:rgba(0, 0, 0, 0.75);margin-bottom:8px;transition:color .35s}
+    .ngen-mod span{display:block;font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;color:rgba(0, 0, 0, 0.75);line-height:1.3;transition:color .35s}
+    .ngen-mod.active{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.45);box-shadow:0 0 20px rgba(34,197,94,.15)}
+    .ngen-mod.active i,.ngen-mod.active span{color:#4ade80}
+    .ngen-mod.active span{font-weight:700}
+    .patent-badge{position:absolute;top:64px;left:24px;z-index:5;width:110px;height:110px;padding:14px;background:transparent;border:0;display:flex;align-items:center;justify-content:center;border-radius:16px;box-shadow:none;transition:transform .35s ease}
+    .patent-badge img{width:200%;height:200%;object-fit:contain}
+    .patent-badge:hover{transform:translateY(-2px) scale(1.02)}
+    .innov-scene{border:3px solid rgba(255,255,255,.15);box-shadow:12px 12px 0 rgba(255,255,255,.06)}
+    .program-stack{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+    .ngc-chip{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid rgba(15,23,42,.12);border-radius:999px;background:rgba(255,255,255,.94);color:var(--dark);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;transition:all .3s;box-shadow:0 10px 35px rgba(15,23,42,.06)}
+    .ngc-chip i,.prog-chip i{font-size:1rem;color:var(--dark)}
+    .prog-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(15,23,42,.12);border-radius:999px;background:rgba(255,255,255,.94);color:var(--dark);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;transition:all .3s;box-shadow:0 10px 30px rgba(15,23,42,.05)}
+    .show-awards-btn{margin:42px auto 24px;display:block;padding:16px 26px;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;border:2px solid rgba(255,255,255,.18);background:transparent;color:white;cursor:var(--cur-point);transition:all .3s}
+    .show-awards-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35)}
+    .aw-more{display:none;opacity:0;transition:opacity .35s ease,transform .35s ease}
+    .aw-more.active{display:block;opacity:1;transform:translateY(0)}
+    .aw-more-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+    .aw-more-card{padding:24px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);display:flex;flex-direction:column;gap:12px}
+    .aw-more-icon{font-size:1.6rem;display:inline-flex}
+    /* Neon-glow contact pill: rotating gradient border + soft pulsing aura */
+    @property --qc-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+    @keyframes qcSpin{to{--qc-a:360deg}}
+    @keyframes qcPulse{0%,100%{opacity:.32}50%{opacity:.6}}
+    .quick-contact{position:fixed;right:22px;bottom:24px;z-index:10050;padding:17px 30px;color:#fff;font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-decoration:none;border-radius:999px;cursor:var(--cur-point);
+        border:1.6px solid transparent;
+        background:linear-gradient(#0a0a0a,#0a0a0a) padding-box,
+                   conic-gradient(from var(--qc-a),#6d5cff,#b14bff,#ff5db1,#5b8cff,#6d5cff) border-box;
+        box-shadow:0 10px 34px rgba(0,0,0,.45);
+        animation:qcSpin 5s linear infinite;
+        transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+    .quick-contact::before{content:'';position:absolute;inset:-5px;border-radius:inherit;z-index:-1;pointer-events:none;
+        background:linear-gradient(90deg,#6d5cff,#b14bff,#ff5db1,#5b8cff);
+        filter:blur(18px);opacity:.4;animation:qcPulse 3s ease-in-out infinite}
+    .quick-contact:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 46px rgba(150,90,255,.45)}
+    .quick-contact:hover::before{opacity:.85;filter:blur(22px)}
+    @media(prefers-reduced-motion:reduce){.quick-contact,.quick-contact::before{animation:none}}
+    @media(max-width:720px){.aw-more-grid{grid-template-columns:1fr}.quick-contact{right:16px;bottom:16px;width:calc(100% - 32px);text-align:center}}
+    .scene-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+    .sr{position:absolute;border-radius:50%;border:1px solid rgba(34,197,94,.08);animation:ringp 3.5s ease-in-out infinite}
+    .sr:nth-child(1){width:280px;height:280px}.sr:nth-child(2){width:380px;height:380px;animation-delay:.6s}
+    @keyframes ringp{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:.5;transform:scale(1.02)}}
+    .scene-lbl{position:absolute;bottom:16px;left:16px;font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;color:rgba(255,255,255,.2)}
+    .scene-badge{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:8px 14px;font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.4);letter-spacing:.1em;display:flex;align-items:center;gap:8px}
+    .innov-content .s-label::before{background:var(--fg)}
+    .innov-content h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:18px;line-height:1.1}
+    .innov-content p{color:var(--fg3);line-height:1.8;margin-bottom:14px;font-size:1.05rem}
+    .innov-feats{margin-top:36px;display:flex;flex-direction:column;gap:10px}
+    .if-item{display:flex;align-items:flex-start;gap:14px;padding:18px;border:1px solid var(--border);transition:all .3s}
+    .if-item:hover{border-color:var(--fg);background:var(--bg2);box-shadow:0 6px 24px rgba(0,0,0,.04)}
+    .if-ic{width:38px;height:38px;background:var(--fg);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+    .if-txt h4{font-size:.88rem;font-weight:600;margin-bottom:3px}.if-txt p{font-size:.78rem;color:var(--fg3);margin:0}
+    /* ===== CONTACT ===== */
+    #contact{padding:140px 48px;background:linear-gradient(180deg,#fff9e6 0%,#f6d099 100%);position:relative;overflow:hidden}
+    #contact::before{display:none}
+    .contact-grid{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:auto auto;gap:62px 60px;align-items:start;position:relative;z-index:1}
+    .contact-model-col{display:flex;align-items:center;justify-content:center}
+    .contact-model-panel{position:relative;width:100%;min-height:640px;border-radius:32px;overflow:hidden;background:linear-gradient(180deg,#fff6dc 0%,#f4c078 100%);box-shadow:0 40px 90px rgba(0,0,0,.12)}
+    #desertCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+    .contact-form-col .cf-form{background:rgba(255,255,255,0.95);padding:32px;border-radius:28px;box-shadow:0 26px 56px rgba(0,0,0,.1)}
+    .contact-social-col{grid-column:1/-1;display:flex;flex-direction:column;gap:16px;margin-top:10px}
+    .contact-left h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:16px}
+    .contact-left p{color:var(--fg3);line-height:1.8;margin-bottom:44px;font-size:1.05rem}
+    .cl-links{display:flex;flex-wrap:wrap;gap:12px}
+    .cl-link{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--fg);padding:18px 20px;border:1px solid var(--border);background:var(--bg);transition:all .3s}
+    .cl-link:hover{border-color:var(--fg);transform:translateX(6px);box-shadow:0 6px 24px rgba(0,0,0,.05)}
+    .cl-ic{width:42px;height:42px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:all .3s}
+    .cl-link:hover .cl-ic{background:var(--fg);color:var(--bg)}
+    .cl-txt span:first-child{display:block;font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;color:var(--fg4);margin-bottom:3px}
+    .cl-txt span:last-child{font-size:.9rem;font-weight:500}
+    .cl-arr{margin-left:auto;color:var(--fg4);transition:all .3s}.cl-link:hover .cl-arr{color:var(--fg);transform:translateX(4px)}
+    .cf-form{display:flex;flex-direction:column;gap:16px}
+    .fg-g{display:flex;flex-direction:column;gap:6px}
+    .f-lbl{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;color:var(--fg3)}
+    .f-inp,.f-ta{background:var(--bg);border:1px solid var(--border);color:var(--fg);padding:14px 18px;font-family:var(--sans);font-size:.92rem;outline:none;width:100%;transition:border-color .3s,box-shadow .3s}
+    .f-inp:focus,.f-ta:focus{border-color:var(--fg);box-shadow:0 0 0 3px rgba(0,0,0,.04)}
+    .f-ta{resize:vertical;min-height:120px}
+    .f-sub{width:100%;padding:16px;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;border:none;cursor:var(--cur-point);transition:box-shadow .3s;position:relative;overflow:hidden}
+    .f-sub::before{content:'';position:absolute;inset:0;background:var(--fg2);transform:translateX(-101%);transition:transform .45s cubic-bezier(.77,0,.175,1)}
+    .f-sub:hover::before{transform:translateX(0)}.f-sub:hover{box-shadow:0 10px 40px rgba(0,0,0,.2)}
+    .f-sub span{position:relative;z-index:1}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-items:center;justify-content:space-between}
+    .ft-logo{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;font-weight:700}
+    .ft-copy{font-family:var(--mono);font-size:.6rem;color:var(--fg3)}
+    .ft-links{display:flex;gap:16px}
+    .ft-links a{color:var(--fg3);text-decoration:none;font-size:.95rem;transition:color .3s,transform .3s;display:inline-block}
+    .ft-links a:hover{color:var(--fg);transform:translateY(-3px)}
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials{padding:96px 48px;background:var(--bg2)}
+    .test-header{margin-bottom:38px}
+    .test-header h2{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:10px}
+    .test-header p{font-size:.92rem;color:var(--fg3);line-height:1.65;max-width:540px}
+    .test-platform{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;color:var(--fg3);background:var(--bg);border:1px solid var(--border2);padding:8px 16px;margin-bottom:28px}
+    .test-platform .stars-row{display:flex;gap:3px;color:#f59e0b}
+    .test-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border)}
+    .test-card{background:var(--bg);padding:30px 32px;position:relative;overflow:hidden;transition:background .35s var(--ease)}
+    .test-card:hover{background:var(--bg)}
+    .test-card::after{content:'';position:absolute;inset:0;background:var(--fg);transform:translateY(101%);transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:0}
+    .test-card:hover::after{transform:translateY(0)}
+    .test-card>*{position:relative;z-index:1;transition:color .35s}
+    .test-card:hover .test-text{color:rgba(255,255,255,.8)}
+    .test-card:hover .test-name{color:white}
+    .test-card:hover .test-meta{color:rgba(255,255,255,.5)}
+    .test-card:hover .test-stars i{color:rgba(255,200,0,.9)}
+    .test-card:hover .test-num{color:rgba(255,255,255,.08)}
+    .test-card:hover .test-proof{color:rgba(255,255,255,.5)}
+    .test-card:hover .test-proof:hover{color:white}
+    .test-open{font-size:2.6rem;font-family:Georgia,serif;color:var(--fg4);line-height:1;margin-bottom:8px;display:block;transition:color .35s}
+    .test-stars{display:flex;gap:4px;margin-bottom:14px}
+    .test-stars i{color:#f59e0b;font-size:.66rem;transition:color .35s}
+    .test-text{font-size:1rem;color:var(--fg2);line-height:1.7;margin-bottom:18px;transition:color .35s}
+    .test-divider{height:1px;background:var(--border);margin-bottom:16px;transition:background .35s}
+    .test-card:hover .test-divider{background:rgba(255,255,255,.15)}
+    .test-person{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .test-avatar{width:46px;height:46px;border-radius:50%;flex-shrink:0;overflow:hidden;border:1px solid var(--border2);background:var(--bg2);transition:border-color .35s}
+    .test-avatar svg{width:100%;height:100%;display:block}
+    .test-card:hover .test-avatar{border-color:rgba(255,255,255,.22)}
+    .test-name{font-family:var(--mono);font-size:1rem;font-weight:800;letter-spacing:.08em;margin-bottom:4px;transition:color .35s}
+    .test-meta{font-family:var(--mono);font-size:.72rem;color:var(--fg3);letter-spacing:.08em;font-weight:600;transition:color .35s}
+    .test-proof{font-family:var(--mono);font-size:.72rem;color:var(--fg3);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-top:0;border:1px solid var(--border);padding:7px 14px;transition:all .3s;font-weight:500}
+    .test-proof:hover{border-color:var(--border2)}
+    .test-num{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:3rem;font-weight:900;color:var(--bg2);line-height:1;letter-spacing:-.04em;pointer-events:none;transition:color .35s}
+
+    /* ===== HUMANOID ROBOT SECTION ===== */
+    #humanoid{padding:140px 48px;background:var(--dark);color:white;position:relative;overflow:hidden}
+    .hum-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .hum-scene{position:relative;aspect-ratio:1;background:#060606;overflow:hidden;border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center}
+    .hum-blueprint{position:relative;width:88%;max-width:380px;aspect-ratio:1;z-index:1}
+    .hum-photo{position:absolute;inset:8%;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+    .hum-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.1);opacity:.35;transition:opacity .6s,filter .6s}
+    .hum-scene:hover .hum-photo img{opacity:.55;filter:grayscale(40%) contrast(1.05)}
+    .hum-blueprint-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .hum-blueprint-svg line,.hum-blueprint-svg path{stroke:rgba(255,255,255,.15);stroke-width:1;fill:none}
+    .hum-dim{position:absolute;font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.25);letter-spacing:.08em;animation:dimFade 4s ease-in-out infinite}
+    .hum-dim.d1{top:12%;left:4%}.hum-dim.d2{top:42%;right:2%;animation-delay:1s}.hum-dim.d3{bottom:18%;left:8%;animation-delay:2s}
+    @keyframes dimFade{0%,100%{opacity:.4}50%{opacity:1}}
+    .hum-orbit{position:absolute;inset:-8%;border:1px dashed rgba(255,255,255,.08);border-radius:50%;animation:orbitSpin 24s linear infinite}
+    @keyframes orbitSpin{to{transform:rotate(360deg)}}
+    .hum-orbit-dot{position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;background:#f59e0b;border-radius:50%;box-shadow:0 0 12px rgba(245,158,11,.6)}
+    .hum-bp-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+    .hum-sketch-note{position:absolute;font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.2);letter-spacing:.08em;pointer-events:none}
+    .hum-sketch-note.n1{top:16px;left:16px}.hum-sketch-note.n2{bottom:16px;right:16px}.hum-sketch-note.n3{top:50%;right:16px;transform:translateY(-50%)}
+    .hum-sketch-line{position:absolute;background:rgba(255,255,255,.08);pointer-events:none}
+    .hum-sketch-line.h{width:60%;height:1px;top:30%;left:20%}.hum-sketch-line.v{width:1px;height:40%;top:30%;left:65%}
+    .hum-wip{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;padding:8px 16px;border:1px dashed rgba(255,255,255,.2);color:rgba(255,255,255,.4);animation:wipBlink 2.5s ease-in-out infinite}
+    @keyframes wipBlink{0%,100%{opacity:1}50%{opacity:.4}}
+    .hum-content .s-label{color:rgba(255,255,255,.3)}.hum-content .s-label::before{background:rgba(255,255,255,.3)}
+    .hum-content h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:18px;line-height:1.1;color:white}
+    .hum-content p{color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:14px;font-size:1.05rem}
+    .hum-content p strong{color:rgba(255,255,255,.85)}
+    .hum-feats{margin-top:32px;display:flex;flex-direction:column;gap:10px}
+    .hf-item{display:flex;align-items:flex-start;gap:14px;padding:18px;border:1px solid rgba(255,255,255,.08);transition:all .3s}
+    .hf-item:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.03)}
+    .hf-ic{width:38px;height:38px;background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.15);color:rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;transition:all .3s}
+    .hf-item:hover .hf-ic{background:white;color:var(--dark);border-style:solid}
+    .hf-txt h4{font-size:.92rem;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px}.hf-txt p{font-size:.82rem;color:rgba(255,255,255,.4);margin:0;line-height:1.6}
+    .hum-status{margin-top:28px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:rgba(255,255,255,.4);padding:10px 20px;border:1px dashed rgba(255,255,255,.15)}
+    .hum-status .iit-pulse{background:#f59e0b}
+
+    /* ===== FILM STRIP ===== */
+    .film-strip{background:var(--dark);padding:24px 0;overflow:hidden;position:relative}
+    .film-track-wrap{position:relative;padding:18px 0}
+    .film-sprocket{position:absolute;left:0;right:0;height:18px;display:flex;gap:0;z-index:2}
+    .film-sprocket.top{top:0}.film-sprocket.bot{bottom:0}
+    .film-holes{display:flex;width:100%;justify-content:space-around;align-items:center;background:var(--dark);padding:0 4px}
+    .film-hole{width:12px;height:9px;border-radius:2px;background:#1a1a1a;border:1px solid #333;flex-shrink:0}
+    .film-track{display:flex;animation:filmScroll 12s linear infinite}
+    @keyframes filmScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .film-frame{min-width:220px;height:160px;margin:0 3px;position:relative;overflow:hidden;border:2px solid #222;flex-shrink:0}
+    .film-frame img{width:100%;height:100%;object-fit:cover;filter:sepia(30%) contrast(1.1);transition:filter .4s}
+    .film-frame:hover img{filter:sepia(0%) contrast(1)}
+    .film-border{position:absolute;left:0;right:0;height:3px;background:var(--dark);z-index:1}
+    .film-border.top{top:0}.film-border.bot{bottom:0}
+
+    /* ===== JOURNEY TIMELINE ===== */
+    #journey{background:var(--bg);border-top:1px solid var(--border)}
+    .journey-wrap{height:250vh;position:relative}
+    .journey-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:0 48px}
+    .journey-header{margin-bottom:48px}
+    .journey-header h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:10px}
+    .journey-header p{font-size:1rem;color:var(--fg3);line-height:1.75;max-width:500px}
+    .journey-track{display:flex;gap:0;will-change:transform}
+    .journey-line{position:absolute;top:50%;left:0;right:0;height:2px;background:var(--border);z-index:0}
+    .jc{min-width:380px;padding:48px 40px;border-right:1px solid var(--border);background:var(--bg);display:flex;flex-direction:column;justify-content:center;position:relative;flex-shrink:0;overflow:hidden;transition:background .4s var(--ease)}
+    .jc:hover{background:var(--fg)}
+    .jc-year{font-family:var(--mono);font-size:4rem;font-weight:900;color:rgba(15,23,42,.22);line-height:1;margin-bottom:12px;letter-spacing:-.04em;transition:color .35s}
+    .jc:hover .jc-year{color:rgba(15,23,42,.36)}
+    .jc-dot{width:14px;height:14px;border-radius:50%;background:var(--fg);border:3px solid var(--bg);margin-bottom:20px;transition:all .35s;position:relative;z-index:1}
+    .jc:hover .jc-dot{background:white;border-color:var(--fg);transform:scale(1.3)}
+    .jc-title{font-size:1.15rem;font-weight:800;margin-bottom:8px;letter-spacing:-.02em;transition:color .35s}
+    .jc:hover .jc-title{color:white}
+    .jc-sub{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--fg3);margin-bottom:12px;transition:color .35s}
+    .jc:hover .jc-sub{color:rgba(255,255,255,.5)}
+    .jc-desc{font-size:.92rem;color:var(--fg3);line-height:1.7;transition:color .35s}
+    .jc:hover .jc-desc{color:rgba(255,255,255,.6)}
+    .jc-icon{position:absolute;top:20px;right:20px;font-size:1.4rem;color:var(--fg3);transition:color .35s}
+    .jc:hover .jc-icon{color:rgba(255,255,255,.4)}
+
+    /* ===== SCROLL HIGHLIGHT & LOC TAG ===== */
+    .scroll-hl{display:inline;background:linear-gradient(to top,rgba(255,215,0,.42) 40%,transparent 40%);background-size:0% 100%;background-repeat:no-repeat;background-position:0 100%;transition:background-size .9s cubic-bezier(.22,1,.36,1)}
+    .scroll-hl.active{background-size:100% 100%}
+    .loc-tag{font-weight:800;color:#c8860a;letter-spacing:.08em;position:relative;padding:1px 5px;background:rgba(255,215,0,.18);border-radius:3px;border-bottom:2px solid rgba(255,185,0,.55)}
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:1024px){
+        .hero-grid,.about-grid,.innov-grid,.hum-grid,.contact-grid{grid-template-columns:1fr;gap:48px}
+        .hero-right{order:-1}.hero-img-wrap{max-width:360px;margin:0 auto}
+        .stats-strip{grid-template-columns:repeat(2,1fr)}
+        .stats-strip .stat-item:nth-child(n+4){display:block}
+        .stats-strip .stat-item:nth-child(even){border-right:none}
+        .stats-strip .stat-item:nth-child(1), .stats-strip .stat-item:nth-child(2){border-bottom:1px solid var(--border)}
+        
+        .skills-grid{grid-template-columns:repeat(2,1fr)}
+        .bento{grid-template-columns:repeat(2,1fr)}
+        .bc-featured{grid-column:span 2;grid-row:span 2}
+        .pm-panel{grid-template-columns:1fr;max-height:95vh}
+        .pm-media{max-height:50vh}
+        .aw-entry{grid-template-columns:1fr}.aw-entry.reverse .aw-img{order:0}.aw-entry.reverse .aw-text{order:0}
+        .aw-img{height:280px}
+        
+        .aw-stats{grid-template-columns:repeat(2,1fr)}
+        .aw-stat:nth-child(even){border-right:none}
+        .aw-stat:nth-child(1), .aw-stat:nth-child(2){border-bottom:1px solid rgba(255,255,255,.08)}
+        
+        .test-grid{grid-template-columns:1fr}
+        .jc{min-width:300px}
+    }
+    @media(max-width:768px){
+        /* Mobile tweaks for Next Gen Camera console, patent badge, and scene label */
+        .innov-scene{aspect-ratio:auto;padding:72px 16px 40px;height:auto}
+        .patent-badge{top:12px;right:auto;left:12px;width:56px;height:56px;padding:6px;border-radius:12px}
+        .scene-badge{top:12px;right:12px;padding:6px 10px;font-size:.5rem;max-width:40%;text-align:right}
+        .patent-badge img{width:100%;height:100%;object-fit:contain;}
+
+        .ngen-modules{grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:6px}
+        .ngen-mod{min-height:60px;padding:6px;border-radius:8px}
+        .ngen-mod i{font-size:1rem;margin-bottom:4px}
+        .ngen-mod span{font-size:.55rem}
+        .ngen-console{height:auto;position:relative;z-index:2;display:flex;flex-direction:column;gap:16px;width:100%}
+        .scene-lbl{left:12px;bottom:12px;right:auto;font-size:.55rem}
+
+        nav,nav.scrolled{padding:14px 20px}
+        .nav-links{display:none}.nav-toggle{display:block}
+        #home,#labs,#about,#skills,#projects,#awards,#certificates,#testimonials,#innovation,#contact,#humanoid{padding:80px 20px}
+        .hero-name{font-size:clamp(2.8rem,10vw,4.2rem)}
+        .about-right{grid-template-columns:1fr}
+        .skills-grid{grid-template-columns:1fr}
+        .bento{grid-template-columns:1fr;grid-auto-rows:280px}
+        .bc-featured{grid-column:span 1;grid-row:span 1}
+        .bc-num{font-size:3.5rem}.bc-featured .bc-num{font-size:3.5rem}
+        .bc-featured .bc-title{font-size:1rem}
+        .pm-panel{grid-template-columns:1fr;max-width:100vw}
+        .pm-media,.pm-info{min-width:0}
+        .pm-info{padding:32px 22px}
+        .test-card{padding:24px 20px}
+        .jc{min-width:240px;padding:32px 24px}
+        .journey-sticky{padding:0 20px}
+        footer{flex-direction:column;gap:14px;text-align:center;padding:24px 20px}
+
+        /* Mobile specific font size fixes */
+        .ph-counter{font-size:3rem}
+        .ph-left h2{font-size:clamp(2rem,6vw,3rem)}
+        .aw-stat-num{font-size:2rem}
+        .film-frame{min-width:160px;height:120px}
+        .mob-menu{gap:16px}
+        .mob-menu a{font-size:1.2rem}
+    }
+    </style>
+</head>
+<body><div id="progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+    <a href="#home" class="nav-logo">AKL_</a>
+    <ul class="nav-links">
+        <li><a href="#labs">LABS</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#skills">SKILLS</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#awards">AWARDS</a></li>
+        <li><a href="#certificates">CERTS</a></li>
+        <li><a href="#testimonials">CLIENTS</a></li>
+        <li><a href="#journey">JOURNEY</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:0">
+        <button class="nav-toggle" id="navBtn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+    <button class="mob-close" id="mobClose"><i class="fas fa-times"></i></button>
+    <a href="#labs">LABS</a><a href="#about">ABOUT</a><a href="#skills">SKILLS</a><a href="#projects">PROJECTS</a>
+    <a href="#awards">AWARDS</a><a href="#certificates">CERTS</a><a href="#testimonials">CLIENTS</a><a href="#journey">JOURNEY</a><a href="#contact">CONTACT</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="neo-hero">
+    <span class="nb-blob nb-blob-1" aria-hidden="true"></span>
+    <span class="nb-blob nb-blob-2" aria-hidden="true"></span>
+    <div class="nb-hero-grid">
+        <div class="nb-hero-main">
+            <div class="nb-hero-status">
+                <span class="nb-pill nb-pill-live"><span class="nb-live-dot"></span>Open to new opportunities</span>
+                <span class="nb-pill font-code">FOUNDER · AKL ROBOTICS</span>
+            </div>
+            <p class="nb-hero-hi font-pixel">HI, I'M</p>
+            <h1 class="nb-name">AKSHIT<br>KUMAR <span class="nb-name-mark">LALL</span></h1>
+            <div class="nb-term">
+                <span class="nb-term-dots"><i></i><i></i><i></i></span>
+                <span class="nb-term-txt font-code">&gt;&nbsp;<span id="typed"></span><span class="caret"></span></span>
+            </div>
+            <!-- <p class="nb-hero-statement">I build <strong>real software</strong> for <strong>real clients</strong> worldwide — computer vision, AI/ML, robotics, the full modern web stack &amp; 3D. Designed, shipped, working.</p> -->
+            <p class="nb-hero-bio">I'm <strong>Akshit Kumar Lall</strong>, a <span class="hl-mark">national award-winning engineer</span>, first-year CS student, and the founder of <strong>AKL Robotics</strong>. I combine deep technical expertise in <span class="hl-mark">AI, Computer Vision &amp; full-stack development</span> with a strong <span class="hl-mark">go-to-market mindset</span> to build and scale global software solutions.</p>
+
+            <div class="nb-chips">
+                <span class="nb-chip nb-c-pink">COMPUTER VISION</span>
+                <span class="nb-chip nb-c-mint">AI / ML</span>
+                <span class="nb-chip nb-c-yellow">ROBOTICS</span>
+                <span class="nb-chip nb-c-blue">FULL-STACK WEB</span>
+                <span class="nb-chip nb-c-lav">CAD · 3D</span>
+                <span class="nb-chip nb-c-coral">PYTHON</span>
+            </div>
+            <div class="nb-cta">
+                <a href="#projects" class="nb-btn nb-btn-dark"><span>VIEW PROJECTS</span> <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="nb-btn nb-btn-pink"><span>HIRE ME</span></a>
+            </div>
+        </div>
+        <div class="nb-hero-side">
+            <div class="nb-photo">
+                <img src="assets/me op.jpeg" alt="Akshit Kumar Lall">
+                <span class="nb-photo-tag font-pixel">AKL</span>
+            </div>
+            <div class="nb-badge-float font-code"><strong>5+</strong> YEARS<br>BUILDING<br>SOFTWARE</div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-strip rv">
+    <div class="stat-item"><span class="stat-num counter" data-t="100">0</span><span class="stat-label">PROJECTS DELIVERED</span></div>
+    <div class="stat-item"><span class="stat-num counter" data-t="50">0</span><span class="stat-label">CLIENTS WORLDWIDE</span></div>
+    <div class="stat-item"><span class="stat-num counter" data-t="8">0</span><span class="stat-label">AWARDS WON</span></div>
+    <div class="stat-item"><span class="stat-num" style="font-size:1.1rem;line-height:1.3">FOUNDER<br>&amp; CEO</span><span class="stat-label">AKL TECH</span></div>
+</div>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <span class="m-i">PYTHON</span><span class="m-i">C++</span><span class="m-i">OPENCV</span><span class="m-i">REACT</span><span class="m-i">DJANGO</span><span class="m-i">FLASK</span><span class="m-i">HTML · CSS · JS</span><span class="m-i">CAD</span><span class="m-i">3D DESIGN</span><span class="m-i">VIDEO EDITING</span><span class="m-i">COMPUTER VISION</span><span class="m-i">AI / ML</span><span class="m-i">MARKETING</span><span class="m-i">SAAS</span><span class="m-i">BUSINESS</span><span class="m-i">NEXT GEN CAMERA</span>
+        <span class="m-i">PYTHON</span><span class="m-i">C++</span><span class="m-i">OPENCV</span><span class="m-i">REACT</span><span class="m-i">DJANGO</span><span class="m-i">FLASK</span><span class="m-i">HTML · CSS · JS</span><span class="m-i">CAD</span><span class="m-i">3D DESIGN</span><span class="m-i">VIDEO EDITING</span><span class="m-i">COMPUTER VISION</span><span class="m-i">AI / ML</span><span class="m-i">MARKETING</span><span class="m-i">SAAS</span><span class="m-i">BUSINESS</span><span class="m-i">NEXT GEN CAMERA</span>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="neo-about">
+    <div class="nb-about-inner">
+        <div class="nb-about-head rv-l">
+            <p class="nb-kicker font-pixel">// ABOUT ME</p>
+            <h2 class="nb-about-title">ENGINEER.<br>INNOVATOR.<br><span class="nb-name-mark">ENTREPRENEUR.</span></h2>
+            <div class="nb-about-lead">
+                <p class="font-code">I'm <strong>Akshit Kumar Lall</strong> — a <strong>national award-winning</strong> engineer building real software for real clients worldwide. My core expertise spans <strong>Computer Vision</strong>, <strong>AI / ML</strong>, <strong>Robotics &amp; Technology</strong>, the <strong>full modern web stack</strong>, and <strong>CAD / 3D design</strong>.</p>
+                <p class="font-code">I'm an <strong>entrepreneur</strong> building <strong>AKL Robotics</strong> — my humanoid robotics &amp; AI startup — and I bring real <strong>business &amp; product</strong> knowledge to everything I ship.</p>
+            </div>
+        </div>
+        <div class="nb-about-right rv-r">
+            <div class="nb-exp-grid">
+                <div class="nb-exp nb-c-pink"><span class="nb-exp-ic">👁️</span><h3 class="font-code">COMPUTER VISION</h3><p class="font-code">Detection, tracking &amp; recognition systems in production.</p></div>
+                <div class="nb-exp nb-c-mint"><span class="nb-exp-ic">🧠</span><h3 class="font-code">AI / ML DEVELOPER</h3><p class="font-code">Training &amp; deploying real machine-learning pipelines.</p></div>
+                <div class="nb-exp nb-c-yellow"><span class="nb-exp-ic">🐍</span><h3 class="font-code">PYTHON MASTERY</h3><p class="font-code">5+ years — my weapon of choice for anything hard.</p></div>
+                <div class="nb-exp nb-c-blue"><span class="nb-exp-ic">🌐</span><h3 class="font-code">FULL-STACK WEB</h3><p class="font-code">The full modern web stack, front to back.</p></div>
+                <div class="nb-exp nb-c-coral"><span class="nb-exp-ic">🤖</span><h3 class="font-code">ROBOTICS</h3><p class="font-code">Humanoid robotics, hardware &amp; embedded systems.</p></div>
+                <div class="nb-exp nb-c-white"><span class="nb-exp-ic">📐</span><h3 class="font-code">CAD · 3D DESIGN</h3><p class="font-code">Modeling &amp; prototyping for real-world builds.</p></div>
+            </div>
+            <div class="nb-now">
+                <span class="nb-now-tag font-pixel">NOW</span>
+                <div class="nb-now-body">
+                    <p class="nb-now-title">BUILDING <span class="nb-name-mark">AKL ROBOTICS</span></p>
+                    <p class="nb-now-sub font-code">A humanoid robotics &amp; AI startup — alongside freelancing for <strong>50+ clients</strong> worldwide and <strong>100+ projects</strong> shipped.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="s-max">
+        <div class="skills-header rv">
+            <div class="s-label">EXPERTISE</div>
+            <h2>Tech Stack</h2>
+            <p>Production-grade tools. Real-world experience. Not just tutorials — real shipped code.</p>
+        </div>
+        <div class="skills-grid">
+            <div class="sk-card gc rv"><span class="sk-ic">👁️</span><div class="sk-name">COMPUTER VISION</div><div class="sk-tags"><span class="sk-tag">OpenCV</span><span class="sk-tag">YOLO</span><span class="sk-tag">MediaPipe</span><span class="sk-tag">Object Detection</span><span class="sk-tag">Face Recognition</span><span class="sk-tag">Image Processing</span><span class="sk-tag">Optical Flow</span></div></div>
+            <div class="sk-card gc rv"><span class="sk-ic">🧠</span><div class="sk-name">AI &amp; MACHINE LEARNING</div><div class="sk-tags"><span class="sk-tag">TensorFlow</span><span class="sk-tag">PyTorch</span><span class="sk-tag">Scikit-learn</span><span class="sk-tag">Deep Learning</span><span class="sk-tag">Neural Networks</span><span class="sk-tag">CNNs</span></div></div>
+            <div class="sk-card gc rv"><span class="sk-ic">⌨️</span><div class="sk-name">LANGUAGES</div><div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">C++</span><span class="sk-tag">JavaScript</span><span class="sk-tag">HTML/CSS</span><span class="sk-tag">SQL</span><span class="sk-tag">Bash</span></div></div>
+            <div class="sk-card gc rv"><span class="sk-ic">🌐</span><div class="sk-name">WEB DEVELOPMENT</div><div class="sk-tags"><span class="sk-tag">React</span><span class="sk-tag">Django</span><span class="sk-tag">Flask</span><span class="sk-tag">HTML</span><span class="sk-tag">CSS</span><span class="sk-tag">JavaScript</span><span class="sk-tag">REST APIs</span><span class="sk-tag">Tailwind</span></div></div>
+            <div class="sk-card gc rv"><span class="sk-ic">🎬</span><div class="sk-name">CREATIVE &amp; DESIGN</div><div class="sk-tags"><span class="sk-tag">CAD</span><span class="sk-tag">Fusion 360</span><span class="sk-tag">3D Design</span><span class="sk-tag">3D Printing</span><span class="sk-tag">Video Editing</span><span class="sk-tag">Motion Graphics</span></div></div>
+            <div class="sk-card gc rv"><span class="sk-ic">🎮</span><div class="sk-name">GAME &amp; SIMULATION</div><div class="sk-tags"><span class="sk-tag">Pygame</span><span class="sk-tag">Ursina Engine</span><span class="sk-tag">OpenGL</span><span class="sk-tag">Physics Sim</span><span class="sk-tag">3D Rendering</span></div></div>
+            <div class="sk-card gc rv"><span class="sk-ic">📐</span><div class="sk-name">HARDWARE &amp; ROBOTICS</div><div class="sk-tags"><span class="sk-tag">Arduino</span><span class="sk-tag">Embedded</span><span class="sk-tag">Prototyping</span><span class="sk-tag">PCB Design</span><span class="sk-tag">Servo Systems</span></div></div>
+            <div class="sk-card gc rv"><span class="sk-ic">📈</span><div class="sk-name">BUSINESS &amp; GROWTH</div><div class="sk-tags"><span class="sk-tag">Marketing</span><span class="sk-tag">Go-to-Market</span><span class="sk-tag">SaaS Building</span><span class="sk-tag">Product Strategy</span><span class="sk-tag">Branding</span><span class="sk-tag">Sales</span><span class="sk-tag">Startups</span></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     PROJECT SHOWCASE — DARK BENTO GRID
+================================================================ -->
+<section id="projects">
+    <div class="s-max">
+
+        <!-- Header -->
+        <div class="ph rv">
+            <div class="ph-left">
+                <div class="s-label"><span class="ph-kicker-dot"></span>PORTFOLIO — SELECTED WORK</div>
+                <h2>Projects</h2>
+                <p>Every tile is real, working software. Hover any card for a live preview, click to open the full case study. Media loads on demand so browsing stays buttery smooth.</p>
+            </div>
+            <div class="ph-right">
+                <div class="ph-counter counter" data-t="100">0</div>
+                <div class="ph-counter-sub">PROJECTS DELIVERED</div>
+            </div>
+        </div>
+
+        <!-- Filter -->
+        <div class="proj-filter rv">
+            <button class="pfb active" data-f="all">FEATURED <span class="cnt">12</span></button>
+            <button class="pfb" data-f="cv">COMPUTER VISION <span class="cnt">7</span></button>
+            <button class="pfb" data-f="ai">AI / ML <span class="cnt">6</span></button>
+            <button class="pfb" data-f="web">WEB / CLIENT <span class="cnt">2</span></button>
+            <button class="pfb" data-f="game">GAME / 3D <span class="cnt">3</span></button>
+        </div>
+
+        <!-- ============ BENTO GRID ============ -->
+        <div class="bento rv" id="bentoGrid">
+
+            <!-- 0: Property Auto-Furnish (featured) -->
+            <div class="bc bc-featured" data-id="0" data-cat="ai web" style="--i:0">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">01</div>
+                <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>HIGHLY ADVANCED · UK REAL ESTATE</div>
+                    <h3 class="bc-title">AI Property Auto-Furnish Image Generator</h3>
+                    <p class="bc-blurb">Empty rooms in, photorealistic AI-staged interiors out — a paid, end-to-end generative pipeline delivered for a UK real-estate client.</p>
+                    <div class="bc-tags"><span class="bc-tag">client-work</span><span class="bc-tag">generative-ai</span><span class="bc-tag">deep-learning</span></div>
+                    <button class="bc-expand"><span>VIEW CASE STUDY</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 1: Football Tracker -->
+            <div class="bc" data-id="1" data-cat="cv ai" style="--i:1">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]full football team score ball tracker and analyzer.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">02</div>
+                <div class="bc-badge accent">ADVANCED · CV</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>FOOTBALL ANALYSIS</div>
+                    <h3 class="bc-title">Full Match Ball Tracker &amp; Score Analyzer</h3>
+                    <p class="bc-blurb">YOLOv8 tracks every player and the ball in real time, with a live score and tactical overlay.</p>
+                    <div class="bc-tags"><span class="bc-tag">yolo</span><span class="bc-tag">opencv</span><span class="bc-tag">tracking</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 2: Sports Recognition — multi-video grid -->
+            <div class="bc" data-id="2" data-cat="cv ai" style="--i:2">
+                <div class="bc-multi">
+                    <video class="main-vid" preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/pushups1.mp4"></video>
+                    <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/squats.mp4"></video>
+                    <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/bicep.mp4"></video>
+                </div>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">03</div>
+                <div class="bc-badge accent">ADVANCED · AI</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>12+ EXERCISES</div>
+                    <h3 class="bc-title">Sports Activity Recognition &amp; Classifier</h3>
+                    <p class="bc-blurb">A MediaPipe pose engine that recognises and counts 12+ exercises with live form feedback.</p>
+                    <div class="bc-tags"><span class="bc-tag">pose-estimation</span><span class="bc-tag">mediapipe</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 3: Squid Game 3D -->
+            <div class="bc" data-id="3" data-cat="game" style="--i:3">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[complex]squid game 3d made using ursina python.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">04</div>
+                <div class="bc-badge accent">COMPLEX · 3D</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>PYTHON 3D ENGINE</div>
+                    <h3 class="bc-title">Squid Game 3D — Full Game in Python</h3>
+                    <p class="bc-blurb">Red Light, Green Light rebuilt as a full 3D game — entirely in Python with the Ursina engine.</p>
+                    <div class="bc-tags"><span class="bc-tag">ursina</span><span class="bc-tag">python</span><span class="bc-tag">3d</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 4: Violence Detection -->
+            <div class="bc" data-id="4" data-cat="ai cv" style="--i:4">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium]voilence detection using python.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">05</div>
+                <div class="bc-badge accent">MEDIUM · AI</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>SURVEILLANCE AI</div>
+                    <h3 class="bc-title">Real-Time Violence Detection System</h3>
+                    <p class="bc-blurb">Deep-learning CNNs flag violent motion in live video for real-time security alerting.</p>
+                    <div class="bc-tags"><span class="bc-tag">cnn</span><span class="bc-tag">video-classification</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 5: Document Scanner -->
+            <div class="bc" data-id="5" data-cat="cv" style="--i:5">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium] document scanner with full GUI.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">06</div>
+                <div class="bc-badge accent">MEDIUM · CV</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>DESKTOP APP</div>
+                    <h3 class="bc-title">Document Scanner with Full GUI</h3>
+                    <p class="bc-blurb">An OpenCV edge-detection scanner with a full desktop GUI — angled photos to clean, flat scans.</p>
+                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">tkinter</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 6: Client Website -->
+            <div class="bc" data-id="6" data-cat="web" style="--i:6">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium]client website-1.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">07</div>
+                <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>WEB DEVELOPMENT</div>
+                    <h3 class="bc-title">Client Website — Full Build</h3>
+                    <p class="bc-blurb">A complete responsive website designed, built and shipped end-to-end for a paying client.</p>
+                    <div class="bc-tags"><span class="bc-tag">html</span><span class="bc-tag">css</span><span class="bc-tag">javascript</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 7: Face Segmentizer -->
+            <div class="bc" data-id="7" data-cat="cv ai" style="--i:7">
+                <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.png" alt="Face Segmentizer">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">08</div>
+                <div class="bc-badge accent">ADVANCED · CV</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>SEGMENTATION</div>
+                    <h3 class="bc-title">Face Segmentizer — Auto Passport Photo</h3>
+                    <p class="bc-blurb">Deep segmentation auto-crops faces to regulation passport photos from any background.</p>
+                    <div class="bc-tags"><span class="bc-tag">segmentation</span><span class="bc-tag">face-detection</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 8: Multiplayer Game -->
+            <div class="bc" data-id="8" data-cat="game" style="--i:8">
+                <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png" alt="Multiplayer Platformer">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">09</div>
+                <div class="bc-badge accent">ADVANCED · GAME</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>PYGAME NETWORKING</div>
+                    <h3 class="bc-title">Multiplayer Platformer — Pygame</h3>
+                    <p class="bc-blurb">A 2D platformer with real-time socket multiplayer, a physics engine and enemy AI — built in Pygame.</p>
+                    <div class="bc-tags"><span class="bc-tag">pygame</span><span class="bc-tag">sockets</span><span class="bc-tag">multiplayer</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 9: OpenGL -->
+            <div class="bc" data-id="9" data-cat="game" style="--i:9">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[basic] opengl demo.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">10</div>
+                <div class="bc-badge accent">GRAPHICS</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>GPU RENDERING</div>
+                    <h3 class="bc-title">OpenGL 3D Rendering Demo</h3>
+                    <p class="bc-blurb">Real-time GPU rendering with custom GLSL shaders, lighting and camera controls in OpenGL.</p>
+                    <div class="bc-tags"><span class="bc-tag">opengl</span><span class="bc-tag">shaders</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 10: Motion Detection -->
+            <div class="bc" data-id="10" data-cat="cv" style="--i:10">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[basic]motion_detection.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">11</div>
+                <div class="bc-badge accent">CV</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>REAL-TIME</div>
+                    <h3 class="bc-title">Real-Time Motion Detection</h3>
+                    <p class="bc-blurb">Frame-differencing motion detection on live webcam feeds, running at 60+ FPS.</p>
+                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">frame-diff</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 11: Pose Estimation -->
+            <div class="bc" data-id="11" data-cat="cv ai" style="--i:11">
+                <img src="assets/my projects/[basic]pose estimation 2 .png" alt="Pose Estimation">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">12</div>
+                <div class="bc-badge accent">CV · AI</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>BODY TRACKING</div>
+                    <h3 class="bc-title">Human Pose Estimation</h3>
+                    <p class="bc-blurb">33-point skeletal tracking in real time — the foundation of my sports-AI systems.</p>
+                    <div class="bc-tags"><span class="bc-tag">mediapipe</span><span class="bc-tag">skeleton</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+        </div><!-- /bento -->
+    </div>
+</section>
+
+<!-- INTERACTIVE LABS HUB 
+<section id="labs">
+    <div class="labs-intro rv">
+        <div class="s-label">INTERACTIVE LABS</div>
+        <h2>Hands-On Labs</h2>
+        <p>Every demo here is built to explore a specific technology in a playful, interactive way — from web experiments to robot controls.</p>
+    </div>
+    <div class="labs-grid rv">
+        <a href="web-lab.html" class="lab-card gc">
+            <div class="lab-card-tag">WEB</div>
+            <h3>Web Lab</h3>
+            <p>Interactive experiments in HTML, CSS and vanilla JavaScript.</p>
+            <span class="lab-card-go">OPEN LAB</span>
+        </a>
+        <a href="innovation-lab.html" class="lab-card gc">
+            <div class="lab-card-tag">INNOVATION</div>
+            <h3>Next Gen Camera Lab</h3>
+            <p>Explore the live AI security demo and engineering dashboard.</p>
+            <span class="lab-card-go">OPEN LAB</span>
+        </a>
+        <a href="create-lab.html" class="lab-card gc">
+            <div class="lab-card-tag">CREATIVE</div>
+            <h3>Design Lab</h3>
+            <p>Build, prototype and visualize product concepts within the portfolio.</p>
+            <span class="lab-card-go">OPEN LAB</span>
+        </a>
+        <a href="cv-lab.html" class="lab-card gc">
+            <div class="lab-card-tag">COMPUTER VISION</div>
+            <h3>CV Lab</h3>
+            <p>Live demos of object detection, tracking, pose and motion analysis.</p>
+            <span class="lab-card-go">OPEN LAB</span>
+        </a>
+    </div>
+</section> -->
+
+<!-- PROJECT MODAL
+================================================================ -->
+<div class="proj-modal" id="projModal">
+    <div class="pm-bg" id="pmBg"></div>
+    <div class="pm-panel">
+        <button class="pm-close" id="pmClose"><i class="fas fa-times"></i></button>
+        <!-- Media side -->
+        <div class="pm-media" id="pmMedia"></div>
+        <!-- Info side -->
+        <div class="pm-info" id="pmInfo"></div>
+    </div>
+</div>
+
+<!-- AWARDS -->
+<section id="awards">
+    <div class="s-max">
+        <div class="aw-header rv">
+            <div class="s-label">RECOGNITION</div>
+            <h2>Awards &amp;<br>Achievements</h2>
+            <p>Not participation certificates — these are <strong style="color:rgba(255,255,255,.8)">competitive wins</strong> on national and international stages, judged by experts, against hundreds of competitors.</p>
+        </div>
+        <div class="aw-entry rv">
+            <div class="aw-img">
+                <div class="aw-carousel">
+                    <div class="aw-slide active"><img src="assets/recieving BIC award on state.jpg" alt="BIC Award"></div>
+                    <div class="aw-slide"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award Stage"></div>
+                </div>
+                <div class="aw-img-num">01</div>
+            </div>
+            <div class="aw-text">
+                <div class="aw-cat">1ST PRIZE · STATE-LEVEL INNOVATION</div>
+                <h3 class="aw-title">Bihar Innovation Challenge — 1st Prize</h3>
+                <div class="aw-venue"><strong>Government of Bihar</strong> (#BiharHaiTaiyar)<br>State-Level Engineering Innovation Competition</div>
+                <p class="aw-desc">Won <strong style="color:white">first place</strong> at the Bihar Innovation Challenge — a state-level competition where hundreds of innovators competed. Presented the Next Gen Camera to a panel of government judges and received the award on a public stage, along with a <strong style="color:white">MacBook</strong> as the grand prize.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-map-marker-alt"></i> STATE LEVEL</span><span class="aw-badge"><i class="fas fa-laptop"></i> WON MACBOOK</span></div>
+            </div>
+        </div>
+        <div class="aw-entry reverse rv">
+            <div class="aw-img"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.jpeg" alt="INEX Medal"><div class="aw-img-num">02</div></div>
+            <div class="aw-text">
+                <div class="aw-cat">SILVER MEDAL · INTERNATIONAL EXPO</div>
+                <h3 class="aw-title">INEX India Silver Medal — IYIIC</h3>
+                <div class="aw-venue"><strong>India International Innovation &amp; Invention Expo</strong><br>Indian Young Innovators &amp; Inventors Challenge</div>
+                <p class="aw-desc">Awarded the <strong style="color:white">INEX India Silver Medal</strong> at an international-level expo where young innovators from across India competed. Recognized by an international panel of judges for outstanding innovation in computer vision and engineering technology.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-medal"></i> SILVER MEDAL</span><span class="aw-badge"><i class="fas fa-globe"></i> INTERNATIONAL EXPO</span></div>
+            </div>
+        </div>
+        <div class="aw-entry rv">
+            <div class="aw-img">
+                <div class="aw-carousel">
+                    <div class="aw-slide active"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" alt="BIT Mesra Presentation"></div>
+                    <div class="aw-slide"><img src="assets/recieving recognition at BIT meshra patna.jpg" alt="BIT Mesra Recognition"></div>
+                </div>
+                <div class="aw-img-num">03</div>
+            </div>
+            <div class="aw-text">
+                <div class="aw-cat">PRESENTATION · PREMIER ENGINEERING INSTITUTE</div>
+                <h3 class="aw-title">BIT Mesra Patna — Innovation Showcase</h3>
+                <div class="aw-venue"><strong>Birla Institute of Technology, Mesra</strong> — Patna Campus<br>Innovation Presentation &amp; Recognition Event</div>
+                <p class="aw-desc">Selected to present the Next Gen Camera at <strong style="color:white">BIT Mesra, Patna</strong> — one of India's premier engineering institutes. Delivered a full technical presentation and live demonstration of all 5 detection modules to faculty, researchers, and students.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-university"></i> BIT MESRA</span><span class="aw-badge"><i class="fas fa-certificate"></i> RECOGNIZED</span></div>
+            </div>
+        </div>
+
+        <div class="aw-entry reverse rv">
+            <div class="aw-img"><img src="assets/explaining next gen camera to foreign researchers.jpg" alt="International researchers"><div class="aw-img-num">04</div></div>
+            <div class="aw-text">
+                <div class="aw-cat">INTERNATIONAL · RESEARCH ENGAGEMENT</div>
+                <h3 class="aw-title">Presented to International Researchers</h3>
+                <div class="aw-venue"><strong>International Innovation Exhibition</strong><br>Engagement with Foreign Research Delegates</div>
+                <p class="aw-desc"><strong style="color:white">International researchers and delegates</strong> engaged in detailed technical discussions about the Next Gen Camera's architecture. Explained the CV pipeline, real-time inference approach, and custom-built detection modules to a foreign research panel who expressed strong interest in the innovation.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-globe-americas"></i> INTERNATIONAL</span><span class="aw-badge"><i class="fas fa-comments"></i> TECH DISCUSSION</span></div>
+            </div>
+        </div>
+        <div class="aw-entry rv">
+            <div class="aw-img">
+                <div class="aw-carousel">
+                    <div class="aw-slide active"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award"></div>
+                    <div class="aw-slide"><img src="assets/recieving BIC award on state.jpg" alt="BIC Stage"></div>
+                </div>
+                <div class="aw-img-num">05</div>
+            </div>
+            <div class="aw-text">
+                <div class="aw-cat">MULTIPLE AWARDS · NATIONAL LEVEL</div>
+                <h3 class="aw-title">Aryabhat Award, NCSC, Robo Fest &amp; More</h3>
+                <div class="aw-venue"><strong>Multiple National Competitions</strong><br>Science, Engineering &amp; Robotics Events</div>
+                <p class="aw-desc">Beyond the flagship wins: <strong style="color:white">Aryabhat National Award</strong> for scientific excellence, <strong style="color:white">National Children's Science Congress</strong>, <strong style="color:white">Robo Fest</strong> robotics competition, <strong style="color:white">Ingenious Geeks</strong>, <strong style="color:white">Inter-School Model Making</strong>, and <strong style="color:white">NAEST 2022</strong>. Each win validated a different dimension of engineering capability.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-star"></i> ARYABHAT</span><span class="aw-badge"><i class="fas fa-microscope"></i> NCSC</span><span class="aw-badge"><i class="fas fa-robot"></i> ROBO FEST</span><span class="aw-badge"><i class="fas fa-flask"></i> NAEST 2022</span></div>
+            </div>
+        </div>
+        <button class="show-awards-btn" id="showAwardsBtn">SHOW MORE AWARDS</button>
+        <div class="aw-more" id="awMoreAwards">
+            <div class="aw-entry rv">
+                <div class="aw-img"><video src="assets/1st postion in IIT delhi innovation challlenge - NextGenParkingSystem.mp4" autoplay muted loop playsinline></video><div class="aw-img-num">06</div></div>
+                <div class="aw-text">
+                    <div class="aw-cat">1ST PRIZE · IIT DELHI</div>
+                    <h3 class="aw-title">Next Gen Parking System — 1st Prize</h3>
+                    <div class="aw-venue"><strong>IIT Delhi Innovation Challenge</strong><br>Smart parking automation and AI-enabled vehicle flow management</div>
+                    <p class="aw-desc">Won <strong style="color:white">first prize</strong> at the IIT Delhi innovation challenge for a complete smart parking system. The project combined real-time detection, optimization, and a polished physical demo with strong judge feedback.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-award"></i> IIT DELHI</span><span class="aw-badge"><i class="fas fa-car-side"></i> PARKING AI</span><span class="aw-badge"><i class="fas fa-brain"></i> SYSTEM DESIGN</span></div>
+                </div>
+            </div>
+            <div class="aw-entry reverse rv">
+                <div class="aw-img"><img src="assets/1st prize at robo fest.jpg" alt="Robo Fest"><div class="aw-img-num">07</div></div>
+                <div class="aw-text">
+                    <div class="aw-cat">1ST PRIZE · ROBOTICS</div>
+                    <h3 class="aw-title">Robo Fest — 1st Prize</h3>
+                    <div class="aw-venue"><strong>Robo Fest</strong><br>Competitive robotics design and execution</div>
+                    <p class="aw-desc">Awarded the <strong style="color:white">first prize</strong> for a robotics system that excelled in technical execution, reliability, and presentation. The win is backed by the official Robo Fest certificate and a trophy photograph.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-robot"></i> ROBOTICS</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span></div>
+                </div>
+            </div>
+            <div class="aw-entry rv">
+                <div class="aw-img"><img src="assets/certificates/misc/ingenious geeks.png" alt="Ingenious Geeks Certificate"><div class="aw-img-num">08</div></div>
+                <div class="aw-text">
+                    <div class="aw-cat">INNOVATION PROGRAM</div>
+                    <h3 class="aw-title">Ingenious Geeks — Certificate</h3>
+                    <div class="aw-venue"><strong>Ingenious Geeks</strong><br>National technology and invention showcase</div>
+                    <p class="aw-desc">Recognized by the Ingenious Geeks program for outstanding invention and creative engineering. The certificate proves the project’s innovation strength and real-world impact.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-lightbulb"></i> INNOVATION</span><span class="aw-badge"><i class="fas fa-certificate"></i> CERTIFIED</span></div>
+                </div>
+            </div>
+            <div class="aw-entry reverse rv">
+                <div class="aw-img">
+                    <div class="aw-carousel">
+                        <div class="aw-slide active"><img src="assets/certificates/misc/national science congress.jpg" alt="Science Congress"></div>
+                        <div class="aw-slide"><img src="assets/certificates/misc/ncse.jpeg" alt="NCSC Proof"></div>
+                    </div>
+                    <div class="aw-img-num">09</div>
+                </div>
+                <div class="aw-text">
+                    <div class="aw-cat">NATIONAL SCIENCE PROGRAM</div>
+                    <h3 class="aw-title">National Children's Science Congress</h3>
+                    <div class="aw-venue"><strong>NCSC</strong><br>School-level science research event</div>
+                    <p class="aw-desc">Selected to present research at the National Children's Science Congress, demonstrating both technical depth and communication skills. The award reflects strong scientific curiosity and project coherence.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-flask"></i> SCIENCE PROJECT</span><span class="aw-badge"><i class="fas fa-award"></i> NATIONAL</span></div>
+                </div>
+            </div>
+            <div class="aw-entry rv">
+                <div class="aw-img placeholder">
+                <div class="aw-placeholder-inner"><i class="fas fa-file-pdf"></i><p>Certificate proof for model making is available in the certificates section.</p></div>
+                <div class="aw-img-num">10</div>
+            </div>
+                <div class="aw-text">
+                    <div class="aw-cat">MODEL MAKING · DESIGN</div>
+                    <h3 class="aw-title">Inter-School Model Making</h3>
+                    <div class="aw-venue"><strong>Inter-School Competition</strong><br>Physical model design and execution</div>
+                    <p class="aw-desc">Recognized for an engineered model that combined creativity with precision. The project was judged on technical accuracy, aesthetics, and presentation quality.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-tools"></i> MODEL DESIGN</span><span class="aw-badge"><i class="fas fa-check-circle"></i> COMPETITION</span></div>
+                </div>
+            </div>
+            <!-- <div class="aw-entry reverse rv">
+                <div class="aw-img"><img src="assets/certificates/stemq/RANK SREMQ.jpeg" alt="STEM Q Rank"><div class="aw-img-num">11</div></div>
+                <div class="aw-text">
+                    <div class="aw-cat">ACADEMIC RANK</div>
+                    <h3 class="aw-title">STEM Q Rank Certificate</h3>
+                    <div class="aw-venue"><strong>STEMQ</strong><br>Rank achievement certificate</div>
+                    <p class="aw-desc">Earned a ranked certificate in the STEM Q assessment, showing strong performance in science, technology, engineering, and mathematics. This credential underscores the project’s academic credibility.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-brain"></i> STEM SKILLS</span><span class="aw-badge"><i class="fas fa-award"></i> RANKED</span></div>
+                </div>
+            </div> -->
+            <!-- <div class="aw-entry rv">
+                <div class="aw-img"><img src="assets/certificates/misc/download.png" alt="Green Olympiad Certificate"><div class="aw-img-num">12</div></div>
+                <div class="aw-text">
+                    <div class="aw-cat">OLYMPIAD DISTINCTION</div>
+                    <h3 class="aw-title">Green Olympiad — Distinction</h3>
+                    <div class="aw-venue"><strong>Green Olympiad</strong><br>Environment science exam distinction</div>
+                    <p class="aw-desc">Awarded distinction in the Green Olympiad for strong environmental science understanding and application. This achievement complements the engineering awards with broad STEM recognition.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-leaf"></i> ENVIRONMENT</span><span class="aw-badge"><i class="fas fa-star"></i> DISTINCTION</span></div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     TESTIMONIALS
+================================================================ -->
+<section id="testimonials">
+    <div class="s-max">
+        <div class="test-header rv">
+            <div class="s-label">▶ NOW PLAYING · CLIENT TAPES</div>
+            <h2>What Clients Say</h2>
+            <p>Real reviews from real paying clients. Every project delivered with professionalism, speed, and precision.</p>
+        </div>
+        <div class="test-platform rv">
+            <span class="vhs-rec">● REC</span>
+            <div class="stars-row"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <span>5.0 RATING · VERIFIED TAPES · FIVERR</span>
+        </div>
+        <div class="test-grid rv">
+            <div class="test-card gc">
+                <span class="test-num">01</span>
+                <div class="test-vhs-bar"><span class="vhs-rec">● REC</span><span class="vhs-tape">TAPE 01</span></div>
+                <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="test-text">Very helpful and communicative seller. Made me understand the whole project very patiently. Would surely recommend him.</p>
+                <div class="test-divider"></div>
+                <div class="test-person">
+                    <span class="test-avatar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#ffd9e6"/><path d="M14 64c0-11 8-17 18-17s18 6 18 17Z" fill="#e8568a"/><path d="M16 31c0-12 7-20 16-20s16 8 16 20c0 5-1 9-3 11V29a13 13 0 0 0-26 0v13c-2-2-3-6-3-11Z" fill="#3a2a2a"/><circle cx="32" cy="31" r="12" fill="#f4c6a0"/><path d="M20 29c0-9 5-15 12-15s12 6 12 15c-3-3-7-5-12-5s-9 2-12 5Z" fill="#3a2a2a"/><circle cx="27" cy="31" r="1.6" fill="#2a1e1e"/><circle cx="37" cy="31" r="1.6" fill="#2a1e1e"/><path d="M27 36q5 4 10 0" fill="none" stroke="#9c5b3b" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                    <div>
+                        <div class="test-name">Rina</div>
+                        <div class="test-meta">CLIENT · <span class="loc-tag">INDIA</span></div>
+                    </div>
+                </div>
+                <a href="https://flic.kr/p/2r83uR9" target="_blank" class="test-play" aria-label="Play verified review screenshot">
+                    <span class="test-play-btn"><i class="fas fa-play"></i></span>
+                    <span class="test-play-main">PLAY VERIFIED TAPE</span>
+                    <span class="test-play-time">0:00:31</span>
+                </a>
+            </div>
+            <div class="test-card gc">
+                <span class="test-num">02</span>
+                <div class="test-vhs-bar"><span class="vhs-rec">● REC</span><span class="vhs-tape">TAPE 02</span></div>
+                <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="test-text">I was glad to work with Akshit, very professional and high level of competency. Will see you again for more jobs.</p>
+                <div class="test-divider"></div>
+                <div class="test-person">
+                    <span class="test-avatar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#d6e4ff"/><path d="M14 64c0-11 8-17 18-17s18 6 18 17Z" fill="#3b6fd6"/><path d="M27 48l5 6 5-6Z" fill="#fff"/><path d="M19 28c0-9 6-15 13-15s13 6 13 15c-2-2-3-4-5-5-3-2-13-2-16 0-2 1-3 3-5 5Z" fill="#5a4632"/><circle cx="32" cy="31" r="12" fill="#f0c49a"/><circle cx="27" cy="31" r="3.4" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="37" cy="31" r="3.4" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><line x1="30.4" y1="31" x2="33.6" y2="31" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="27" cy="31" r="1.3" fill="#2a1e1e"/><circle cx="37" cy="31" r="1.3" fill="#2a1e1e"/><path d="M28 37q4 3 8 0" fill="none" stroke="#a86b45" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+                    <div>
+                        <div class="test-name">Frisbeeparis</div>
+                        <div class="test-meta">CEO · <span class="loc-tag">FRANCE</span></div>
+                    </div>
+                </div>
+                <a href="https://flic.kr/p/2r88X4X" target="_blank" class="test-play" aria-label="Play verified review screenshot">
+                    <span class="test-play-btn"><i class="fas fa-play"></i></span>
+                    <span class="test-play-main">PLAY VERIFIED TAPE</span>
+                    <span class="test-play-time">0:01:12</span>
+                </a>
+            </div>
+            <div class="test-card gc">
+                <span class="test-num">03</span>
+                <div class="test-vhs-bar"><span class="vhs-rec">● REC</span><span class="vhs-tape">TAPE 03</span></div>
+                <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="test-text">Akshit helped me with every problem I had during and after working with him. He is very professional and knows what he is doing.</p>
+                <div class="test-divider"></div>
+                <div class="test-person">
+                    <span class="test-avatar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#d4f3e0"/><path d="M14 64c0-11 8-17 18-17s18 6 18 17Z" fill="#1f9d6b"/><circle cx="32" cy="31" r="12" fill="#e0b083"/><path d="M21 32c0 9 5 14 11 14s11-5 11-14c-2 3-5 5-11 5s-9-2-11-5Z" fill="#3a2c1e"/><path d="M19 29c0-10 6-16 13-16s13 6 13 16c-2-3-4-5-6-6-3-2-11-2-14 0-2 1-4 3-6 6Z" fill="#3a2c1e"/><circle cx="27" cy="30" r="1.6" fill="#2a1e1e"/><circle cx="37" cy="30" r="1.6" fill="#2a1e1e"/><path d="M28 35q4 2 8 0" fill="none" stroke="#5e3a22" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                    <div>
+                        <div class="test-name">Dionisiszervas</div>
+                        <div class="test-meta">CLIENT · <span class="loc-tag">GREECE</span></div>
+                    </div>
+                </div>
+                <a href="https://flic.kr/p/2r89eJV" target="_blank" class="test-play" aria-label="Play verified review screenshot">
+                    <span class="test-play-btn"><i class="fas fa-play"></i></span>
+                    <span class="test-play-main">PLAY VERIFIED TAPE</span>
+                    <span class="test-play-time">0:02:05</span>
+                </a>
+            </div>
+            <div class="test-card gc">
+                <span class="test-num">04</span>
+                <div class="test-vhs-bar"><span class="vhs-rec">● REC</span><span class="vhs-tape">TAPE 04</span></div>
+                <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="test-text">Amazing Developer. Akshit completed my project within 5 hours instead of 7 days. Highly intelligent.</p>
+                <div class="test-divider"></div>
+                <div class="test-person">
+                    <span class="test-avatar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#ffe6cc"/><path d="M14 64c0-11 8-17 18-17s18 6 18 17Z" fill="#f08a24"/><path d="M20 28c0-9 5-15 12-15s12 6 12 15c-2-2-3-4-5-5-3-2-11-2-14 0-2 1-3 3-5 5Z" fill="#e3b34b"/><circle cx="32" cy="31" r="12" fill="#f2c9a0"/><path d="M21 26q11 -6 22 0c-3-2-7-3-11-3s-8 1-11 3Z" fill="#e3b34b"/><circle cx="27" cy="31" r="1.6" fill="#2a1e1e"/><circle cx="37" cy="31" r="1.6" fill="#2a1e1e"/><path d="M27 36q5 3 10 0" fill="none" stroke="#b5754a" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                    <div>
+                        <div class="test-name">Steve Panel</div>
+                        <div class="test-meta">CLIENT · <span class="loc-tag">USA</span></div>
+                    </div>
+                </div>
+                <a href="https://flic.kr/p/2r89eK6" target="_blank" class="test-play" aria-label="Play verified review screenshot">
+                    <span class="test-play-btn"><i class="fas fa-play"></i></span>
+                    <span class="test-play-main">PLAY VERIFIED TAPE</span>
+                    <span class="test-play-time">0:03:48</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     JOURNEY TIMELINE
+================================================================ -->
+<section id="journey">
+    <div class="journey-wrap">
+        <div class="journey-sticky">
+            <canvas id="driftCanvas" aria-hidden="true"></canvas>
+            <div class="drift-vignette" aria-hidden="true"></div>
+            <div class="journey-header">
+                <div class="s-label">MY JOURNEY</div>
+                <h2>Life Timeline : The Drive So Far</h2>
+                <p>Scroll to drift the car down my road of life — every turn lands on a milestone.</p>
+            </div>
+            <div class="drift-events">
+                <article class="drift-event" data-i="0">
+                    <span class="drift-ev-num">01</span>
+                    <i class="fas fa-baby drift-ev-ic"></i>
+                    <span class="drift-ev-year">2007</span>
+                    <span class="drift-ev-tag">WHERE IT ALL BEGAN</span>
+                    <h3>Born in Ranchi, Jharkhand</h3>
+                    <p>Born and raised in Ranchi — the city of waterfalls. Started tinkering with electronics and computers at a young age.</p>
+                </article>
+                <article class="drift-event" data-i="1">
+                    <span class="drift-ev-num">02</span>
+                    <i class="fas fa-school drift-ev-ic"></i>
+                    <span class="drift-ev-year">2023</span>
+                    <span class="drift-ev-tag">DELHI PUBLIC SCHOOL · PATNA</span>
+                    <h3>Completed Class 10th — DPS Patna</h3>
+                    <p>Finished schooling at DPS Patna — winning national awards, building the Next Gen Camera, and freelancing all while still in school.</p>
+                </article>
+                <article class="drift-event" data-i="2">
+                    <span class="drift-ev-num">03</span>
+                    <i class="fas fa-trophy drift-ev-ic"></i>
+                    <span class="drift-ev-year">2023</span>
+                    <span class="drift-ev-tag">BIC · INEX · ARYABHAT · NCSC</span>
+                    <h3>8+ National Awards Won</h3>
+                    <p>Bihar Innovation Challenge (1st Prize + MacBook), INEX Silver Medal, Aryabhat National Award, Robo Fest and more.</p>
+                </article>
+                <article class="drift-event" data-i="3">
+                    <span class="drift-ev-num">04</span>
+                    <i class="fas fa-fire drift-ev-ic"></i>
+                    <span class="drift-ev-year">2026</span>
+                    <span class="drift-ev-tag">VELLORE INSTITUTE OF TECHNOLOGY</span>
+                    <h3>VIT Vellore — CSE</h3>
+                    <p>Pursuing Computer Science &amp; Engineering at VIT Vellore — blending academics with freelancing, innovation and entrepreneurship.</p>
+                </article>
+                <article class="drift-event" data-i="4">
+                    <span class="drift-ev-num">05</span>
+                    <i class="fas fa-rocket drift-ev-ic"></i>
+                    <span class="drift-ev-year">NOW</span>
+                    <span class="drift-ev-tag">STUDYING · BUILDING · INNOVATING</span>
+                    <h3>VIT + Founder of AKL Robotics</h3>
+                    <p>Building a Humanoid Robotics &amp; AI startup while at VIT. The road keeps turning — the drive is just getting started.</p>
+                </article>
+            </div>
+            <div class="drift-progress" aria-hidden="true">
+                <div class="drift-bar"><span class="drift-bar-fill"></span></div>
+                <div class="drift-dots">
+                    <span class="drift-dot"></span>
+                    <span class="drift-dot"></span>
+                    <span class="drift-dot"></span>
+                    <span class="drift-dot"></span>
+                    <span class="drift-dot"></span>
+                </div>
+            </div>
+            <div class="drift-hint"><i class="fas fa-computer-mouse"></i> SCROLL TO DRIVE</div>
+        </div>
+    </div>
+</section>
+
+<!-- NEXT GEN CAMERA — promo card; full write-up lives in next-gen-camera.html -->
+<section id="innovation" class="neo-zone ngc-promo">
+    <div class="s-max">
+        <a href="next-gen-camera.html" class="ngc-promo-card rv">
+            <div class="ngc-promo-text">
+                <div class="s-label font-code">FLAGSHIP · PATENT FILED · 8+ AWARDS</div>
+                <h2><span class="scroll-hl">Next Gen Camera System</span></h2>
+                <p>An AI security layer for existing CCTV — it spots robbers, fire, faints, faces &amp; anomalies in real time and <strong>acts</strong> (buzzer + calls/alerts) instead of just recording. Presented at INEX India &amp; the Bihar Innovation Challenge.</p>
+                <span class="ngc-promo-go font-code">EXPLORE THE FULL PROJECT <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="ngc-promo-media">
+                <img src="assets/explaining next gen camera to foreign researchers.jpg" alt="Next Gen Camera demonstration">
+                <span class="ngc-promo-badge font-code"><i class="fas fa-trophy"></i> 8+ AWARDS</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+    <!-- Full-bleed 3D canvas — covers entire section -->
+    <canvas id="desertCanvas" aria-hidden="true"></canvas>
+
+    <!-- Two-column overlay: left = open desert view, right = glass form -->
+    <div class="contact-overlay">
+        <!-- LEFT: heading floats over the 3D model -->
+        <div class="contact-hd rv">
+            <div class="s-label">CONTACT</div>
+            <h2>Let's Build<br>Something.</h2>
+            <p>Open to freelance work, client projects, and engineering challenges. I deliver production-quality software — on time.</p>
+        </div>
+
+        <!-- RIGHT: glass form + glass social links stacked -->
+        <div class="contact-panel">
+            <form class="cf-form" id="cForm" action="https://formsubmit.co/bd77b285c94cff82cad9750bd3b1d895" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_subject" value="Portfolio Contact">
+                <div class="fg-g"><label class="f-lbl">YOUR NAME</label><input type="text" name="name" class="f-inp" placeholder="John Doe" required></div>
+                <div class="fg-g"><label class="f-lbl">EMAIL ADDRESS</label><input type="email" name="email" class="f-inp" placeholder="john@example.com" required></div>
+                <div class="fg-g"><label class="f-lbl">MESSAGE</label><textarea name="message" class="f-ta" placeholder="Tell me about your project..." required></textarea></div>
+                <button type="submit" class="f-sub"><span>SEND MESSAGE →</span></button>
+            </form>
+            <div class="cl-links">
+                <a href="mailto:akshitkumarlal@gmail.com" class="cl-link gc"><div class="cl-ic"><i class="fas fa-envelope"></i></div><div class="cl-txt"><span>EMAIL</span><span>akshitkumarlal@gmail.com</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://github.com/akshitkumarlall" target="_blank" class="cl-link gc"><div class="cl-ic"><i class="fab fa-github"></i></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><i class="fab fa-linkedin-in"></i></div><div class="cl-txt"><span>LINKEDIN</span><span>linkedin.com/in/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><i class="fab fa-youtube"></i></div><div class="cl-txt"><span>YOUTUBE</span><span>youtube.com/@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><i class="fab fa-x-twitter"></i></div><div class="cl-txt"><span>TWITTER / X</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://www.instagram.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><i class="fab fa-instagram"></i></div><div class="cl-txt"><span>INSTAGRAM</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- CERTIFICATES -->
+<section id="certificates" class="neo-zone">
+    <div class="s-max">
+        <div class="cert-header rv">
+            <div class="s-label font-code">CREDENTIALS</div>
+            <h2>Certificates &amp;<br>Competition Proof</h2>
+            <p class="font-code" style="font-size:.85rem;color:#333;max-width:560px;line-height:1.75;margin-top:12px">Tap any card to open the official PDF or certificate. These back the awards above — science congress, innovation expos, robotics, STEM competitions, and more.</p>
+        </div>
+        <div class="cert-grid rv">
+            <a href="assets/certificates/India%20International%20Innovation%20and%20Invention%20Expo.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-lav">
+                <span class="cert-tag">INEX</span>
+                <h3>India International Innovation &amp; Invention Expo</h3>
+                <p>INEX / IYIIC — international innovation expo</p>
+                <span class="cert-open">OPEN PDF →</span>
+            </a>
+            <a href="assets/certificates/aryabhat%20national%20award.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-yellow">
+                <span class="cert-tag">NATIONAL</span>
+                <h3>Aryabhat National Award</h3>
+                <p>National-level science &amp; innovation recognition</p>
+                <span class="cert-open">OPEN PDF →</span>
+            </a>
+            <a href="assets/certificates/Robo%20Fest.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-pink">
+                <span class="cert-tag">ROBOTICS</span>
+                <h3>Robo Fest — 1st Prize</h3>
+                <p>Robotics competition winner</p>
+                <span class="cert-open">OPEN PDF →</span>
+            </a>
+            <a href="assets/certificates/Natioal%20Childrens%20Science%20Congress.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-blue">
+                <span class="cert-tag">SCIENCE</span>
+                <h3>National Children's Science Congress</h3>
+                <p>NCSC participation / recognition</p>
+                <span class="cert-open">OPEN PDF →</span>
+            </a>
+            <a href="assets/certificates/naest-2022.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-white">
+                <span class="cert-tag">NAEST</span>
+                <h3>NAEST 2022</h3>
+                <p>National science &amp; technology event</p>
+                <span class="cert-open">OPEN PDF →</span>
+            </a>
+            <a href="assets/certificates/Ingenious%20geeks.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-mint" style="background:var(--neo-mint)">
+                <span class="cert-tag">TECH</span>
+                <h3>Ingenious Geeks</h3>
+                <p>Innovation / tech program certificate</p>
+                <span class="cert-open">OPEN PDF →</span>
+            </a>
+            <a href="assets/certificates/inter%20school%20model%20making.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-yellow">
+                <span class="cert-tag">MODEL</span>
+                <h3>Inter School Model Making</h3>
+                <p>Physical model &amp; design competition</p>
+                <span class="cert-open">OPEN PDF →</span>
+            </a>
+
+
+        </div>
+    </div>
+</section>
+
+<!-- FILM STRIP -->
+<div class="film-strip">
+    <div class="film-track-wrap">
+        <div class="film-sprocket top"><div class="film-holes" id="filmHoles1"></div></div>
+        <div class="film-track" id="filmTrack">
+            <div class="film-frame"><img src="assets/recieving BIC award on state.jpg" alt="BIC Award"></div>
+            <div class="film-frame"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.jpeg" alt="INEX Medal"></div>
+            <div class="film-frame"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" alt="BIT Mesra 1"></div>
+            <div class="film-frame"><img src="assets/presenting in BIT Meshra patna about next gen camera-2.jpg" alt="BIT Mesra 2"></div>
+            <div class="film-frame"><img src="assets/explaining next gen camera to foreign researchers.jpg" alt="Foreign Researchers"></div>
+            <div class="film-frame"><img src="assets/1st prize at robo fest.jpg" alt="Robo Fest"></div>
+            <div class="film-frame"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Winner"></div>
+            <div class="film-frame"><img src="assets/recieving recognition at BIT meshra patna.jpg" alt="BIT Recognition"></div>
+            <!-- duplicate for seamless loop -->
+            <div class="film-frame"><img src="assets/recieving BIC award on state.jpg" alt="BIC Award"></div>
+            <div class="film-frame"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.jpeg" alt="INEX Medal"></div>
+            <div class="film-frame"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" alt="BIT Mesra 1"></div>
+            <div class="film-frame"><img src="assets/presenting in BIT Meshra patna about next gen camera-2.jpg" alt="BIT Mesra 2"></div>
+            <div class="film-frame"><img src="assets/explaining next gen camera to foreign researchers.jpg" alt="Foreign Researchers"></div>
+            <div class="film-frame"><img src="assets/1st prize at robo fest.jpg" alt="Robo Fest"></div>
+            <div class="film-frame"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Winner"></div>
+            <div class="film-frame"><img src="assets/recieving recognition at BIT meshra patna.jpg" alt="BIT Recognition"></div>
+        </div>
+        <div class="film-sprocket bot"><div class="film-holes" id="filmHoles2"></div></div>
+    </div>
+</div>
+
+<footer>
+    <div class="ft-logo">AKSHIT KUMAR LALL</div>
+    <div class="ft-copy">&copy; 2026 — Built with code, not templates.</div>
+    <div class="ft-links">
+        <a href="https://github.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+</footer>
+<a href="#contact" class="quick-contact" aria-label="Contact Me">CONTACT ME</a>
+
+<script src="js/video-manager.js"></script>
+<!-- Drift Journey 3D scene. Inlined as a module so it runs regardless of the
+     local servers JS MIME type (Windows python http.server serves .js as text/plain,
+     which blocks external module scripts). CDN imports below are unaffected. -->
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const CONFIG = {
+  carUrl: 'assets/cardrift/mazda_rx7_stylised.glb',
+  trackUrl: 'assets/cardrift/airport_track_curve.glb',
+  smokeUrl: 'assets/cardrift/smoke.glb',
+  grassUrl: 'assets/cardrift/low_poly_grass.glb',
+  treeUrl: 'assets/cardrift/low_poly_trees.glb',
+  logUrl: 'assets/cardrift/log_low-poly_3d_model.glb',
+  schoolUrl: 'assets/cardrift/low_poly__school_building.glb',
+  audioUrl: 'assets/cardrift/car sound.mp3',
+  carLength: 40.5,        // target car length in world units
+  carYaw: Math.PI,       // set to Math.PI if the car ever drives in reverse
+  carColor: 0xeceef2,    // fallback paint when the GLB ships with no colour data
+  roadWidth: 7,
+  smokeHeight: 2.8,      // size of an animated smoke puff
+  smokeRate: 0.08,       // seconds between smoke puffs while drifting (lower = denser)
+  maxVolume: 0.09,       // engine SFX volume ceiling (kept very subtle)
+};
+
+const ACCENTS = [0x8b7bff, 0x4dd4ff, 0xff6ec4, 0x5eead4, 0xffb347];
+const SMOKE_TINTS = [0x8b7bff, 0x4dd4ff, 0xff6ec4];
+const UP = new THREE.Vector3(0, 1, 0);
+const markers = [];
+
+const section = document.getElementById('journey');
+const canvas = document.getElementById('driftCanvas');
+const wrap = section ? section.querySelector('.journey-wrap') : null;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function fail(err) {
+  window.__driftError = (err && err.message) ? err.message : String(err);
+  console.warn('[drift-journey] static fallback:', window.__driftError);
+  if (section) { section.classList.remove('is-3d'); section.classList.add('journey-static'); }
+}
+
+function boot() {
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
+  } catch (e) { fail(e); return; }
+  // Cap DPR at 1.5: on retina/4K a full-viewport canvas at DPR 2 renders ~4x
+  // the pixels, which is the main cause of scroll stutter through this section.
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  // Cinematic colour response — cheap per-pixel tone curve, always on.
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.08;
+
+  // Only beefier devices get the post-processing bloom "filter". We detect
+  // capability up front and DYNAMICALLY import the bloom passes — low-end
+  // devices never even fetch or run that code path.
+  const HIGH_END = (navigator.hardwareConcurrency || 2) >= 8
+    && (navigator.deviceMemory || 4) >= 4
+    && !window.matchMedia('(pointer:coarse)').matches;
+  let composer = null;
+
+  const scene = new THREE.Scene();
+  const SKY = new THREE.Color('#e9ebf1');
+  scene.background = SKY;
+  scene.fog = new THREE.Fog(SKY, 70, 200);
+
+  // Neutral studio environment so the car's PBR (metallic) materials are lit
+  // instead of rendering black. Without an env map, glTF metalness=1 surfaces are black.
+  try {
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  } catch (e) { console.warn('[drift-journey] env map failed', e); }
+
+  const camera = new THREE.PerspectiveCamera(48, 2, 0.1, 800);
+  camera.position.set(0, 9, 18);
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x9aa2b2, 1.1));
+  const key = new THREE.DirectionalLight(0xffffff, 1.7);
+  key.position.set(14, 22, 10);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0x8b7bff, 0.55);
+  rim.position.set(-12, 9, -14);
+  scene.add(rim);
+
+  // Capable devices: lazy-load a subtle UnrealBloom pass for a soft cinematic
+  // glow on bright surfaces (sky, headlights, paint). Imports resolve from the
+  // CDN import map, so this is fetched on demand and skipped entirely otherwise.
+  if (HIGH_END) {
+    Promise.all([
+      import('three/addons/postprocessing/EffectComposer.js'),
+      import('three/addons/postprocessing/RenderPass.js'),
+      import('three/addons/postprocessing/UnrealBloomPass.js'),
+      import('three/addons/postprocessing/OutputPass.js'),
+    ]).then(([{ EffectComposer }, { RenderPass }, { UnrealBloomPass }, { OutputPass }]) => {
+      const w = canvas.clientWidth || 1, h = canvas.clientHeight || 1;
+      const c = new EffectComposer(renderer);
+      c.setPixelRatio(renderer.getPixelRatio());
+      c.setSize(w, h);
+      c.addPass(new RenderPass(scene, camera));
+      // (resolution, strength, radius, threshold) — gentle, only bright pixels
+      c.addPass(new UnrealBloomPass(new THREE.Vector2(w, h), 0.42, 0.55, 0.85));
+      c.addPass(new OutputPass());
+      composer = c;
+    }).catch(() => { composer = null; });
+  }
+
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(900, 900),
+    new THREE.MeshStandardMaterial({ color: 0xcfd3db, roughness: 1, metalness: 0 })
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -0.015;
+  scene.add(ground);
+
+  const grid = new THREE.GridHelper(900, 180, 0xb6bcc8, 0xc7ccd6);
+  grid.material.opacity = 0.4;
+  grid.material.transparent = true;
+  scene.add(grid);
+
+  const ctrl = [
+    new THREE.Vector3(0, 0, 12),
+    new THREE.Vector3(-2, 0, -8),
+    new THREE.Vector3(-15, 0, -26),
+    new THREE.Vector3(-7, 0, -46),
+    new THREE.Vector3(11, 0, -64),
+    new THREE.Vector3(15, 0, -84),
+    new THREE.Vector3(3, 0, -102),
+    new THREE.Vector3(-13, 0, -120),
+    new THREE.Vector3(-5, 0, -140),
+    new THREE.Vector3(1, 0, -160),
+    // road continues winding past the final milestone — "the road ahead"
+    new THREE.Vector3(-9, 0, -182),
+    new THREE.Vector3(-3, 0, -206),
+    new THREE.Vector3(9, 0, -230),
+    new THREE.Vector3(4, 0, -256),
+    new THREE.Vector3(-2, 0, -282),
+  ];
+  const curve = new THREE.CatmullRomCurve3(ctrl, false, 'catmullrom', 0.5);
+
+  buildRoad(scene, curve, CONFIG.roadWidth);
+
+  const N = 5;
+  const DRIVE_END = 0.62; // car drives 0..DRIVE_END of the road; the rest stretches ahead into the distance
+  const stationT = [];
+  for (let i = 0; i < N; i++) stationT.push(((i + 0.5) / N) * DRIVE_END);
+  stationT.forEach((t, i) => {
+    const p = curve.getPointAt(t);
+    const tan = curve.getTangentAt(t).normalize();
+    const side = new THREE.Vector3().crossVectors(tan, UP).normalize();
+    const marker = makeMarker(ACCENTS[i % ACCENTS.length]);
+    marker.position.copy(p).addScaledVector(side, CONFIG.roadWidth * 0.5 + 1.6);
+    marker.userData.spin = marker.children[1];
+    scene.add(marker);
+    markers.push(marker);
+  });
+
+  // Add school building to second checkpoint
+  new GLTFLoader().load(CONFIG.schoolUrl, (gltf) => {
+    try {
+      const school = gltf.scene;
+      const sz = new THREE.Vector3();
+      new THREE.Box3().setFromObject(school).getSize(sz);
+      const scale = 15.5 / (Math.max(sz.x, sz.y, sz.z) || 1);
+      school.traverse((o) => { if (o.isMesh) o.frustumCulled = false; });
+      school.scale.setScalar(scale);
+
+      const t = stationT[1]; // second checkpoint
+      const p = curve.getPointAt(t);
+      const tan = curve.getTangentAt(t).normalize();
+      const side = new THREE.Vector3().crossVectors(tan, UP).normalize();
+
+      school.position.copy(p).addScaledVector(side, CONFIG.roadWidth * 0.5 + 4);
+      school.position.x -= 20;
+      school.position.z -= 10;
+      /* school.position.y = -1; */
+      school.rotation.y = Math.atan2(tan.x, tan.z) + Math.PI / 2;
+      scene.add(school);
+    } catch (_) { /* school is optional */ }
+  }, undefined, () => { /* ignore */ });
+
+  const carRig = new THREE.Group();
+  scene.add(carRig);
+  const carModel = new THREE.Group();
+  carRig.add(carModel);
+
+  const smoke = new SmokeSystem(scene);
+
+  // Animated GLB smoke (preferred). Falls back to the sprite system if it fails to load.
+  let glbSmoke = null;
+  new GLTFLoader().load(CONFIG.smokeUrl, (g) => {
+    try {
+      const sz = new THREE.Vector3();
+      new THREE.Box3().setFromObject(g.scene).getSize(sz);
+      glbSmoke = new GltfSmoke(scene, g, CONFIG.smokeHeight / (sz.y || 1));
+    } catch (e) { console.warn('[drift-journey] smoke setup failed', e); }
+  }, undefined, (e) => { console.warn('[drift-journey] smoke model failed', e); });
+
+  let carReady = false;
+  const loader = new GLTFLoader();
+  loader.load(CONFIG.carUrl, (gltf) => {
+    const obj = gltf.scene;
+    const box = new THREE.Box3().setFromObject(obj);
+    const size = new THREE.Vector3(); box.getSize(size);
+    const center = new THREE.Vector3(); box.getCenter(center);
+    const lengthAxisIsX = size.x > size.z;
+    const maxLen = Math.max(size.x, size.z) || 1;
+    const s = CONFIG.carLength / maxLen;
+    obj.scale.setScalar(s);
+    obj.position.set(-center.x * s, -box.min.y * s, -center.z * s);
+    obj.rotation.y = (lengthAxisIsX ? Math.PI / 2 : 0) + CONFIG.carYaw;
+    // This GLB ships with no colour data (all materials are unlit & black, no textures,
+    // no vertex colours), so it would render as a black blob. Give colourless materials a
+    // clean, lit car-paint. Materials that DO carry colour/textures are left untouched, so a
+    // properly-exported model just works.
+    const repaint = (mat, geom) => {
+      const colorless = mat && !mat.map && mat.color && mat.color.getHex() === 0x000000
+        && !(geom && geom.attributes && geom.attributes.color);
+      return colorless
+        ? new THREE.MeshStandardMaterial({ color: CONFIG.carColor, metalness: 0.4, roughness: 0.42 })
+        : mat;
+    };
+    obj.traverse((o) => {
+      if (!o.isMesh) return;
+      o.frustumCulled = false;
+      o.material = Array.isArray(o.material)
+        ? o.material.map((m) => repaint(m, o.geometry))
+        : repaint(o.material, o.geometry);
+    });
+    carModel.add(obj);
+    carReady = true;
+    section.classList.remove('is-loading');
+  }, undefined, (e) => {
+    console.warn('[drift-journey] car model failed to load', e);
+    section.classList.remove('is-loading');
+  });
+
+  loader.load(CONFIG.trackUrl, (gltf) => {
+    try {
+      const proto = gltf.scene;
+      const box = new THREE.Box3().setFromObject(proto);
+      const size = new THREE.Vector3(); box.getSize(size);
+      const s = 11 / (Math.max(size.x, size.z) || 1);
+      const spots = [
+        { p: new THREE.Vector3(34, 0, -30), r: 0.6 },
+        { p: new THREE.Vector3(-40, 0, -96), r: -1.1 },
+        { p: new THREE.Vector3(30, 0, -150), r: 2.2 },
+      ];
+      spots.forEach((sp) => {
+        const c = proto.clone(true);
+        c.scale.setScalar(s);
+        c.position.copy(sp.p);
+        c.position.y = 0.01;
+        c.rotation.y = sp.r;
+        c.traverse((o) => { if (o.isMesh) o.frustumCulled = false; });
+        scene.add(c);
+      });
+    } catch (_) { /* scenery is optional */ }
+  }, undefined, () => { /* ignore */ });
+
+  // Roadside low-poly grass — scattered along both edges of the whole road for life.
+  new GLTFLoader().load(CONFIG.grassUrl, (gltf) => {
+    try {
+      const proto = gltf.scene;
+      const sz = new THREE.Vector3();
+      new THREE.Box3().setFromObject(proto).getSize(sz);
+      const base = 1.7 / (Math.max(sz.x, sz.y, sz.z) || 1);
+      // Keep frustum culling ON so only grass in the camera's view is drawn
+      // (most tufts are far down the road / off-screen) — big draw-call saving.
+      proto.traverse((o) => { if (o.isMesh) o.frustumCulled = true; });
+      const grp = new THREE.Group();
+      const sd = new THREE.Vector3();
+      for (let i = 0; i < 70; i++) {
+        const t = Math.random();
+        const pt = curve.getPointAt(t);
+        sd.crossVectors(curve.getTangentAt(t).normalize(), UP).normalize();
+        const sign = Math.random() < 0.5 ? -1 : 1;
+        const dist = CONFIG.roadWidth * 0.5 + 0.5 + Math.random() * 11;
+        const tuft = proto.clone(true);
+        tuft.scale.setScalar(base * (0.6 + Math.random() * 0.9));
+        tuft.position.copy(pt).addScaledVector(sd, sign * dist);
+        tuft.position.y = -4;
+        tuft.rotation.y = Math.random() * Math.PI * 2;
+        grp.add(tuft);
+      }
+      scene.add(grp);
+    } catch (_) { /* grass is optional */ }
+  }, undefined, () => { /* ignore */ });
+
+  // Roadside low-poly trees — scattered less frequently
+  new GLTFLoader().load(CONFIG.treeUrl, (gltf) => {
+    try {
+      const proto = gltf.scene;
+      const sz = new THREE.Vector3();
+      new THREE.Box3().setFromObject(proto).getSize(sz);
+      const base = 10.8 / (Math.max(sz.x, sz.y, sz.z) || 1);
+      // Cull off-screen trees too (default-on culling) to trim per-frame draws.
+      proto.traverse((o) => { if (o.isMesh) o.frustumCulled = true; });
+      const grp = new THREE.Group();
+      const sd = new THREE.Vector3();
+      for (let i = 0; i < 8; i++) {
+        const t = Math.random();
+        const pt = curve.getPointAt(t);
+        sd.crossVectors(curve.getTangentAt(t).normalize(), UP).normalize();
+        const sign = Math.random() < 0.5 ? -1 : 1;
+        const dist = CONFIG.roadWidth * 0.5 + 5 + Math.random() * 22;
+        const tree = proto.clone(true);
+        tree.scale.setScalar(base * (0.8 + Math.random() * 0.6));
+        tree.position.copy(pt).addScaledVector(sd, sign * dist);
+        tree.position.y = 0;
+        tree.rotation.y = Math.random() * Math.PI * 2;
+        grp.add(tree);
+      }
+      scene.add(grp);
+    } catch (_) { /* trees are optional */ }
+  }, undefined, () => { /* ignore */ });
+
+  const panels = Array.from(section.querySelectorAll('.drift-event'));
+  const dots = Array.from(section.querySelectorAll('.drift-dot'));
+  const barFill = section.querySelector('.drift-bar-fill');
+  let activeIdx = -1;
+  function syncOverlay(p) {
+    const idx = Math.min(N - 1, Math.max(0, Math.floor(p * N)));
+    if (idx !== activeIdx) {
+      activeIdx = idx;
+      panels.forEach((el, i) => el.classList.toggle('active', i === idx));
+      dots.forEach((el, i) => el.classList.toggle('active', i <= idx));
+    }
+    if (barFill) barFill.style.transform = `scaleY(${Math.max(0.001, p)})`;
+  }
+
+  const audio = setupAudio();
+
+  function resize() {
+    const w = canvas.clientWidth || canvas.offsetWidth;
+    const h = canvas.clientHeight || canvas.offsetHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    if (composer) composer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+
+  // Switch to 3D mode first (reveals + sizes the canvas), then measure.
+  section.classList.add('is-3d', 'is-loading');
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+
+  const hint = section.querySelector('.drift-hint');
+  window.addEventListener('scroll', () => { if (hint) hint.classList.add('hide'); }, { once: true, passive: true });
+
+  const tan = new THREE.Vector3(), tanAhead = new THREE.Vector3(), side = new THREE.Vector3();
+  const camTarget = new THREE.Vector3(), look = new THREE.Vector3();
+  const rearL = new THREE.Vector3(), rearR = new THREE.Vector3();
+  let curP = 0, lastP = 0, curVel = 0, prevT = performance.now(), raf = 0, glbAcc = 0;
+
+  function progress() {
+    const rect = wrap.getBoundingClientRect();
+    const scrollable = wrap.offsetHeight - window.innerHeight;
+    if (scrollable <= 0) return 0;
+    return Math.min(Math.max(-rect.top / scrollable, 0), 1);
+  }
+
+  // Critically-damped follow toward the scroll target → smooth ease in AND out,
+  // so the car never snaps/instantly accelerates when you start or stop scrolling.
+  function smoothDamp(cur, target, smoothTime, dt) {
+    const omega = 2 / smoothTime;
+    const x = omega * dt;
+    const exp = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x);
+    const change = cur - target;
+    const temp = (curVel + omega * change) * dt;
+    curVel = (curVel - omega * temp) * exp;
+    return target + (change + temp) * exp;
+  }
+
+  function step(dt, targetP, doRender) {
+    curP = smoothDamp(curP, targetP, 0.22, dt);
+    const vel = Math.abs(curP - lastP) / Math.max(dt, 0.0001);
+    lastP = curP;
+
+    const p = Math.min(Math.max(curP, 0.0002), 0.9998);
+    const carT = p * DRIVE_END;
+    const pos = curve.getPointAt(carT);
+    curve.getTangentAt(carT, tan).normalize();
+    curve.getTangentAt(Math.min(0.9999, carT + 0.01), tanAhead).normalize();
+    const heading = Math.atan2(tan.x, tan.z);
+    let dH = Math.atan2(tanAhead.x, tanAhead.z) - heading;
+    while (dH > Math.PI) dH -= 2 * Math.PI;
+    while (dH < -Math.PI) dH += 2 * Math.PI;
+    const driftSign = Math.sign(dH) || 1;
+    const drift = Math.min(1, Math.abs(dH) * 9 * (0.45 + Math.min(1, vel * 1.4)));
+
+    carRig.position.copy(pos);
+    carRig.position.y += 0.02;
+    carRig.rotation.y = heading + driftSign * drift * 0.55;
+    carRig.rotation.z = -driftSign * drift * 0.13;
+
+    camTarget.copy(tan).multiplyScalar(-11.5).add(pos);
+    camTarget.y = pos.y + 5.6;
+    camera.position.lerp(camTarget, Math.min(1, dt * 3.4));
+    look.copy(pos); look.y += 1.1;
+    camera.lookAt(look);
+
+    if (carReady && drift > 0.07) {
+      side.crossVectors(tan, UP).normalize();
+      if (glbSmoke) {
+        glbAcc += dt;
+        if (glbAcc >= CONFIG.smokeRate) {
+          glbAcc = 0;
+          const off = (Math.random() - 0.5) * 2.4;
+          rearL.copy(pos).addScaledVector(tan, -2.6).addScaledVector(side, off);
+          rearR.set(-tan.x, 0.35, -tan.z).normalize(); // backward + slightly up → low horizontal trail
+          glbSmoke.spawn(rearL, rearR);
+        }
+      } else {
+        rearL.copy(pos).addScaledVector(tan, -2.0).addScaledVector(side, -0.95);
+        rearR.copy(pos).addScaledVector(tan, -2.0).addScaledVector(side, 0.95);
+        smoke.emit(rearL, tan, drift);
+        smoke.emit(rearR, tan, drift);
+      }
+    }
+    if (glbSmoke) glbSmoke.update(dt); else smoke.update(dt);
+
+    for (const m of markers) { m.userData.spin.rotation.y += dt * 0.8; }
+
+    syncOverlay(curP);
+    audio.update(doRender && vel > 0.012, dt);
+
+    if (doRender) { if (composer) composer.render(); else renderer.render(scene, camera); }
+  }
+
+  function loop() {
+    raf = requestAnimationFrame(loop);
+    const rect = section.getBoundingClientRect();
+    const visible = rect.bottom > 0 && rect.top < window.innerHeight;
+    if (!visible) {
+      // Section off-screen: skip all curve math + rendering. Keep the loop
+      // alive (cheap) and just hold the audio paused. Reset the clock so we
+      // don't get a huge dt spike the frame it scrolls back into view.
+      audio.update(false, 0.016);
+      prevT = performance.now();
+      return;
+    }
+    const now = performance.now();
+    let dt = (now - prevT) / 1000; prevT = now;
+    if (dt > 0.05) dt = 0.05;
+    step(dt, progress(), true);
+  }
+  loop();
+
+  window.__driftDebug = () => ({
+    ready: carReady,
+    progress: +curP.toFixed(3),
+    calls: renderer.info.render.calls,
+    triangles: renderer.info.render.triangles,
+    canvas: [canvas.clientWidth, canvas.clientHeight],
+    glbSmoke: !!glbSmoke,
+    smokeAlive: glbSmoke ? glbSmoke.aliveCount() : smoke.aliveCount(),
+  });
+  // Verification hook: render one frame at a given progress, bypassing rAF.
+  window.__driftTick = (p) => {
+    const tp = (typeof p === 'number') ? p : progress();
+    curP = tp; lastP = tp;
+    step(0.016, tp, true);
+    return window.__driftDebug();
+  };
+}
+
+function buildRoad(scene, curve, w) {
+  const seg = 600;
+  const rp = [], ri = [];
+  const lp = [], li = [];
+  const tmp = new THREE.Vector3();
+  const dashN = 100, lineW = 0.16;
+  for (let i = 0; i <= seg; i++) {
+    const t = i / seg;
+    const p = curve.getPointAt(t);
+    curve.getTangentAt(t, tmp).normalize();
+    const sd = new THREE.Vector3().crossVectors(tmp, UP).normalize();
+    rp.push(p.x - sd.x * w / 2, 0.012, p.z - sd.z * w / 2,
+            p.x + sd.x * w / 2, 0.012, p.z + sd.z * w / 2);
+    lp.push(p.x - sd.x * lineW / 2, 0.02, p.z - sd.z * lineW / 2,
+            p.x + sd.x * lineW / 2, 0.02, p.z + sd.z * lineW / 2);
+  }
+  for (let i = 0; i < seg; i++) {
+    const a = i * 2, b = i * 2 + 1, c = i * 2 + 2, d = i * 2 + 3;
+    ri.push(a, b, c, b, d, c);
+    if (Math.floor((i / seg) * dashN) % 2 === 0) li.push(a, b, c, b, d, c);
+  }
+  const rg = new THREE.BufferGeometry();
+  rg.setAttribute('position', new THREE.Float32BufferAttribute(rp, 3));
+  rg.setIndex(ri); rg.computeVertexNormals();
+  const road = new THREE.Mesh(rg, new THREE.MeshStandardMaterial({ color: 0x2b2d34, roughness: 0.96, metalness: 0 }));
+  road.renderOrder = 1;
+  scene.add(road);
+
+  const lg = new THREE.BufferGeometry();
+  lg.setAttribute('position', new THREE.Float32BufferAttribute(lp, 3));
+  lg.setIndex(li); lg.computeVertexNormals();
+  const line = new THREE.Mesh(lg, new THREE.MeshBasicMaterial({ color: 0xf4f6fa }));
+  line.renderOrder = 2;
+  scene.add(line);
+}
+
+function makeMarker(color) {
+  const g = new THREE.Group();
+  const post = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.07, 0.07, 2.6, 8),
+    new THREE.MeshStandardMaterial({ color: 0x222831, roughness: 0.8 })
+  );
+  post.position.y = 1.3;
+  g.add(post);
+  const orb = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(0.55, 0),
+    new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.65, roughness: 0.35, flatShading: true })
+  );
+  orb.position.y = 2.8;
+  g.add(orb);
+  return g;
+}
+
+function makeSmokeTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, 'rgba(255,255,255,0.95)');
+  g.addColorStop(0.4, 'rgba(248,249,252,0.45)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 64, 64);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+class SmokeSystem {
+  constructor(scene) {
+    this.max = 150;
+    this.parts = [];
+    this.cursor = 0;
+    const tex = makeSmokeTexture();
+    const group = new THREE.Group();
+    scene.add(group);
+    for (let i = 0; i < this.max; i++) {
+      const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0, depthWrite: false });
+      const sp = new THREE.Sprite(mat);
+      sp.visible = false;
+      group.add(sp);
+      this.parts.push({ sp, life: 0, max: 1, vel: new THREE.Vector3(), start: 1, rot: 0 });
+    }
+  }
+  emit(pos, dir, intensity) {
+    const count = 1 + Math.floor(intensity * 2);
+    for (let k = 0; k < count; k++) {
+      const part = this.parts[this.cursor];
+      this.cursor = (this.cursor + 1) % this.max;
+      part.life = 0;
+      part.max = 0.7 + Math.random() * 0.6;
+      part.sp.position.copy(pos);
+      part.sp.position.x += (Math.random() - 0.5) * 0.4;
+      part.sp.position.z += (Math.random() - 0.5) * 0.4;
+      part.sp.position.y = 0.2;
+      part.vel.set((Math.random() - 0.5) * 1.3, 0.6 + Math.random() * 0.9, (Math.random() - 0.5) * 1.3)
+        .addScaledVector(dir, -(1.4 + Math.random() * 1.6));
+      part.start = 0.55 + Math.random() * 0.8;
+      part.rot = Math.random() * Math.PI;
+      part.sp.material.color.set(Math.random() > 0.82 ? SMOKE_TINTS[(Math.random() * SMOKE_TINTS.length) | 0] : 0xf1f3f7);
+      part.sp.visible = true;
+    }
+  }
+  update(dt) {
+    for (const part of this.parts) {
+      if (!part.sp.visible) continue;
+      part.life += dt;
+      const u = part.life / part.max;
+      if (u >= 1) { part.sp.visible = false; part.sp.material.opacity = 0; continue; }
+      part.vel.y *= (1 - 0.6 * dt);
+      part.vel.x *= (1 - 1.3 * dt);
+      part.vel.z *= (1 - 1.3 * dt);
+      part.sp.position.addScaledVector(part.vel, dt);
+      part.sp.scale.setScalar(part.start * (1 + u * 2.4));
+      part.sp.material.opacity = Math.sin(Math.min(1, u) * Math.PI) * 0.5;
+      part.sp.material.rotation = part.rot + u * 0.8;
+    }
+  }
+  aliveCount() { return this.parts.reduce((n, p) => n + (p.sp.visible ? 1 : 0), 0); }
+}
+
+// Pooled instances of the animated smoke GLB, dropped as a trail during drifts.
+class GltfSmoke {
+  constructor(scene, gltf, baseScale) {
+    this.max = 10;
+    this.pool = [];
+    this.cursor = 0;
+    const proto = gltf.scene;
+    const clip = (gltf.animations && gltf.animations[0]) || null;
+    for (let i = 0; i < this.max; i++) {
+      const inst = proto.clone(true); // not skinned, so a deep clone is fine
+      inst.visible = false;
+      const mats = [];
+      inst.traverse((o) => {
+        if (!o.isMesh) return;
+        o.frustumCulled = false;
+        o.castShadow = o.receiveShadow = false;
+        const arr = Array.isArray(o.material) ? o.material : [o.material];
+        const cloned = arr.map((m) => { const c = m.clone(); c.transparent = true; c.depthWrite = false; mats.push(c); return c; });
+        o.material = Array.isArray(o.material) ? cloned : cloned[0];
+      });
+      scene.add(inst);
+      const mixer = new THREE.AnimationMixer(inst);
+      const action = clip ? mixer.clipAction(clip) : null;
+      this.pool.push({ inst, mixer, action, mats, active: false, life: 0, max: 1, base: baseScale, startScale: baseScale });
+    }
+  }
+  spawn(pos, dir) {
+    const it = this.pool[this.cursor];
+    this.cursor = (this.cursor + 1) % this.max;
+    it.active = true;
+    it.life = 0;
+    it.max = 1.3 + Math.random() * 0.6;
+    it.inst.visible = true;
+    it.inst.position.set(pos.x, 0.15, pos.z);
+    // tilt the plume so its local +Y (rise axis) points along dir → low, horizontal trailing smoke
+    it.inst.quaternion.setFromUnitVectors(UP, dir);
+    it.startScale = it.base * (0.6 + Math.random() * 0.5);
+    it.inst.scale.setScalar(it.startScale * 0.5);
+    if (it.action) { it.action.reset(); it.action.timeScale = 1.3; it.action.play(); }
+  }
+  update(dt) {
+    for (const it of this.pool) {
+      if (!it.active) continue;
+      it.life += dt;
+      it.mixer.update(dt);
+      const u = it.life / it.max;
+      if (u >= 1) { it.active = false; it.inst.visible = false; if (it.action) it.action.stop(); continue; }
+      const op = Math.sin(Math.min(1, u) * Math.PI);
+      for (const m of it.mats) m.opacity = op;
+      it.inst.scale.setScalar(it.startScale * (0.5 + u * 1.1));
+    }
+  }
+  aliveCount() { return this.pool.reduce((n, p) => n + (p.active ? 1 : 0), 0); }
+}
+
+function setupAudio() {
+  const state = { audio: null, armed: false, cur: 0 };
+  try {
+    state.audio = new Audio(encodeURI(CONFIG.audioUrl));
+    state.audio.loop = false;          // play through once; resume from pause, restart only when finished
+    state.audio.preload = 'auto';
+    state.audio.volume = 0;
+  } catch (_) { /* no audio */ }
+  const arm = () => { state.armed = true; };
+  ['pointerdown', 'keydown', 'touchstart'].forEach((ev) =>
+    window.addEventListener(ev, arm, { once: true, passive: true }));
+
+  // `moving` = the car is in motion. Play while moving (resuming from where it paused),
+  // pause when it stops, and only start the clip over once it has finished playing.
+  state.update = function (moving, dt) {
+    if (!state.audio) return;
+    const active = state.armed && moving;
+    state.cur += ((active ? 1 : 0) - state.cur) * Math.min(1, dt * 6);
+    state.audio.volume = Math.max(0, Math.min(CONFIG.maxVolume, state.cur * CONFIG.maxVolume));
+    if (active) {
+      if (state.audio.ended) { try { state.audio.currentTime = 0; } catch (_) {} }
+      if (state.audio.paused) { const pr = state.audio.play(); if (pr && pr.catch) pr.catch(() => {}); }
+    } else if (!state.audio.paused) {
+      state.audio.pause();             // keep position so the next move resumes, not restarts
+    }
+  };
+  return state;
+}
+
+// Kick off only after every declaration above is initialized (class declarations are not hoisted).
+if (!section || !canvas || !wrap) {
+  /* nothing to do */
+} else if (reduceMotion) {
+  section.classList.add('journey-static');
+} else {
+  try { boot(); }
+  catch (e) { fail(e); }
+}
+</script>
+<script>
+/* MAIN SITE SCRIPT — all non-3D interactivity (vanilla JS, no libraries).
+   Owns: custom cursor, scroll progress/nav, scroll-reveal (.rv), counters,
+   the PROJS dataset + project modal, filters, skill-card tilt, Next-Gen-Camera
+   console, magnetic buttons, film strip, journey horizontal-scroll fallback.
+   Organised by "// ===== NAME =====" banners. The two 3D scenes are separate
+   inline <script type="module"> blocks (see drift-journey + desert-road). */
+(function(){
+'use strict';
+
+// ===== CURSOR =====
+// Pixel arrow/hand cursors are pure CSS now (--cur-arrow / --cur-point).
+// No JS cursor element, no mousemove handler, no dark-section observer.
+
+// ===== UNIFIED SCROLL DISPATCHER (single listener, rAF-throttled) =====
+// All scroll-driven work funnels through here so we attach ONE scroll
+// listener and do at most one layout read + one batch of writes per frame.
+const scrollCbs=[];
+let scrollTick=false;
+function onScrollFrame(){
+    scrollTick=false;
+    const y=window.scrollY;
+    for(let i=0;i<scrollCbs.length;i++)scrollCbs[i](y);
+}
+window.addEventListener('scroll',()=>{
+    if(scrollTick)return;
+    scrollTick=true;
+    requestAnimationFrame(onScrollFrame);
+},{passive:true});
+
+// ===== SCROLL PROGRESS =====
+const prog=document.getElementById('progress');
+scrollCbs.push(y=>{
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(max>0?y/max*100:0)+'%';
+});
+
+// ===== NAV =====
+const navEl=document.getElementById('nav');
+let navScrolled=false;
+scrollCbs.push(y=>{
+    const s=y>50;
+    if(s!==navScrolled){navScrolled=s;navEl.classList.toggle('scrolled',s);}
+});
+document.getElementById('navBtn').addEventListener('click',()=>{document.getElementById('mobMenu').classList.add('open')});
+document.getElementById('mobClose').addEventListener('click',()=>{document.getElementById('mobMenu').classList.remove('open')});
+document.querySelectorAll('.mob-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open')));
+
+// ===== GLOW CARD =====
+document.querySelectorAll('.gc').forEach(c=>{
+    let r=null;
+    c.addEventListener('mouseenter',()=>{r=c.getBoundingClientRect()});
+    c.addEventListener('mousemove',e=>{if(!r)return;c.style.setProperty('--lx',(e.clientX-r.left)+'px');c.style.setProperty('--ly',(e.clientY-r.top)+'px')});
+    c.addEventListener('mouseleave',()=>{r=null;c.style.setProperty('--lx','-999px');c.style.setProperty('--ly','-999px')});
+});
+
+// ===== TYPEWRITER =====
+const roles=['Computer Vision Expert.','AI & ML Developer.','Specializing in Python development.','Full-Stack Web Dev.','Robotics & Hardware.','CAD & 3D Designer.','Founder — AKL Robotics.','Entrepreneur.'];
+let ri=0,ci=0,del=false;const typedEl=document.getElementById('typed');
+function type(){const cur=roles[ri];if(!del){typedEl.textContent=cur.slice(0,ci+1);ci++;if(ci===cur.length){del=true;setTimeout(type,1600);return}}else{typedEl.textContent=cur.slice(0,ci-1);ci--;if(ci===0){del=false;ri=(ri+1)%roles.length}}setTimeout(type,del?35:72)}
+type();
+
+// ===== SCROLL REVEAL =====
+const rvObs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*50)})},{threshold:.06});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>rvObs.observe(el));
+
+// ===== SCROLL HIGHLIGHT (innovations) =====
+const scrollHlObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');scrollHlObs.unobserve(e.target)}})},{threshold:.45});
+document.querySelectorAll('.scroll-hl').forEach(el=>scrollHlObs.observe(el));
+
+// ===== COUNTERS =====
+const cntObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=+el.dataset.t;if(!t)return;let v=0;const step=Math.max(t/30,.5);const id=setInterval(()=>{v+=step;if(v>=t){v=t;clearInterval(id)}const lbl=el.nextElementSibling?el.nextElementSibling.textContent:'';const s=lbl.includes('K+')?' K+':'+';el.textContent=Math.floor(v)+s},35);cntObs.unobserve(el)}})},{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>cntObs.observe(el));
+
+// ===== PROJECT DATA =====
+// Source of truth for the modal. To add a project: append an object here AND add a
+// matching .bc card in the #projects HTML (its data-id must equal this array index).
+const PROJS = [
+  { num:'01', level:'HIGHLY ADVANCED · CLIENT WORK', badge:'PAID CLIENT PROJECT', client:'Client: startrek23 (UK Real Estate)',
+    title:'AI Property Auto-Furnish Image Generator',
+    desc:`Built a production AI system for a real UK real estate client that takes <strong>empty room photographs</strong> and automatically generates <strong>photorealistic fully-furnished versions</strong> using generative deep learning models.<br><br>The system handles bedrooms, kitchens, bathrooms, and living rooms — producing staging-quality outputs that replace thousands of dollars in physical staging costs. This was a <strong>fully paid client deliverable</strong> built end-to-end: from model training to processing pipeline to final delivery.`,
+    stack:['Python','Deep Learning','Stable Diffusion','OpenCV','PIL','Image Processing'],
+    badges:[{ic:'fas fa-briefcase',t:'PAID CLIENT'},{ic:'fas fa-globe',t:'UK REAL ESTATE'},{ic:'fas fa-robot',t:'GENERATIVE AI'}],
+    mainType:'video', main:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4',
+    gallery:[
+      {type:'img',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-4.JPG',label:'BEFORE — EMPTY ROOM'},
+      {type:'img',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-4.jpg',label:'AFTER — AI FURNISHED'},
+      {type:'img',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-22.JPG',label:'BEFORE — BEDROOM 2'},
+      {type:'img',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-22.jpg',label:'AFTER — BEDROOM 2 FURNISHED'},
+      {type:'img',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-6.JPG',label:'BEFORE — LIVING ROOM'},
+      {type:'img',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-6 (2).jpg',label:'AFTER — LIVING ROOM FURNISHED'},
+      {type:'vid',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4',label:'KITCHEN DEMO'},
+      {type:'vid',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/bathroom.mp4',label:'BATHROOM DEMO'},
+      {type:'vid',src:'assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/single bedroom.mp4',label:'BEDROOM DEMO'}
+    ]
+  },
+  { num:'02', level:'ADVANCED · COMPUTER VISION + AI', badge:'ADVANCED',
+    title:'Full Match Ball Tracker &amp; Score Analyzer',
+    desc:`Complete end-to-end computer vision pipeline that tracks every player on the pitch, follows the ball in real-time, keeps team scores, and provides tactical analysis.<br><br>Uses <strong>YOLOv8</strong> for player and ball detection, with custom tracking algorithms for identity persistence across frames even through occlusion. A full analytics overlay renders bounding boxes, player IDs, ball trajectory, and live score — processed at real-time speeds.`,
+    stack:['Python','YOLOv8','OpenCV','TensorFlow','NumPy','Real-Time Processing'],
+    badges:[{ic:'fas fa-eye',t:'COMPUTER VISION'},{ic:'fas fa-chart-line',t:'ANALYTICS'},{ic:'fas fa-bolt',t:'REAL-TIME'}],
+    mainType:'video', main:'assets/my projects/[advanced]full football team score ball tracker and analyzer.mp4', gallery:[]
+  },
+  { num:'03', level:'ADVANCED · AI + POSE ESTIMATION', badge:'ADVANCED',
+    title:'Sports Activity Recognition, Analyzer &amp; Classifier',
+    desc:`Complex end-to-end system that recognizes and classifies <strong>12+ exercises</strong> in real-time: push-ups, squats, bicep curls, bench press, dips, pull-ups, shoulder press, pectoral flies, rowing, and more.<br><br>Uses <strong>MediaPipe</strong> for skeletal pose estimation, feeding joint angles and velocities into a custom-trained classifier. Counts reps, evaluates form quality, and provides real-time coaching feedback. One of my most technically demanding builds — handling variable body types, camera angles, and exercise variations.`,
+    stack:['Python','MediaPipe','TensorFlow','OpenCV','Pose Estimation','ML Classification'],
+    badges:[{ic:'fas fa-dumbbell',t:'12+ EXERCISES'},{ic:'fas fa-brain',t:'AI CLASSIFICATION'},{ic:'fas fa-person-running',t:'POSE ESTIMATION'}],
+    mainType:'video', main:'assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/pushups1.mp4',
+    gallery:[
+      {type:'vid',src:'assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/squats.mp4',label:'SQUATS'},
+      {type:'vid',src:'assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/bicep.mp4',label:'BICEP CURLS'},
+      {type:'vid',src:'assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/benchpress.mp4',label:'BENCH PRESS'},
+      {type:'vid',src:'assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/dips.mp4',label:'DIPS'},
+      {type:'vid',src:'assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/pullups.mp4',label:'PULL-UPS'},
+      {type:'vid',src:'assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/topshoulderpress.mp4',label:'SHOULDER PRESS'}
+    ]
+  },
+  { num:'04', level:'COMPLEX · 3D GAME ENGINE', badge:'COMPLEX',
+    title:'Squid Game 3D — Full Game in Python',
+    desc:`Full 3D recreation of the Squid Game "Red Light, Green Light" challenge built <strong>entirely in Python</strong> using the Ursina engine. Features 3D character models, real-time motion detection mechanics, custom shaders, dynamic lighting, and a complete game loop with scoring and elimination logic.<br><br>Demonstrates that Python can power real, visually rich 3D games — not just scripts.`,
+    stack:['Python','Ursina Engine','3D Rendering','Game Physics','Custom Shaders'],
+    badges:[{ic:'fas fa-gamepad',t:'3D GAME'},{ic:'fab fa-python',t:'PYTHON'},{ic:'fas fa-cube',t:'3D ENGINE'}],
+    mainType:'video', main:'assets/my projects/[complex]squid game 3d made using ursina python.mp4', gallery:[]
+  },
+  { num:'05', level:'MEDIUM · AI / SURVEILLANCE', badge:'MEDIUM',
+    title:'Real-Time Violence Detection System',
+    desc:`AI-powered real-time violence detection system that analyzes live video streams and classifies violent behavior using deep learning <strong>CNNs trained on custom datasets</strong>.<br><br>Processes video frames through a temporal analysis pipeline to reduce false positives. Designed for security and surveillance applications with real-time alerting. The system distinguishes between violent and non-violent motion patterns even in crowded scenes.`,
+    stack:['Python','TensorFlow','OpenCV','CNN','Video Classification','Temporal Analysis'],
+    badges:[{ic:'fas fa-shield-halved',t:'SURVEILLANCE AI'},{ic:'fas fa-video',t:'VIDEO ANALYSIS'},{ic:'fas fa-brain',t:'DEEP LEARNING'}],
+    mainType:'video', main:'assets/my projects/[medium]voilence detection using python.mp4', gallery:[]
+  },
+  { num:'06', level:'MEDIUM · COMPUTER VISION', badge:'MEDIUM',
+    title:'Document Scanner with Full GUI',
+    desc:`Desktop document scanner application with a <strong>complete GUI interface</strong>. Uses OpenCV for edge detection, perspective transformation, and adaptive thresholding to produce clean, flat scans from angled photos taken with any camera.<br><br>The Tkinter GUI supports drag-and-drop, real-time edge preview, manual corner adjustment, and multi-format export. Handles documents, receipts, handwritten notes, and books.`,
+    stack:['Python','OpenCV','Tkinter','Image Processing','Perspective Transform'],
+    badges:[{ic:'fas fa-file-image',t:'DOCUMENT SCANNER'},{ic:'fas fa-desktop',t:'FULL GUI'},{ic:'fas fa-eye',t:'EDGE DETECTION'}],
+    mainType:'video', main:'assets/my projects/[medium] document scanner with full GUI.mp4', gallery:[]
+  },
+  { num:'07', level:'MEDIUM · WEB / CLIENT WORK', badge:'PAID CLIENT PROJECT',
+    title:'Client Website — Full Build',
+    desc:`Complete responsive website designed and built from scratch for a <strong>paying client</strong>. Features smooth animations, modern UI/UX design, full mobile optimization, and cross-browser compatibility.<br><br>Delivered as a production client project with clean code, optimized assets, and full documentation. Demonstrates ability to handle real client requirements, revisions, and professional delivery.`,
+    stack:['HTML5','CSS3','JavaScript','Responsive Design','Animations','Performance Optimization'],
+    badges:[{ic:'fas fa-briefcase',t:'CLIENT WORK'},{ic:'fas fa-mobile-alt',t:'RESPONSIVE'},{ic:'fas fa-paint-brush',t:'MODERN UI'}],
+    mainType:'video', main:'assets/my projects/[medium]client website-1.mp4', gallery:[]
+  },
+  { num:'08', level:'ADVANCED · COMPUTER VISION', badge:'ADVANCED',
+    title:'Face Segmentizer — Auto Passport Photo Generator',
+    desc:`Automated passport photo generator that detects faces, <strong>segments them from any background</strong> using deep learning segmentation models, crops precisely to standard passport dimensions, applies regulatory compliance checks, and outputs print-ready images.<br><br>Handles varying lighting conditions, backgrounds, face angles, and expressions. Can batch-process multiple images automatically.`,
+    stack:['Python','OpenCV','Deep Learning','Image Segmentation','PIL','Face Detection'],
+    badges:[{ic:'fas fa-id-card',t:'PASSPORT PHOTO'},{ic:'fas fa-cut',t:'SEGMENTATION'},{ic:'fas fa-face-smile',t:'FACE DETECTION'}],
+    mainType:'img', main:'assets/my projects/[advanced[face sementizer for automatch passport image generator.png', gallery:[]
+  },
+  { num:'09', level:'ADVANCED · GAME DEVELOPMENT', badge:'ADVANCED',
+    title:'Multiplayer Platformer — Pygame + Networking',
+    desc:`Complete 2D platformer game with <strong>real-time multiplayer networking</strong> over Python sockets. Features custom sprite animation, tile-based level design from a level editor, collectible items, enemy AI with pathfinding, a custom physics engine, and synchronized multiplayer gameplay.<br><br>Players can join or host games over a local network. Demonstrates deep understanding of game architecture, network programming, and Python performance optimization.`,
+    stack:['Python','Pygame','Sockets','Networking','Physics Engine','Sprite Animation'],
+    badges:[{ic:'fas fa-gamepad',t:'MULTIPLAYER'},{ic:'fas fa-network-wired',t:'NETWORKING'},{ic:'fas fa-running',t:'PLATFORMER'}],
+    mainType:'img', main:'assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png', gallery:[]
+  },
+  { num:'10', level:'GRAPHICS · GPU RENDERING', badge:'GRAPHICS',
+    title:'OpenGL 3D Rendering Demo',
+    desc:`3D graphics rendering system built with OpenGL and Python. Features <strong>real-time 3D object rendering</strong>, camera controls, dynamic lighting with multiple light sources, and custom GLSL shader implementation.<br><br>Demonstrates fundamental understanding of the graphics pipeline, vertex/fragment shaders, transformation matrices, and GPU-accelerated rendering — the foundation of all real-time 3D graphics.`,
+    stack:['Python','OpenGL','GLSL Shaders','PyOpenGL','Linear Algebra','GPU Programming'],
+    badges:[{ic:'fas fa-cube',t:'3D RENDERING'},{ic:'fas fa-bolt',t:'GPU ACCELERATED'},{ic:'fas fa-code',t:'CUSTOM SHADERS'}],
+    mainType:'video', main:'assets/my projects/[basic] opengl demo.mp4', gallery:[]
+  },
+  { num:'11', level:'COMPUTER VISION · REAL-TIME', badge:'CV',
+    title:'Real-Time Motion Detection',
+    desc:`Real-time motion detection system using OpenCV with <strong>frame differencing, Gaussian blur, threshold-based contour detection</strong>, and bounding box visualization on live webcam feeds.<br><br>Features configurable sensitivity, motion zone selection, and visual alerting. Runs efficiently on standard hardware with minimal CPU usage. This was the foundational project that led to the more complex sports and surveillance systems.`,
+    stack:['Python','OpenCV','NumPy','Real-Time Processing','Contour Detection'],
+    badges:[{ic:'fas fa-eye',t:'REAL-TIME CV'},{ic:'fas fa-wave-square',t:'MOTION ANALYSIS'},{ic:'fas fa-bolt',t:'60+ FPS'}],
+    mainType:'video', main:'assets/my projects/[basic]motion_detection.mp4', gallery:[]
+  },
+  { num:'12', level:'COMPUTER VISION · POSE', badge:'CV · AI',
+    title:'Human Pose Estimation',
+    desc:`Real-time human pose estimation and <strong>33-point skeletal tracking</strong> using MediaPipe Pose and OpenCV. Detects body landmarks including joints, connects them into a full skeleton overlay rendered over the live camera feed.<br><br>This project was the foundation for the Sports Activity Recognition system — understanding pose data, joint angles, and velocity vectors before building the full classifier on top.`,
+    stack:['Python','MediaPipe','OpenCV','Pose Estimation','NumPy','Landmark Detection'],
+    badges:[{ic:'fas fa-person',t:'33 LANDMARKS'},{ic:'fas fa-eye',t:'REAL-TIME'},{ic:'fas fa-layer-group',t:'FOUNDATION PROJECT'}],
+    mainType:'img', main:'assets/my projects/[basic]pose estimation 2 .png', gallery:[]
+  }
+];
+
+// ===== MODAL =====
+const modal=document.getElementById('projModal');
+const pmMedia=document.getElementById('pmMedia');
+const pmInfo=document.getElementById('pmInfo');
+const VM=window.VideoManager;
+
+function openModal(id){
+    const p=PROJS[id];
+    if(VM)VM.pauseAllBento();
+
+    let mediaHTML='';
+    if(p.mainType==='video'){
+        mediaHTML+=`<video class="pm-main-vid" data-src="${p.main}" preload="none" muted loop playsinline></video>`;
+    }else{
+        mediaHTML+=`<img class="pm-main-img" src="${p.main}" alt="${p.title}" loading="lazy">`;
+    }
+    if(p.gallery&&p.gallery.length){
+        const imgs=p.gallery.filter(m=>m.type==='img');
+        const vids=p.gallery.filter(m=>m.type==='vid');
+        const hasBa=imgs.length>=2;
+        if(hasBa){
+            mediaHTML+=`<div class="pm-ba">`;
+            imgs.forEach(m=>{
+                mediaHTML+=`<div class="pm-ba-side"><img src="${m.src}" alt="${m.label}" loading="lazy"><div class="pm-ba-tag">${m.label}</div></div>`;
+            });
+            mediaHTML+=`</div>`;
+            if(vids.length){
+                mediaHTML+=`<div class="pm-gallery">`;
+                vids.forEach(m=>{
+                    mediaHTML+=`<div class="pm-gal-item pm-vid-wrap" data-src="${m.src}"><video preload="none" muted loop playsinline></video><div class="pm-gal-label">${m.label}</div></div>`;
+                });
+                mediaHTML+=`</div>`;
+            }
+        }else{
+            mediaHTML+=`<div class="pm-gallery">`;
+            p.gallery.forEach(m=>{
+                if(m.type==='vid') mediaHTML+=`<div class="pm-gal-item pm-vid-wrap" data-src="${m.src}"><video preload="none" muted loop playsinline></video><div class="pm-gal-label">${m.label}</div></div>`;
+                else mediaHTML+=`<div class="pm-gal-item"><img src="${m.src}" alt="${m.label}" loading="lazy"><div class="pm-gal-label">${m.label}</div></div>`;
+            });
+            mediaHTML+=`</div>`;
+        }
+    }
+    pmMedia.innerHTML=mediaHTML;
+    if(VM)VM.initModalMedia(pmMedia);
+
+    const stackItems=p.stack.map(s=>`<span class="pm-st">${s}</span>`).join('');
+    const badgeItems=p.badges.map(b=>`<span class="pm-badge"><i class="${b.ic}"></i> ${b.t}</span>`).join('');
+    let clientHTML=p.client?`<div class="pm-client"><i class="fas fa-user"></i> ${p.client}</div>`:'';
+    pmInfo.innerHTML=`
+        <div class="pm-level">${p.level}</div>
+        <div class="pm-num">${p.num}</div>
+        <h2 class="pm-title">${p.title}</h2>
+        ${clientHTML}
+        <div class="pm-divider"></div>
+        <p class="pm-desc">${p.desc}</p>
+        <div class="pm-stack-label">TECH STACK</div>
+        <div class="pm-stack">${stackItems}</div>
+        <div class="pm-badges">${badgeItems}</div>`;
+
+    modal.classList.add('active');
+    document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+    if(VM)VM.onModalClose(pmMedia);
+    modal.classList.remove('active');
+    document.body.style.overflow='';
+    setTimeout(()=>{pmMedia.innerHTML='';pmInfo.innerHTML=''},600);
+}
+
+document.getElementById('pmClose').addEventListener('click',closeModal);
+document.getElementById('pmBg').addEventListener('click',closeModal);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+if(VM)VM.initBento();
+document.querySelectorAll('.bc').forEach(card=>{
+    const id=+card.dataset.id;
+    card.addEventListener('click',()=>openModal(id));
+    card.querySelector('.bc-expand').addEventListener('click',e=>{e.stopPropagation();openModal(id)});
+    // cursor-follow spotlight (rect cached on enter to avoid per-move layout reads)
+    let r=null;
+    card.addEventListener('mouseenter',()=>{r=card.getBoundingClientRect()});
+    card.addEventListener('mousemove',e=>{
+        if(!r)return;
+        card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+        card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+    });
+    card.addEventListener('mouseleave',()=>{r=null});
+});
+
+// ===== PROJECT FILTER =====
+document.querySelectorAll('.pfb').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+        document.querySelectorAll('.pfb').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const f=btn.dataset.f;
+        document.querySelectorAll('.bc').forEach(card=>{
+            const cats=card.dataset.cat.split(' ');
+            const show=f==='all'||cats.includes(f);
+            if(show){card.classList.remove('bc-hidden');card.style.opacity='0';card.style.transform='scale(.92)';requestAnimationFrame(()=>{card.style.transition='opacity .4s,transform .4s var(--ease)';card.style.opacity='1';card.style.transform=''})}
+            else{card.classList.add('bc-hidden');if(VM)VM.pauseAllIn(card)}
+        });
+        if(VM)VM.pauseAllBento();
+    });
+});
+const showAwardsBtn=document.getElementById('showAwardsBtn');
+const awMoreAwards=document.getElementById('awMoreAwards');
+if(showAwardsBtn && awMoreAwards){
+    showAwardsBtn.addEventListener('click',()=>{
+        const expanded=awMoreAwards.classList.toggle('active');
+        showAwardsBtn.textContent=expanded?'HIDE AWARDS':'SHOW MORE AWARDS';
+        if(expanded)awMoreAwards.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+}
+
+// ===== 3D TILT on skill cards =====
+document.querySelectorAll('.sk-card').forEach(card=>{
+    let r=null;
+    card.addEventListener('mouseenter',()=>{r=card.getBoundingClientRect();card.style.transition=''});
+    card.addEventListener('mousemove',e=>{
+        if(!r)return;
+        const x=e.clientX-r.left,y=e.clientY-r.top;
+        const rx=((y-r.height/2)/(r.height/2))*4,ry=-((x-r.width/2)/(r.width/2))*4;
+        card.style.transform=`perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+    });
+    card.addEventListener('mouseleave',()=>{r=null;card.style.transform='';card.style.transition='transform .5s var(--ease)'});
+});
+
+// ===== NEXT GEN CAMERA console =====
+// The live module console moved to its own page (next-gen-camera.html), which
+// carries its own copy of this clock + rotation logic. Nothing to run here.
+
+const awardCarousels=document.querySelectorAll('.aw-carousel');
+awardCarousels.forEach(carousel=>{
+    const slides=carousel.querySelectorAll('.aw-slide');
+    if(slides.length<2) return;
+    let activeSlide=0;
+    slides.forEach((slide,i)=>slide.classList.toggle('active',i===0));
+    setInterval(()=>{
+        slides[activeSlide].classList.remove('active');
+        const currentVideo=slides[activeSlide].querySelector('video');
+        if(currentVideo)currentVideo.pause();
+        activeSlide=(activeSlide+1)%slides.length;
+        slides[activeSlide].classList.add('active');
+        const nextVideo=slides[activeSlide].querySelector('video');
+        if(nextVideo) nextVideo.play().catch(()=>{});
+    },4200);
+});
+
+// ===== MAGNETIC BUTTONS =====
+document.querySelectorAll('.btn').forEach(btn=>{
+    let r=null;
+    btn.addEventListener('mouseenter',()=>{r=btn.getBoundingClientRect();btn.style.transition='transform .12s ease'});
+    btn.addEventListener('mousemove',e=>{if(!r)return;const x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;btn.style.transform=`translate(${x*.15}px,${y*.15}px)`});
+    btn.addEventListener('mouseleave',()=>{r=null;btn.style.transform='';btn.style.transition='transform .45s var(--ease)'});
+});
+
+// ===== FILM STRIP SPROCKET HOLES =====
+['filmHoles1','filmHoles2'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){for(let i=0;i<80;i++){const h=document.createElement('div');h.className='film-hole';el.appendChild(h)}}
+});
+
+// ===== JOURNEY HORIZONTAL SCROLL =====
+const journeyWrap=document.querySelector('.journey-wrap');
+const journeyTrack=document.getElementById('journeyTrack');
+if(journeyWrap&&journeyTrack){
+    scrollCbs.push(()=>{
+        const rect=journeyWrap.getBoundingClientRect();
+        const viewH=window.innerHeight;
+        const scrollable=journeyWrap.offsetHeight-viewH;
+        if(rect.top<=0&&rect.bottom>=viewH){
+            const progress=Math.min(Math.max(-rect.top/scrollable,0),1);
+            const trackW=journeyTrack.scrollWidth-window.innerWidth+100;
+            journeyTrack.style.transform=`translateX(${-progress*trackW}px)`;
+        }
+    });
+}
+
+})();
+</script>
+
+<!-- Desert Road 3D scene for #contact. Inlined module (MIME workaround). -->
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+(function () {
+  const canvas  = document.getElementById('desertCanvas');
+  const section = document.getElementById('contact');
+  if (!canvas || !section) return;
+
+  // ── Baked config (tuned via control panel, now finalised) ──
+  const cfg = {
+    camX: 0,    camY: 80,   camZ: 58,
+    lkX:  0.5,  lkY:  22,   lkZ:  0,
+    mX:  -12,   mY:   15.5, mZ:  -2,
+    rX:  -21,   rY:   180,  rZ:   2,
+    rotSpeed: 0.012,
+    fov:  42,
+    scale: 84,
+  };
+
+  // ── Renderer — pixel ratio capped at 1 for a background scene (saves GPU) ──
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'low-power' });
+  renderer.setPixelRatio(1); // background doesn't need retina resolution
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.3;
+
+  // ── Scene ──
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#f5e3b0'); // warm sand
+
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  pmrem.compileEquirectangularShader();
+  scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+
+  // Lighting — sunny desert day
+  scene.add(new THREE.AmbientLight(0xfff2c9, 0.85));
+  const sun = new THREE.DirectionalLight(0xffe5a0, 3.2);
+  sun.position.set(20, 30, 18);
+  scene.add(sun);
+  const fill = new THREE.DirectionalLight(0xffcfa3, 0.85);
+  fill.position.set(-14, 12, -10);
+  scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffae55, 1.0);
+  rim.position.set(0, -8, -18);
+  scene.add(rim);
+
+  // ── Camera ──
+  const camera = new THREE.PerspectiveCamera(cfg.fov, 1, 0.1, 2000);
+
+  // ── Resize ──
+  function resize() {
+    const w = section.offsetWidth  || 1280;
+    const h = section.offsetHeight || 720;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  new ResizeObserver(resize).observe(section);
+
+  // ── Model loading ──
+  let model    = null;
+  let baseOff  = new THREE.Vector3();
+  let spinAccum = 0;
+
+  function loadModel() {
+    new GLTFLoader().load('assets/cardrift/desert_road.glb', (gltf) => {
+      if (model) scene.remove(model);
+      model = gltf.scene;
+      const box    = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const size   = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      const sc     = cfg.scale / maxDim;
+      model.scale.setScalar(sc);
+      baseOff.set(-center.x * sc, -center.y * sc, -center.z * sc);
+      scene.add(model);
+    }, undefined, (e) => console.warn('[DesertRoad]', e));
+  }
+  loadModel();
+
+  // ── One-time camera setup (config is now baked, no live sliders) ──
+  const DEG = Math.PI / 180;
+  camera.position.set(cfg.camX, cfg.camY, cfg.camZ);
+  camera.lookAt(cfg.lkX, cfg.lkY, cfg.lkZ);
+  camera.fov = cfg.fov;
+  camera.updateProjectionMatrix();
+
+  // ── Visibility gate ──
+  let visible = false;
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.05 }).observe(section);
+
+  // ── Animation loop — throttled to ~24 fps (background scene, saves GPU) ──
+  const FRAME_MS = 1000 / 24;
+  let lastFrame = 0;
+
+  function tick(ts) {
+    requestAnimationFrame(tick);
+    if (!visible || !model) return;
+    if (ts - lastFrame < FRAME_MS) return; // skip frames to hit ~24fps
+    lastFrame = ts;
+
+    spinAccum += cfg.rotSpeed;
+    model.position.set(baseOff.x + cfg.mX, baseOff.y + cfg.mY, baseOff.z + cfg.mZ);
+    model.rotation.set(cfg.rX * DEG, cfg.rY * DEG + spinAccum, cfg.rZ * DEG);
+
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
