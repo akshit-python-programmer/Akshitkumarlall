@@ -8,7 +8,7 @@ A single-page personal portfolio for my work in **Computer Vision, AI/ML, full-s
 
 ## Highlights
 
-- **Scroll-driven 3D "drift journey"** — a low-poly Mazda RX7 drifts down a winding road past my life milestones as you scroll, with a smoke trail, roadside scenery and engine audio (Three.js).
+- **Scroll-driven 3D "drift journey"** — a low-poly car drifts down a winding road past my life milestones as you scroll, with a smoke trail, roadside scenery and engine audio (Three.js).
 - **3D desert-road contact scene** — a slowly rotating model sits behind a glassmorphism contact form.
 - **Neo-brutalist design language** — flat pastel fills, hard zero-blur shadows, chunky mono/pixel type.
 - **Project showcase** — a bento grid of projects with category filters and detail modals; videos lazy-load one decoder at a time to stay smooth.
