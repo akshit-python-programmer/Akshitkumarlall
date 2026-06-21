@@ -9,7 +9,7 @@
     <script>
       (function () {
         var t = localStorage.getItem('theme');
-        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (!t) t = 'light';
         document.documentElement.dataset.theme = t;
       })();
     </script>
@@ -120,7 +120,7 @@
     .hero-exp{position:absolute;top:24px;right:-20px;font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;writing-mode:vertical-rl;color:var(--fg3);z-index:2}
 
     /* Stats */
-    .stats-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);max-width:1300px;margin:0 auto}
+    .stats-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(2,1fr);max-width:1300px;margin:0 auto}
     .stat-item{padding:32px;text-align:center;border-right:1px solid var(--border);transition:background .3s}
     .stat-item:last-child{border-right:none}.stat-item:hover{background:var(--bg2)}
     .stat-num{font-family:var(--mono);font-size:2.8rem;font-weight:800;line-height:1;display:block}
@@ -145,7 +145,16 @@
     .about-hi span{font-family:var(--mono);font-size:.82rem;color:var(--fg2);line-height:1.5;letter-spacing:.02em}
 
     /* ===== SKILLS ===== */
-    #skills{padding:140px 48px;background:var(--bg)}
+    #skills{padding:140px 48px;background:var(--bg);position:relative;overflow:hidden}
+    #skills>.s-max{position:relative;z-index:1}
+    /* Glowing 3D depth-wall of tech icons behind the content (populated by JS) */
+    .skills-fx{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .skills-fx::before{content:'';position:absolute;inset:0;background:radial-gradient(58% 50% at 50% 40%,rgba(120,150,255,.06),transparent 70%)}
+    .sfx-ic{position:absolute;width:var(--sz,40px);height:var(--sz,40px);object-fit:contain;opacity:var(--op,.18);
+        filter:blur(var(--bl,0)) drop-shadow(0 0 14px rgba(120,170,255,.5));
+        will-change:transform;animation:sfxFloat var(--dur,9s) ease-in-out infinite;animation-delay:var(--dly,0s)}
+    @keyframes sfxFloat{0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-16px) rotate(calc(var(--rot,0deg) + 4deg))}}
+    @media(prefers-reduced-motion:reduce){.sfx-ic{animation:none}}
     .skills-header{margin-bottom:72px}
     .skills-header h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:14px}
     .skills-header p{font-size:1.05rem;color:var(--fg3);line-height:1.75;max-width:540px}
@@ -291,10 +300,10 @@
     .proj-modal{position:fixed;inset:0;z-index:9500;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .4s}
     .proj-modal.active{opacity:1;pointer-events:all}
     .pm-bg{position:absolute;inset:0;background:rgba(0,0,0,.82)}
-    .pm-main-playbar{display:flex;align-items:center;gap:16px;padding:16px;background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,.08)}
-    .pm-main-play{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;padding:12px 24px;background:white;color:var(--dark);border:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:transform .2s,box-shadow .2s}
-    .pm-main-play:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,255,255,.15)}
-    .pm-main-hint{font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.35);letter-spacing:.08em}
+    .pm-main-playbar{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;background:rgba(0,0,0,0.5);text-align:center;z-index:2;backdrop-filter:blur(3px)}
+    .pm-main-play{font-family:var(--mono);font-size:1.1rem;letter-spacing:.15em;padding:22px 40px;background:white;color:var(--dark);border:none;cursor:pointer;display:inline-flex;align-items:center;gap:12px;border-radius:999px;min-width:300px;justify-content:center;transition:transform .2s,box-shadow .2s}
+    .pm-main-play:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 12px 30px rgba(255,255,255,.25)}
+    .pm-main-hint{font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.8);letter-spacing:.08em;max-width:520px;text-shadow:0 2px 4px rgba(0,0,0,.5)}
     .pm-gal-item{position:relative}
     .pm-vid-play{position:absolute;inset:0;margin:auto;width:fit-content;height:fit-content;padding:10px 18px;font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;background:rgba(0,0,0,.75);color:white;border:1px solid rgba(255,255,255,.25);cursor:pointer;display:flex;align-items:center;gap:8px;z-index:2;transition:background .25s}
     .pm-vid-play:hover{background:rgba(255,255,255,.15)}
@@ -632,10 +641,6 @@
     @media(max-width:1024px){
         .hero-grid,.about-grid,.innov-grid,.hum-grid,.contact-grid{grid-template-columns:1fr;gap:48px}
         .hero-right{order:-1}.hero-img-wrap{max-width:360px;margin:0 auto}
-        .stats-strip{grid-template-columns:repeat(2,1fr)}
-        .stats-strip .stat-item:nth-child(n+4){display:block}
-        .stats-strip .stat-item:nth-child(even){border-right:none}
-        .stats-strip .stat-item:nth-child(1), .stats-strip .stat-item:nth-child(2){border-bottom:1px solid var(--border)}
         
         .skills-grid{grid-template-columns:repeat(2,1fr)}
         .bento{grid-template-columns:repeat(2,1fr)}
@@ -738,7 +743,7 @@
                 <span class="nb-term-txt font-code">&gt;&nbsp;<span id="typed"></span><span class="caret"></span></span>
             </div>
             <!-- <p class="nb-hero-statement">I build <strong>real software</strong> for <strong>real clients</strong> worldwide — computer vision, AI/ML, robotics, the full modern web stack &amp; 3D. Designed, shipped, working.</p> -->
-            <p class="nb-hero-bio">I'm <strong>Akshit Kumar Lall</strong>, a <span class="hl-mark">national award-winning engineer</span>, first-year CS student, and the founder of <strong>AKL Robotics</strong>. I combine deep technical expertise in <span class="hl-mark">AI, Computer Vision &amp; full-stack development</span> with a strong <span class="hl-mark">go-to-market mindset</span> to build and scale global software solutions.</p>
+            <p class="nb-hero-bio">Building AI, CV, robotics, and full-stack solutions with real delivery.</p>
 
             <div class="nb-chips">
                 <span class="nb-chip nb-c-pink">COMPUTER VISION</span>
@@ -747,10 +752,13 @@
                 <span class="nb-chip nb-c-blue">FULL-STACK WEB</span>
                 <span class="nb-chip nb-c-lav">CAD · 3D</span>
                 <span class="nb-chip nb-c-coral">PYTHON</span>
+                <span class="nb-chip nb-c-yellow">BUSINESS STRATEGY</span>
+                <span class="nb-chip nb-c-redp">PRODUCT DEVELOPMENT</span>
+
             </div>
             <div class="nb-cta">
                 <a href="#projects" class="nb-btn nb-btn-dark"><span>VIEW PROJECTS</span> <i class="fas fa-arrow-right"></i></a>
-                <a href="#contact" class="nb-btn nb-btn-pink"><span>HIRE ME</span></a>
+                <a href="#contact" class="nb-btn nb-btn-pink"><span>akshitkumarlal@gmail.com</span></a>
             </div>
         </div>
         <div class="nb-hero-side">
@@ -767,8 +775,6 @@
 <div class="stats-strip rv">
     <div class="stat-item"><span class="stat-num counter" data-t="100">0</span><span class="stat-label">PROJECTS DELIVERED</span></div>
     <div class="stat-item"><span class="stat-num counter" data-t="50">0</span><span class="stat-label">CLIENTS WORLDWIDE</span></div>
-    <div class="stat-item"><span class="stat-num counter" data-t="8">0</span><span class="stat-label">AWARDS WON</span></div>
-    <div class="stat-item"><span class="stat-num" style="font-size:1.1rem;line-height:1.3">FOUNDER<br>&amp; CEO</span><span class="stat-label">AKL Technologies</span></div>
 </div>
 
 <!-- Marquee -->
@@ -812,6 +818,7 @@
 
 <!-- SKILLS -->
 <section id="skills">
+    <div class="skills-fx" id="skillsFx" aria-hidden="true"></div>
     <div class="s-max">
         <div class="skills-header rv">
             <div class="s-label">EXPERTISE</div>
@@ -1128,7 +1135,7 @@
         <div class="aw-header rv">
             <div class="s-label">RECOGNITION</div>
             <h2>Awards &amp;<br>Achievements</h2>
-            <p>Not participation certificates — these are <strong style="color:rgba(255,255,255,.8)">competitive wins</strong> on national and international stages, judged by experts, against hundreds of competitors.</p>
+            <p>Proven competitive wins on national and international stages.</p>
         </div>
         <div class="aw-entry rv">
             <div class="aw-img">
@@ -1415,7 +1422,7 @@
                     <i class="fas fa-trophy drift-ev-ic"></i>
                     <span class="drift-ev-year">2023</span>
                     <span class="drift-ev-tag">BIC · INEX · ARYABHAT · NCSC</span>
-                    <h3>8+ National Awards Won</h3>
+                    <h3>Multiple National Awards</h3>
                     <p>Bihar Innovation Challenge (1st Prize + MacBook), INEX Silver Medal, Aryabhat National Award, Robo Fest and more.</p>
                 </article>
                 <article class="drift-event" data-i="3">
@@ -1455,14 +1462,14 @@
     <div class="s-max">
         <a href="next-gen-camera.html" class="ngc-promo-card rv">
             <div class="ngc-promo-text">
-                <div class="s-label font-code">FLAGSHIP · PATENT FILED · 8+ AWARDS</div>
+                <div class="s-label font-code">FLAGSHIP · PATENT FILED · MULTIPLE AWARDS</div>
                 <h2><span class="scroll-hl">Next Gen Camera System</span></h2>
                 <p>An AI security layer for existing CCTV — it spots robbers, fire, faints, faces &amp; anomalies in real time and <strong>acts</strong> (buzzer + calls/alerts) instead of just recording. Presented at INEX India &amp; the Bihar Innovation Challenge.</p>
                 <span class="ngc-promo-go font-code">EXPLORE THE FULL PROJECT <i class="fas fa-arrow-right"></i></span>
             </div>
             <div class="ngc-promo-media">
                 <img src="assets/explaining next gen camera to foreign researchers.jpg" alt="Next Gen Camera demonstration">
-                <span class="ngc-promo-badge font-code"><i class="fas fa-trophy"></i> 8+ AWARDS</span>
+                <span class="ngc-promo-badge font-code"><i class="fas fa-trophy"></i> MULTIPLE AWARDS</span>
             </div>
         </a>
     </div>
@@ -2539,7 +2546,7 @@ function openModal(id){
 
     let mediaHTML='';
     if(p.mainType==='video'){
-        mediaHTML+=`<video class="pm-main-vid" data-src="${p.main}" preload="none" muted loop playsinline></video>`;
+        mediaHTML+=`<div style="position:relative;width:100%;aspect-ratio:16/10;"><video class="pm-main-vid" data-src="${p.main}" preload="none" muted loop playsinline></video></div>`;
     }else{
         mediaHTML+=`<img class="pm-main-img" src="${p.main}" alt="${p.title}" loading="lazy">`;
     }
@@ -2641,6 +2648,63 @@ if(showAwardsBtn && awMoreAwards){
         if(expanded)awMoreAwards.scrollIntoView({behavior:'smooth',block:'center'});
     });
 }
+
+// ===== SKILLS — glowing 3D depth-wall of tech icons =====
+// Scatters real tech logos behind the section at faux-depth (size + blur +
+// opacity + a soft glow) with a gentle float. Biased toward the edges/top/
+// bottom so they frame the content instead of hiding behind the opaque cards.
+(function(){
+    const fx=document.getElementById('skillsFx'); if(!fx)return;
+    if(window.matchMedia('(pointer:coarse)').matches) return; // skip the extra paint on phones
+    const BASE=['python','tensorflow','pytorch','opencv','react','cpp','javascript','django',
+                'arduino','opengl','html5','css3','mysql','nodejs','numpy','blender','git','raspberrypi'];
+    const ICONS=BASE.concat(BASE);            // pool of candidates to try to place
+    const rand=(a,b)=>a+Math.random()*(b-a);
+
+    // Work in pixels so we can space icons apart properly, then store positions
+    // as % (responsive). Reject any candidate that lands too close to an
+    // already-placed icon; skip it if no free spot is found — that guarantees
+    // no overlap and lets the wall self-pack to whatever fits.
+    const rect=fx.getBoundingClientRect();
+    const W=rect.width||window.innerWidth, H=rect.height||760;
+    const GAP=18;                              // min clear gap between icons (px)
+    const placed=[];                           // {cx, cy, r} centres in px
+
+    function candidate(band){
+        if(band===0) return [rand(0.01,0.17)*W, rand(0.04,0.94)*H]; // left edge
+        if(band===1) return [rand(0.83,0.99)*W, rand(0.04,0.94)*H]; // right edge
+        if(band===2) return [rand(0.05,0.95)*W, rand(0.02,0.19)*H]; // top edge
+        return            [rand(0.05,0.95)*W, rand(0.80,0.97)*H];   // bottom edge
+    }
+
+    ICONS.forEach((name,i)=>{
+        const depth=Math.random();                 // 0 far → 1 near
+        const sz=32+depth*32;                      // 32..64 px
+        const r=sz*0.5;
+        let cx=null, cy=null;
+        for(let t=0;t<28;t++){
+            const [x,y]=candidate(i%4);
+            let clear=true;
+            for(const p of placed){
+                if(Math.hypot(x-p.cx, y-p.cy) < r + p.r + GAP){ clear=false; break; }
+            }
+            if(clear){ cx=x; cy=y; placed.push({cx:x,cy:y,r}); break; }
+        }
+        if(cx===null) return;                      // no room → skip (no overlap)
+
+        const img=document.createElement('img');
+        img.src='assets/icons/tech/'+name+'.svg'; img.alt=''; img.loading='lazy'; img.className='sfx-ic';
+        img.style.left=((cx - sz/2)/W*100).toFixed(2)+'%';   // top-left corner as %
+        img.style.top =((cy - sz/2)/H*100).toFixed(2)+'%';
+        img.style.setProperty('--sz',sz.toFixed(0)+'px');
+        img.style.setProperty('--op',(0.22+depth*0.34).toFixed(2));   // prominent
+        img.style.setProperty('--bl',((1-depth)*2.2).toFixed(1)+'px');
+        img.style.setProperty('--rot',rand(-9,9).toFixed(1)+'deg');
+        img.style.setProperty('--dur',rand(7,13).toFixed(1)+'s');
+        img.style.setProperty('--dly',rand(0,6).toFixed(1)+'s');
+        fx.appendChild(img);
+    });
+})();
 
 // ===== 3D TILT on skill cards =====
 document.querySelectorAll('.sk-card').forEach(card=>{

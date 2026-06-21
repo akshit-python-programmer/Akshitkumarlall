@@ -1367,9 +1367,12 @@
 [data-theme="dark"] .nb-about-lead p { color: #cfd2d8; }
 
 /* Skills */
-[data-theme="dark"] #skills { background: #0c0d10; }
+[data-theme="dark"] #skills { background: #0a0b0e; }
 [data-theme="dark"] .sk-card { background: #15171c; }
 [data-theme="dark"] .sk-card:hover { background: #1c1f27; }
+/* the tech-icon wall glows on the dark backdrop */
+[data-theme="dark"] .skills-fx::before { background: radial-gradient(60% 55% at 50% 40%, rgba(90, 140, 255, 0.16), transparent 72%); }
+[data-theme="dark"] .sfx-ic { filter: blur(var(--bl, 0)) drop-shadow(0 0 14px rgba(120, 180, 255, 0.55)); opacity: calc(var(--op, 0.18) + 0.06); }
 
 /* Journey 3D section backdrop */
 [data-theme="dark"] #journey { background: #0a0b0f; }
