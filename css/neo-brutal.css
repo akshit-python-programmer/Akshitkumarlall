@@ -973,6 +973,22 @@
   #journey.is-3d .drift-progress { right: 14px; }
   .drift-bar { height: 130px; }
   #journey:not(.is-3d) .journey-sticky { padding: 80px 20px; }
+
+  /* Phones often don't composite backdrop-filter, so the black road shows
+     through the card and the translucent text vanishes. Use a SOLID card and
+     fully-opaque text on mobile so the year/heading stay readable. */
+  #journey.is-3d .drift-event {
+    background: #0b0d13 !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+  #journey.is-3d .drift-ev-year {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+  #journey.is-3d .drift-event p { color: rgba(255, 255, 255, 0.82); }
 }
 
 /* ============================================================
@@ -1119,14 +1135,25 @@
   transform: translateX(6px) !important;
 }
 .cl-ic {
-  background: rgba(255, 255, 255, 0.22) !important;
-  color: rgba(80, 40, 5, 0.9) !important;
-  border-radius: 2px !important;
+  background: #ffffff !important;            /* white tile so every logo (incl. dark GitHub/X) stays visible */
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12) !important;
 }
 .cl-link:hover .cl-ic {
-  background: rgba(175, 75, 8, 0.88) !important;
-  color: #fff !important;
+  background: #ffffff !important;            /* keep white on hover — don't tint over the real logos */
+  transform: scale(1.05);
 }
+
+/* Real downloaded brand logos (replace the old Font Awesome <i> glyphs) */
+.soc-ic { display: block; object-fit: contain; }
+.cl-ic .soc-ic { width: 24px; height: 24px; }
+/* footer: give each link a small white tile so the marks read on any footer bg */
+.ft-links a {
+  display: inline-flex !important; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 10px;
+  background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.14);
+}
+.ft-links a .soc-ic { width: 20px; height: 20px; }
 .cl-txt span:first-child { color: rgba(100, 60, 10, 0.62) !important; }
 .cl-txt span:last-child  { color: rgba(25, 12, 0, 0.92) !important; }
 .cl-arr { color: rgba(100, 60, 10, 0.45) !important; }
@@ -1303,3 +1330,70 @@
   #testimonials .test-grid { grid-template-columns: 1fr !important; }
   #testimonials { padding: 64px 20px !important; }
 }
+
+
+/* ============================================================
+   DARK MODE — toggle + system default (data-theme on <html>)
+   Neo-brutal pastel CARDS stay vivid by design; we darken the
+   page / section backgrounds and lift the text that sits on them.
+   ============================================================ */
+/* :root[...] needed so these win over the per-page inline :root tokens, which
+   would otherwise tie on specificity and beat us on source order. */
+:root[data-theme="dark"] {
+  --bg: #0c0d10; --bg2: #15171c; --dark: #050509;
+  --fg: #f1f2f4; --fg2: #cdd0d6; --fg3: #9aa0a8; --fg4: #5a606a;
+  --border: rgba(255, 255, 255, 0.10); --border2: rgba(255, 255, 255, 0.22);
+}
+[data-theme="dark"] body {
+  background: #0c0d10;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+[data-theme="dark"] ::selection { background: #f1f2f4; color: #0c0d10; }
+
+/* Nav */
+[data-theme="dark"] nav.scrolled { background: rgba(13, 14, 18, 0.9); border-bottom-color: rgba(255, 255, 255, 0.10); }
+[data-theme="dark"] .nav-links a, [data-theme="dark"] .nav-logo { color: var(--fg); }
+[data-theme="dark"] .mob-menu { background: #0c0d10; }
+
+/* Hero — darken section, lift heading/bio (the pastel chips + yellow mark stay) */
+[data-theme="dark"] #home.neo-hero { background: #0e0f14; }
+[data-theme="dark"] .nb-hero-hi, [data-theme="dark"] .nb-name { color: #f3f4f6; }
+[data-theme="dark"] .nb-hero-bio { color: #dfe1e5; }
+
+/* About — darken section + light dividers + lift headings (exp cards stay vivid) */
+[data-theme="dark"] #about.neo-about { background: #121319; border-top-color: rgba(255, 255, 255, 0.14); border-bottom-color: rgba(255, 255, 255, 0.14); }
+[data-theme="dark"] .nb-kicker { color: #b9bdc6; }
+[data-theme="dark"] .nb-about-title { color: #f3f4f6; }
+[data-theme="dark"] .nb-about-lead p { color: #cfd2d8; }
+
+/* Skills */
+[data-theme="dark"] #skills { background: #0c0d10; }
+[data-theme="dark"] .sk-card { background: #15171c; }
+[data-theme="dark"] .sk-card:hover { background: #1c1f27; }
+
+/* Journey 3D section backdrop */
+[data-theme="dark"] #journey { background: #0a0b0f; }
+
+/* Testimonials — keep the cream "tapes", darken the desk + lift the heading */
+[data-theme="dark"] #testimonials {
+  background: radial-gradient(120% 80% at 50% 0%, #1b1714 0%, #14110e 55%, #100d0b 100%) !important;
+}
+[data-theme="dark"] #testimonials .test-header h2 { color: #f1ece2 !important; }
+[data-theme="dark"] #testimonials .test-header p { color: #b9b0a2 !important; }
+
+/* Neo-zones — Next Gen Camera promo + certificates */
+[data-theme="dark"] #innovation.neo-zone,
+[data-theme="dark"] #certificates.neo-zone {
+  background: linear-gradient(180deg, #181426 0%, #0f1320 45%, #0c0d10 100%) !important;
+}
+[data-theme="dark"] .ngc-promo-card { background: #15171c !important; color: #eceef2 !important; }
+[data-theme="dark"] .ngc-promo-text p { color: #c4c8cf !important; }
+[data-theme="dark"] .ngc-promo-text h2 { color: #f3f4f6 !important; }
+
+/* Contact — darken fallback bg + lift heading (form fields stay light tiles) */
+[data-theme="dark"] #contact { background: #0d0f14 !important; }
+[data-theme="dark"] .contact-hd h2 { color: #f3f4f6; }
+[data-theme="dark"] .contact-hd p { color: #c4c8cf; }
+
+/* Footer */
+[data-theme="dark"] footer { border-top-color: rgba(255, 255, 255, 0.10); }
