@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akshit Kumar Lall </title>
+    <!-- Theme boot — runs before paint so there's no light/dark flash.
+         Defaults to the visitor's OS setting; a saved choice wins. -->
+    <script>
+      (function () {
+        var t = localStorage.getItem('theme');
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -49,6 +58,9 @@
     .mob-menu.open{display:flex}
     .mob-menu a{font-family:var(--mono);font-size:1.5rem;text-decoration:none;color:var(--fg);letter-spacing:.1em}
     .mob-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:1.4rem;cursor:var(--cur-point);color:var(--fg)}
+    /* Dark-mode toggle */
+    .theme-toggle{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;background:none;border:1.5px solid var(--border2);border-radius:50%;color:var(--fg);font-size:.9rem;cursor:var(--cur-point);transition:background .25s,color .25s,border-color .25s,transform .25s}
+    .theme-toggle:hover{transform:rotate(18deg) scale(1.06);border-color:var(--fg)}
 
     /* Buttons */
     .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-decoration:none;cursor:var(--cur-point);border:none;position:relative;overflow:hidden;transition:all .4s var(--ease)}
@@ -698,7 +710,8 @@
         <li><a href="#journey">JOURNEY</a></li>
         <li><a href="#contact">CONTACT</a></li>
     </ul>
-    <div style="display:flex;align-items:center;gap:0">
+    <div style="display:flex;align-items:center;gap:8px">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
         <button class="nav-toggle" id="navBtn"><i class="fas fa-bars"></i></button>
     </div>
 </nav>
@@ -755,7 +768,7 @@
     <div class="stat-item"><span class="stat-num counter" data-t="100">0</span><span class="stat-label">PROJECTS DELIVERED</span></div>
     <div class="stat-item"><span class="stat-num counter" data-t="50">0</span><span class="stat-label">CLIENTS WORLDWIDE</span></div>
     <div class="stat-item"><span class="stat-num counter" data-t="8">0</span><span class="stat-label">AWARDS WON</span></div>
-    <div class="stat-item"><span class="stat-num" style="font-size:1.1rem;line-height:1.3">FOUNDER<br>&amp; CEO</span><span class="stat-label">AKL TECH</span></div>
+    <div class="stat-item"><span class="stat-num" style="font-size:1.1rem;line-height:1.3">FOUNDER<br>&amp; CEO</span><span class="stat-label">AKL Technologies</span></div>
 </div>
 
 <!-- Marquee -->
@@ -1482,12 +1495,12 @@
                 <button type="submit" class="f-sub"><span>SEND MESSAGE →</span></button>
             </form>
             <div class="cl-links">
-                <a href="mailto:akshitkumarlal@gmail.com" class="cl-link gc"><div class="cl-ic"><i class="fas fa-envelope"></i></div><div class="cl-txt"><span>EMAIL</span><span>akshitkumarlal@gmail.com</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://github.com/akshitkumarlall" target="_blank" class="cl-link gc"><div class="cl-ic"><i class="fab fa-github"></i></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><i class="fab fa-linkedin-in"></i></div><div class="cl-txt"><span>LINKEDIN</span><span>linkedin.com/in/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><i class="fab fa-youtube"></i></div><div class="cl-txt"><span>YOUTUBE</span><span>youtube.com/@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><i class="fab fa-x-twitter"></i></div><div class="cl-txt"><span>TWITTER / X</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://www.instagram.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><i class="fab fa-instagram"></i></div><div class="cl-txt"><span>INSTAGRAM</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="mailto:akshitkumarlal@gmail.com" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/gmail.svg" alt="Email" width="24" height="24"></div><div class="cl-txt"><span>EMAIL</span><span>akshitkumarlal@gmail.com</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://github.com/akshitkumarlall" target="_blank" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="24" height="24"></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="24" height="24"></div><div class="cl-txt"><span>LINKEDIN</span><span>linkedin.com/in/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/youtube.svg" alt="YouTube" width="24" height="24"></div><div class="cl-txt"><span>YOUTUBE</span><span>youtube.com/@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="22" height="22"></div><div class="cl-txt"><span>TWITTER / X</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://www.instagram.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/instagram.svg" alt="Instagram" width="24" height="24"></div><div class="cl-txt"><span>INSTAGRAM</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
             </div>
         </div>
     </div>
@@ -1583,11 +1596,11 @@
     <div class="ft-logo">AKSHIT KUMAR LALL</div>
     <div class="ft-copy">&copy; 2026 — Built with code, not templates.</div>
     <div class="ft-links">
-        <a href="https://github.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://www.instagram.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="22" height="22"></a>
+        <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="22" height="22"></a>
+        <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img class="soc-ic" src="assets/icons/social/youtube.svg" alt="YouTube" width="22" height="22"></a>
+        <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="20" height="20"></a>
+        <a href="https://www.instagram.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img class="soc-ic" src="assets/icons/social/instagram.svg" alt="Instagram" width="22" height="22"></a>
     </div>
 </footer>
 <a href="#contact" class="quick-contact" aria-label="Contact Me">CONTACT ME</a>
@@ -1657,9 +1670,20 @@ function boot() {
   let composer = null;
 
   const scene = new THREE.Scene();
-  const SKY = new THREE.Color('#e9ebf1');
+  // Sky/fog follow the site theme — pale day sky vs deep night (which also
+  // makes the new headlights actually read). Updated live on theme change.
+  const DAY_SKY = 0xe9ebf1, NIGHT_SKY = 0x0c1020;
+  const SKY = new THREE.Color(DAY_SKY);
   scene.background = SKY;
   scene.fog = new THREE.Fog(SKY, 70, 200);
+  function applyTheme(theme) {
+    const dark = theme === 'dark';
+    SKY.setHex(dark ? NIGHT_SKY : DAY_SKY);
+    scene.fog.color.setHex(dark ? NIGHT_SKY : DAY_SKY);
+    renderer.toneMappingExposure = dark ? 0.95 : 1.08;
+    headlightBeams.forEach((b) => { b.intensity = dark ? 14 : 5; });
+  }
+  window.addEventListener('themechange', (e) => applyTheme(e.detail));
 
   // Neutral studio environment so the car's PBR (metallic) materials are lit
   // instead of rendering black. Without an env map, glTF metalness=1 surfaces are black.
@@ -1779,6 +1803,28 @@ function boot() {
   scene.add(carRig);
   const carModel = new THREE.Group();
   carRig.add(carModel);
+
+  // ── Headlights ── two forward beams that pool light on the road ahead (very
+  // visible at night / in dark mode) plus little emissive lamps at the front.
+  // Parented to carRig so they track the car's position + steering. No shadows.
+  const headlightBeams = [];
+  (function addHeadlights() {
+    const grp = new THREE.Group();
+    const lampMat = new THREE.MeshStandardMaterial({ color: 0xfff6d8, emissive: 0xfff0be, emissiveIntensity: 4 });
+    const lampGeo = new THREE.SphereGeometry(0.55, 14, 10);
+    for (const sx of [-1.8, 1.8]) {
+      const lamp = new THREE.Mesh(lampGeo, lampMat);
+      lamp.position.set(sx, 2.0, 18);          // car front (local +Z is forward)
+      grp.add(lamp);
+      const beam = new THREE.SpotLight(0xfff1c4, 5, 95, Math.PI / 7, 0.55, 1.1);
+      beam.position.set(sx, 2.4, 17);
+      beam.target.position.set(sx * 1.5, -2.5, 48); // light pool further down the road
+      grp.add(beam, beam.target);
+      headlightBeams.push(beam);
+    }
+    carRig.add(grp);
+  })();
+  applyTheme(document.documentElement.dataset.theme || 'light');
 
   const smoke = new SmokeSystem(scene);
 
@@ -1948,7 +1994,7 @@ function boot() {
   const tan = new THREE.Vector3(), tanAhead = new THREE.Vector3(), side = new THREE.Vector3();
   const camTarget = new THREE.Vector3(), look = new THREE.Vector3();
   const rearL = new THREE.Vector3(), rearR = new THREE.Vector3();
-  let curP = 0, lastP = 0, curVel = 0, prevT = performance.now(), raf = 0, glbAcc = 0;
+  let curP = 0, lastP = 0, curVel = 0, velSmooth = 0, prevT = performance.now(), raf = 0, glbAcc = 0;
 
   function progress() {
     const rect = wrap.getBoundingClientRect();
@@ -1970,9 +2016,14 @@ function boot() {
   }
 
   function step(dt, targetP, doRender) {
-    curP = smoothDamp(curP, targetP, 0.22, dt);
+    // Stronger critically-damped follow → the car glides into each milestone
+    // instead of tracking raw scroll pixel-for-pixel (which reads as jitter).
+    curP = smoothDamp(curP, targetP, 0.32, dt);
     const vel = Math.abs(curP - lastP) / Math.max(dt, 0.0001);
     lastP = curP;
+    // Low-pass the velocity so drift intensity + engine audio don't flicker
+    // frame-to-frame on uneven scroll.
+    velSmooth += (vel - velSmooth) * Math.min(1, dt * 4);
 
     const p = Math.min(Math.max(curP, 0.0002), 0.9998);
     const carT = p * DRIVE_END;
@@ -1984,7 +2035,7 @@ function boot() {
     while (dH > Math.PI) dH -= 2 * Math.PI;
     while (dH < -Math.PI) dH += 2 * Math.PI;
     const driftSign = Math.sign(dH) || 1;
-    const drift = Math.min(1, Math.abs(dH) * 9 * (0.45 + Math.min(1, vel * 1.4)));
+    const drift = Math.min(1, Math.abs(dH) * 9 * (0.45 + Math.min(1, velSmooth * 1.4)));
 
     carRig.position.copy(pos);
     carRig.position.y += 0.02;
@@ -2020,7 +2071,7 @@ function boot() {
     for (const m of markers) { m.userData.spin.rotation.y += dt * 0.8; }
 
     syncOverlay(curP);
-    audio.update(doRender && vel > 0.012, dt);
+    audio.update(doRender && velSmooth > 0.012, dt);
 
     if (doRender) { if (composer) composer.render(); else renderer.render(scene, camera); }
   }
@@ -2322,6 +2373,24 @@ scrollCbs.push(y=>{
 document.getElementById('navBtn').addEventListener('click',()=>{document.getElementById('mobMenu').classList.add('open')});
 document.getElementById('mobClose').addEventListener('click',()=>{document.getElementById('mobMenu').classList.remove('open')});
 document.querySelectorAll('.mob-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open')));
+
+// ===== THEME TOGGLE (dark mode) =====
+// data-theme is already set pre-paint by the boot script in <head>. Here we
+// just sync the icon and let the button flip + persist the choice.
+(function(){
+    const root=document.documentElement, btn=document.getElementById('themeToggle');
+    if(!btn)return;
+    const syncIcon=()=>{const dark=root.dataset.theme==='dark';btn.innerHTML=dark?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';};
+    syncIcon();
+    btn.addEventListener('click',()=>{
+        const next=root.dataset.theme==='dark'?'light':'dark';
+        root.dataset.theme=next;
+        localStorage.setItem('theme',next);
+        syncIcon();
+        // let the 3D scenes recolour to match (night sky / headlights)
+        window.dispatchEvent(new CustomEvent('themechange',{detail:next}));
+    });
+})();
 
 // ===== GLOW CARD =====
 document.querySelectorAll('.gc').forEach(c=>{
@@ -2650,6 +2719,15 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   const canvas  = document.getElementById('desertCanvas');
   const section = document.getElementById('contact');
   if (!canvas || !section) return;
+
+  // On phones the background 3D model is barely visible behind the form, so
+  // skip the whole GLB fetch + render loop to save GPU/battery/bandwidth.
+  // #contact has its own solid background (see neo-brutal.css), so hiding the
+  // canvas just leaves a clean section.
+  if (window.matchMedia('(max-width: 760px), (pointer: coarse)').matches) {
+    canvas.style.display = 'none';
+    return;
+  }
 
   // ── Baked config (tuned via control panel, now finalised) ──
   const cfg = {
