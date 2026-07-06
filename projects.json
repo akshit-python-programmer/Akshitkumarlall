@@ -1,0 +1,212 @@
+[
+  {
+    "num": "01",
+    "level": "HIGHLY ADVANCED · CLIENT WORK",
+    "badge": "PAID CLIENT PROJECT",
+    "client": "Client: startrek23 (UK Real Estate)",
+    "title": "AI Property Auto-Furnish Image Generator",
+    "desc": "Built a production AI system for a real UK real estate client that takes <strong>empty room photographs</strong> and automatically generates <strong>photorealistic fully-furnished versions</strong> using generative deep learning models.<br><br>The system handles bedrooms, kitchens, bathrooms, and living rooms — producing staging-quality outputs that replace thousands of dollars in physical staging costs. This was a <strong>fully paid client deliverable</strong> built end-to-end: from model training to processing pipeline to final delivery.",
+    "stack": ["Python", "Deep Learning", "Stable Diffusion", "OpenCV", "PIL", "Image Processing"],
+    "badges": [
+      { "ic": "fas fa-briefcase", "t": "PAID CLIENT" },
+      { "ic": "fas fa-globe", "t": "UK REAL ESTATE" },
+      { "ic": "fas fa-robot", "t": "GENERATIVE AI" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4",
+    "gallery": [
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-4.JPG", "label": "BEFORE — EMPTY ROOM" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-4.jpg", "label": "AFTER — AI FURNISHED" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-22.JPG", "label": "BEFORE — BEDROOM 2" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-22.jpg", "label": "AFTER — BEDROOM 2 FURNISHED" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-6.JPG", "label": "BEFORE — LIVING ROOM" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-6 (2).jpg", "label": "AFTER — LIVING ROOM FURNISHED" },
+      { "type": "vid", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4", "label": "KITCHEN DEMO" },
+      { "type": "vid", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/bathroom.mp4", "label": "BATHROOM DEMO" },
+      { "type": "vid", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/single bedroom.mp4", "label": "BEDROOM DEMO" }
+    ]
+  },
+  {
+    "num": "02",
+    "level": "ADVANCED · COMPUTER VISION + AI",
+    "badge": "ADVANCED",
+    "title": "Full Match Ball Tracker & Score Analyzer",
+    "desc": "Complete end-to-end computer vision pipeline that tracks every player on the pitch, follows the ball in real-time, keeps team scores, and provides tactical analysis.<br><br>Uses <strong>YOLOv8</strong> for player and ball detection, with custom tracking algorithms for identity persistence across frames even through occlusion. A full analytics overlay renders bounding boxes, player IDs, ball trajectory, and live score — processed at real-time speeds.",
+    "stack": ["Python", "YOLOv8", "OpenCV", "TensorFlow", "NumPy", "Real-Time Processing"],
+    "badges": [
+      { "ic": "fas fa-eye", "t": "COMPUTER VISION" },
+      { "ic": "fas fa-chart-line", "t": "ANALYTICS" },
+      { "ic": "fas fa-bolt", "t": "REAL-TIME" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[advanced]full football team score ball tracker and analyzer.mp4",
+    "gallery": []
+  },
+  {
+    "num": "03",
+    "level": "ADVANCED · AI + POSE ESTIMATION",
+    "badge": "ADVANCED",
+    "title": "Sports Activity Recognition, Analyzer & Classifier",
+    "desc": "Complex end-to-end system that recognizes and classifies <strong>12+ exercises</strong> in real-time: push-ups, squats, bicep curls, bench press, dips, pull-ups, shoulder press, pectoral flies, rowing, and more.<br><br>Uses <strong>MediaPipe</strong> for skeletal pose estimation, feeding joint angles and velocities into a custom-trained classifier. Counts reps, evaluates form quality, and provides real-time coaching feedback. One of my most technically demanding builds — handling variable body types, camera angles, and exercise variations.",
+    "stack": ["Python", "MediaPipe", "TensorFlow", "OpenCV", "Pose Estimation", "ML Classification"],
+    "badges": [
+      { "ic": "fas fa-dumbbell", "t": "12+ EXERCISES" },
+      { "ic": "fas fa-brain", "t": "AI CLASSIFICATION" },
+      { "ic": "fas fa-person-running", "t": "POSE ESTIMATION" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/pushups1.mp4",
+    "gallery": [
+      { "type": "vid", "src": "assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/squats.mp4", "label": "SQUATS" },
+      { "type": "vid", "src": "assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/bicep.mp4", "label": "BICEP CURLS" },
+      { "type": "vid", "src": "assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/benchpress.mp4", "label": "BENCH PRESS" },
+      { "type": "vid", "src": "assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/dips.mp4", "label": "DIPS" },
+      { "type": "vid", "src": "assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/pullups.mp4", "label": "PULL-UPS" },
+      { "type": "vid", "src": "assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/topshoulderpress.mp4", "label": "SHOULDER PRESS" }
+    ]
+  },
+  {
+    "num": "04",
+    "level": "COMPLEX · 3D GAME ENGINE",
+    "badge": "COMPLEX",
+    "title": "Squid Game 3D — Full Game in Python",
+    "desc": "Full 3D recreation of the Squid Game \"Red Light, Green Light\" challenge built <strong>entirely in Python</strong> using the Ursina engine. Features 3D character models, real-time motion detection mechanics, custom shaders, dynamic lighting, and a complete game loop with scoring and elimination logic.<br><br>Demonstrates that Python can power real, visually rich 3D games — not just scripts.",
+    "stack": ["Python", "Ursina Engine", "3D Rendering", "Game Physics", "Custom Shaders"],
+    "badges": [
+      { "ic": "fas fa-gamepad", "t": "3D GAME" },
+      { "ic": "fab fa-python", "t": "PYTHON" },
+      { "ic": "fas fa-cube", "t": "3D ENGINE" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[complex]squid game 3d made using ursina python.mp4",
+    "gallery": []
+  },
+  {
+    "num": "05",
+    "level": "MEDIUM · AI / SURVEILLANCE",
+    "badge": "MEDIUM",
+    "title": "Real-Time Violence Detection System",
+    "desc": "AI-powered real-time violence detection system that analyzes live video streams and classifies violent behavior using deep learning <strong>CNNs trained on custom datasets</strong>.<br><br>Processes video frames through a temporal analysis pipeline to reduce false positives. Designed for security and surveillance applications with real-time alerting. The system distinguishes between violent and non-violent motion patterns even in crowded scenes.",
+    "stack": ["Python", "TensorFlow", "OpenCV", "CNN", "Video Classification", "Temporal Analysis"],
+    "badges": [
+      { "ic": "fas fa-shield-halved", "t": "SURVEILLANCE AI" },
+      { "ic": "fas fa-video", "t": "VIDEO ANALYSIS" },
+      { "ic": "fas fa-brain", "t": "DEEP LEARNING" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[medium]voilence detection using python.mp4",
+    "gallery": []
+  },
+  {
+    "num": "06",
+    "level": "MEDIUM · COMPUTER VISION",
+    "badge": "MEDIUM",
+    "title": "Document Scanner with Full GUI",
+    "desc": "Desktop document scanner application with a <strong>complete GUI interface</strong>. Uses OpenCV for edge detection, perspective transformation, and adaptive thresholding to produce clean, flat scans from angled photos taken with any camera.<br><br>The Tkinter GUI supports drag-and-drop, real-time edge preview, manual corner adjustment, and multi-format export. Handles documents, receipts, handwritten notes, and books.",
+    "stack": ["Python", "OpenCV", "Tkinter", "Image Processing", "Perspective Transform"],
+    "badges": [
+      { "ic": "fas fa-file-image", "t": "DOCUMENT SCANNER" },
+      { "ic": "fas fa-desktop", "t": "FULL GUI" },
+      { "ic": "fas fa-eye", "t": "EDGE DETECTION" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[medium] document scanner with full GUI.mp4",
+    "gallery": []
+  },
+  {
+    "num": "07",
+    "level": "MEDIUM · WEB / CLIENT WORK",
+    "badge": "PAID CLIENT PROJECT",
+    "title": "Client Website — Full Build",
+    "desc": "Complete responsive website designed and built from scratch for a <strong>paying client</strong>. Features smooth animations, modern UI/UX design, full mobile optimization, and cross-browser compatibility.<br><br>Delivered as a production client project with clean code, optimized assets, and full documentation. Demonstrates ability to handle real client requirements, revisions, and professional delivery.",
+    "stack": ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Animations", "Performance Optimization"],
+    "badges": [
+      { "ic": "fas fa-briefcase", "t": "CLIENT WORK" },
+      { "ic": "fas fa-mobile-alt", "t": "RESPONSIVE" },
+      { "ic": "fas fa-paint-brush", "t": "MODERN UI" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[medium]client website-1.mp4",
+    "gallery": []
+  },
+  {
+    "num": "08",
+    "level": "ADVANCED · COMPUTER VISION",
+    "badge": "ADVANCED",
+    "title": "Face Segmentizer — Auto Passport Photo Generator",
+    "desc": "Automated passport photo generator that detects faces, <strong>segments them from any background</strong> using deep learning segmentation models, crops precisely to standard passport dimensions, applies regulatory compliance checks, and outputs print-ready images.<br><br>Handles varying lighting conditions, backgrounds, face angles, and expressions. Can batch-process multiple images automatically.",
+    "stack": ["Python", "OpenCV", "Deep Learning", "Image Segmentation", "PIL", "Face Detection"],
+    "badges": [
+      { "ic": "fas fa-id-card", "t": "PASSPORT PHOTO" },
+      { "ic": "fas fa-cut", "t": "SEGMENTATION" },
+      { "ic": "fas fa-face-smile", "t": "FACE DETECTION" }
+    ],
+    "mainType": "img",
+    "main": "assets/my projects/[advanced[face sementizer for automatch passport image generator.png",
+    "gallery": []
+  },
+  {
+    "num": "09",
+    "level": "ADVANCED · GAME DEVELOPMENT",
+    "badge": "ADVANCED",
+    "title": "Multiplayer Platformer — Pygame + Networking",
+    "desc": "Complete 2D platformer game with <strong>real-time multiplayer networking</strong> over Python sockets. Features custom sprite animation, tile-based level design from a level editor, collectible items, enemy AI with pathfinding, a custom physics engine, and synchronized multiplayer gameplay.<br><br>Players can join or host games over a local network. Demonstrates deep understanding of game architecture, network programming, and Python performance optimization.",
+    "stack": ["Python", "Pygame", "Sockets", "Networking", "Physics Engine", "Sprite Animation"],
+    "badges": [
+      { "ic": "fas fa-gamepad", "t": "MULTIPLAYER" },
+      { "ic": "fas fa-network-wired", "t": "NETWORKING" },
+      { "ic": "fas fa-running", "t": "PLATFORMER" }
+    ],
+    "mainType": "img",
+    "main": "assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png",
+    "gallery": []
+  },
+  {
+    "num": "10",
+    "level": "GRAPHICS · GPU RENDERING",
+    "badge": "GRAPHICS",
+    "title": "OpenGL 3D Rendering Demo",
+    "desc": "3D graphics rendering system built with OpenGL and Python. Features <strong>real-time 3D object rendering</strong>, camera controls, dynamic lighting with multiple light sources, and custom GLSL shader implementation.<br><br>Demonstrates fundamental understanding of the graphics pipeline, vertex/fragment shaders, transformation matrices, and GPU-accelerated rendering — the foundation of all real-time 3D graphics.",
+    "stack": ["Python", "OpenGL", "GLSL Shaders", "PyOpenGL", "Linear Algebra", "GPU Programming"],
+    "badges": [
+      { "ic": "fas fa-cube", "t": "3D RENDERING" },
+      { "ic": "fas fa-bolt", "t": "GPU ACCELERATED" },
+      { "ic": "fas fa-code", "t": "CUSTOM SHADERS" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[basic] opengl demo.mp4",
+    "gallery": []
+  },
+  {
+    "num": "11",
+    "level": "COMPUTER VISION · REAL-TIME",
+    "badge": "CV",
+    "title": "Real-Time Motion Detection",
+    "desc": "Real-time motion detection system using OpenCV with <strong>frame differencing, Gaussian blur, threshold-based contour detection</strong>, and bounding box visualization on live webcam feeds.<br><br>Features configurable sensitivity, motion zone selection, and visual alerting. Runs efficiently on standard hardware with minimal CPU usage. This was the foundational project that led to the more complex sports and surveillance systems.",
+    "stack": ["Python", "OpenCV", "NumPy", "Real-Time Processing", "Contour Detection"],
+    "badges": [
+      { "ic": "fas fa-eye", "t": "REAL-TIME CV" },
+      { "ic": "fas fa-wave-square", "t": "MOTION ANALYSIS" },
+      { "ic": "fas fa-bolt", "t": "60+ FPS" }
+    ],
+    "mainType": "video",
+    "main": "assets/my projects/[basic]motion_detection.mp4",
+    "gallery": []
+  },
+  {
+    "num": "12",
+    "level": "COMPUTER VISION · POSE",
+    "badge": "CV · AI",
+    "title": "Human Pose Estimation",
+    "desc": "Real-time human pose estimation and <strong>33-point skeletal tracking</strong> using MediaPipe Pose and OpenCV. Detects body landmarks including joints, connects them into a full skeleton overlay rendered over the live camera feed.<br><br>This project was the foundation for the Sports Activity Recognition system — understanding pose data, joint angles, and velocity vectors before building the full classifier on top.",
+    "stack": ["Python", "MediaPipe", "OpenCV", "Pose Estimation", "NumPy", "Landmark Detection"],
+    "badges": [
+      { "ic": "fas fa-person", "t": "33 LANDMARKS" },
+      { "ic": "fas fa-eye", "t": "REAL-TIME" },
+      { "ic": "fas fa-layer-group", "t": "FOUNDATION PROJECT" }
+    ],
+    "mainType": "img",
+    "main": "assets/my projects/[basic]pose estimation 2 .png",
+    "gallery": []
+  }
+]
