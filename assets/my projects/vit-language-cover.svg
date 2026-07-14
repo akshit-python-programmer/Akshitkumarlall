@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="'IBM Plex Mono','JetBrains Mono',monospace">
+  <rect width="800" height="600" fill="#0e0e16"/>
+  <rect x="60" y="60" width="680" height="480" fill="#12121c" stroke="#2a2a3a" stroke-width="2"/>
+  <circle cx="92" cy="92" r="7" fill="#ffe066"/>
+  <circle cx="116" cy="92" r="7" fill="#06d6a0"/>
+  <circle cx="140" cy="92" r="7" fill="#3a3a4a"/>
+  <text x="100" y="200" font-size="96" font-weight="700" fill="#ffe066">vit</text>
+  <text x="100" y="248" font-size="20" fill="#9aa0a8">an interpreted language, built from nothing</text>
+  <text x="100" y="330" font-size="22" fill="#e4e6ea">$ vit run hello.vit</text>
+  <text x="100" y="372" font-size="22" fill="#06d6a0">&gt; lexer ......... ok</text>
+  <text x="100" y="414" font-size="22" fill="#06d6a0">&gt; parser ........ ok</text>
+  <text x="100" y="456" font-size="22" fill="#06d6a0">&gt; executer ...... ok</text>
+  <text x="100" y="500" font-size="22" fill="#ffe066">hello, world</text>
+</svg>

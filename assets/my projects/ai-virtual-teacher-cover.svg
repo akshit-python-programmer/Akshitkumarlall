@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="'IBM Plex Mono','JetBrains Mono',monospace">
+  <rect width="800" height="600" fill="#0e0e16"/>
+  <rect x="60" y="60" width="680" height="480" fill="#12121c" stroke="#2a2a3a" stroke-width="2"/>
+  <rect x="60" y="60" width="680" height="52" fill="#1a1a28"/>
+  <text x="88" y="94" font-size="20" fill="#9aa0a8">AI VIRTUAL TEACHER — 2021</text>
+  <text x="88" y="180" font-size="40" font-weight="700" fill="#e4e6ea">a voice "video call"</text>
+  <text x="88" y="222" font-size="20" fill="#9aa0a8">built at 14 · preserved as originally written</text>
+  <text x="88" y="310" font-size="22" fill="#06d6a0">[mic]    listening...</text>
+  <text x="88" y="352" font-size="22" fill="#e4e6ea">[intent] matched question</text>
+  <text x="88" y="394" font-size="22" fill="#06d6a0">[tts]    speaking...</text>
+  <text x="88" y="470" font-size="22" fill="#ffe066">&gt; processes passing messages via .akl files</text>
+</svg>

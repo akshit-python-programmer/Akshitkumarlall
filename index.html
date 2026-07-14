@@ -149,7 +149,7 @@
     #skills>.s-max{position:relative;z-index:1}
     /* Glowing 3D depth-wall of tech icons behind the content (populated by JS) */
     .skills-fx{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-    .skills-fx::before{content:'';position:absolute;inset:0;background:radial-gradient(58% 50% at 50% 40%,rgba(120,150,255,.06),transparent 70%)}
+    .skills-fx::before{content:'';position:absolute;inset:0;background:radial-gradient(58% 50% at 50% 40%,rgba(6,214,160,.06),transparent 70%)}
     .sfx-ic{position:absolute;width:var(--sz,40px);height:var(--sz,40px);object-fit:contain;opacity:var(--op,.18);
         filter:blur(var(--bl,0)) drop-shadow(0 0 14px rgba(120,170,255,.5));
         will-change:transform;animation:sfxFloat var(--dur,9s) ease-in-out infinite;animation-delay:var(--dly,0s)}
@@ -158,8 +158,11 @@
     .skills-header{margin-bottom:72px}
     .skills-header h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:14px}
     .skills-header p{font-size:1.05rem;color:var(--fg3);line-height:1.75;max-width:540px}
-    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
-    .sk-card{background:var(--bg);padding:40px 32px;transition:background .3s,transform .4s var(--ease)}
+    .skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+    .sk-card{background:var(--bg);padding:40px 28px;transition:background .3s,transform .4s var(--ease);min-width:0}
+    .sk-also{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:28px;padding:18px 22px;border:1px solid var(--border)}
+    .sk-also-lbl{font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.14em;color:var(--fg3);margin-right:8px}
+    .sk-also-cap{font-family:var(--mono);font-size:.8rem;color:var(--fg3);line-height:1.7;margin-top:12px;padding-left:2px}
     .sk-card:hover{background:var(--bg2)}
     .sk-ic{font-size:2rem;margin-bottom:20px;display:block;transition:transform .4s var(--ease)}
     .sk-card:hover .sk-ic{transform:translateY(-5px) scale(1.12)}
@@ -187,8 +190,9 @@
     .ph{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:46px;flex-wrap:wrap;gap:32px}
     .ph-left{max-width:640px}
     .ph-left .s-label{color:rgba(255,255,255,.5);font-family:var(--font-code);align-items:center}
-    .ph-left .s-label::before{background:linear-gradient(90deg,#8b7bff,#4dd4ff)}
-    .ph-kicker-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4dd4ff;box-shadow:0 0 10px #4dd4ff;animation:blink 1.4s infinite}
+    .ph-left .s-label::before{background:#06d6a0}
+    .ph-showing{font-family:var(--font-code);font-size:.66rem;letter-spacing:.1em;color:rgba(255,255,255,.42);margin-top:14px}
+    .ph-kicker-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#06d6a0;box-shadow:0 0 10px #06d6a0;animation:blink 1.4s infinite}
     .ph-left h2{font-size:clamp(2.8rem,7vw,5.6rem);font-weight:900;letter-spacing:-.05em;line-height:.92;margin-top:14px;
         background:linear-gradient(100deg,#fff 18%,#bcb4ff 38%,#8be9ff 52%,#fff 72%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:projSheen 7s linear infinite}
     @keyframes projSheen{to{background-position:240% 0}}
@@ -203,7 +207,7 @@
     .pfb{position:relative;font-family:var(--font-code);font-size:.6rem;font-weight:600;letter-spacing:.12em;padding:11px 20px;border:1px solid rgba(255,255,255,.14);border-radius:40px;background:rgba(255,255,255,.03);color:rgba(255,255,255,.55);cursor:var(--cur-point);transition:color .3s,border-color .3s,background .3s,transform .2s,box-shadow .3s}
     .pfb .cnt{opacity:.5;margin-left:7px;font-size:.92em}
     .pfb:hover{border-color:rgba(255,255,255,.4);color:#fff;transform:translateY(-2px)}
-    .pfb.active{background:linear-gradient(100deg,#8b7bff,#4dd4ff);color:#06060a;border-color:transparent;box-shadow:0 10px 28px -8px rgba(77,212,255,.7)}
+    .pfb.active{background:var(--neo-yellow,#fff3a8);color:#06060a;border-color:transparent;box-shadow:0 10px 28px -8px rgba(255,243,168,.6)}
     .pfb.active .cnt{opacity:.8}
 
     /* Bento grid */
@@ -217,15 +221,15 @@
     /* Card base */
     .bc{position:relative;overflow:hidden;cursor:var(--cur-point);border-radius:16px;background:#0e0e16;isolation:isolate;
         box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 14px 30px -18px rgba(0,0,0,.9);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
-    .bc:hover{transform:translateY(-7px);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5),0 30px 60px -22px rgba(0,0,0,.95),0 0 50px -14px var(--glow,#8b7bff)}
+    .bc:hover{transform:translateY(-7px);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5),0 30px 60px -22px rgba(0,0,0,.95),0 0 50px -14px var(--glow,#06d6a0)}
     .bc-featured{grid-column:span 2;grid-row:span 2}
     .bc-hidden{display:none}
-    .bc:nth-child(6n+1){--glow:#8b7bff}
-    .bc:nth-child(6n+2){--glow:#4dd4ff}
-    .bc:nth-child(6n+3){--glow:#ff6ec4}
-    .bc:nth-child(6n+4){--glow:#5eead4}
-    .bc:nth-child(6n+5){--glow:#ffb347}
-    .bc:nth-child(6n+6){--glow:#a78bfa}
+    .bc:nth-child(6n+1){--glow:#ffe066}
+    .bc:nth-child(6n+2){--glow:#06d6a0}
+    .bc:nth-child(6n+3){--glow:#ffffff}
+    .bc:nth-child(6n+4){--glow:#ffe066}
+    .bc:nth-child(6n+5){--glow:#06d6a0}
+    .bc:nth-child(6n+6){--glow:#ffffff}
 
     /* cursor spotlight */
     .bc::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .4s;
@@ -242,7 +246,7 @@
 
     /* Animated gradient ring on hover */
     .bc-frame{position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:inherit;padding:1.5px;
-        background:conic-gradient(from var(--a),transparent 0%,var(--glow,#8b7bff) 16%,#fff 26%,transparent 42%,transparent 100%);
+        background:conic-gradient(from var(--a),transparent 0%,var(--glow,#06d6a0) 16%,#fff 26%,transparent 42%,transparent 100%);
         -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .45s}
     .bc:hover .bc-frame{opacity:.95;animation:bcSpin 3.2s linear infinite}
     @keyframes bcSpin{to{--a:360deg}}
@@ -260,15 +264,15 @@
     /* Badge */
     .bc-badge{position:absolute;top:14px;right:14px;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-code);font-size:.5rem;font-weight:600;letter-spacing:.14em;padding:6px 11px;z-index:5;border-radius:30px;background:rgba(255,255,255,.92);color:#0a0a0a}
     .bc-badge.accent{background:rgba(255,255,255,.08);color:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.2)}
-    .bc-badge.paid{background:linear-gradient(100deg,#8b7bff,#4dd4ff);color:#06060a}
+    .bc-badge.paid{background:var(--neo-yellow,#fff3a8);color:#06060a}
     .bc-badge-dot{width:6px;height:6px;border-radius:50%;background:#06d6a0;animation:badgePulse 1.8s infinite}
     @keyframes badgePulse{0%{box-shadow:0 0 0 0 rgba(6,214,160,.6)}70%{box-shadow:0 0 0 7px rgba(6,214,160,0)}100%{box-shadow:0 0 0 0 rgba(6,214,160,0)}}
 
     /* Content */
     .bc-content{position:absolute;bottom:0;left:0;right:0;padding:20px 20px 22px;z-index:5}
     .bc-featured .bc-content{padding:30px 30px 32px}
-    .bc-level{display:flex;align-items:center;gap:8px;font-family:var(--font-code);font-size:.56rem;letter-spacing:.16em;color:var(--glow,#9b8cff);margin-bottom:9px;text-shadow:0 0 14px var(--glow,#9b8cff)}
-    .bc-dot{width:5px;height:5px;border-radius:50%;background:var(--glow,#9b8cff);box-shadow:0 0 8px var(--glow,#9b8cff);flex-shrink:0}
+    .bc-level{display:flex;align-items:center;gap:8px;font-family:var(--font-code);font-size:.56rem;letter-spacing:.16em;color:var(--glow,#06d6a0);margin-bottom:9px;text-shadow:0 0 14px var(--glow,#06d6a0)}
+    .bc-dot{width:5px;height:5px;border-radius:50%;background:var(--glow,#06d6a0);box-shadow:0 0 8px var(--glow,#06d6a0);flex-shrink:0}
     .bc-title{font-size:1.05rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.22;margin-bottom:10px}
     .bc-featured .bc-title{font-size:1.55rem}
     .bc-blurb{font-size:.78rem;color:rgba(255,255,255,.62);line-height:1.55;margin-bottom:12px;max-height:0;opacity:0;overflow:hidden;transition:max-height .45s var(--ease),opacity .4s,margin .4s}
@@ -367,6 +371,9 @@
     .pm-st:hover{border-color:var(--fg);color:var(--fg)}
     .pm-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:24px;border-top:1px solid var(--border)}
     .pm-badge{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;padding:6px 14px;background:var(--dark);color:white;display:flex;align-items:center;gap:7px}
+    .pm-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .pm-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.12em;text-decoration:none;color:var(--fg);border:2px solid var(--fg);padding:11px 18px;transition:background .25s,color .25s}
+    .pm-link:hover{background:var(--fg);color:var(--bg)}
     .pm-badge.outline{background:transparent;color:var(--fg);border:1.5px solid var(--border2)}
 
     /* ===== AWARDS ===== */
@@ -391,6 +398,10 @@
     .aw-badges{display:flex;gap:10px;flex-wrap:wrap}
     .aw-badge{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;padding:8px 16px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);display:flex;align-items:center;gap:8px;transition:all .3s}
     .aw-entry:hover .aw-badge{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
+    .aw-cert-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .aw-cert-link{display:inline-flex;align-items:center;gap:9px;margin-top:16px;font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.12em;text-decoration:none;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:10px 16px;transition:background .25s,color .25s,border-color .25s}
+    .aw-cert-row .aw-cert-link{margin-top:0}
+    .aw-cert-link:hover{background:#fff;color:#06060a;border-color:#fff}
     .aw-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:80px;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
     .aw-stat{padding:36px 32px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
     .aw-stat:last-child{border-right:none}
@@ -436,9 +447,6 @@
     .ngen-mod.active{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.45);box-shadow:0 0 20px rgba(34,197,94,.15)}
     .ngen-mod.active i,.ngen-mod.active span{color:#4ade80}
     .ngen-mod.active span{font-weight:700}
-    .patent-badge{position:absolute;top:64px;left:24px;z-index:5;width:110px;height:110px;padding:14px;background:transparent;border:0;display:flex;align-items:center;justify-content:center;border-radius:16px;box-shadow:none;transition:transform .35s ease}
-    .patent-badge img{width:200%;height:200%;object-fit:contain}
-    .patent-badge:hover{transform:translateY(-2px) scale(1.02)}
     .innov-scene{border:3px solid rgba(255,255,255,.15);box-shadow:12px 12px 0 rgba(255,255,255,.06)}
     .program-stack{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
     .ngc-chip{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid rgba(15,23,42,.12);border-radius:999px;background:rgba(255,255,255,.94);color:var(--dark);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;transition:all .3s;box-shadow:0 10px 35px rgba(15,23,42,.06)}
@@ -452,22 +460,15 @@
     .aw-more-card{padding:24px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);display:flex;flex-direction:column;gap:12px}
     .aw-more-icon{font-size:1.6rem;display:inline-flex}
     /* Neon-glow contact pill: rotating gradient border + soft pulsing aura */
-    @property --qc-a{syntax:'<angle>';inherits:false;initial-value:0deg}
-    @keyframes qcSpin{to{--qc-a:360deg}}
-    @keyframes qcPulse{0%,100%{opacity:.32}50%{opacity:.6}}
-    .quick-contact{position:fixed;right:22px;bottom:24px;z-index:10050;padding:17px 30px;color:#fff;font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-decoration:none;border-radius:999px;cursor:var(--cur-point);
-        border:1.6px solid transparent;
-        background:linear-gradient(#0a0a0a,#0a0a0a) padding-box,
-                   conic-gradient(from var(--qc-a),#6d5cff,#b14bff,#ff5db1,#5b8cff,#6d5cff) border-box;
-        box-shadow:0 10px 34px rgba(0,0,0,.45);
-        animation:qcSpin 5s linear infinite;
-        transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
-    .quick-contact::before{content:'';position:absolute;inset:-5px;border-radius:inherit;z-index:-1;pointer-events:none;
-        background:linear-gradient(90deg,#6d5cff,#b14bff,#ff5db1,#5b8cff);
-        filter:blur(18px);opacity:.4;animation:qcPulse 3s ease-in-out infinite}
-    .quick-contact:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 46px rgba(150,90,255,.45)}
-    .quick-contact:hover::before{opacity:.85;filter:blur(22px)}
-    @media(prefers-reduced-motion:reduce){.quick-contact,.quick-contact::before{animation:none}}
+    /* CTA-exclusive purple: this pill + the contact submit button, nowhere else.
+       Slapped-on sticker: thickest border + biggest hard shadow on the page. */
+    .quick-contact{position:fixed;right:22px;bottom:24px;z-index:10050;padding:16px 28px;color:#fff;font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.16em;text-decoration:none;border-radius:999px;cursor:var(--cur-point);
+        background:var(--neo-purple,#7c5cff);
+        border:4px solid var(--neo-black,#0a0a0a);
+        box-shadow:8px 8px 0 var(--neo-shadow-color,#0a0a0a);
+        transform:rotate(-2deg);
+        transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+    .quick-contact:hover{transform:rotate(0deg) translate(-2px,-2px);box-shadow:11px 11px 0 var(--neo-shadow-color,#0a0a0a)}
     @media(max-width:720px){.aw-more-grid{grid-template-columns:1fr}.quick-contact{right:16px;bottom:16px;width:calc(100% - 32px);text-align:center}}
     .scene-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
     .sr{position:absolute;border-radius:50%;border:1px solid rgba(34,197,94,.08);animation:ringp 3.5s ease-in-out infinite}
@@ -508,9 +509,10 @@
     .f-inp,.f-ta{background:var(--bg);border:1px solid var(--border);color:var(--fg);padding:14px 18px;font-family:var(--sans);font-size:.92rem;outline:none;width:100%;transition:border-color .3s,box-shadow .3s}
     .f-inp:focus,.f-ta:focus{border-color:var(--fg);box-shadow:0 0 0 3px rgba(0,0,0,.04)}
     .f-ta{resize:vertical;min-height:120px}
-    .f-sub{width:100%;padding:16px;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;border:none;cursor:var(--cur-point);transition:box-shadow .3s;position:relative;overflow:hidden}
-    .f-sub::before{content:'';position:absolute;inset:0;background:var(--fg2);transform:translateX(-101%);transition:transform .45s cubic-bezier(.77,0,.175,1)}
-    .f-sub:hover::before{transform:translateX(0)}.f-sub:hover{box-shadow:0 10px 40px rgba(0,0,0,.2)}
+    /* CTA-exclusive purple (see .quick-contact) */
+    .f-sub{width:100%;padding:16px;background:var(--neo-purple,#7c5cff);color:#fff;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.12em;border:3px solid var(--neo-black,#0a0a0a);box-shadow:5px 5px 0 var(--neo-shadow-color,#0a0a0a);cursor:var(--cur-point);transition:transform .2s var(--ease),box-shadow .2s var(--ease);position:relative;overflow:hidden}
+    .f-sub::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.18);transform:translateX(-101%);transition:transform .45s cubic-bezier(.77,0,.175,1)}
+    .f-sub:hover::before{transform:translateX(0)}.f-sub:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--neo-shadow-color,#0a0a0a)}
     .f-sub span{position:relative;z-index:1}
 
     /* Footer */
@@ -661,11 +663,9 @@
         .jc{min-width:300px}
     }
     @media(max-width:768px){
-        /* Mobile tweaks for Next Gen Camera console, patent badge, and scene label */
+        /* Mobile tweaks for Next Gen Camera console and scene label */
         .innov-scene{aspect-ratio:auto;padding:72px 16px 40px;height:auto}
-        .patent-badge{top:12px;right:auto;left:12px;width:56px;height:56px;padding:6px;border-radius:12px}
         .scene-badge{top:12px;right:12px;padding:6px 10px;font-size:.5rem;max-width:40%;text-align:right}
-        .patent-badge img{width:100%;height:100%;object-fit:contain;}
 
         .ngen-modules{grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:6px}
         .ngen-mod{min-height:60px;padding:6px;border-radius:8px}
@@ -709,9 +709,10 @@
 <nav id="nav">
     <a href="#home" class="nav-logo">AKL_</a>
     <ul class="nav-links">
+        <li><a href="#projects">PROJECTS</a></li>
         <li><a href="#about">ABOUT</a></li>
-        <li><a href="#projects">WORK</a></li>
-        <li><a href="#awards">JOURNEY</a></li>
+        <li><a href="#awards">AWARDS</a></li>
+        <li><a href="#journey">JOURNEY</a></li>
         <li><a href="#contact">CONTACT</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:8px">
@@ -721,7 +722,7 @@
 </nav>
 <div class="mob-menu" id="mobMenu">
     <button class="mob-close" id="mobClose"><i class="fas fa-times"></i></button>
-    <a href="#about">ABOUT</a><a href="#projects">WORK</a><a href="#awards">JOURNEY</a><a href="#contact">CONTACT</a>
+    <a href="#projects">PROJECTS</a><a href="#about">ABOUT</a><a href="#awards">AWARDS</a><a href="#journey">JOURNEY</a><a href="#contact">CONTACT</a>
 </div>
 
 <!-- HERO -->
@@ -740,23 +741,16 @@
                 <span class="nb-term-dots"><i></i><i></i><i></i></span>
                 <span class="nb-term-txt font-code">&gt;&nbsp;<span id="typed"></span><span class="caret"></span></span>
             </div>
-            <!-- <p class="nb-hero-statement">I build <strong>real software</strong> for <strong>real clients</strong> worldwide — computer vision, AI/ML, robotics, the full modern web stack &amp; 3D. Designed, shipped, working.</p> -->
-            <p class="nb-hero-bio">Building AI, CV, robotics, and full-stack solutions with real delivery.</p>
+            <p class="nb-hero-tagline">I build machines that see.</p>
+            <p class="nb-hero-sub font-code">Computer-vision-first builder — <strong>171 projects</strong> since class 6. Founder of <strong>AKL Technologies</strong>, putting AI into the physical world — and shipping full-stack products on the web.</p>
 
-            <div class="nb-chips">
-                <span class="nb-chip nb-c-pink">COMPUTER VISION</span>
-                <span class="nb-chip nb-c-mint">AI / ML</span>
-                <span class="nb-chip nb-c-yellow">ROBOTICS</span>
-                <span class="nb-chip nb-c-blue">FULL-STACK WEB</span>
-                <span class="nb-chip nb-c-lav">CAD · 3D</span>
-                <span class="nb-chip nb-c-coral">PYTHON</span>
-                <span class="nb-chip nb-c-yellow">BUSINESS STRATEGY</span>
-                <span class="nb-chip nb-c-redp">PRODUCT DEVELOPMENT</span>
-
+            <div class="nb-proof font-code">
+                <span class="nb-proof-item">171 PROJECTS BUILT</span>
+                <span class="nb-proof-item">AWARD-WINNING AI CAMERA</span>
+                <span class="nb-proof-item">50+ FIVERR CLIENTS · 5.0★</span>
             </div>
             <div class="nb-cta">
                 <a href="#projects" class="nb-btn nb-btn-dark"><span>VIEW PROJECTS</span> <i class="fas fa-arrow-right"></i></a>
-                <a href="#contact" class="nb-btn nb-btn-pink"><span>akshitkumarlal@gmail.com</span></a>
             </div>
         </div>
         <div class="nb-hero-side">
@@ -764,24 +758,369 @@
                 <img src="assets/me op.jpeg" alt="Akshit Kumar Lall">
                 <span class="nb-photo-tag font-pixel">AKL</span>
             </div>
-            <div class="nb-badge-float font-code"><strong>5+</strong> YEARS<br>BUILDING<br>SOFTWARE</div>
+            <div class="nb-badge-float font-code"><strong>AWARD</strong>WINNING ·<br>NEXT GEN<br>CAMERA</div>
         </div>
     </div>
 </section>
 
 <!-- Stats -->
 <div class="stats-strip rv">
-    <div class="stat-item"><span class="stat-num counter" data-t="100">0</span><span class="stat-label">PROJECTS DELIVERED</span></div>
-    <div class="stat-item"><span class="stat-num counter" data-t="50">0</span><span class="stat-label">CLIENTS WORLDWIDE</span></div>
+    <div class="stat-item"><span class="stat-num counter" data-t="171" data-sfx="">0</span><span class="stat-label">PROJECTS BUILT SINCE CLASS 6</span></div>
+    <div class="stat-item"><span class="stat-num counter" data-t="50">0</span><span class="stat-label">FIVERR CLIENTS · 5.0★</span></div>
 </div>
 
 <!-- Marquee -->
 <div class="marquee-wrap">
     <div class="marquee-track">
-        <span class="m-i">PYTHON</span><span class="m-i">C++</span><span class="m-i">OPENCV</span><span class="m-i">REACT</span><span class="m-i">DJANGO</span><span class="m-i">FLASK</span><span class="m-i">HTML · CSS · JS</span><span class="m-i">CAD</span><span class="m-i">3D DESIGN</span><span class="m-i">VIDEO EDITING</span><span class="m-i">COMPUTER VISION</span><span class="m-i">AI / ML</span><span class="m-i">MARKETING</span><span class="m-i">SAAS</span><span class="m-i">BUSINESS</span><span class="m-i">NEXT GEN CAMERA</span>
-        <span class="m-i">PYTHON</span><span class="m-i">C++</span><span class="m-i">OPENCV</span><span class="m-i">REACT</span><span class="m-i">DJANGO</span><span class="m-i">FLASK</span><span class="m-i">HTML · CSS · JS</span><span class="m-i">CAD</span><span class="m-i">3D DESIGN</span><span class="m-i">VIDEO EDITING</span><span class="m-i">COMPUTER VISION</span><span class="m-i">AI / ML</span><span class="m-i">MARKETING</span><span class="m-i">SAAS</span><span class="m-i">BUSINESS</span><span class="m-i">NEXT GEN CAMERA</span>
+        <span class="m-i">PYTHON</span><span class="m-i">C++</span><span class="m-i">OPENCV</span><span class="m-i">YOLO</span><span class="m-i">MEDIAPIPE</span><span class="m-i">PYTORCH</span><span class="m-i">REACT</span><span class="m-i">DJANGO</span><span class="m-i">FLASK</span><span class="m-i">FIREBASE</span><span class="m-i">FUSION 360</span><span class="m-i">ARDUINO</span><span class="m-i">EMBEDDED</span><span class="m-i">NEXT GEN CAMERA</span>
+        <span class="m-i">PYTHON</span><span class="m-i">C++</span><span class="m-i">OPENCV</span><span class="m-i">YOLO</span><span class="m-i">MEDIAPIPE</span><span class="m-i">PYTORCH</span><span class="m-i">REACT</span><span class="m-i">DJANGO</span><span class="m-i">FLASK</span><span class="m-i">FIREBASE</span><span class="m-i">FUSION 360</span><span class="m-i">ARDUINO</span><span class="m-i">EMBEDDED</span><span class="m-i">NEXT GEN CAMERA</span>
     </div>
 </div>
+
+<!-- ================================================================
+     PROJECT SHOWCASE — DARK BENTO GRID
+================================================================ -->
+<section id="projects">
+    <div class="s-max">
+
+        <!-- Header -->
+        <div class="ph rv">
+            <div class="ph-left">
+                <div class="s-label"><span class="ph-kicker-dot"></span>PORTFOLIO — SELECTED WORK</div>
+                <h2>Projects</h2>
+                <p>Selected work — hover for a live preview, click for the full case study.</p>
+                <p class="ph-showing font-code">SHOWING 18 OF 171 — the rest live on GitHub.</p>
+            </div>
+            <div class="ph-right">
+                <div class="ph-counter counter" data-t="171" data-sfx="">0</div>
+                <div class="ph-counter-sub">PROJECTS BUILT</div>
+            </div>
+        </div>
+
+        <!-- Filter -->
+        <div class="proj-filter rv">
+            <button class="pfb active" data-f="all">FEATURED <span class="cnt">18</span></button>
+            <button class="pfb" data-f="cv">COMPUTER VISION <span class="cnt">9</span></button>
+            <button class="pfb" data-f="ai">AI / ML <span class="cnt">9</span></button>
+            <button class="pfb" data-f="web">WEB / CLIENT <span class="cnt">3</span></button>
+            <button class="pfb" data-f="game">GAME / 3D <span class="cnt">3</span></button>
+        </div>
+
+        <!-- ============ BENTO GRID ============ -->
+        <div class="bento rv" id="bentoGrid">
+            <!-- 12: Next Gen Camera (flagship) -->
+            <div class="bc bc-featured" data-id="12" data-cat="cv ai" style="--i:0">
+                <img src="assets/next gen camera/robber detection.png" alt="Next Gen Camera System">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">01</div>
+                <div class="bc-badge paid"><span class="bc-badge-dot"></span>FLAGSHIP · 4 AWARDS</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>AI SECURITY · 5 DETECTION MODULES</div>
+                    <h3 class="bc-title">Next Gen Camera System</h3>
+                    <p class="bc-blurb">An AI security layer for existing CCTV — spots robbers, fire, faints, faces &amp; anomalies in real time and acts (buzzer + calls/alerts) instead of just recording.</p>
+                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">deep-learning</span><span class="bc-tag">embedded</span></div>
+                    <button class="bc-expand"><span>VIEW CASE STUDY</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 13: vit programming language -->
+            <div class="bc" data-id="13" data-cat="" style="--i:1">
+                <img src="assets/my projects/vit-language-cover.svg" alt="vit — My Own Programming Language">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">02</div>
+                <div class="bc-badge accent">BUILT MY OWN LANGUAGE</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>INTERPRETER · FROM SCRATCH</div>
+                    <h3 class="bc-title">vit — My Own Programming Language</h3>
+                    <p class="bc-blurb">A hand-written lexer, parser and executer with its own keyword system and source-cache format. Not a wrapper, not a transpiler — an interpreted language built from nothing, in Python.</p>
+                    <div class="bc-tags"><span class="bc-tag">python</span><span class="bc-tag">interpreter</span><span class="bc-tag">parser</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 17: JEE Horizon — live full-stack product -->
+            <div class="bc" data-id="17" data-cat="web ai" style="--i:2">
+                <img src="assets/my projects/jeehorizon.png" alt="JEE Horizon — AI E-Learning Platform">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">03</div>
+                <div class="bc-badge accent">SHIPPED &amp; LIVE</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>FULL-STACK · AI E-LEARNING</div>
+                    <h3 class="bc-title">JEE Horizon — AI E-Learning Platform</h3>
+                    <p class="bc-blurb">A live platform where students solve practice questions, get AI help when they're stuck, and compete against each other on the leaderboard. Shipped and running in production.</p>
+                    <div class="bc-tags"><span class="bc-tag">react</span><span class="bc-tag">firebase</span><span class="bc-tag">ai</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 0: Property Auto-Furnish (featured) -->
+            <div class="bc" data-id="0" data-cat="ai web" style="--i:3">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">03</div>
+                <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>HIGHLY ADVANCED · UK REAL ESTATE</div>
+                    <h3 class="bc-title">AI Property Auto-Furnish Image Generator</h3>
+                    <p class="bc-blurb">Empty rooms in, photorealistic AI-staged interiors out — a paid, end-to-end generative pipeline delivered for a UK real-estate client.</p>
+                    <div class="bc-tags"><span class="bc-tag">client-work</span><span class="bc-tag">generative-ai</span><span class="bc-tag">deep-learning</span></div>
+                    <button class="bc-expand"><span>VIEW CASE STUDY</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 1: Football Tracker -->
+            <div class="bc" data-id="1" data-cat="cv ai" style="--i:4">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]full football team score ball tracker and analyzer.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">04</div>
+                <div class="bc-badge accent">ADVANCED · CV</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>FOOTBALL ANALYSIS</div>
+                    <h3 class="bc-title">Full Match Ball Tracker &amp; Score Analyzer</h3>
+                    <p class="bc-blurb">YOLOv8 tracks every player and the ball in real time, with a live score and tactical overlay.</p>
+                    <div class="bc-tags"><span class="bc-tag">yolo</span><span class="bc-tag">opencv</span><span class="bc-tag">tracking</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 14: Next Gen Parking -->
+            <div class="bc" data-id="14" data-cat="cv" style="--i:5">
+                <video preload="none" muted loop playsinline data-src="assets/1st postion in IIT delhi innovation challlenge - NextGenParkingSystem.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">05</div>
+                <div class="bc-badge accent">1ST PRIZE · IIT DELHI</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>CLASSICAL CV · NO ML</div>
+                    <h3 class="bc-title">Next Gen Parking — Single-Camera Smart Parking</h3>
+                    <p class="bc-blurb">One camera replaces a sensor per parking spot — real-time free/occupied detection using pure classical computer vision. No neural network anywhere in the pipeline, and that’s the point.</p>
+                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">classical-cv</span><span class="bc-tag">real-time</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 2: Sports Recognition — multi-video grid -->
+            <div class="bc" data-id="2" data-cat="cv ai" style="--i:6">
+                <div class="bc-multi">
+                    <video class="main-vid" preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/pushups1.mp4"></video>
+                    <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/squats.mp4"></video>
+                    <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/bicep.mp4"></video>
+                </div>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">06</div>
+                <div class="bc-badge accent">ADVANCED · AI</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>12+ EXERCISES</div>
+                    <h3 class="bc-title">Sports Activity Recognition &amp; Classifier</h3>
+                    <p class="bc-blurb">A MediaPipe pose engine that recognises and counts 12+ exercises with live form feedback.</p>
+                    <div class="bc-tags"><span class="bc-tag">pose-estimation</span><span class="bc-tag">mediapipe</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 4: Violence Detection -->
+            <div class="bc" data-id="4" data-cat="ai cv" style="--i:7">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium]voilence detection using python.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">07</div>
+                <div class="bc-badge accent">MEDIUM · AI</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>SURVEILLANCE AI</div>
+                    <h3 class="bc-title">Real-Time Violence Detection System</h3>
+                    <p class="bc-blurb">Deep-learning CNNs flag violent motion in live video for real-time security alerting.</p>
+                    <div class="bc-tags"><span class="bc-tag">cnn</span><span class="bc-tag">video-classification</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 11: Pose Estimation -->
+            <div class="bc" data-id="11" data-cat="cv ai" style="--i:8">
+                <img src="assets/my projects/[basic]pose estimation 2 .png" alt="Pose Estimation">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">08</div>
+                <div class="bc-badge accent">CV · AI</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>BODY TRACKING</div>
+                    <h3 class="bc-title">Human Pose Estimation</h3>
+                    <p class="bc-blurb">33-point skeletal tracking in real time — the foundation of my sports-AI systems.</p>
+                    <div class="bc-tags"><span class="bc-tag">mediapipe</span><span class="bc-tag">skeleton</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 15: AI Virtual Teacher -->
+            <div class="bc" data-id="15" data-cat="ai" style="--i:9">
+                <img src="assets/my projects/ai-virtual-teacher-cover.svg" alt="AI Virtual Teacher — a Voice “Video Call”">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">09</div>
+                <div class="bc-badge accent">BUILT AT 14</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>2021 · SPEECH + TTS</div>
+                    <h3 class="bc-title">AI Virtual Teacher — a Voice “Video Call”</h3>
+                    <p class="bc-blurb">Speech recognition, an intent matcher and TTS running as separate processes passing messages through files — I reinvented message queues before I knew threads existed. Preserved as originally written.</p>
+                    <div class="bc-tags"><span class="bc-tag">python</span><span class="bc-tag">speech</span><span class="bc-tag">multiprocessing</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 7: Face Segmentizer -->
+            <div class="bc" data-id="7" data-cat="cv ai" style="--i:10">
+                <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.png" alt="Face Segmentizer">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">10</div>
+                <div class="bc-badge accent">ADVANCED · CV</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>SEGMENTATION</div>
+                    <h3 class="bc-title">Face Segmentizer — Auto Passport Photo</h3>
+                    <p class="bc-blurb">Deep segmentation auto-crops faces to regulation passport photos from any background.</p>
+                    <div class="bc-tags"><span class="bc-tag">segmentation</span><span class="bc-tag">face-detection</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 5: Document Scanner -->
+            <div class="bc" data-id="5" data-cat="cv" style="--i:11">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium] document scanner with full GUI.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">11</div>
+                <div class="bc-badge accent">MEDIUM · CV</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>DESKTOP APP</div>
+                    <h3 class="bc-title">Document Scanner with Full GUI</h3>
+                    <p class="bc-blurb">An OpenCV edge-detection scanner with a full desktop GUI — angled photos to clean, flat scans.</p>
+                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">tkinter</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 16: Foci -->
+            <div class="bc" data-id="16" data-cat="" style="--i:12">
+                <img src="assets/my projects/foci-cover.svg" alt="Foci — Study Planner &amp; Focus App">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">12</div>
+                <div class="bc-badge accent">OPEN SOURCE</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>DESKTOP APP · WINDOWS</div>
+                    <h3 class="bc-title">Foci — Study Planner &amp; Focus App</h3>
+                    <p class="bc-blurb">Daily timeline, focus timer, lofi player, stats and rewards across 8 themes — built to run my own discipline system, then shipped with a landing page.</p>
+                    <div class="bc-tags"><span class="bc-tag">python</span><span class="bc-tag">pygame</span><span class="bc-tag">desktop</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 10: Motion Detection -->
+            <div class="bc" data-id="10" data-cat="cv" style="--i:13">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[basic]motion_detection.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">13</div>
+                <div class="bc-badge accent">CV</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>REAL-TIME</div>
+                    <h3 class="bc-title">Real-Time Motion Detection</h3>
+                    <p class="bc-blurb">Frame-differencing motion detection on live webcam feeds, running at 60+ FPS.</p>
+                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">frame-diff</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 3: Squid Game 3D -->
+            <div class="bc" data-id="3" data-cat="game" style="--i:14">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[complex]squid game 3d made using ursina python.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">14</div>
+                <div class="bc-badge accent">COMPLEX · 3D</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>PYTHON 3D ENGINE</div>
+                    <h3 class="bc-title">Squid Game 3D — Full Game in Python</h3>
+                    <p class="bc-blurb">Red Light, Green Light rebuilt as a full 3D game — entirely in Python with the Ursina engine.</p>
+                    <div class="bc-tags"><span class="bc-tag">ursina</span><span class="bc-tag">python</span><span class="bc-tag">3d</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 8: Multiplayer Game -->
+            <div class="bc" data-id="8" data-cat="game" style="--i:15">
+                <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png" alt="Multiplayer Platformer">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">15</div>
+                <div class="bc-badge accent">ADVANCED · GAME</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>PYGAME NETWORKING</div>
+                    <h3 class="bc-title">Multiplayer Platformer — Pygame</h3>
+                    <p class="bc-blurb">A 2D platformer with real-time socket multiplayer, a physics engine and enemy AI — built in Pygame.</p>
+                    <div class="bc-tags"><span class="bc-tag">pygame</span><span class="bc-tag">sockets</span><span class="bc-tag">multiplayer</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 9: OpenGL -->
+            <div class="bc" data-id="9" data-cat="game" style="--i:16">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[basic] opengl demo.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">16</div>
+                <div class="bc-badge accent">GRAPHICS</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>GPU RENDERING</div>
+                    <h3 class="bc-title">OpenGL 3D Rendering Demo</h3>
+                    <p class="bc-blurb">Real-time GPU rendering with custom GLSL shaders, lighting and camera controls in OpenGL.</p>
+                    <div class="bc-tags"><span class="bc-tag">opengl</span><span class="bc-tag">shaders</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 6: Client Website -->
+            <div class="bc" data-id="6" data-cat="web" style="--i:17">
+                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium]client website-1.mp4"></video>
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">17</div>
+                <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>WEB DEVELOPMENT</div>
+                    <h3 class="bc-title">Client Website — Full Build</h3>
+                    <p class="bc-blurb">A complete responsive website designed, built and shipped end-to-end for a paying client.</p>
+                    <div class="bc-tags"><span class="bc-tag">html</span><span class="bc-tag">css</span><span class="bc-tag">javascript</span></div>
+                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+        </div><!-- /bento -->
+    </div>
+</section>
 
 <!-- ABOUT -->
 <section id="about" class="neo-about">
@@ -790,24 +1129,29 @@
             <p class="nb-kicker font-pixel">// ABOUT ME</p>
             <h2 class="nb-about-title">ENGINEER.<br>INNOVATOR.<br><span class="nb-name-mark">ENTREPRENEUR.</span></h2>
             <div class="nb-about-lead">
-                <p class="font-code">I'm <strong>Akshit Kumar Lall</strong> — a <strong>national award-winning</strong> engineer building real software for real clients worldwide. My core expertise spans <strong>Computer Vision</strong>, <strong>AI / ML</strong>, <strong>Robotics &amp; Technology</strong>, the <strong>full modern web stack</strong>, and <strong>CAD / 3D design</strong>.</p>
-                <p class="font-code">I'm an <strong>entrepreneur</strong> building <strong>AKL Technologies</strong> — my humanoid robotics &amp; AI startup — and I bring real <strong>business &amp; product</strong> knowledge to everything I ship.</p>
+                <p class="font-code">I started coding in class 6 and never really stopped. <strong>171 projects</strong> later, that's turned into an <strong>award-winning AI surveillance camera</strong> I've been building since class 7 (it's won at state, national and international level), <strong>my own interpreted programming language</strong>, and paid computer-vision work for clients around the world.</p>
+                <p class="font-code">The other half is the web: I build <strong>full-stack products end to end</strong> — Django, Flask, React, Firebase — most recently <strong>JEE Horizon</strong>, a live AI-powered e-learning platform where students solve questions and compete with each other. And if a problem can be solved in <strong>Python</strong>, I've probably already got the library for it.</p>
+                <p class="font-code">Today I'm the founder of <strong>AKL Technologies</strong> — a humanoid robotics &amp; AI startup — and a freelance CV engineer with <strong>50+ Fiverr clients at a 5.0★ rating</strong>. I care about two things most: shipping things that actually run, and keeping them honest.</p>
             </div>
+            <div class="nb-ethos font-code">
+                <span class="nb-ethos-chip nb-c-yellow">FINISHED &gt; PERFECT</span>
+                <span class="nb-ethos-chip nb-c-white">NO FAKE GREEN SQUARES</span>
+                <span class="nb-ethos-chip nb-c-mint">PONDER TILL EUREKA</span>
+            </div>
+            <p class="nb-ethos-cap font-code">— house rules, since class 6</p>
         </div>
         <div class="nb-about-right rv-r">
             <div class="nb-exp-grid">
-                <div class="nb-exp nb-c-pink"><span class="nb-exp-ic">👁️</span><h3 class="font-code">COMPUTER VISION</h3><p class="font-code">Detection, tracking &amp; recognition systems in production.</p></div>
-                <div class="nb-exp nb-c-mint"><span class="nb-exp-ic">🧠</span><h3 class="font-code">AI / ML DEVELOPER</h3><p class="font-code">Training &amp; deploying real machine-learning pipelines.</p></div>
-                <div class="nb-exp nb-c-yellow"><span class="nb-exp-ic">🐍</span><h3 class="font-code">PYTHON MASTERY</h3><p class="font-code">5+ years — my weapon of choice for anything hard.</p></div>
-                <div class="nb-exp nb-c-blue"><span class="nb-exp-ic">🌐</span><h3 class="font-code">FULL-STACK WEB</h3><p class="font-code">The full modern web stack, front to back.</p></div>
-                <div class="nb-exp nb-c-coral"><span class="nb-exp-ic">🤖</span><h3 class="font-code">ROBOTICS</h3><p class="font-code">Humanoid robotics, hardware &amp; embedded systems.</p></div>
-                <div class="nb-exp nb-c-white"><span class="nb-exp-ic">📐</span><h3 class="font-code">CAD · 3D DESIGN</h3><p class="font-code">Modeling &amp; prototyping for real-world builds.</p></div>
+                <div class="nb-exp nb-c-white"><span class="nb-exp-ic">👁️</span><h3 class="font-code">COMPUTER VISION</h3><p class="font-code">Detection, tracking &amp; recognition systems in production.</p></div>
+                <div class="nb-exp nb-c-yellow"><span class="nb-exp-ic">🧠</span><h3 class="font-code">AI / ML</h3><p class="font-code">Training &amp; deploying machine-learning pipelines end to end.</p></div>
+                <div class="nb-exp nb-c-mint"><span class="nb-exp-ic">🌐</span><h3 class="font-code">FULL-STACK WEB</h3><p class="font-code">Django, Flask, React &amp; Firebase — shipped, live products.</p></div>
+                <div class="nb-exp nb-c-white"><span class="nb-exp-ic">🤖</span><h3 class="font-code">ROBOTICS &amp; HARDWARE</h3><p class="font-code">Humanoid robotics, embedded systems &amp; CAD-driven builds.</p></div>
             </div>
             <div class="nb-now">
                 <span class="nb-now-tag font-pixel">NOW</span>
                 <div class="nb-now-body">
                     <p class="nb-now-title">BUILDING <span class="nb-name-mark">AKL Technologies</span></p>
-                    <p class="nb-now-sub font-code">A humanoid robotics &amp; AI startup — alongside freelancing for <strong>50+ clients</strong> worldwide and <strong>100+ projects</strong> shipped.</p>
+                    <p class="nb-now-sub font-code">A humanoid robotics &amp; AI startup — alongside freelancing (<strong>50+ Fiverr clients · 5.0★</strong>) and a <strong>171-project archive</strong>.</p>
                 </div>
             </div>
         </div>
@@ -821,261 +1165,31 @@
         <div class="skills-header rv">
             <div class="s-label">EXPERTISE</div>
             <h2>Tech Stack</h2>
-            <p>Production-grade tools. Real-world experience. Not just tutorials — real shipped code.</p>
+            <p>Production tools I work with daily.</p>
         </div>
         <div class="skills-grid">
             <div class="sk-card gc rv"><span class="sk-ic">👁️</span><div class="sk-name">COMPUTER VISION</div><div class="sk-tags"><span class="sk-tag">OpenCV</span><span class="sk-tag">YOLO</span><span class="sk-tag">MediaPipe</span><span class="sk-tag">Object Detection</span><span class="sk-tag">Face Recognition</span><span class="sk-tag">Image Processing</span><span class="sk-tag">Optical Flow</span></div></div>
             <div class="sk-card gc rv"><span class="sk-ic">🧠</span><div class="sk-name">AI &amp; MACHINE LEARNING</div><div class="sk-tags"><span class="sk-tag">TensorFlow</span><span class="sk-tag">PyTorch</span><span class="sk-tag">Scikit-learn</span><span class="sk-tag">Deep Learning</span><span class="sk-tag">Neural Networks</span><span class="sk-tag">CNNs</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">⌨️</span><div class="sk-name">LANGUAGES</div><div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">C++</span><span class="sk-tag">JavaScript</span><span class="sk-tag">HTML/CSS</span><span class="sk-tag">SQL</span><span class="sk-tag">Bash</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">🌐</span><div class="sk-name">WEB DEVELOPMENT</div><div class="sk-tags"><span class="sk-tag">React</span><span class="sk-tag">Django</span><span class="sk-tag">Flask</span><span class="sk-tag">HTML</span><span class="sk-tag">CSS</span><span class="sk-tag">JavaScript</span><span class="sk-tag">REST APIs</span><span class="sk-tag">Tailwind</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">🎬</span><div class="sk-name">CREATIVE &amp; DESIGN</div><div class="sk-tags"><span class="sk-tag">CAD</span><span class="sk-tag">Fusion 360</span><span class="sk-tag">3D Design</span><span class="sk-tag">3D Printing</span><span class="sk-tag">Video Editing</span><span class="sk-tag">Motion Graphics</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">🎮</span><div class="sk-name">GAME &amp; SIMULATION</div><div class="sk-tags"><span class="sk-tag">Pygame</span><span class="sk-tag">Ursina Engine</span><span class="sk-tag">OpenGL</span><span class="sk-tag">Physics Sim</span><span class="sk-tag">3D Rendering</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">📐</span><div class="sk-name">HARDWARE &amp; ROBOTICS</div><div class="sk-tags"><span class="sk-tag">Arduino</span><span class="sk-tag">Embedded</span><span class="sk-tag">Prototyping</span><span class="sk-tag">PCB Design</span><span class="sk-tag">Servo Systems</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">📈</span><div class="sk-name">BUSINESS &amp; GROWTH</div><div class="sk-tags"><span class="sk-tag">Marketing</span><span class="sk-tag">Go-to-Market</span><span class="sk-tag">SaaS Building</span><span class="sk-tag">Product Strategy</span><span class="sk-tag">Branding</span><span class="sk-tag">Sales</span><span class="sk-tag">Startups</span></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================================================
-     PROJECT SHOWCASE — DARK BENTO GRID
-================================================================ -->
-<section id="projects">
-    <div class="s-max">
-
-        <!-- Header -->
-        <div class="ph rv">
-            <div class="ph-left">
-                <div class="s-label"><span class="ph-kicker-dot"></span>PORTFOLIO — SELECTED WORK</div>
-                <h2>Projects</h2>
-                <p>Every tile is real, working software. Hover any card for a live preview, click to open the full case study. Media loads on demand so browsing stays buttery smooth.</p>
-            </div>
-            <div class="ph-right">
-                <div class="ph-counter counter" data-t="100">0</div>
-                <div class="ph-counter-sub">PROJECTS DELIVERED</div>
-            </div>
+            <div class="sk-card gc rv"><span class="sk-ic">🌐</span><div class="sk-name">FULL-STACK WEB</div><div class="sk-tags"><span class="sk-tag">Django</span><span class="sk-tag">Flask</span><span class="sk-tag">React</span><span class="sk-tag">Firebase</span><span class="sk-tag">JavaScript</span><span class="sk-tag">HTML5</span><span class="sk-tag">CSS3</span><span class="sk-tag">REST APIs</span></div></div>
+            <div class="sk-card gc rv"><span class="sk-ic">🤖</span><div class="sk-name">HARDWARE &amp; ROBOTICS</div><div class="sk-tags"><span class="sk-tag">Arduino</span><span class="sk-tag">Fusion 360</span><span class="sk-tag">Embedded</span><span class="sk-tag">Prototyping</span><span class="sk-tag">PCB Design</span><span class="sk-tag">Servo Systems</span><span class="sk-tag">3D Printing</span></div></div>
         </div>
 
-        <!-- Filter -->
-        <div class="proj-filter rv">
-            <button class="pfb active" data-f="all">FEATURED <span class="cnt">12</span></button>
-            <button class="pfb" data-f="cv">COMPUTER VISION <span class="cnt">7</span></button>
-            <button class="pfb" data-f="ai">AI / ML <span class="cnt">6</span></button>
-            <button class="pfb" data-f="web">WEB / CLIENT <span class="cnt">2</span></button>
-            <button class="pfb" data-f="game">GAME / 3D <span class="cnt">3</span></button>
+        <div class="sk-also rv">
+            <span class="sk-also-lbl">PYTHON, END TO END:</span>
+            <span class="sk-tag">NumPy</span><span class="sk-tag">Pandas</span><span class="sk-tag">Matplotlib</span><span class="sk-tag">Pillow</span><span class="sk-tag">SciPy</span><span class="sk-tag">Pygame</span><span class="sk-tag">Ursina</span><span class="sk-tag">PyOpenGL</span><span class="sk-tag">Tkinter</span><span class="sk-tag">PyQt</span><span class="sk-tag">Selenium</span><span class="sk-tag">BeautifulSoup</span><span class="sk-tag">Requests</span><span class="sk-tag">Sockets</span><span class="sk-tag">Multiprocessing</span>
+        </div>
+        <p class="sk-also-cap font-code">…and whatever else the problem needs. If it can be built in Python, I can build it.</p>
+
+        <div class="sk-also rv">
+            <span class="sk-also-lbl">ALSO SHIP WITH:</span>
+            <span class="sk-tag">C++</span><span class="sk-tag">OpenGL</span><span class="sk-tag">SQL</span><span class="sk-tag">Git</span><span class="sk-tag">Linux</span>
         </div>
 
-        <!-- ============ BENTO GRID ============ -->
-        <div class="bento rv" id="bentoGrid">
-
-            <!-- 0: Property Auto-Furnish (featured) -->
-            <div class="bc bc-featured" data-id="0" data-cat="ai web" style="--i:0">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">01</div>
-                <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>HIGHLY ADVANCED · UK REAL ESTATE</div>
-                    <h3 class="bc-title">AI Property Auto-Furnish Image Generator</h3>
-                    <p class="bc-blurb">Empty rooms in, photorealistic AI-staged interiors out — a paid, end-to-end generative pipeline delivered for a UK real-estate client.</p>
-                    <div class="bc-tags"><span class="bc-tag">client-work</span><span class="bc-tag">generative-ai</span><span class="bc-tag">deep-learning</span></div>
-                    <button class="bc-expand"><span>VIEW CASE STUDY</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 1: Football Tracker -->
-            <div class="bc" data-id="1" data-cat="cv ai" style="--i:1">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]full football team score ball tracker and analyzer.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">02</div>
-                <div class="bc-badge accent">ADVANCED · CV</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>FOOTBALL ANALYSIS</div>
-                    <h3 class="bc-title">Full Match Ball Tracker &amp; Score Analyzer</h3>
-                    <p class="bc-blurb">YOLOv8 tracks every player and the ball in real time, with a live score and tactical overlay.</p>
-                    <div class="bc-tags"><span class="bc-tag">yolo</span><span class="bc-tag">opencv</span><span class="bc-tag">tracking</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 2: Sports Recognition — multi-video grid -->
-            <div class="bc" data-id="2" data-cat="cv ai" style="--i:2">
-                <div class="bc-multi">
-                    <video class="main-vid" preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/pushups1.mp4"></video>
-                    <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/squats.mp4"></video>
-                    <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/bicep.mp4"></video>
-                </div>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">03</div>
-                <div class="bc-badge accent">ADVANCED · AI</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>12+ EXERCISES</div>
-                    <h3 class="bc-title">Sports Activity Recognition &amp; Classifier</h3>
-                    <p class="bc-blurb">A MediaPipe pose engine that recognises and counts 12+ exercises with live form feedback.</p>
-                    <div class="bc-tags"><span class="bc-tag">pose-estimation</span><span class="bc-tag">mediapipe</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 3: Squid Game 3D -->
-            <div class="bc" data-id="3" data-cat="game" style="--i:3">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[complex]squid game 3d made using ursina python.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">04</div>
-                <div class="bc-badge accent">COMPLEX · 3D</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>PYTHON 3D ENGINE</div>
-                    <h3 class="bc-title">Squid Game 3D — Full Game in Python</h3>
-                    <p class="bc-blurb">Red Light, Green Light rebuilt as a full 3D game — entirely in Python with the Ursina engine.</p>
-                    <div class="bc-tags"><span class="bc-tag">ursina</span><span class="bc-tag">python</span><span class="bc-tag">3d</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 4: Violence Detection -->
-            <div class="bc" data-id="4" data-cat="ai cv" style="--i:4">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium]voilence detection using python.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">05</div>
-                <div class="bc-badge accent">MEDIUM · AI</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>SURVEILLANCE AI</div>
-                    <h3 class="bc-title">Real-Time Violence Detection System</h3>
-                    <p class="bc-blurb">Deep-learning CNNs flag violent motion in live video for real-time security alerting.</p>
-                    <div class="bc-tags"><span class="bc-tag">cnn</span><span class="bc-tag">video-classification</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 5: Document Scanner -->
-            <div class="bc" data-id="5" data-cat="cv" style="--i:5">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium] document scanner with full GUI.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">06</div>
-                <div class="bc-badge accent">MEDIUM · CV</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>DESKTOP APP</div>
-                    <h3 class="bc-title">Document Scanner with Full GUI</h3>
-                    <p class="bc-blurb">An OpenCV edge-detection scanner with a full desktop GUI — angled photos to clean, flat scans.</p>
-                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">tkinter</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 6: Client Website -->
-            <div class="bc" data-id="6" data-cat="web" style="--i:6">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium]client website-1.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">07</div>
-                <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>WEB DEVELOPMENT</div>
-                    <h3 class="bc-title">Client Website — Full Build</h3>
-                    <p class="bc-blurb">A complete responsive website designed, built and shipped end-to-end for a paying client.</p>
-                    <div class="bc-tags"><span class="bc-tag">html</span><span class="bc-tag">css</span><span class="bc-tag">javascript</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 7: Face Segmentizer -->
-            <div class="bc" data-id="7" data-cat="cv ai" style="--i:7">
-                <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.png" alt="Face Segmentizer">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">08</div>
-                <div class="bc-badge accent">ADVANCED · CV</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>SEGMENTATION</div>
-                    <h3 class="bc-title">Face Segmentizer — Auto Passport Photo</h3>
-                    <p class="bc-blurb">Deep segmentation auto-crops faces to regulation passport photos from any background.</p>
-                    <div class="bc-tags"><span class="bc-tag">segmentation</span><span class="bc-tag">face-detection</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 8: Multiplayer Game -->
-            <div class="bc" data-id="8" data-cat="game" style="--i:8">
-                <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png" alt="Multiplayer Platformer">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">09</div>
-                <div class="bc-badge accent">ADVANCED · GAME</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>PYGAME NETWORKING</div>
-                    <h3 class="bc-title">Multiplayer Platformer — Pygame</h3>
-                    <p class="bc-blurb">A 2D platformer with real-time socket multiplayer, a physics engine and enemy AI — built in Pygame.</p>
-                    <div class="bc-tags"><span class="bc-tag">pygame</span><span class="bc-tag">sockets</span><span class="bc-tag">multiplayer</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 9: OpenGL -->
-            <div class="bc" data-id="9" data-cat="game" style="--i:9">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[basic] opengl demo.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">10</div>
-                <div class="bc-badge accent">GRAPHICS</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>GPU RENDERING</div>
-                    <h3 class="bc-title">OpenGL 3D Rendering Demo</h3>
-                    <p class="bc-blurb">Real-time GPU rendering with custom GLSL shaders, lighting and camera controls in OpenGL.</p>
-                    <div class="bc-tags"><span class="bc-tag">opengl</span><span class="bc-tag">shaders</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 10: Motion Detection -->
-            <div class="bc" data-id="10" data-cat="cv" style="--i:10">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[basic]motion_detection.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">11</div>
-                <div class="bc-badge accent">CV</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>REAL-TIME</div>
-                    <h3 class="bc-title">Real-Time Motion Detection</h3>
-                    <p class="bc-blurb">Frame-differencing motion detection on live webcam feeds, running at 60+ FPS.</p>
-                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">frame-diff</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 11: Pose Estimation -->
-            <div class="bc" data-id="11" data-cat="cv ai" style="--i:11">
-                <img src="assets/my projects/[basic]pose estimation 2 .png" alt="Pose Estimation">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">12</div>
-                <div class="bc-badge accent">CV · AI</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>BODY TRACKING</div>
-                    <h3 class="bc-title">Human Pose Estimation</h3>
-                    <p class="bc-blurb">33-point skeletal tracking in real time — the foundation of my sports-AI systems.</p>
-                    <div class="bc-tags"><span class="bc-tag">mediapipe</span><span class="bc-tag">skeleton</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-        </div><!-- /bento -->
+        <div class="sk-also rv">
+            <span class="sk-also-lbl">BUSINESS &amp; GROWTH:</span>
+            <span class="sk-tag">Marketing</span><span class="sk-tag">Go-to-Market</span><span class="sk-tag">Branding</span><span class="sk-tag">SaaS Building</span><span class="sk-tag">Sales</span><span class="sk-tag">Product Strategy</span><span class="sk-tag">Startups</span>
+        </div>
+        <p class="sk-also-cap font-code">Founder of AKL Technologies — building the product is only half of it.</p>
     </div>
 </section>
 
@@ -1133,7 +1247,7 @@
         <div class="aw-header rv">
             <div class="s-label">RECOGNITION</div>
             <h2>Awards &amp;<br>Achievements</h2>
-            <p>Proven competitive wins on national and international stages.</p>
+            <p>Competitive wins on national and international stages.</p>
         </div>
         <div class="aw-entry rv">
             <div class="aw-img">
@@ -1159,6 +1273,7 @@
                 <div class="aw-venue"><strong>India International Innovation &amp; Invention Expo</strong><br>Indian Young Innovators &amp; Inventors Challenge</div>
                 <p class="aw-desc">Awarded the <strong style="color:white">INEX India Silver Medal</strong> at an international-level expo where young innovators from across India competed. Recognized by an international panel of judges for outstanding innovation in computer vision and engineering technology.</p>
                 <div class="aw-badges"><span class="aw-badge"><i class="fas fa-medal"></i> SILVER MEDAL</span><span class="aw-badge"><i class="fas fa-globe"></i> INTERNATIONAL EXPO</span></div>
+                <a class="aw-cert-link" href="assets/certificates/India%20International%20Innovation%20and%20Invention%20Expo.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
             </div>
         </div>
         <div class="aw-entry rv">
@@ -1202,6 +1317,10 @@
                 <div class="aw-venue"><strong>Multiple National Competitions</strong><br>Science, Engineering &amp; Robotics Events</div>
                 <p class="aw-desc">Beyond the flagship wins: <strong style="color:white">Aryabhat National Award</strong> for scientific excellence, <strong style="color:white">National Children's Science Congress</strong>, <strong style="color:white">Robo Fest</strong> robotics competition, <strong style="color:white">Ingenious Geeks</strong>, <strong style="color:white">Inter-School Model Making</strong>, and <strong style="color:white">NAEST 2022</strong>. Each win validated a different dimension of engineering capability.</p>
                 <div class="aw-badges"><span class="aw-badge"><i class="fas fa-star"></i> ARYABHAT</span><span class="aw-badge"><i class="fas fa-microscope"></i> NCSC</span><span class="aw-badge"><i class="fas fa-robot"></i> ROBO FEST</span><span class="aw-badge"><i class="fas fa-flask"></i> NAEST 2022</span></div>
+                <div class="aw-cert-row">
+                    <a class="aw-cert-link" href="assets/certificates/aryabhat%20national%20award.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> ARYABHAT CERTIFICATE →</a>
+                    <a class="aw-cert-link" href="assets/certificates/naest-2022.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> NAEST 2022 CERTIFICATE →</a>
+                </div>
             </div>
         </div>
         <button class="show-awards-btn" id="showAwardsBtn">SHOW MORE AWARDS</button>
@@ -1211,9 +1330,9 @@
                 <div class="aw-text">
                     <div class="aw-cat">1ST PRIZE · IIT DELHI</div>
                     <h3 class="aw-title">Next Gen Parking System — 1st Prize</h3>
-                    <div class="aw-venue"><strong>IIT Delhi Innovation Challenge</strong><br>Smart parking automation and AI-enabled vehicle flow management</div>
-                    <p class="aw-desc">Won <strong style="color:white">first prize</strong> at the IIT Delhi innovation challenge for a complete smart parking system. The project combined real-time detection, optimization, and a polished physical demo with strong judge feedback.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-award"></i> IIT DELHI</span><span class="aw-badge"><i class="fas fa-car-side"></i> PARKING AI</span><span class="aw-badge"><i class="fas fa-brain"></i> SYSTEM DESIGN</span></div>
+                    <div class="aw-venue"><strong>IIT Delhi Innovation Challenge</strong><br>Single-camera smart parking using classical computer vision</div>
+                    <p class="aw-desc">Won <strong style="color:white">first prize</strong> at the IIT Delhi innovation challenge with a smart parking system where <strong style="color:white">one camera replaces a sensor per parking spot</strong> — real-time free/occupied detection built on classical computer vision, presented with a polished physical demo.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-award"></i> IIT DELHI</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-eye"></i> CLASSICAL CV</span></div>
                 </div>
             </div>
             <div class="aw-entry reverse rv">
@@ -1224,6 +1343,7 @@
                     <div class="aw-venue"><strong>Robo Fest</strong><br>Competitive robotics design and execution</div>
                     <p class="aw-desc">Awarded the <strong style="color:white">first prize</strong> for a robotics system that excelled in technical execution, reliability, and presentation. The win is backed by the official Robo Fest certificate and a trophy photograph.</p>
                     <div class="aw-badges"><span class="aw-badge"><i class="fas fa-robot"></i> ROBOTICS</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span></div>
+                    <a class="aw-cert-link" href="assets/certificates/Robo%20Fest.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
                 </div>
             </div>
             <div class="aw-entry rv">
@@ -1232,8 +1352,9 @@
                     <div class="aw-cat">INNOVATION PROGRAM</div>
                     <h3 class="aw-title">Ingenious Geeks — Certificate</h3>
                     <div class="aw-venue"><strong>Ingenious Geeks</strong><br>National technology and invention showcase</div>
-                    <p class="aw-desc">Recognized by the Ingenious Geeks program for outstanding invention and creative engineering. The certificate proves the project’s innovation strength and real-world impact.</p>
+                    <p class="aw-desc">Recognized by the Ingenious Geeks program for outstanding invention and creative engineering. The certificate backs the project’s innovation strength and practical impact.</p>
                     <div class="aw-badges"><span class="aw-badge"><i class="fas fa-lightbulb"></i> INNOVATION</span><span class="aw-badge"><i class="fas fa-certificate"></i> CERTIFIED</span></div>
+                    <a class="aw-cert-link" href="assets/certificates/Ingenious%20geeks.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
                 </div>
             </div>
             <div class="aw-entry reverse rv">
@@ -1250,11 +1371,12 @@
                     <div class="aw-venue"><strong>NCSC</strong><br>School-level science research event</div>
                     <p class="aw-desc">Selected to present research at the National Children's Science Congress, demonstrating both technical depth and communication skills. The award reflects strong scientific curiosity and project coherence.</p>
                     <div class="aw-badges"><span class="aw-badge"><i class="fas fa-flask"></i> SCIENCE PROJECT</span><span class="aw-badge"><i class="fas fa-award"></i> NATIONAL</span></div>
+                    <a class="aw-cert-link" href="assets/certificates/Natioal%20Childrens%20Science%20Congress.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
                 </div>
             </div>
             <div class="aw-entry rv">
                 <div class="aw-img placeholder">
-                <div class="aw-placeholder-inner"><i class="fas fa-file-pdf"></i><p>Certificate proof for model making is available in the certificates section.</p></div>
+                <div class="aw-placeholder-inner"><i class="fas fa-file-pdf"></i><p>Official certificate attached — open it from the link beside.</p></div>
                 <div class="aw-img-num">10</div>
             </div>
                 <div class="aw-text">
@@ -1263,6 +1385,7 @@
                     <div class="aw-venue"><strong>Inter-School Competition</strong><br>Physical model design and execution</div>
                     <p class="aw-desc">Recognized for an engineered model that combined creativity with precision. The project was judged on technical accuracy, aesthetics, and presentation quality.</p>
                     <div class="aw-badges"><span class="aw-badge"><i class="fas fa-tools"></i> MODEL DESIGN</span><span class="aw-badge"><i class="fas fa-check-circle"></i> COMPETITION</span></div>
+                    <a class="aw-cert-link" href="assets/certificates/inter%20school%20model%20making.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
                 </div>
             </div>
             <!-- <div class="aw-entry reverse rv">
@@ -1297,7 +1420,7 @@
         <div class="test-header rv">
             <div class="s-label">▶ NOW PLAYING · CLIENT TAPES</div>
             <h2>What Clients Say</h2>
-            <p>Real reviews from real paying clients. Every project delivered with professionalism, speed, and precision.</p>
+            <p>Client reviews from Fiverr — 5.0 rating, all verifiable.</p>
         </div>
         <div class="test-platform rv">
             <span class="vhs-rec">● REC</span>
@@ -1411,32 +1534,50 @@
                     <h3>Born in Ranchi, Jharkhand</h3>
                     <p>Born and raised in Ranchi — the city of waterfalls. Started tinkering with electronics and computers at a young age.</p>
                 </article>
+                <!-- TODO-VERIFY: exact class-6 year -->
                 <article class="drift-event" data-i="1">
                     <span class="drift-ev-num">02</span>
+                    <i class="fas fa-code drift-ev-ic"></i>
+                    <span class="drift-ev-year">2019</span>
+                    <span class="drift-ev-tag">CLASS 6 · SELF-TAUGHT</span>
+                    <h3>First Lines of Code</h3>
+                    <p>Self-taught from YouTube and docs — the start of a habit that never stopped.</p>
+                </article>
+                <!-- TODO-VERIFY: exact class-7 year -->
+                <article class="drift-event" data-i="2">
+                    <span class="drift-ev-num">03</span>
+                    <i class="fas fa-camera drift-ev-ic"></i>
+                    <span class="drift-ev-year">2020</span>
+                    <span class="drift-ev-tag">CLASS 7 · NEXT GEN CAMERA v0</span>
+                    <h3>Next Gen Camera v0</h3>
+                    <p>Started building the AI surveillance camera that would go on to win state, national and international awards — and is still evolving today.</p>
+                </article>
+                <article class="drift-event" data-i="3">
+                    <span class="drift-ev-num">04</span>
                     <i class="fas fa-school drift-ev-ic"></i>
                     <span class="drift-ev-year">2023</span>
                     <span class="drift-ev-tag">DELHI PUBLIC SCHOOL · PATNA</span>
                     <h3>Completed Class 10th — DPS Patna</h3>
                     <p>Finished schooling at DPS Patna — winning national awards, building the Next Gen Camera, and freelancing all while still in school.</p>
                 </article>
-                <article class="drift-event" data-i="2">
-                    <span class="drift-ev-num">03</span>
+                <article class="drift-event" data-i="4">
+                    <span class="drift-ev-num">05</span>
                     <i class="fas fa-trophy drift-ev-ic"></i>
                     <span class="drift-ev-year">2023</span>
                     <span class="drift-ev-tag">BIC · INEX · ARYABHAT · NCSC</span>
                     <h3>Multiple National Awards</h3>
                     <p>Bihar Innovation Challenge (1st Prize + MacBook), INEX Silver Medal, Aryabhat National Award, Robo Fest and more.</p>
                 </article>
-                <article class="drift-event" data-i="3">
-                    <span class="drift-ev-num">04</span>
+                <article class="drift-event" data-i="5">
+                    <span class="drift-ev-num">06</span>
                     <i class="fas fa-fire drift-ev-ic"></i>
                     <span class="drift-ev-year">2026</span>
                     <span class="drift-ev-tag">VELLORE INSTITUTE OF TECHNOLOGY</span>
                     <h3>VIT Vellore — CSE</h3>
                     <p>Pursuing Computer Science &amp; Engineering at VIT Vellore — blending academics with freelancing, innovation and entrepreneurship.</p>
                 </article>
-                <article class="drift-event" data-i="4">
-                    <span class="drift-ev-num">05</span>
+                <article class="drift-event" data-i="6">
+                    <span class="drift-ev-num">07</span>
                     <i class="fas fa-rocket drift-ev-ic"></i>
                     <span class="drift-ev-year">NOW</span>
                     <span class="drift-ev-tag">STUDYING · BUILDING · INNOVATING</span>
@@ -1452,31 +1593,14 @@
                     <span class="drift-dot"></span>
                     <span class="drift-dot"></span>
                     <span class="drift-dot"></span>
+                    <span class="drift-dot"></span>
+                    <span class="drift-dot"></span>
                 </div>
             </div>
             <div class="drift-hint"><i class="fas fa-computer-mouse"></i> SCROLL TO DRIVE</div>
         </div>
     </div>
 </section>
-
-<!-- NEXT GEN CAMERA — promo card; full write-up lives in next-gen-camera.html -->
-<section id="innovation" class="neo-zone ngc-promo">
-    <div class="s-max">
-        <a href="next-gen-camera.html" class="ngc-promo-card rv">
-            <div class="ngc-promo-text">
-                <div class="s-label font-code">FLAGSHIP · PATENT FILED · MULTIPLE AWARDS</div>
-                <h2><span class="scroll-hl">Next Gen Camera System</span></h2>
-                <p>An AI security layer for existing CCTV — it spots robbers, fire, faints, faces &amp; anomalies in real time and <strong>acts</strong> (buzzer + calls/alerts) instead of just recording. Presented at INEX India &amp; the Bihar Innovation Challenge.</p>
-                <span class="ngc-promo-go font-code">EXPLORE THE FULL PROJECT <i class="fas fa-arrow-right"></i></span>
-            </div>
-            <div class="ngc-promo-media">
-                <img src="assets/explaining next gen camera to foreign researchers.jpg" alt="Next Gen Camera demonstration">
-                <span class="ngc-promo-badge font-code"><i class="fas fa-trophy"></i> MULTIPLE AWARDS</span>
-            </div>
-        </a>
-    </div>
-</section>
-
 
 <!-- CONTACT -->
 <section id="contact">
@@ -1497,7 +1621,7 @@
             </form>
             <div class="cl-links">
                 <a href="mailto:akshitkumarlal@gmail.com" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/gmail.svg" alt="Email" width="24" height="24"></div><div class="cl-txt"><span>EMAIL</span><span>akshitkumarlal@gmail.com</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="24" height="24"></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="24" height="24"></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshit-python-programmer</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
                 <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="24" height="24"></div><div class="cl-txt"><span>LINKEDIN</span><span>linkedin.com/in/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
                 <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/youtube.svg" alt="YouTube" width="24" height="24"></div><div class="cl-txt"><span>YOUTUBE</span><span>youtube.com/@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
                 <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="22" height="22"></div><div class="cl-txt"><span>TWITTER / X</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
@@ -1508,63 +1632,6 @@
 
 </section>
 
-
-<!-- CERTIFICATES -->
-<section id="certificates" class="neo-zone">
-    <div class="s-max">
-        <div class="cert-header rv">
-            <div class="s-label font-code">CREDENTIALS</div>
-            <h2>Certificates &amp;<br>Competition Proof</h2>
-            <p class="font-code" style="font-size:.85rem;color:var(--fg3);max-width:560px;line-height:1.75;margin-top:12px">Tap any card to open the official PDF or certificate. These back the awards above — science congress, innovation expos, robotics, STEM competitions, and more.</p>
-        </div>
-        <div class="cert-grid rv">
-            <a href="assets/certificates/India%20International%20Innovation%20and%20Invention%20Expo.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-lav">
-                <span class="cert-tag">INEX</span>
-                <h3>India International Innovation &amp; Invention Expo</h3>
-                <p>INEX / IYIIC — international innovation expo</p>
-                <span class="cert-open">OPEN PDF →</span>
-            </a>
-            <a href="assets/certificates/aryabhat%20national%20award.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-yellow">
-                <span class="cert-tag">NATIONAL</span>
-                <h3>Aryabhat National Award</h3>
-                <p>National-level science &amp; innovation recognition</p>
-                <span class="cert-open">OPEN PDF →</span>
-            </a>
-            <a href="assets/certificates/Robo%20Fest.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-pink">
-                <span class="cert-tag">ROBOTICS</span>
-                <h3>Robo Fest — 1st Prize</h3>
-                <p>Robotics competition winner</p>
-                <span class="cert-open">OPEN PDF →</span>
-            </a>
-            <a href="assets/certificates/Natioal%20Childrens%20Science%20Congress.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-blue">
-                <span class="cert-tag">SCIENCE</span>
-                <h3>National Children's Science Congress</h3>
-                <p>NCSC participation / recognition</p>
-                <span class="cert-open">OPEN PDF →</span>
-            </a>
-            <a href="assets/certificates/naest-2022.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-white">
-                <span class="cert-tag">NAEST</span>
-                <h3>NAEST 2022</h3>
-                <p>National science &amp; technology event</p>
-                <span class="cert-open">OPEN PDF →</span>
-            </a>
-            <a href="assets/certificates/Ingenious%20geeks.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-mint" style="background:var(--neo-mint)">
-                <span class="cert-tag">TECH</span>
-                <h3>Ingenious Geeks</h3>
-                <p>Innovation / tech program certificate</p>
-                <span class="cert-open">OPEN PDF →</span>
-            </a>
-            <a href="assets/certificates/inter%20school%20model%20making.pdf" target="_blank" rel="noopener noreferrer" class="cert-card c-yellow">
-                <span class="cert-tag">MODEL</span>
-                <h3>Inter School Model Making</h3>
-                <p>Physical model &amp; design competition</p>
-                <span class="cert-open">OPEN PDF →</span>
-            </a>
-
-
-        </div>
-    </div>
-</section>
 
 
 <footer>
@@ -1607,7 +1674,7 @@ const CONFIG = {
   maxVolume: 0.09,       // engine SFX volume ceiling (kept very subtle)
 };
 
-const ACCENTS = [0x8b7bff, 0x4dd4ff, 0xff6ec4, 0x5eead4, 0xffb347];
+const ACCENTS = [0xffe066, 0x06d6a0];
 const SMOKE_TINTS = [0x8b7bff, 0x4dd4ff, 0xff6ec4];
 const UP = new THREE.Vector3(0, 1, 0);
 const markers = [];
@@ -1735,7 +1802,8 @@ function boot() {
 
   buildRoad(scene, curve, CONFIG.roadWidth);
 
-  const N = 5;
+  // One station per .drift-event milestone card (falls back to 5 if the DOM changes)
+  const N = document.querySelectorAll('#journey .drift-event').length || 5;
   const DRIVE_END = 0.62; // car drives 0..DRIVE_END of the road; the rest stretches ahead into the distance
   const stationT = [];
   for (let i = 0; i < N; i++) stationT.push(((i + 0.5) / N) * DRIVE_END);
@@ -1760,7 +1828,7 @@ function boot() {
       school.traverse((o) => { if (o.isMesh) o.frustumCulled = false; });
       school.scale.setScalar(scale);
 
-      const t = stationT[1]; // second checkpoint
+      const t = stationT[3]; // DPS Patna checkpoint (4th milestone)
       const p = curve.getPointAt(t);
       const tan = curve.getTangentAt(t).normalize();
       const side = new THREE.Vector3().crossVectors(tan, UP).normalize();
@@ -2376,7 +2444,7 @@ document.querySelectorAll('.gc').forEach(c=>{
 });
 
 // ===== TYPEWRITER =====
-const roles=['Computer Vision Expert.','AI & ML Developer.','Specializing in Python development.','Full-Stack Web Dev.','Robotics & Hardware.','CAD & 3D Designer.','Founder — AKL Technologies .','Entrepreneur.'];
+const roles=['Computer Vision.','Robotics & Hardware.','Built my own programming language.'];
 let ri=0,ci=0,del=false;const typedEl=document.getElementById('typed');
 function type(){const cur=roles[ri];if(!del){typedEl.textContent=cur.slice(0,ci+1);ci++;if(ci===cur.length){del=true;setTimeout(type,1600);return}}else{typedEl.textContent=cur.slice(0,ci-1);ci--;if(ci===0){del=false;ri=(ri+1)%roles.length}}setTimeout(type,del?35:72)}
 type();
@@ -2390,7 +2458,7 @@ const scrollHlObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.is
 document.querySelectorAll('.scroll-hl').forEach(el=>scrollHlObs.observe(el));
 
 // ===== COUNTERS =====
-const cntObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=+el.dataset.t;if(!t)return;let v=0;const step=Math.max(t/30,.5);const id=setInterval(()=>{v+=step;if(v>=t){v=t;clearInterval(id)}const lbl=el.nextElementSibling?el.nextElementSibling.textContent:'';const s=lbl.includes('K+')?' K+':'+';el.textContent=Math.floor(v)+s},35);cntObs.unobserve(el)}})},{threshold:.5});
+const cntObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=+el.dataset.t;if(!t)return;let v=0;const step=Math.max(t/30,.5);const id=setInterval(()=>{v+=step;if(v>=t){v=t;clearInterval(id)}const lbl=el.nextElementSibling?el.nextElementSibling.textContent:'';const s=el.dataset.sfx!==undefined?el.dataset.sfx:(lbl.includes('K+')?' K+':'+');el.textContent=Math.floor(v)+s},35);cntObs.unobserve(el)}})},{threshold:.5});
 document.querySelectorAll('.counter').forEach(el=>cntObs.observe(el));
 
 // ===== PROJECT DATA =====
@@ -2456,6 +2524,13 @@ function openModal(id){
     const stackItems=p.stack.map(s=>`<span class="pm-st">${s}</span>`).join('');
     const badgeItems=p.badges.map(b=>`<span class="pm-badge"><i class="${b.ic}"></i> ${b.t}</span>`).join('');
     let clientHTML=p.client?`<div class="pm-client"><i class="fas fa-user"></i> ${p.client}</div>`:'';
+    // optional links per project (projects.json): p.page = case-study page, p.repo = GitHub repo
+    // an absolute p.page is a live deployment, not a local case study — new tab, different label
+    const pageExt=p.page&&/^https?:\/\//.test(p.page);
+    const linkItems=[
+        p.page?`<a class="pm-link" href="${p.page}"${pageExt?' target="_blank" rel="noopener noreferrer"':''}>${pageExt?'VISIT LIVE SITE':'FULL PROJECT PAGE'} <i class="fas fa-arrow-right"></i></a>`:'',
+        p.repo?`<a class="pm-link" href="${p.repo}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> VIEW CODE</a>`:''
+    ].join('');
     pmInfo.innerHTML=`
         <div class="pm-level">${p.level}</div>
         <div class="pm-num">${p.num}</div>
@@ -2465,7 +2540,8 @@ function openModal(id){
         <p class="pm-desc">${p.desc}</p>
         <div class="pm-stack-label">TECH STACK</div>
         <div class="pm-stack">${stackItems}</div>
-        <div class="pm-badges">${badgeItems}</div>`;
+        <div class="pm-badges">${badgeItems}</div>
+        ${linkItems?`<div class="pm-links">${linkItems}</div>`:''}`;
 
     modal.classList.add('active');
     document.body.style.overflow='hidden';

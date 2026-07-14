@@ -7,6 +7,8 @@
   --neo-blue: #b8dcff;
   --neo-lavender: #e4d4ff;
   --neo-coral: #ffb4a2;
+  /* CTA-exclusive: floating contact pill + form submit ONLY */
+  --neo-purple: #7c5cff;
   --neo-border: 3px solid var(--neo-black);
   --neo-shadow-color: var(--neo-black);
   --neo-shadow: 6px 6px 0 var(--neo-shadow-color);
@@ -477,7 +479,7 @@
 .nb-blob-1 {
   width: 116px;
   height: 116px;
-  background: var(--neo-blue);
+  background: var(--neo-mint);
   top: 116px;
   right: 6%;
   transform: rotate(12deg);
@@ -486,7 +488,7 @@
   width: 84px;
   height: 84px;
   border-radius: 50%;
-  background: var(--neo-pink);
+  background: var(--neo-yellow);
   bottom: 64px;
   left: 3%;
   transform: rotate(-8deg);
@@ -600,7 +602,7 @@
 .nb-hero-statement strong {
   font-weight: 800;
   color: var(--neo-black);
-  border-bottom: 3px solid var(--neo-pink);
+  border-bottom: 3px solid var(--neo-yellow);
 }
 
 .nb-chips {
@@ -709,7 +711,7 @@
 
 /* ---------------------------- ABOUT ---------------------------- */
 #about.neo-about {
-  background: var(--neo-lavender);
+  background: var(--neo-mint);
   border-top: var(--neo-border);
   border-bottom: var(--neo-border);
   padding: 120px 48px;
@@ -733,7 +735,8 @@
 .nb-about-title {
   font-family: var(--sans);
   font-weight: 900;
-  font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+  /* min sized so "ENTREPRENEUR." still fits one line on a 360px phone */
+  font-size: clamp(2.1rem, 5.4vw, 4.4rem);
   line-height: 0.95;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -757,7 +760,7 @@
 .nb-about-lead strong {
   font-weight: 700;
   color: var(--neo-black);
-  border-bottom: 3px solid var(--neo-pink);
+  border-bottom: 3px solid var(--neo-yellow);
 }
 
 .nb-exp-grid {
@@ -869,7 +872,7 @@
    DRIFT JOURNEY — scroll-driven 3D timeline
 ============================================================ */
 #journey { background: #e9ebf1; }
-#journey .journey-wrap { height: 520vh; }
+#journey .journey-wrap { height: 700vh; } /* ~100vh of scroll per milestone (7 stops) */
 #journey .journey-sticky { justify-content: flex-start; padding: 0; }
 
 #driftCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
@@ -895,30 +898,32 @@
 /* Header (over the scene) */
 #journey .journey-header { position: absolute; top: 5vh; left: 48px; right: 48px; z-index: 4; margin: 0; max-width: 560px; pointer-events: none; }
 #journey .journey-header .s-label { color: #3a3f4d; }
-#journey .journey-header .s-label::before { background: linear-gradient(90deg, #8b7bff, #4dd4ff); }
+#journey .journey-header .s-label::before { background: #06d6a0; }
 #journey .journey-header h2 { color: #10121a; font-weight: 900; }
 #journey .journey-header p { color: #4a505e; }
 
 /* Per-event accent */
-.drift-event[data-i="0"] { --evc: #8b7bff; }
-.drift-event[data-i="1"] { --evc: #4dd4ff; }
-.drift-event[data-i="2"] { --evc: #ff6ec4; }
-.drift-event[data-i="3"] { --evc: #5eead4; }
-.drift-event[data-i="4"] { --evc: #ffb347; }
+.drift-event[data-i="0"] { --evc: #ffe066; }
+.drift-event[data-i="1"] { --evc: #06d6a0; }
+.drift-event[data-i="2"] { --evc: #ffe066; }
+.drift-event[data-i="3"] { --evc: #06d6a0; }
+.drift-event[data-i="4"] { --evc: #ffe066; }
+.drift-event[data-i="5"] { --evc: #06d6a0; }
+.drift-event[data-i="6"] { --evc: #ffe066; }
 
 /* Event HUD card */
 .drift-ev-num { position: absolute; top: 18px; right: 22px; font-family: var(--font-code); font-size: 0.72rem; font-weight: 700; color: rgba(255, 255, 255, 0.25); }
 .drift-ev-ic {
   display: inline-flex; align-items: center; justify-content: center;
   width: 44px; height: 44px; border-radius: 13px; margin-bottom: 16px;
-  font-size: 1.1rem; color: #0a0a0f; background: var(--evc, #8b7bff);
-  box-shadow: 0 0 26px -4px var(--evc, #8b7bff);
+  font-size: 1.1rem; color: #0a0a0f; background: var(--evc, #ffe066);
+  box-shadow: 0 0 26px -4px var(--evc, #ffe066);
 }
 .drift-ev-year {
   display: block; font-family: var(--sans); font-weight: 900; font-size: 2.3rem; line-height: 1; letter-spacing: -0.03em; margin-bottom: 8px;
   background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.45)); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.drift-ev-tag { display: block; font-family: var(--font-code); font-size: 0.56rem; letter-spacing: 0.16em; color: var(--evc, #8b7bff); margin-bottom: 12px; }
+.drift-ev-tag { display: block; font-family: var(--font-code); font-size: 0.56rem; letter-spacing: 0.16em; color: var(--evc, #ffe066); margin-bottom: 12px; }
 .drift-event h3 { font-size: 1.22rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 8px; }
 .drift-event p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.62); line-height: 1.6; }
 
@@ -936,7 +941,7 @@
 /* Progress rail (right) */
 #journey.is-3d .drift-progress { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 18px; pointer-events: none; }
 .drift-bar { width: 3px; height: 190px; border-radius: 3px; background: rgba(20, 22, 30, 0.16); overflow: hidden; position: relative; }
-.drift-bar-fill { position: absolute; inset: 0; transform-origin: top; transform: scaleY(0); background: linear-gradient(180deg, #8b7bff, #4dd4ff, #ff6ec4); }
+.drift-bar-fill { position: absolute; inset: 0; transform-origin: top; transform: scaleY(0); background: linear-gradient(180deg, #ffe066, #06d6a0); }
 .drift-dots { display: flex; flex-direction: column; gap: 12px; }
 .drift-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(20, 22, 30, 0.22); transition: transform 0.35s, background 0.35s, box-shadow 0.35s; }
 .drift-dot.active { background: #10121a; transform: scale(1.4); box-shadow: 0 0 0 4px rgba(139, 123, 255, 0.18); }
@@ -1080,17 +1085,18 @@
 }
 
 /* Submit — warm amber */
+/* CTA-exclusive purple (matches .quick-contact) */
 .f-sub {
-  background: rgba(175, 75, 8, 0.97) !important;
+  background: var(--neo-purple) !important;
   color: #fff !important;
-  border: 1px solid rgba(255, 175, 70, 0.3) !important;
-  box-shadow: 0 4px 24px rgba(150, 60, 0, 0.38) !important;
+  border: 3px solid var(--neo-black) !important;
+  box-shadow: 5px 5px 0 var(--neo-shadow-color) !important;
 }
 .f-sub::before {
-  background: rgba(215, 105, 25, 0.96) !important;
+  background: rgba(0, 0, 0, 0.18) !important;
 }
 .f-sub:hover {
-  box-shadow: 0 10px 40px rgba(190, 75, 0, 0.5) !important;
+  box-shadow: 7px 7px 0 var(--neo-shadow-color) !important;
 }
 
 /* ── Social link glass cards ── */
@@ -1339,6 +1345,70 @@
 
 
 /* ============================================================
+   HERO — tagline + proof strip (2026 redesign)
+   ============================================================ */
+.nb-hero-tagline {
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: var(--neo-black);
+  margin: 18px 0 8px;
+}
+.nb-hero-sub {
+  font-family: var(--font-code);
+  font-size: .86rem;
+  line-height: 1.7;
+  color: #333;
+  max-width: 52ch;
+  margin-bottom: 24px;
+}
+.nb-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.nb-proof-item {
+  background: #fff;
+  border: 2px solid var(--neo-black);
+  box-shadow: 3px 3px 0 var(--neo-shadow-color);
+  padding: 9px 14px;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--neo-black);
+}
+
+/* ============================================================
+   ABOUT — ethos sticker strip (V2 personality patch)
+   ============================================================ */
+.nb-ethos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+.nb-ethos-chip {
+  display: inline-block;
+  border: 2px solid var(--neo-black);
+  box-shadow: 3px 3px 0 var(--neo-shadow-color);
+  padding: 10px 15px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--neo-black);
+  transform: rotate(-2deg);
+}
+.nb-ethos-chip:nth-child(2) { transform: rotate(1.5deg); }
+.nb-ethos-chip:nth-child(3) { transform: rotate(-1deg); }
+.nb-ethos-cap {
+  margin-top: 12px;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: #3a3a3a;
+}
+
+/* ============================================================
    DARK MODE — toggle + system default (data-theme on <html>)
    Neo-brutal pastel CARDS stay vivid by design; we darken the
    page / section backgrounds and lift the text that sits on them.
@@ -1367,20 +1437,23 @@
 [data-theme="dark"] #home.neo-hero { background: #0e0f14; }
 [data-theme="dark"] .nb-hero-hi, [data-theme="dark"] .nb-name { color: #f3f4f6; }
 [data-theme="dark"] .nb-hero-bio { color: #dfe1e5; }
+[data-theme="dark"] .nb-hero-tagline { color: #f3f4f6; }
+[data-theme="dark"] .nb-hero-sub { color: #cdd0d6; }
 
 /* About — darken section + light dividers + lift headings (exp cards stay vivid) */
 [data-theme="dark"] #about.neo-about { background: #121319; border-top-color: rgba(255, 255, 255, 0.14); border-bottom-color: rgba(255, 255, 255, 0.14); }
 [data-theme="dark"] .nb-kicker { color: #b9bdc6; }
 [data-theme="dark"] .nb-about-title { color: #f3f4f6; }
 /* .nb-about-lead keeps its white card bg by design — text must stay dark, not the light-on-dark grey used elsewhere */
+[data-theme="dark"] .nb-ethos-cap { color: #9aa0a8; }
 
 /* Skills */
 [data-theme="dark"] #skills { background: #0a0b0e; }
 [data-theme="dark"] .sk-card { background: #15171c; }
 [data-theme="dark"] .sk-card:hover { background: #1c1f27; }
 /* the tech-icon wall glows on the dark backdrop */
-[data-theme="dark"] .skills-fx::before { background: radial-gradient(60% 55% at 50% 40%, rgba(90, 140, 255, 0.16), transparent 72%); }
-[data-theme="dark"] .sfx-ic { filter: blur(var(--bl, 0)) drop-shadow(0 0 14px rgba(120, 180, 255, 0.55)); opacity: calc(var(--op, 0.18) + 0.06); }
+[data-theme="dark"] .skills-fx::before { background: radial-gradient(60% 55% at 50% 40%, rgba(6, 214, 160, 0.14), transparent 72%); }
+[data-theme="dark"] .sfx-ic { filter: blur(var(--bl, 0)) drop-shadow(0 0 14px rgba(6, 214, 160, 0.5)); opacity: calc(var(--op, 0.18) + 0.06); }
 
 /* Journey 3D section backdrop */
 [data-theme="dark"] #journey { background: #0a0b0f; }
@@ -1432,19 +1505,12 @@
 }
 [data-theme="dark"] .f-inp:focus,
 [data-theme="dark"] .f-ta:focus {
-  border-color: #7c8aff !important;
-  box-shadow: 0 0 0 4px rgba(120, 140, 255, 0.18), inset 0 1px 3px rgba(0,0,0,0.2) !important;
+  border-color: #ffe066 !important;
+  box-shadow: 0 0 0 4px rgba(255, 224, 102, 0.16), inset 0 1px 3px rgba(0,0,0,0.2) !important;
   background: rgba(18, 20, 28, 0.95) !important;
 }
 [data-theme="dark"] .f-lbl { color: #b9bdc6 !important; }
-[data-theme="dark"] .f-sub {
-  background: linear-gradient(100deg, #5a6aff, #7c8aff) !important;
-  color: #fff !important;
-  border-color: rgba(120, 140, 255, 0.3) !important;
-  box-shadow: 0 4px 24px rgba(90, 106, 255, 0.3) !important;
-}
-[data-theme="dark"] .f-sub::before { background: linear-gradient(100deg, #4a5aef, #6c7aef) !important; }
-[data-theme="dark"] .f-sub:hover { box-shadow: 0 10px 40px rgba(90, 106, 255, 0.45) !important; }
+/* .f-sub is flat CTA purple in both themes (base rule); shadow color flips via --neo-shadow-color */
 [data-theme="dark"] .cl-link {
   background: rgba(20, 22, 30, 0.7) !important;
   border-color: rgba(255, 255, 255, 0.10) !important;
@@ -1452,13 +1518,13 @@
 }
 [data-theme="dark"] .cl-link:hover {
   background: rgba(30, 33, 42, 0.85) !important;
-  border-color: rgba(120, 140, 255, 0.4) !important;
+  border-color: rgba(255, 224, 102, 0.5) !important;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4) !important;
 }
 [data-theme="dark"] .cl-txt span:first-child { color: rgba(200, 205, 220, 0.55) !important; }
 [data-theme="dark"] .cl-txt span:last-child  { color: rgba(220, 225, 240, 0.92) !important; }
 [data-theme="dark"] .cl-arr { color: rgba(200, 205, 220, 0.4) !important; }
-[data-theme="dark"] .cl-link:hover .cl-arr { color: rgba(120, 140, 255, 1) !important; }
+[data-theme="dark"] .cl-link:hover .cl-arr { color: #ffe066 !important; }
 
 /* Footer */
 [data-theme="dark"] footer { border-top-color: rgba(255, 255, 255, 0.10); }
