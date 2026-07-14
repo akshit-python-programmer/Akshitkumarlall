@@ -49,12 +49,12 @@
     nav{position:fixed;top:0;left:0;right:0;z-index:2000;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:all .4s var(--ease)}
     nav.scrolled{padding:14px 48px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;text-decoration:none;color:var(--fg);font-weight:700}
-    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links{display:flex;gap:24px;list-style:none}
     .nav-links a{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-decoration:none;color:var(--fg3);transition:color .3s;position:relative}
     .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--fg);transition:width .3s var(--ease)}
     .nav-links a:hover{color:var(--fg)}.nav-links a:hover::after{width:100%}
     .nav-toggle{display:none;background:none;border:1.5px solid var(--border2);color:var(--fg);padding:7px 12px;cursor:var(--cur-point);font-size:.85rem}
-    .mob-menu{display:none;position:fixed;inset:0;z-index:1900;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:36px}
+    .mob-menu{display:none;position:fixed;inset:0;z-index:1900;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:90px 20px 40px;overflow-y:auto}
     .mob-menu.open{display:flex}
     .mob-menu a{font-family:var(--mono);font-size:1.5rem;text-decoration:none;color:var(--fg);letter-spacing:.1em}
     .mob-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:1.4rem;cursor:var(--cur-point);color:var(--fg)}
@@ -80,6 +80,9 @@
     .s-label{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--fg3);margin-bottom:16px}
     .s-label::before{content:'';width:32px;height:1.5px;background:var(--fg)}
     .s-max{max-width:1300px;margin:0 auto}
+    img,video{max-width:100%;height:auto}
+
+    #projects,#about,#skills,#testimonials,#awards,#journey,#contact{scroll-margin-top:96px}
 
     @keyframes fu{to{opacity:1;transform:translateY(0)}}
     @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -643,6 +646,16 @@
     .loc-tag{font-weight:800;color:#c8860a;letter-spacing:.08em;position:relative;padding:1px 5px;background:rgba(255,215,0,.18);border-radius:3px;border-bottom:2px solid rgba(255,185,0,.55)}
 
     /* ===== RESPONSIVE ===== */
+    @media(max-width:1100px){
+        nav,nav.scrolled{padding-left:28px;padding-right:28px}
+        .nav-links{gap:16px}
+        .nav-links a{font-size:.66rem;letter-spacing:.1em}
+    }
+    @media(max-width:980px){
+        nav,nav.scrolled{padding:14px 20px}
+        .nav-links{display:none}
+        .nav-toggle{display:block}
+    }
     @media(max-width:1024px){
         .hero-grid,.about-grid,.innov-grid,.hum-grid,.contact-grid{grid-template-columns:1fr;gap:48px}
         .hero-right{order:-1}.hero-img-wrap{max-width:360px;margin:0 auto}
@@ -661,6 +674,7 @@
         
         .test-grid{grid-template-columns:1fr}
         .jc{min-width:300px}
+        .aw-text{padding:28px 24px}
     }
     @media(max-width:768px){
         /* Mobile tweaks for Next Gen Camera console and scene label */
@@ -675,7 +689,6 @@
         .scene-lbl{left:12px;bottom:12px;right:auto;font-size:.55rem}
 
         nav,nav.scrolled{padding:14px 20px}
-        .nav-links{display:none}.nav-toggle{display:block}
         #home,#labs,#about,#skills,#projects,#awards,#certificates,#testimonials,#innovation,#contact,#humanoid{padding:80px 20px}
         .hero-name{font-size:clamp(2.8rem,10vw,4.2rem)}
         .about-right{grid-template-columns:1fr}
@@ -698,8 +711,8 @@
         .ph-left h2{font-size:clamp(2rem,6vw,3rem)}
         .aw-stat-num{font-size:2rem}
         .film-frame{min-width:160px;height:120px}
-        .mob-menu{gap:16px}
-        .mob-menu a{font-size:1.2rem}
+        .mob-menu{gap:14px}
+        .mob-menu a{font-size:1.05rem;line-height:1.35;text-align:center;width:min(420px,100%)}
     }
     </style>
 </head>
@@ -711,6 +724,7 @@
     <ul class="nav-links">
         <li><a href="#projects">PROJECTS</a></li>
         <li><a href="#about">ABOUT</a></li>
+        <li><a href="#testimonials">REVIEWS</a></li>
         <li><a href="#awards">AWARDS</a></li>
         <li><a href="#journey">JOURNEY</a></li>
         <li><a href="#contact">CONTACT</a></li>
@@ -722,7 +736,7 @@
 </nav>
 <div class="mob-menu" id="mobMenu">
     <button class="mob-close" id="mobClose"><i class="fas fa-times"></i></button>
-    <a href="#projects">PROJECTS</a><a href="#about">ABOUT</a><a href="#awards">AWARDS</a><a href="#journey">JOURNEY</a><a href="#contact">CONTACT</a>
+    <a href="#projects">PROJECTS</a><a href="#about">ABOUT</a><a href="#testimonials">REVIEWS</a><a href="#awards">AWARDS</a><a href="#journey">JOURNEY</a><a href="#contact">CONTACT</a>
 </div>
 
 <!-- HERO -->
@@ -2416,6 +2430,13 @@ scrollCbs.push(y=>{
 document.getElementById('navBtn').addEventListener('click',()=>{document.getElementById('mobMenu').classList.add('open')});
 document.getElementById('mobClose').addEventListener('click',()=>{document.getElementById('mobMenu').classList.remove('open')});
 document.querySelectorAll('.mob-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open')));
+
+// ===== SECTION ORDER (Client Reviews before Awards) =====
+const awardsSection=document.getElementById('awards');
+const reviewsSection=document.getElementById('testimonials');
+if(awardsSection && reviewsSection && awardsSection.previousElementSibling!==reviewsSection){
+    awardsSection.parentNode.insertBefore(reviewsSection,awardsSection);
+}
 
 // ===== THEME TOGGLE (dark mode) =====
 // data-theme is already set pre-paint by the boot script in <head>. Here we

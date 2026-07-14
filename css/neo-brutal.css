@@ -1343,6 +1343,56 @@
   #testimonials { padding: 64px 20px !important; }
 }
 
+@media (max-width: 980px) {
+  #testimonials .test-card {
+    padding: 18px 16px 14px !important;
+  }
+  #testimonials .test-text {
+    font-size: .96rem !important;
+    line-height: 1.62 !important;
+  }
+  .test-play {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .test-play-main {
+    min-width: 180px;
+  }
+  .test-play-time {
+    margin-left: auto;
+  }
+  #awards .aw-title,
+  #awards .aw-desc,
+  #awards .aw-venue {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+}
+
+@media (max-width: 560px) {
+  .test-play {
+    padding: 8px 10px;
+    font-size: .54rem;
+    letter-spacing: .1em;
+  }
+  .test-play-main {
+    min-width: 0;
+    width: 100%;
+    order: 2;
+  }
+  .test-play-time {
+    width: 100%;
+    text-align: right;
+    order: 3;
+  }
+  #awards .aw-badges {
+    gap: 8px !important;
+  }
+  #awards .aw-cert-row {
+    gap: 8px !important;
+  }
+}
+
 
 /* ============================================================
    HERO — tagline + proof strip (2026 redesign)
