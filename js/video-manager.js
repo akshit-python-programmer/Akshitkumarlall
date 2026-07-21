@@ -1,6 +1,3 @@
-/**
- * Portfolio video performance — lazy src, one decoder at a time, modal click-to-play.
- */
 (function (global) {
   'use strict';
 
@@ -114,9 +111,8 @@
     btn.type = 'button';
     btn.className = 'pm-vid-play';
     btn.innerHTML = '<i class="fas fa-play"></i> PLAY';
-      btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (global.SFX) global.SFX.play('play');
       pauseAllIn(wrap.closest('#pmMedia') || document);
       ensureSrc(video);
       video.muted = false;
@@ -140,7 +136,6 @@
 
     const btn = playBar.querySelector('.pm-main-play');
     btn.addEventListener('click', () => {
-      if (global.SFX) global.SFX.play('play');
       pauseAllBento();
       ensureSrc(video);
       video.muted = false;

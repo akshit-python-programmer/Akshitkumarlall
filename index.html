@@ -39,7 +39,11 @@
     }
     
     html{scroll-behavior:smooth;overflow-x:clip}
-    body{font-family:var(--sans);background:var(--bg);color:var(--fg);overflow-x:hidden;cursor:var(--cur-arrow);
+    /* Must be overflow-x:CLIP, never `hidden`. `hidden` computes overflow-y to `auto`,
+       which turns <body> into a scroll container — and then position:sticky children
+       (the journey car scene) anchor to body's scrollport instead of the viewport and
+       never stick at all. `clip` suppresses sideways overflow without that side effect. */
+    body{font-family:var(--sans);background:var(--bg);color:var(--fg);overflow-x:clip;cursor:var(--cur-arrow);
         background-image:radial-gradient(circle,rgba(0,0,0,.04) 1px,transparent 1px);background-size:24px 24px}
     ::selection{background:var(--fg);color:var(--bg)}
 
@@ -1207,43 +1211,7 @@
     </div>
 </section>
 
-<!-- INTERACTIVE LABS HUB 
-<section id="labs">
-    <div class="labs-intro rv">
-        <div class="s-label">INTERACTIVE LABS</div>
-        <h2>Hands-On Labs</h2>
-        <p>Every demo here is built to explore a specific technology in a playful, interactive way — from web experiments to robot controls.</p>
-    </div>
-    <div class="labs-grid rv">
-        <a href="web-lab.html" class="lab-card gc">
-            <div class="lab-card-tag">WEB</div>
-            <h3>Web Lab</h3>
-            <p>Interactive experiments in HTML, CSS and vanilla JavaScript.</p>
-            <span class="lab-card-go">OPEN LAB</span>
-        </a>
-        <a href="innovation-lab.html" class="lab-card gc">
-            <div class="lab-card-tag">INNOVATION</div>
-            <h3>Next Gen Camera Lab</h3>
-            <p>Explore the live AI security demo and engineering dashboard.</p>
-            <span class="lab-card-go">OPEN LAB</span>
-        </a>
-        <a href="create-lab.html" class="lab-card gc">
-            <div class="lab-card-tag">CREATIVE</div>
-            <h3>Design Lab</h3>
-            <p>Build, prototype and visualize product concepts within the portfolio.</p>
-            <span class="lab-card-go">OPEN LAB</span>
-        </a>
-        <a href="cv-lab.html" class="lab-card gc">
-            <div class="lab-card-tag">COMPUTER VISION</div>
-            <h3>CV Lab</h3>
-            <p>Live demos of object detection, tracking, pose and motion analysis.</p>
-            <span class="lab-card-go">OPEN LAB</span>
-        </a>
-    </div>
-</section> -->
-
-<!-- PROJECT MODAL
-================================================================ -->
+<!-- PROJECT MODAL -->
 <div class="proj-modal" id="projModal">
     <div class="pm-bg" id="pmBg"></div>
     <div class="pm-panel">
@@ -1402,26 +1370,6 @@
                     <a class="aw-cert-link" href="assets/certificates/inter%20school%20model%20making.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
                 </div>
             </div>
-            <!-- <div class="aw-entry reverse rv">
-                <div class="aw-img"><img src="assets/certificates/stemq/RANK SREMQ.jpeg" alt="STEM Q Rank"><div class="aw-img-num">11</div></div>
-                <div class="aw-text">
-                    <div class="aw-cat">ACADEMIC RANK</div>
-                    <h3 class="aw-title">STEM Q Rank Certificate</h3>
-                    <div class="aw-venue"><strong>STEMQ</strong><br>Rank achievement certificate</div>
-                    <p class="aw-desc">Earned a ranked certificate in the STEM Q assessment, showing strong performance in science, technology, engineering, and mathematics. This credential underscores the project’s academic credibility.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-brain"></i> STEM SKILLS</span><span class="aw-badge"><i class="fas fa-award"></i> RANKED</span></div>
-                </div>
-            </div> -->
-            <!-- <div class="aw-entry rv">
-                <div class="aw-img"><img src="assets/certificates/misc/download.png" alt="Green Olympiad Certificate"><div class="aw-img-num">12</div></div>
-                <div class="aw-text">
-                    <div class="aw-cat">OLYMPIAD DISTINCTION</div>
-                    <h3 class="aw-title">Green Olympiad — Distinction</h3>
-                    <div class="aw-venue"><strong>Green Olympiad</strong><br>Environment science exam distinction</div>
-                    <p class="aw-desc">Awarded distinction in the Green Olympiad for strong environmental science understanding and application. This achievement complements the engineering awards with broad STEM recognition.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-leaf"></i> ENVIRONMENT</span><span class="aw-badge"><i class="fas fa-star"></i> DISTINCTION</span></div>
-                </div>
-            </div> -->
         </div>
     </div>
 </section>
@@ -1548,7 +1496,6 @@
                     <h3>Born in Ranchi, Jharkhand</h3>
                     <p>Born and raised in Ranchi — the city of waterfalls. Started tinkering with electronics and computers at a young age.</p>
                 </article>
-                <!-- TODO-VERIFY: exact class-6 year -->
                 <article class="drift-event" data-i="1">
                     <span class="drift-ev-num">02</span>
                     <i class="fas fa-code drift-ev-ic"></i>
@@ -1557,7 +1504,6 @@
                     <h3>First Lines of Code</h3>
                     <p>Self-taught from YouTube and docs — the start of a habit that never stopped.</p>
                 </article>
-                <!-- TODO-VERIFY: exact class-7 year -->
                 <article class="drift-event" data-i="2">
                     <span class="drift-ev-num">03</span>
                     <i class="fas fa-camera drift-ev-ic"></i>
@@ -1662,9 +1608,6 @@
 <a href="#contact" class="quick-contact" aria-label="Contact Me">CONTACT ME</a>
 
 <script src="js/video-manager.js"></script>
-<!-- Drift Journey 3D scene. Inlined as a module so it runs regardless of the
-     local servers JS MIME type (Windows python http.server serves .js as text/plain,
-     which blocks external module scripts). CDN imports below are unaffected. -->
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -1679,7 +1622,11 @@ const CONFIG = {
   logUrl: 'assets/cardrift/log_low-poly_3d_model.glb',
   schoolUrl: 'assets/cardrift/low_poly__school_building.glb',
   audioUrl: 'assets/cardrift/car sound.mp3',
-  carLength: 40.5,        // target car length in world units
+  // Target car length in world units. Must stay in proportion to roadWidth — the
+  // camera sits 11.5 behind and smoke spawns 2.6 back, so ~5.5 is the tuned size.
+  // (Read 40.5 while the GLB's floor slab was being measured instead of the car,
+  // which scaled the car to this same ~5.5 by accident. See the loader below.)
+  carLength: 5.5,
   carYaw: Math.PI,       // set to Math.PI if the car ever drives in reverse
   carColor: 0xeceef2,    // fallback paint when the GLB ships with no colour data
   roadWidth: 7,
@@ -1709,25 +1656,17 @@ function boot() {
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
   } catch (e) { fail(e); return; }
-  // Cap DPR at 1.5: on retina/4K a full-viewport canvas at DPR 2 renders ~4x
-  // the pixels, which is the main cause of scroll stutter through this section.
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  // Cinematic colour response — cheap per-pixel tone curve, always on.
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.08;
 
-  // Only beefier devices get the post-processing bloom "filter". We detect
-  // capability up front and DYNAMICALLY import the bloom passes — low-end
-  // devices never even fetch or run that code path.
   const HIGH_END = (navigator.hardwareConcurrency || 2) >= 8
     && (navigator.deviceMemory || 4) >= 4
     && !window.matchMedia('(pointer:coarse)').matches;
   let composer = null;
 
   const scene = new THREE.Scene();
-  // Sky/fog follow the site theme — pale day sky vs deep night (which also
-  // makes the new headlights actually read). Updated live on theme change.
   const DAY_SKY = 0xe9ebf1, NIGHT_SKY = 0x0c1020;
   const SKY = new THREE.Color(DAY_SKY);
   scene.background = SKY;
@@ -1741,8 +1680,6 @@ function boot() {
   }
   window.addEventListener('themechange', (e) => applyTheme(e.detail));
 
-  // Neutral studio environment so the car's PBR (metallic) materials are lit
-  // instead of rendering black. Without an env map, glTF metalness=1 surfaces are black.
   try {
     const pmrem = new THREE.PMREMGenerator(renderer);
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
@@ -1759,9 +1696,6 @@ function boot() {
   rim.position.set(-12, 9, -14);
   scene.add(rim);
 
-  // Capable devices: lazy-load a subtle UnrealBloom pass for a soft cinematic
-  // glow on bright surfaces (sky, headlights, paint). Imports resolve from the
-  // CDN import map, so this is fetched on demand and skipped entirely otherwise.
   if (HIGH_END) {
     Promise.all([
       import('three/addons/postprocessing/EffectComposer.js'),
@@ -1774,7 +1708,6 @@ function boot() {
       c.setPixelRatio(renderer.getPixelRatio());
       c.setSize(w, h);
       c.addPass(new RenderPass(scene, camera));
-      // (resolution, strength, radius, threshold) — gentle, only bright pixels
       c.addPass(new UnrealBloomPass(new THREE.Vector2(w, h), 0.42, 0.55, 0.85));
       c.addPass(new OutputPass());
       composer = c;
@@ -1868,14 +1801,16 @@ function boot() {
   (function addHeadlights() {
     const grp = new THREE.Group();
     const lampMat = new THREE.MeshStandardMaterial({ color: 0xfff6d8, emissive: 0xfff0be, emissiveIntensity: 4 });
-    const lampGeo = new THREE.SphereGeometry(0.55, 14, 10);
-    for (const sx of [-1.8, 1.8]) {
+    // Offsets are in carRig space (+Z forward) and sized against the real car:
+    // ~5.5 long, 2.6 wide, 2.7 tall — so the nose is at z≈2.75, not z≈18.
+    const lampGeo = new THREE.SphereGeometry(0.18, 14, 10);
+    for (const sx of [-0.85, 0.85]) {
       const lamp = new THREE.Mesh(lampGeo, lampMat);
-      lamp.position.set(sx, 2.0, 18);          // car front (local +Z is forward)
+      lamp.position.set(sx, 0.9, 2.5);         // car front (local +Z is forward)
       grp.add(lamp);
-      const beam = new THREE.SpotLight(0xfff1c4, 5, 95, Math.PI / 7, 0.55, 1.1);
-      beam.position.set(sx, 2.4, 17);
-      beam.target.position.set(sx * 1.5, -2.5, 48); // light pool further down the road
+      const beam = new THREE.SpotLight(0xfff1c4, 5, 40, Math.PI / 7, 0.55, 1.1);
+      beam.position.set(sx, 1.0, 2.4);
+      beam.target.position.set(sx * 1.5, -0.4, 15); // light pool further down the road
       grp.add(beam, beam.target);
       headlightBeams.push(beam);
     }
@@ -1899,6 +1834,14 @@ function boot() {
   const loader = new GLTFLoader();
   loader.load(CONFIG.carUrl, (gltf) => {
     const obj = gltf.scene;
+    // This GLB ships with the original asset's turntable floor baked in — a flat
+    // 9.56 x 9.56 slab ("Floor_Floor_0") around a car that is only 1.31 long. It has
+    // to go BEFORE we measure: it dominates the bounding box, so the scale factor
+    // gets derived from the floor instead of the car, and the slab then rides along
+    // with the car covering the road and everything beside it.
+    const floors = [];
+    obj.traverse((o) => { if (o.isMesh && /floor/i.test(o.name)) floors.push(o); });
+    if (floors.length) floors.forEach((f) => f.removeFromParent());
     const box = new THREE.Box3().setFromObject(obj);
     const size = new THREE.Vector3(); box.getSize(size);
     const center = new THREE.Vector3(); box.getCenter(center);
