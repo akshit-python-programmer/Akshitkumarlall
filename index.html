@@ -394,6 +394,9 @@
     .aw-entry:hover{border-color:rgba(255,255,255,.2)}
     .aw-entry.reverse .aw-img{order:2}.aw-entry.reverse .aw-text{order:1}
     .aw-img{position:relative;overflow:hidden;background:#111;height:420px}
+    /* square media: a 1:1 source fills the column edge-to-edge with nothing cropped.
+       The doubled class keeps this ahead of the mobile `.aw-img{height:280px}` override. */
+    .aw-img.aw-img-square{height:auto;aspect-ratio:1/1}
     .aw-img img,.aw-img video{width:100%;height:100%;object-fit:cover;filter:grayscale(60%);transition:filter .6s,transform .6s}
     .aw-entry:hover .aw-img img,.aw-entry:hover .aw-img video{filter:grayscale(0%);transform:scale(1.03)}
     .aw-img-num{position:absolute;top:24px;left:24px;font-family:var(--mono);font-size:4rem;font-weight:900;color:rgba(255,255,255,.1);line-height:1;z-index:2}
@@ -728,9 +731,9 @@
     <a href="#home" class="nav-logo">AKL_</a>
     <ul class="nav-links">
         <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#awards">AWARDS</a></li>
         <li><a href="#about">ABOUT</a></li>
         <li><a href="#testimonials">REVIEWS</a></li>
-        <li><a href="#awards">AWARDS</a></li>
         <li><a href="#journey">JOURNEY</a></li>
         <li><a href="#contact">CONTACT</a></li>
     </ul>
@@ -741,7 +744,7 @@
 </nav>
 <div class="mob-menu" id="mobMenu">
     <button class="mob-close" id="mobClose"><i class="fas fa-times"></i></button>
-    <a href="#projects">PROJECTS</a><a href="#about">ABOUT</a><a href="#testimonials">REVIEWS</a><a href="#awards">AWARDS</a><a href="#journey">JOURNEY</a><a href="#contact">CONTACT</a>
+    <a href="#projects">PROJECTS</a><a href="#awards">AWARDS</a><a href="#about">ABOUT</a><a href="#testimonials">REVIEWS</a><a href="#journey">JOURNEY</a><a href="#contact">CONTACT</a>
 </div>
 
 <!-- HERO -->
@@ -760,14 +763,15 @@
                 <span class="nb-term-dots"><i></i><i></i><i></i></span>
                 <span class="nb-term-txt font-code">&gt;&nbsp;<span id="typed"></span><span class="caret"></span></span>
             </div>
-            <p class="nb-hero-tagline">I build machines that see.</p>
+            <!-- <p class="nb-hero-tagline">I build machines that see.</p> -->
+            <p class="nb-hero-tagline font-code">Just a Curious aspiring Innovator and Founder.</p>
             <p class="nb-hero-sub font-code">Computer-vision-first builder — <strong>171 projects</strong> since class 6. Founder of <strong>AKL Technologies</strong>, putting AI into the physical world — and shipping full-stack products on the web.</p>
 
-            <div class="nb-proof font-code">
-                <span class="nb-proof-item">171 PROJECTS BUILT</span>
-                <span class="nb-proof-item">AWARD-WINNING AI CAMERA</span>
-                <span class="nb-proof-item">50+ FIVERR CLIENTS · 5.0★</span>
-            </div>
+            <!-- <div class="nb-proof font-code"> -->
+                <!-- <span class="nb-proof-item">171 PROJECTS BUILT</span> -->
+                <!-- <span class="nb-proof-item">AWARD-WINNING AI CAMERA</span> -->
+                <!-- <span class="nb-proof-item">50+ FIVERR CLIENTS · 5.0★</span> -->
+            <!-- </div> -->
             <div class="nb-cta">
                 <a href="#projects" class="nb-btn nb-btn-dark"><span>VIEW PROJECTS</span> <i class="fas fa-arrow-right"></i></a>
             </div>
@@ -783,10 +787,10 @@
 </section>
 
 <!-- Stats -->
-<div class="stats-strip rv">
+<!-- <div class="stats-strip rv">
     <div class="stat-item"><span class="stat-num counter" data-t="171" data-sfx="">0</span><span class="stat-label">PROJECTS BUILT SINCE CLASS 6</span></div>
     <div class="stat-item"><span class="stat-num counter" data-t="50">0</span><span class="stat-label">FIVERR CLIENTS · 5.0★</span></div>
-</div>
+</div> -->
 
 <!-- Marquee -->
 <div class="marquee-wrap">
@@ -820,20 +824,37 @@
         <div class="proj-filter rv">
             <button class="pfb active" data-f="all">FEATURED <span class="cnt">18</span></button>
             <button class="pfb" data-f="cv">COMPUTER VISION <span class="cnt">9</span></button>
-            <button class="pfb" data-f="ai">AI / ML <span class="cnt">9</span></button>
+            <button class="pfb" data-f="ai">AI / ML <span class="cnt">10</span></button>
             <button class="pfb" data-f="web">WEB / CLIENT <span class="cnt">3</span></button>
             <button class="pfb" data-f="game">GAME / 3D <span class="cnt">3</span></button>
         </div>
 
         <!-- ============ BENTO GRID ============ -->
         <div class="bento rv" id="bentoGrid">
-            <!-- 12: Next Gen Camera (flagship) -->
-            <div class="bc bc-featured" data-id="12" data-cat="cv ai" style="--i:0">
-                <img src="assets/next gen camera/robber detection.png" alt="Next Gen Camera System">
+            <!-- 17: Furti AI — VinHack autonomous desktop agent -->
+            <div class="bc" data-id="17" data-cat="ai" style="--i:0">
+                <img src="assets/my projects/furti.png" alt="Furti AI autonomous desktop agent">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
                 <div class="bc-num">01</div>
+                <div class="bc-badge accent">VINHACK · AI AGENT</div>
+                <div class="bc-content">
+                    <div class="bc-level"><span class="bc-dot"></span>AUTONOMOUS DESKTOP AGENT</div>
+                    <h3 class="bc-title">Furti AI — Beyond the Browser</h3>
+                    <p class="bc-blurb">An autonomous desktop agent that handles repetitive workflows across software, using a token-efficient vision pipeline and TypeSafe AI Jev for structured decisions.</p>
+                    <div class="bc-tags"><span class="bc-tag">desktop-agent</span><span class="bc-tag">computer-vision</span><span class="bc-tag">jev</span></div>
+                    <button class="bc-expand"><span>VIEW CASE STUDY</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 12: Next Gen Camera -->
+            <div class="bc" data-id="12" data-cat="cv ai" style="--i:1">
+                <img src="assets/next gen camera/robber detection.png" alt="Next Gen Camera System">
+                <div class="bc-grad"></div>
+                <span class="bc-shine"></span>
+                <div class="bc-frame"></div>
+                <div class="bc-num">02</div>
                 <div class="bc-badge paid"><span class="bc-badge-dot"></span>FLAGSHIP · 4 AWARDS</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>AI SECURITY · 5 DETECTION MODULES</div>
@@ -844,25 +865,8 @@
                 </div>
             </div>
 
-            <!-- 13: vit programming language -->
-            <div class="bc" data-id="13" data-cat="" style="--i:1">
-                <img src="assets/my projects/vit-language-cover.svg" alt="vit — My Own Programming Language">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">02</div>
-                <div class="bc-badge accent">BUILT MY OWN LANGUAGE</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>INTERPRETER · FROM SCRATCH</div>
-                    <h3 class="bc-title">vit — My Own Programming Language</h3>
-                    <p class="bc-blurb">A hand-written lexer, parser and executer with its own keyword system and source-cache format. Not a wrapper, not a transpiler — an interpreted language built from nothing, in Python.</p>
-                    <div class="bc-tags"><span class="bc-tag">python</span><span class="bc-tag">interpreter</span><span class="bc-tag">parser</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 17: JEE Horizon — live full-stack product -->
-            <div class="bc" data-id="17" data-cat="web ai" style="--i:2">
+            <!-- 16: JEE Horizon — live full-stack product -->
+            <div class="bc" data-id="16" data-cat="web ai" style="--i:2">
                 <img src="assets/my projects/jeehorizon.png" alt="JEE Horizon — AI E-Learning Platform">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
@@ -884,7 +888,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">03</div>
+                <div class="bc-num">04</div>
                 <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>HIGHLY ADVANCED · UK REAL ESTATE</div>
@@ -901,7 +905,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">04</div>
+                <div class="bc-num">05</div>
                 <div class="bc-badge accent">ADVANCED · CV</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>FOOTBALL ANALYSIS</div>
@@ -912,13 +916,13 @@
                 </div>
             </div>
 
-            <!-- 14: Next Gen Parking -->
-            <div class="bc" data-id="14" data-cat="cv" style="--i:5">
+            <!-- 13: Next Gen Parking -->
+            <div class="bc" data-id="13" data-cat="cv" style="--i:5">
                 <video preload="none" muted loop playsinline data-src="assets/1st postion in IIT delhi innovation challlenge - NextGenParkingSystem.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">05</div>
+                <div class="bc-num">06</div>
                 <div class="bc-badge accent">1ST PRIZE · IIT DELHI</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>CLASSICAL CV · NO ML</div>
@@ -939,7 +943,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">06</div>
+                <div class="bc-num">07</div>
                 <div class="bc-badge accent">ADVANCED · AI</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>12+ EXERCISES</div>
@@ -956,7 +960,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">07</div>
+                <div class="bc-num">08</div>
                 <div class="bc-badge accent">MEDIUM · AI</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>SURVEILLANCE AI</div>
@@ -973,7 +977,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">08</div>
+                <div class="bc-num">09</div>
                 <div class="bc-badge accent">CV · AI</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>BODY TRACKING</div>
@@ -984,13 +988,13 @@
                 </div>
             </div>
 
-            <!-- 15: AI Virtual Teacher -->
-            <div class="bc" data-id="15" data-cat="ai" style="--i:9">
+            <!-- 14: AI Virtual Teacher -->
+            <div class="bc" data-id="14" data-cat="ai" style="--i:9">
                 <img src="assets/my projects/ai-virtual-teacher-cover.svg" alt="AI Virtual Teacher — a Voice “Video Call”">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">09</div>
+                <div class="bc-num">10</div>
                 <div class="bc-badge accent">BUILT AT 14</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>2021 · SPEECH + TTS</div>
@@ -1007,7 +1011,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">10</div>
+                <div class="bc-num">11</div>
                 <div class="bc-badge accent">ADVANCED · CV</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>SEGMENTATION</div>
@@ -1024,7 +1028,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">11</div>
+                <div class="bc-num">12</div>
                 <div class="bc-badge accent">MEDIUM · CV</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>DESKTOP APP</div>
@@ -1035,13 +1039,13 @@
                 </div>
             </div>
 
-            <!-- 16: Foci -->
-            <div class="bc" data-id="16" data-cat="" style="--i:12">
+            <!-- 15: Foci -->
+            <div class="bc" data-id="15" data-cat="" style="--i:12">
                 <img src="assets/my projects/foci-cover.svg" alt="Foci — Study Planner &amp; Focus App">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">12</div>
+                <div class="bc-num">13</div>
                 <div class="bc-badge accent">OPEN SOURCE</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>DESKTOP APP · WINDOWS</div>
@@ -1058,7 +1062,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">13</div>
+                <div class="bc-num">14</div>
                 <div class="bc-badge accent">CV</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>REAL-TIME</div>
@@ -1075,7 +1079,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">14</div>
+                <div class="bc-num">15</div>
                 <div class="bc-badge accent">COMPLEX · 3D</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>PYTHON 3D ENGINE</div>
@@ -1092,7 +1096,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">15</div>
+                <div class="bc-num">16</div>
                 <div class="bc-badge accent">ADVANCED · GAME</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>PYGAME NETWORKING</div>
@@ -1109,7 +1113,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">16</div>
+                <div class="bc-num">17</div>
                 <div class="bc-badge accent">GRAPHICS</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>GPU RENDERING</div>
@@ -1126,7 +1130,7 @@
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
-                <div class="bc-num">17</div>
+                <div class="bc-num">18</div>
                 <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
                 <div class="bc-content">
                     <div class="bc-level"><span class="bc-dot"></span>WEB DEVELOPMENT</div>
@@ -1141,6 +1145,167 @@
     </div>
 </section>
 
+<!-- AWARDS -->
+<section id="awards">
+    <div class="s-max">
+        <div class="aw-header rv">
+            <div class="s-label">RECOGNITION</div>
+            <h2>Awards &amp;<br>Achievements</h2>
+            <p>Competitive wins on national and international stages.</p>
+        </div>
+        <div class="aw-entry reverse rv">
+            <div class="aw-img aw-img-square"><img src="assets/Vinhack_winner.png" alt="VinHack 2026 1st Prize — VIT Vellore"><div class="aw-img-num">01</div></div>
+            <div class="aw-text">
+                <div class="aw-cat">1ST PRIZE · NATIONAL HACKATHON</div>
+                <h3 class="aw-title">VinHack 2026 — 1st Prize</h3>
+                <div class="aw-venue"><strong>VIT Vellore</strong> — Gravitas 2026<br>Flagship hackathon by VinnovateIT · 19 Sep 2026</div>
+                <p class="aw-desc">Two months into my freshman year, my team took <strong style="color:white">1st prize</strong> at VinHack 2026 — a 30-hour flagship hackathon with <strong style="color:white">800+ participants</strong>, seniors from 3rd and 4th year among them. I led the team and owned <strong style="color:white">the entire architecture and code, solo</strong>; we shipped <strong style="color:white">Furti AI</strong>, an autonomous desktop-automation agent with a token-efficient CV pipeline.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-users"></i> 800+ PARTICIPANTS</span><span class="aw-badge"><i class="fas fa-clock"></i> 30-HOUR BUILD</span><span class="aw-badge"><i class="fas fa-robot"></i> FURTI AI</span></div>
+            </div>
+        </div>
+        <div class="aw-entry rv">
+            <div class="aw-img">
+                <div class="aw-carousel">
+                    <div class="aw-slide active"><img src="assets/recieving BIC award on state.jpg" alt="BIC Award"></div>
+                    <div class="aw-slide"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award Stage"></div>
+                </div>
+                <div class="aw-img-num">02</div>
+            </div>
+            <div class="aw-text">
+                <div class="aw-cat">1ST PRIZE · STATE-LEVEL INNOVATION</div>
+                <h3 class="aw-title">Bihar Innovation Challenge — 1st Prize</h3>
+                <div class="aw-venue"><strong>Government of Bihar</strong> (#BiharHaiTaiyar)<br>State-Level Engineering Innovation Competition</div>
+                <p class="aw-desc">Won <strong style="color:white">first place</strong> at the Bihar Innovation Challenge — a state-level competition where hundreds of innovators competed. Presented the Next Gen Camera to a panel of government judges and received the award on a public stage, along with a <strong style="color:white">MacBook</strong> as the grand prize.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-map-marker-alt"></i> STATE LEVEL</span><span class="aw-badge"><i class="fas fa-laptop"></i> WON MACBOOK</span></div>
+            </div>
+        </div>
+        <div class="aw-entry reverse rv">
+            <div class="aw-img"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.jpeg" alt="INEX Medal"><div class="aw-img-num">03</div></div>
+            <div class="aw-text">
+                <div class="aw-cat">SILVER MEDAL · INTERNATIONAL EXPO</div>
+                <h3 class="aw-title">INEX India Silver Medal — IYIIC</h3>
+                <div class="aw-venue"><strong>India International Innovation &amp; Invention Expo</strong><br>Indian Young Innovators &amp; Inventors Challenge</div>
+                <p class="aw-desc">Awarded the <strong style="color:white">INEX India Silver Medal</strong> at an international-level expo where young innovators from across India competed. Recognized by an international panel of judges for outstanding innovation in computer vision and engineering technology.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-medal"></i> SILVER MEDAL</span><span class="aw-badge"><i class="fas fa-globe"></i> INTERNATIONAL EXPO</span></div>
+                <a class="aw-cert-link" href="assets/certificates/India%20International%20Innovation%20and%20Invention%20Expo.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
+            </div>
+        </div>
+        <div class="aw-entry rv">
+            <div class="aw-img">
+                <div class="aw-carousel">
+                    <div class="aw-slide active"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" alt="BIT Mesra Presentation"></div>
+                    <div class="aw-slide"><img src="assets/recieving recognition at BIT meshra patna.jpg" alt="BIT Mesra Recognition"></div>
+                </div>
+                <div class="aw-img-num">04</div>
+            </div>
+            <div class="aw-text">
+                <div class="aw-cat">PRESENTATION · PREMIER ENGINEERING INSTITUTE</div>
+                <h3 class="aw-title">BIT Mesra Patna — Innovation Showcase</h3>
+                <div class="aw-venue"><strong>Birla Institute of Technology, Mesra</strong> — Patna Campus<br>Innovation Presentation &amp; Recognition Event</div>
+                <p class="aw-desc">Selected to present the Next Gen Camera at <strong style="color:white">BIT Mesra, Patna</strong> — one of India's premier engineering institutes. Delivered a full technical presentation and live demonstration of all 5 detection modules to faculty, researchers, and students.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-university"></i> BIT MESRA</span><span class="aw-badge"><i class="fas fa-certificate"></i> RECOGNIZED</span></div>
+            </div>
+        </div>
+
+        <div class="aw-entry reverse rv">
+            <div class="aw-img"><img src="assets/explaining next gen camera to foreign researchers.jpg" alt="International researchers"><div class="aw-img-num">05</div></div>
+            <div class="aw-text">
+                <div class="aw-cat">INTERNATIONAL · RESEARCH ENGAGEMENT</div>
+                <h3 class="aw-title">Presented to International Researchers</h3>
+                <div class="aw-venue"><strong>International Innovation Exhibition</strong><br>Engagement with Foreign Research Delegates</div>
+                <p class="aw-desc"><strong style="color:white">International researchers and delegates</strong> engaged in detailed technical discussions about the Next Gen Camera's architecture. Explained the CV pipeline, real-time inference approach, and custom-built detection modules to a foreign research panel who expressed strong interest in the innovation.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-globe-americas"></i> INTERNATIONAL</span><span class="aw-badge"><i class="fas fa-comments"></i> TECH DISCUSSION</span></div>
+            </div>
+        </div>
+        <div class="aw-entry rv">
+            <div class="aw-img">
+                <div class="aw-carousel">
+                    <div class="aw-slide active"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award"></div>
+                    <div class="aw-slide"><img src="assets/recieving BIC award on state.jpg" alt="BIC Stage"></div>
+                </div>
+                <div class="aw-img-num">06</div>
+            </div>
+            <div class="aw-text">
+                <div class="aw-cat">MULTIPLE AWARDS · NATIONAL LEVEL</div>
+                <h3 class="aw-title">Aryabhat Award, NCSC, Robo Fest &amp; More</h3>
+                <div class="aw-venue"><strong>Multiple National Competitions</strong><br>Science, Engineering &amp; Robotics Events</div>
+                <p class="aw-desc">Beyond the flagship wins: <strong style="color:white">Aryabhat National Award</strong> for scientific excellence, <strong style="color:white">National Children's Science Congress</strong>, <strong style="color:white">Robo Fest</strong> robotics competition, <strong style="color:white">Ingenious Geeks</strong>, <strong style="color:white">Inter-School Model Making</strong>, and <strong style="color:white">NAEST 2022</strong>. Each win validated a different dimension of engineering capability.</p>
+                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-star"></i> ARYABHAT</span><span class="aw-badge"><i class="fas fa-microscope"></i> NCSC</span><span class="aw-badge"><i class="fas fa-robot"></i> ROBO FEST</span><span class="aw-badge"><i class="fas fa-flask"></i> NAEST 2022</span></div>
+                <div class="aw-cert-row">
+                    <a class="aw-cert-link" href="assets/certificates/aryabhat%20national%20award.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> ARYABHAT CERTIFICATE →</a>
+                    <a class="aw-cert-link" href="assets/certificates/naest-2022.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> NAEST 2022 CERTIFICATE →</a>
+                </div>
+            </div>
+        </div>
+        <button class="show-awards-btn" id="showAwardsBtn">SHOW MORE AWARDS</button>
+        <div class="aw-more" id="awMoreAwards">
+            <div class="aw-entry rv">
+                <div class="aw-img"><video src="assets/1st postion in IIT delhi innovation challlenge - NextGenParkingSystem.mp4" autoplay muted loop playsinline></video><div class="aw-img-num">07</div></div>
+                <div class="aw-text">
+                    <div class="aw-cat">1ST PRIZE · IIT DELHI</div>
+                    <h3 class="aw-title">Next Gen Parking System — 1st Prize</h3>
+                    <div class="aw-venue"><strong>IIT Delhi Innovation Challenge</strong><br>Single-camera smart parking using classical computer vision</div>
+                    <p class="aw-desc">Won <strong style="color:white">first prize</strong> at the IIT Delhi innovation challenge with a smart parking system where <strong style="color:white">one camera replaces a sensor per parking spot</strong> — real-time free/occupied detection built on classical computer vision, presented with a polished physical demo.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-award"></i> IIT DELHI</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-eye"></i> CLASSICAL CV</span></div>
+                </div>
+            </div>
+            <div class="aw-entry reverse rv">
+                <div class="aw-img"><img src="assets/1st prize at robo fest.jpg" alt="Robo Fest"><div class="aw-img-num">08</div></div>
+                <div class="aw-text">
+                    <div class="aw-cat">1ST PRIZE · ROBOTICS</div>
+                    <h3 class="aw-title">Robo Fest — 1st Prize</h3>
+                    <div class="aw-venue"><strong>Robo Fest</strong><br>Competitive robotics design and execution</div>
+                    <p class="aw-desc">Awarded the <strong style="color:white">first prize</strong> for a robotics system that excelled in technical execution, reliability, and presentation. The win is backed by the official Robo Fest certificate and a trophy photograph.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-robot"></i> ROBOTICS</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span></div>
+                    <a class="aw-cert-link" href="assets/certificates/Robo%20Fest.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
+                </div>
+            </div>
+            <div class="aw-entry rv">
+                <div class="aw-img"><img src="assets/certificates/misc/ingenious geeks.png" alt="Ingenious Geeks Certificate"><div class="aw-img-num">09</div></div>
+                <div class="aw-text">
+                    <div class="aw-cat">INNOVATION PROGRAM</div>
+                    <h3 class="aw-title">Ingenious Geeks — Certificate</h3>
+                    <div class="aw-venue"><strong>Ingenious Geeks</strong><br>National technology and invention showcase</div>
+                    <p class="aw-desc">Recognized by the Ingenious Geeks program for outstanding invention and creative engineering. The certificate backs the project’s innovation strength and practical impact.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-lightbulb"></i> INNOVATION</span><span class="aw-badge"><i class="fas fa-certificate"></i> CERTIFIED</span></div>
+                    <a class="aw-cert-link" href="assets/certificates/Ingenious%20geeks.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
+                </div>
+            </div>
+            <div class="aw-entry reverse rv">
+                <div class="aw-img">
+                    <div class="aw-carousel">
+                        <div class="aw-slide active"><img src="assets/certificates/misc/national science congress.jpg" alt="Science Congress"></div>
+                        <div class="aw-slide"><img src="assets/certificates/misc/ncse.jpeg" alt="NCSC Proof"></div>
+                    </div>
+                    <div class="aw-img-num">10</div>
+                </div>
+                <div class="aw-text">
+                    <div class="aw-cat">NATIONAL SCIENCE PROGRAM</div>
+                    <h3 class="aw-title">National Children's Science Congress</h3>
+                    <div class="aw-venue"><strong>NCSC</strong><br>School-level science research event</div>
+                    <p class="aw-desc">Selected to present research at the National Children's Science Congress, demonstrating both technical depth and communication skills. The award reflects strong scientific curiosity and project coherence.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-flask"></i> SCIENCE PROJECT</span><span class="aw-badge"><i class="fas fa-award"></i> NATIONAL</span></div>
+                    <a class="aw-cert-link" href="assets/certificates/Natioal%20Childrens%20Science%20Congress.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
+                </div>
+            </div>
+            <div class="aw-entry rv">
+                <div class="aw-img placeholder">
+                <div class="aw-placeholder-inner"><i class="fas fa-file-pdf"></i><p>Official certificate attached — open it from the link beside.</p></div>
+                <div class="aw-img-num">11</div>
+            </div>
+                <div class="aw-text">
+                    <div class="aw-cat">MODEL MAKING · DESIGN</div>
+                    <h3 class="aw-title">Inter-School Model Making</h3>
+                    <div class="aw-venue"><strong>Inter-School Competition</strong><br>Physical model design and execution</div>
+                    <p class="aw-desc">Recognized for an engineered model that combined creativity with precision. The project was judged on technical accuracy, aesthetics, and presentation quality.</p>
+                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-tools"></i> MODEL DESIGN</span><span class="aw-badge"><i class="fas fa-check-circle"></i> COMPETITION</span></div>
+                    <a class="aw-cert-link" href="assets/certificates/inter%20school%20model%20making.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about" class="neo-about">
     <div class="nb-about-inner">
@@ -1148,7 +1313,7 @@
             <p class="nb-kicker font-pixel">// ABOUT ME</p>
             <h2 class="nb-about-title">ENGINEER.<br>INNOVATOR.<br><span class="nb-name-mark">ENTREPRENEUR.</span></h2>
             <div class="nb-about-lead">
-                <p class="font-code">I started coding in class 6 and never really stopped. <strong>171 projects</strong> later, that's turned into an <strong>award-winning AI surveillance camera</strong> I've been building since class 7 (it's won at state, national and international level), <strong>my own interpreted programming language</strong>, and paid computer-vision work for clients around the world.</p>
+                <p class="font-code">I started coding in class 6 and never really stopped. <strong>171 projects</strong> later, that's turned into an <strong>award-winning AI surveillance camera</strong> I've been building since class 7 (it's won at state, national and international level), and paid computer-vision work for clients around the world.</p>
                 <p class="font-code">The other half is the web: I build <strong>full-stack products end to end</strong> — Django, Flask, React, Firebase — most recently <strong>JEE Horizon</strong>, a live AI-powered e-learning platform where students solve questions and compete with each other. And if a problem can be solved in <strong>Python</strong>, I've probably already got the library for it.</p>
                 <p class="font-code">Today I'm the founder of <strong>AKL Technologies</strong> — a humanoid robotics &amp; AI startup — and a freelance CV engineer with <strong>50+ Fiverr clients at a 5.0★ rating</strong>. I care about two things most: shipping things that actually run, and keeping them honest.</p>
             </div>
@@ -1224,156 +1389,34 @@
     </div>
 </div>
 
-<!-- AWARDS -->
-<section id="awards">
-    <div class="s-max">
-        <div class="aw-header rv">
-            <div class="s-label">RECOGNITION</div>
-            <h2>Awards &amp;<br>Achievements</h2>
-            <p>Competitive wins on national and international stages.</p>
+<!-- RECENT WIN ANNOUNCEMENT — revealed by JS, auto-dismisses after 10s -->
+<div class="vh-pop" id="vhPop" role="dialog" aria-modal="true" aria-labelledby="vhTitle" hidden>
+    <div class="vh-card">
+        <div class="vh-top">
+            <span class="vh-kicker font-pixel">// RECENT WIN</span>
+            <button class="vh-close" id="vhClose" type="button" aria-label="Close announcement"><i class="fas fa-times"></i></button>
         </div>
-        <div class="aw-entry rv">
-            <div class="aw-img">
-                <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/recieving BIC award on state.jpg" alt="BIC Award"></div>
-                    <div class="aw-slide"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award Stage"></div>
-                </div>
-                <div class="aw-img-num">01</div>
+        <div class="vh-body">
+            <div class="vh-media">
+                <div class="vh-frame"><img src="assets/Vinhack_winner.png" alt="1st prize at VinHack 2026, VIT Vellore"></div>
             </div>
-            <div class="aw-text">
-                <div class="aw-cat">1ST PRIZE · STATE-LEVEL INNOVATION</div>
-                <h3 class="aw-title">Bihar Innovation Challenge — 1st Prize</h3>
-                <div class="aw-venue"><strong>Government of Bihar</strong> (#BiharHaiTaiyar)<br>State-Level Engineering Innovation Competition</div>
-                <p class="aw-desc">Won <strong style="color:white">first place</strong> at the Bihar Innovation Challenge — a state-level competition where hundreds of innovators competed. Presented the Next Gen Camera to a panel of government judges and received the award on a public stage, along with a <strong style="color:white">MacBook</strong> as the grand prize.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-map-marker-alt"></i> STATE LEVEL</span><span class="aw-badge"><i class="fas fa-laptop"></i> WON MACBOOK</span></div>
+            <div class="vh-copy">
+                <div class="vh-pills">
+                    <span class="nb-pill font-code"><i class="fas fa-trophy"></i> 1ST PRIZE</span>
+                    <span class="nb-pill font-code"><i class="fas fa-users"></i> 800+ PARTICIPANTS</span>
+                </div>
+                <h2 class="vh-title" id="vhTitle">VINHACK 2026<br><span class="nb-name-mark">1ST PRIZE</span></h2>
+                <p class="vh-meta font-code">VIT VELLORE · GRAVITAS 2026 · 19 SEP 2026</p>
+                <p class="vh-desc">Two months into my freshman year, we took <strong>1st prize</strong> at this 30-hour flagship hackathon — I led the team and wrote the entire architecture and code solo. Our build: <strong>Furti AI</strong>, an autonomous desktop-automation agent.</p>
+                <a href="#awards" class="nb-btn nb-btn-dark vh-go" id="vhGo"><span>SEE THE AWARD</span> <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
-        <div class="aw-entry reverse rv">
-            <div class="aw-img"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.jpeg" alt="INEX Medal"><div class="aw-img-num">02</div></div>
-            <div class="aw-text">
-                <div class="aw-cat">SILVER MEDAL · INTERNATIONAL EXPO</div>
-                <h3 class="aw-title">INEX India Silver Medal — IYIIC</h3>
-                <div class="aw-venue"><strong>India International Innovation &amp; Invention Expo</strong><br>Indian Young Innovators &amp; Inventors Challenge</div>
-                <p class="aw-desc">Awarded the <strong style="color:white">INEX India Silver Medal</strong> at an international-level expo where young innovators from across India competed. Recognized by an international panel of judges for outstanding innovation in computer vision and engineering technology.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-medal"></i> SILVER MEDAL</span><span class="aw-badge"><i class="fas fa-globe"></i> INTERNATIONAL EXPO</span></div>
-                <a class="aw-cert-link" href="assets/certificates/India%20International%20Innovation%20and%20Invention%20Expo.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-            </div>
-        </div>
-        <div class="aw-entry rv">
-            <div class="aw-img">
-                <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" alt="BIT Mesra Presentation"></div>
-                    <div class="aw-slide"><img src="assets/recieving recognition at BIT meshra patna.jpg" alt="BIT Mesra Recognition"></div>
-                </div>
-                <div class="aw-img-num">03</div>
-            </div>
-            <div class="aw-text">
-                <div class="aw-cat">PRESENTATION · PREMIER ENGINEERING INSTITUTE</div>
-                <h3 class="aw-title">BIT Mesra Patna — Innovation Showcase</h3>
-                <div class="aw-venue"><strong>Birla Institute of Technology, Mesra</strong> — Patna Campus<br>Innovation Presentation &amp; Recognition Event</div>
-                <p class="aw-desc">Selected to present the Next Gen Camera at <strong style="color:white">BIT Mesra, Patna</strong> — one of India's premier engineering institutes. Delivered a full technical presentation and live demonstration of all 5 detection modules to faculty, researchers, and students.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-university"></i> BIT MESRA</span><span class="aw-badge"><i class="fas fa-certificate"></i> RECOGNIZED</span></div>
-            </div>
-        </div>
-
-        <div class="aw-entry reverse rv">
-            <div class="aw-img"><img src="assets/explaining next gen camera to foreign researchers.jpg" alt="International researchers"><div class="aw-img-num">04</div></div>
-            <div class="aw-text">
-                <div class="aw-cat">INTERNATIONAL · RESEARCH ENGAGEMENT</div>
-                <h3 class="aw-title">Presented to International Researchers</h3>
-                <div class="aw-venue"><strong>International Innovation Exhibition</strong><br>Engagement with Foreign Research Delegates</div>
-                <p class="aw-desc"><strong style="color:white">International researchers and delegates</strong> engaged in detailed technical discussions about the Next Gen Camera's architecture. Explained the CV pipeline, real-time inference approach, and custom-built detection modules to a foreign research panel who expressed strong interest in the innovation.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-globe-americas"></i> INTERNATIONAL</span><span class="aw-badge"><i class="fas fa-comments"></i> TECH DISCUSSION</span></div>
-            </div>
-        </div>
-        <div class="aw-entry rv">
-            <div class="aw-img">
-                <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award"></div>
-                    <div class="aw-slide"><img src="assets/recieving BIC award on state.jpg" alt="BIC Stage"></div>
-                </div>
-                <div class="aw-img-num">05</div>
-            </div>
-            <div class="aw-text">
-                <div class="aw-cat">MULTIPLE AWARDS · NATIONAL LEVEL</div>
-                <h3 class="aw-title">Aryabhat Award, NCSC, Robo Fest &amp; More</h3>
-                <div class="aw-venue"><strong>Multiple National Competitions</strong><br>Science, Engineering &amp; Robotics Events</div>
-                <p class="aw-desc">Beyond the flagship wins: <strong style="color:white">Aryabhat National Award</strong> for scientific excellence, <strong style="color:white">National Children's Science Congress</strong>, <strong style="color:white">Robo Fest</strong> robotics competition, <strong style="color:white">Ingenious Geeks</strong>, <strong style="color:white">Inter-School Model Making</strong>, and <strong style="color:white">NAEST 2022</strong>. Each win validated a different dimension of engineering capability.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-star"></i> ARYABHAT</span><span class="aw-badge"><i class="fas fa-microscope"></i> NCSC</span><span class="aw-badge"><i class="fas fa-robot"></i> ROBO FEST</span><span class="aw-badge"><i class="fas fa-flask"></i> NAEST 2022</span></div>
-                <div class="aw-cert-row">
-                    <a class="aw-cert-link" href="assets/certificates/aryabhat%20national%20award.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> ARYABHAT CERTIFICATE →</a>
-                    <a class="aw-cert-link" href="assets/certificates/naest-2022.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> NAEST 2022 CERTIFICATE →</a>
-                </div>
-            </div>
-        </div>
-        <button class="show-awards-btn" id="showAwardsBtn">SHOW MORE AWARDS</button>
-        <div class="aw-more" id="awMoreAwards">
-            <div class="aw-entry rv">
-                <div class="aw-img"><video src="assets/1st postion in IIT delhi innovation challlenge - NextGenParkingSystem.mp4" autoplay muted loop playsinline></video><div class="aw-img-num">06</div></div>
-                <div class="aw-text">
-                    <div class="aw-cat">1ST PRIZE · IIT DELHI</div>
-                    <h3 class="aw-title">Next Gen Parking System — 1st Prize</h3>
-                    <div class="aw-venue"><strong>IIT Delhi Innovation Challenge</strong><br>Single-camera smart parking using classical computer vision</div>
-                    <p class="aw-desc">Won <strong style="color:white">first prize</strong> at the IIT Delhi innovation challenge with a smart parking system where <strong style="color:white">one camera replaces a sensor per parking spot</strong> — real-time free/occupied detection built on classical computer vision, presented with a polished physical demo.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-award"></i> IIT DELHI</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-eye"></i> CLASSICAL CV</span></div>
-                </div>
-            </div>
-            <div class="aw-entry reverse rv">
-                <div class="aw-img"><img src="assets/1st prize at robo fest.jpg" alt="Robo Fest"><div class="aw-img-num">07</div></div>
-                <div class="aw-text">
-                    <div class="aw-cat">1ST PRIZE · ROBOTICS</div>
-                    <h3 class="aw-title">Robo Fest — 1st Prize</h3>
-                    <div class="aw-venue"><strong>Robo Fest</strong><br>Competitive robotics design and execution</div>
-                    <p class="aw-desc">Awarded the <strong style="color:white">first prize</strong> for a robotics system that excelled in technical execution, reliability, and presentation. The win is backed by the official Robo Fest certificate and a trophy photograph.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-robot"></i> ROBOTICS</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span></div>
-                    <a class="aw-cert-link" href="assets/certificates/Robo%20Fest.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-                </div>
-            </div>
-            <div class="aw-entry rv">
-                <div class="aw-img"><img src="assets/certificates/misc/ingenious geeks.png" alt="Ingenious Geeks Certificate"><div class="aw-img-num">08</div></div>
-                <div class="aw-text">
-                    <div class="aw-cat">INNOVATION PROGRAM</div>
-                    <h3 class="aw-title">Ingenious Geeks — Certificate</h3>
-                    <div class="aw-venue"><strong>Ingenious Geeks</strong><br>National technology and invention showcase</div>
-                    <p class="aw-desc">Recognized by the Ingenious Geeks program for outstanding invention and creative engineering. The certificate backs the project’s innovation strength and practical impact.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-lightbulb"></i> INNOVATION</span><span class="aw-badge"><i class="fas fa-certificate"></i> CERTIFIED</span></div>
-                    <a class="aw-cert-link" href="assets/certificates/Ingenious%20geeks.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-                </div>
-            </div>
-            <div class="aw-entry reverse rv">
-                <div class="aw-img">
-                    <div class="aw-carousel">
-                        <div class="aw-slide active"><img src="assets/certificates/misc/national science congress.jpg" alt="Science Congress"></div>
-                        <div class="aw-slide"><img src="assets/certificates/misc/ncse.jpeg" alt="NCSC Proof"></div>
-                    </div>
-                    <div class="aw-img-num">09</div>
-                </div>
-                <div class="aw-text">
-                    <div class="aw-cat">NATIONAL SCIENCE PROGRAM</div>
-                    <h3 class="aw-title">National Children's Science Congress</h3>
-                    <div class="aw-venue"><strong>NCSC</strong><br>School-level science research event</div>
-                    <p class="aw-desc">Selected to present research at the National Children's Science Congress, demonstrating both technical depth and communication skills. The award reflects strong scientific curiosity and project coherence.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-flask"></i> SCIENCE PROJECT</span><span class="aw-badge"><i class="fas fa-award"></i> NATIONAL</span></div>
-                    <a class="aw-cert-link" href="assets/certificates/Natioal%20Childrens%20Science%20Congress.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-                </div>
-            </div>
-            <div class="aw-entry rv">
-                <div class="aw-img placeholder">
-                <div class="aw-placeholder-inner"><i class="fas fa-file-pdf"></i><p>Official certificate attached — open it from the link beside.</p></div>
-                <div class="aw-img-num">10</div>
-            </div>
-                <div class="aw-text">
-                    <div class="aw-cat">MODEL MAKING · DESIGN</div>
-                    <h3 class="aw-title">Inter-School Model Making</h3>
-                    <div class="aw-venue"><strong>Inter-School Competition</strong><br>Physical model design and execution</div>
-                    <p class="aw-desc">Recognized for an engineered model that combined creativity with precision. The project was judged on technical accuracy, aesthetics, and presentation quality.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-tools"></i> MODEL DESIGN</span><span class="aw-badge"><i class="fas fa-check-circle"></i> COMPETITION</span></div>
-                    <a class="aw-cert-link" href="assets/certificates/inter%20school%20model%20making.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-                </div>
-            </div>
+        <div class="vh-foot">
+            <span class="vh-foot-lbl font-code">AUTO-CLOSES IN 10S</span>
+            <span class="vh-track"><i></i></span>
         </div>
     </div>
-</section>
+</div>
 
 <!-- ================================================================
      TESTIMONIALS
@@ -1584,9 +1627,7 @@
                 <a href="mailto:akshitkumarlal@gmail.com" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/gmail.svg" alt="Email" width="24" height="24"></div><div class="cl-txt"><span>EMAIL</span><span>akshitkumarlal@gmail.com</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
                 <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="24" height="24"></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshit-python-programmer</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
                 <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="24" height="24"></div><div class="cl-txt"><span>LINKEDIN</span><span>linkedin.com/in/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/youtube.svg" alt="YouTube" width="24" height="24"></div><div class="cl-txt"><span>YOUTUBE</span><span>youtube.com/@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
                 <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="22" height="22"></div><div class="cl-txt"><span>TWITTER / X</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://www.instagram.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/instagram.svg" alt="Instagram" width="24" height="24"></div><div class="cl-txt"><span>INSTAGRAM</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
             </div>
         </div>
     </div>
@@ -1601,9 +1642,7 @@
     <div class="ft-links">
         <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="22" height="22"></a>
         <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="22" height="22"></a>
-        <a href="https://www.youtube.com/@akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img class="soc-ic" src="assets/icons/social/youtube.svg" alt="YouTube" width="22" height="22"></a>
         <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="20" height="20"></a>
-        <a href="https://www.instagram.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img class="soc-ic" src="assets/icons/social/instagram.svg" alt="Instagram" width="22" height="22"></a>
     </div>
 </footer>
 <a href="#contact" class="quick-contact" aria-label="Contact Me">CONTACT ME</a>
@@ -2375,13 +2414,6 @@ document.getElementById('navBtn').addEventListener('click',()=>{document.getElem
 document.getElementById('mobClose').addEventListener('click',()=>{document.getElementById('mobMenu').classList.remove('open')});
 document.querySelectorAll('.mob-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open')));
 
-// ===== SECTION ORDER (Client Reviews before Awards) =====
-const awardsSection=document.getElementById('awards');
-const reviewsSection=document.getElementById('testimonials');
-if(awardsSection && reviewsSection && awardsSection.previousElementSibling!==reviewsSection){
-    awardsSection.parentNode.insertBefore(reviewsSection,awardsSection);
-}
-
 // ===== THEME TOGGLE (dark mode) =====
 // data-theme is already set pre-paint by the boot script in <head>. Here we
 // just sync the icon and let the button flip + persist the choice.
@@ -2409,7 +2441,7 @@ document.querySelectorAll('.gc').forEach(c=>{
 });
 
 // ===== TYPEWRITER =====
-const roles=['Computer Vision.','Robotics & Hardware.','Built my own programming language.'];
+const roles=['Computer Vision.','Robotics & Hardware.'];
 let ri=0,ci=0,del=false;const typedEl=document.getElementById('typed');
 function type(){const cur=roles[ri];if(!del){typedEl.textContent=cur.slice(0,ci+1);ci++;if(ci===cur.length){del=true;setTimeout(type,1600);return}}else{typedEl.textContent=cur.slice(0,ci-1);ci--;if(ci===0){del=false;ri=(ri+1)%roles.length}}setTimeout(type,del?35:72)}
 type();
@@ -2522,6 +2554,59 @@ function closeModal(){
 document.getElementById('pmClose').addEventListener('click',closeModal);
 document.getElementById('pmBg').addEventListener('click',closeModal);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// ===== RECENT WIN ANNOUNCEMENT POPUP =====
+// Once per browser session; auto-dismisses after 10s; never shown on viewports
+// too small to host a modal comfortably.
+(function(){
+    const pop=document.getElementById('vhPop');
+    if(!pop) return;
+    const AUTO_CLOSE_MS=10000, SHOW_DELAY_MS=1200, MIN_W=340, MIN_H=500, FADE_MS=400;
+    const SEEN_KEY='vhPopSeen';
+
+    const tooSmall=()=>window.innerWidth<MIN_W||window.innerHeight<MIN_H;
+    let seen=false;
+    try{ seen=sessionStorage.getItem(SEEN_KEY)==='1'; }catch(e){}
+
+    let timer=null, lastFocus=null;
+
+    function close(){
+        if(!pop.classList.contains('open')) return;
+        clearTimeout(timer); timer=null;
+        pop.classList.remove('open');
+        document.body.style.overflow='';
+        try{ sessionStorage.setItem(SEEN_KEY,'1'); }catch(e){}
+        // preventScroll: the popup opens by itself, so the previously focused
+        // element (the contact field) must not drag the page down to itself
+        if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+        setTimeout(()=>{ pop.hidden=true; },FADE_MS);
+    }
+
+    function open(){
+        if(tooSmall()) return;
+        lastFocus=document.activeElement;
+        pop.hidden=false;
+        // next frame, so the reveal transition runs and the card is focusable
+        requestAnimationFrame(()=>{
+            pop.classList.add('open');
+            const btn=document.getElementById('vhClose');
+            if(btn) btn.focus({preventScroll:true});
+        });
+        document.body.style.overflow='hidden';
+        timer=setTimeout(close,AUTO_CLOSE_MS);
+    }
+
+    pop.addEventListener('click',e=>{
+        if(e.target===pop || e.target.closest('#vhClose, #vhGo')) close();
+    });
+    document.addEventListener('keydown',e=>{
+        if(e.key==='Escape'&&pop.classList.contains('open')) close();
+    });
+    // a resize that drops below the threshold dismisses it, same as never opening
+    window.addEventListener('resize',()=>{ if(pop.classList.contains('open')&&tooSmall()) close(); });
+
+    if(!seen) setTimeout(open,SHOW_DELAY_MS);
+})();
 
 function initProjectCards() {
   if(VM)VM.initBento();

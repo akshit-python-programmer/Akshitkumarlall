@@ -233,22 +233,6 @@
     ]
   },
   {
-    "num": "02",
-    "level": "INTERPRETER · FROM SCRATCH",
-    "badge": "BUILT MY OWN LANGUAGE",
-    "title": "vit — My Own Programming Language",
-    "desc": "A hand-written <strong>lexer, parser and executer</strong> with its own keyword system and source-cache format. Not a wrapper, not a transpiler — an <strong>interpreted language built from nothing</strong>, in Python.<br><br>Programs live in <strong>.vit</strong> source files that run through the full pipeline: tokenize, parse, execute, cache. Building a language end to end forces you to understand how every language you use actually works underneath.",
-    "stack": ["Python", "Lexer", "Parser", "Interpreter Design", "Source Caching"],
-    "badges": [
-      { "ic": "fas fa-code", "t": "FROM SCRATCH" },
-      { "ic": "fas fa-terminal", "t": ".VIT SOURCE FILES" },
-      { "ic": "fas fa-gears", "t": "LEXER → PARSER → EXECUTER" }
-    ],
-    "mainType": "img",
-    "main": "assets/my projects/vit-language-cover.svg",
-    "gallery": []
-  },
-  {
     "num": "05",
     "level": "CLASSICAL CV · NO ML",
     "badge": "1ST PRIZE · IIT DELHI",
@@ -311,6 +295,22 @@
     "mainType": "img",
     "main": "assets/my projects/jeehorizon.png",
     "page": "https://jeehorizon.web.app/",
+    "gallery": []
+  },
+  {
+    "num": "18",
+    "level": "VINHACK · AUTONOMOUS DESKTOP AI",
+    "badge": "VINHACK PROJECT",
+    "title": "Furti AI — Autonomous Desktop Agent",
+    "desc": "Humans should spend their time creating, not repeating administrative work. <strong>Furti AI</strong> is an autonomous desktop agent that works beyond the browser, operating across software in specifically bounded, private local environments to take on tedious multi-step workflows.<br><br>Instead of blindly capturing screenshots every second, Furti uses pattern recognition, computer vision and image processing to procure screen state efficiently. Its token-optimized pipeline triggers API calls and decisions only when needed, helping reduce latency and API costs.<br><br>At the core is <strong>TypeSafe AI Jev</strong>, which returns structured decisions with calibrated probabilities rather than open-ended text. Combined with a multi-level LLM architecture, this gives Furti a faster, more controlled way to automate desktop tasks.",
+    "stack": ["Desktop Automation", "Computer Vision", "Image Processing", "TypeSafe AI Jev", "LLM Orchestration", "Token Optimization"],
+    "badges": [
+      { "ic": "fas fa-desktop", "t": "BEYOND THE BROWSER" },
+      { "ic": "fas fa-shield-halved", "t": "BOUNDED LOCAL ENVIRONMENTS" },
+      { "ic": "fas fa-bolt", "t": "TOKEN-OPTIMIZED PIPELINE" }
+    ],
+    "mainType": "img",
+    "main": "assets/my projects/furti.png",
     "gallery": []
   }
 ]
