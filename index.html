@@ -765,7 +765,7 @@
             </div>
             <!-- <p class="nb-hero-tagline">I build machines that see.</p> -->
             <p class="nb-hero-tagline font-code">Just a Curious aspiring Innovator and Founder.</p>
-            <p class="nb-hero-sub font-code">Computer-vision-first builder — <strong>171 projects</strong> since class 6. Founder of <strong>AKL Technologies</strong>, putting AI into the physical world — and shipping full-stack products on the web.</p>
+            <p class="nb-hero-sub font-code">Builder and Maker — 150+ projects since class 6. Trying <strong>to solve real-world critical problems</strong> by applying technology creatively and contributing to humanity to a sustainable future world.</p>
 
             <!-- <div class="nb-proof font-code"> -->
                 <!-- <span class="nb-proof-item">171 PROJECTS BUILT</span> -->
@@ -788,7 +788,7 @@
 
 <!-- Stats -->
 <!-- <div class="stats-strip rv">
-    <div class="stat-item"><span class="stat-num counter" data-t="171" data-sfx="">0</span><span class="stat-label">PROJECTS BUILT SINCE CLASS 6</span></div>
+    <div class="stat-item"><span class="stat-num counter" data-t="150" data-sfx="">0</span><span class="stat-label">PROJECTS BUILT SINCE CLASS 6</span></div>
     <div class="stat-item"><span class="stat-num counter" data-t="50">0</span><span class="stat-label">FIVERR CLIENTS · 5.0★</span></div>
 </div> -->
 
@@ -812,10 +812,10 @@
                 <div class="s-label"><span class="ph-kicker-dot"></span>PORTFOLIO — SELECTED WORK</div>
                 <h2>Projects</h2>
                 <p>Selected work — hover for a live preview, click for the full case study.</p>
-                <p class="ph-showing font-code">SHOWING 18 OF 171 — the rest live on GitHub.</p>
+                <p class="ph-showing font-code">SHOWING 18 OF 150+ — the rest live on GitHub.</p>
             </div>
             <div class="ph-right">
-                <div class="ph-counter counter" data-t="171" data-sfx="">0</div>
+                <div class="ph-counter counter" data-t="150" data-sfx="">0</div>
                 <div class="ph-counter-sub">PROJECTS BUILT</div>
             </div>
         </div>
@@ -1310,8 +1310,18 @@
 <section id="about" class="neo-about">
     <div class="nb-about-inner">
         <div class="nb-about-head rv-l">
-            <p class="nb-kicker font-pixel">// ABOUT ME</p>
-            <h2 class="nb-about-title">ENGINEER.<br>INNOVATOR.<br><span class="nb-name-mark">ENTREPRENEUR.</span></h2>
+            <div class="nb-about-intro">
+                <figure class="nb-portrait-stage">
+                    <img class="nb-portrait-backdrop" src="assets/potrait.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                    <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.png" alt="Portrait of Akshit Kumar Lall" loading="lazy" decoding="async">
+                    <span class="nb-portrait-index font-code" aria-hidden="true">01 / AKL</span>
+                    <figcaption class="nb-portrait-caption font-code">BUILDER BY NATURE</figcaption>
+                </figure>
+                <div class="nb-about-heading">
+                    <p class="nb-kicker font-pixel">// ABOUT ME</p>
+                    <h2 class="nb-about-title">ENGINEER.<br>INNOVATOR.<br><span class="nb-name-mark">ENTREPRENEUR.</span></h2>
+                </div>
+            </div>
             <div class="nb-about-lead">
                 <p class="font-code">I started coding in class 6 and never really stopped. <strong>171 projects</strong> later, that's turned into an <strong>award-winning AI surveillance camera</strong> I've been building since class 7 (it's won at state, national and international level), and paid computer-vision work for clients around the world.</p>
                 <p class="font-code">The other half is the web: I build <strong>full-stack products end to end</strong> — Django, Flask, React, Firebase — most recently <strong>JEE Horizon</strong>, a live AI-powered e-learning platform where students solve questions and compete with each other. And if a problem can be solved in <strong>Python</strong>, I've probably already got the library for it.</p>
@@ -1608,12 +1618,30 @@
 
 <!-- CONTACT -->
 <section id="contact">
-    <!-- Full-bleed 3D canvas — covers entire section -->
+    <!-- Contact 3D scene disabled; restore the canvas and module script below to re-enable it. -->
+    <!--
     <canvas id="desertCanvas" aria-hidden="true"></canvas>
+    -->
 
-    <!-- Centered contact panel with form and social links -->
     <div class="contact-overlay">
+        <div class="contact-portrait-column">
+            <figure class="nb-portrait-stage contact-portrait-stage">
+                <img class="nb-portrait-backdrop" src="assets/potrait.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.png" alt="Portrait of Akshit Kumar Lall" loading="lazy" decoding="async">
+                <span class="nb-portrait-index font-code">AKL / 01</span>
+                <figcaption class="nb-portrait-caption font-code">LET'S MAKE IT REAL</figcaption>
+            </figure>
+            <div class="contact-portrait-note">
+                <span class="font-pixel">HAVE A GOOD ONE?</span>
+                <p class="font-code">Tell me what you’re building. I’m always up for a thoughtful challenge.</p>
+            </div>
+        </div>
         <div class="contact-panel">
+            <div class="contact-heading">
+                <p class="contact-kicker font-pixel">// CONTACT</p>
+                <h2>LET'S BUILD<br><span class="nb-name-mark">SOMETHING REAL.</span></h2>
+                <p class="font-code">Have a project, a question, or an ambitious idea? Send me a note.</p>
+            </div>
             <form class="cf-form" id="cForm" action="https://formsubmit.co/bd77b285c94cff82cad9750bd3b1d895" method="POST">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
@@ -2775,7 +2803,7 @@ if(journeyWrap&&journeyTrack){
 })();
 </script>
 
-<!-- Desert Road 3D scene for #contact. Inlined module (MIME workaround). -->
+<!-- Contact 3D scene disabled: restore this module and the canvas above to re-enable the rotating model.
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -2898,6 +2926,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   requestAnimationFrame(tick);
 })();
 </script>
+-->
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('contactEmail');

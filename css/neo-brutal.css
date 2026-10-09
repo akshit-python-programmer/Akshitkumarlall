@@ -745,18 +745,100 @@
   font-size: 0.58rem;
   letter-spacing: 0.04em;
   color: var(--neo-black);
-  margin-bottom: 22px;
+  margin-bottom: 16px;
+}
+.nb-about-intro {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(18px, 3vw, 34px);
+  margin-bottom: 30px;
+  container-type: inline-size;
+}
+.nb-portrait-stage {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 0.76;
+  margin: 0;
+  overflow: hidden;
+  border: var(--neo-border);
+  background: var(--neo-yellow);
+  box-shadow: var(--neo-shadow);
+  transform: rotate(-2deg);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.nb-portrait-stage:hover {
+  transform: rotate(0deg) translate(-2px, -3px);
+  box-shadow: 9px 9px 0 var(--neo-shadow-color);
+}
+.nb-portrait-stage::before {
+  position: absolute;
+  z-index: -1;
+  inset: 12% 8% 0 24%;
+  border: 2px solid var(--neo-black);
+  background: var(--neo-pink);
+  content: "";
+  transform: rotate(5deg);
+}
+.nb-portrait-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% center;
+  opacity: 0.22;
+  filter: grayscale(1) contrast(0.88) blur(1px);
+}
+.nb-portrait-cutout {
+  position: absolute;
+  z-index: 1;
+  bottom: -5%;
+  left: -30%;
+  width: 160%;
+  height: 125%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(4px 0 0 var(--neo-black));
+  transition: transform 0.3s ease;
+}
+.nb-portrait-stage:hover .nb-portrait-cutout {
+  transform: translateY(-4px);
+}
+.nb-portrait-index,
+.nb-portrait-caption {
+  position: absolute;
+  z-index: 2;
+  padding: 6px 8px;
+  border: 2px solid var(--neo-black);
+  background: #fff;
+  color: var(--neo-black);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+.nb-portrait-index {
+  top: 10px;
+  left: 10px;
+}
+.nb-portrait-caption {
+  right: 8px;
+  bottom: 9px;
+  background: var(--neo-yellow);
 }
 .nb-about-title {
   font-family: var(--sans);
   font-weight: 900;
-  /* min sized so "ENTREPRENEUR." still fits one line on a 360px phone */
-  font-size: clamp(2.1rem, 5.4vw, 4.4rem);
+  font-size: clamp(1.3rem, 5.2cqi, 2.8rem);
   line-height: 0.95;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--neo-black);
-  margin-bottom: 28px;
+  margin-bottom: 0;
 }
 .nb-about-lead {
   background: #fff;
@@ -858,6 +940,12 @@
   .nb-about-inner { grid-template-columns: 1fr; gap: 40px; }
 }
 
+@media (max-width: 1200px) {
+  .nb-about-inner { grid-template-columns: 1fr; }
+  .nb-about-intro { grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr); }
+  .nb-about-head .nb-portrait-stage { max-width: 320px; }
+}
+
 @media (max-width: 560px) {
   #home.neo-hero { padding: 104px 18px 64px; }
   .nb-name { font-size: clamp(2.5rem, 13vw, 3.6rem); }
@@ -865,6 +953,9 @@
   .nb-badge-float { left: auto; right: 4px; bottom: -18px; }
 
   #about.neo-about { padding: 80px 18px; }
+  .nb-about-intro { grid-template-columns: 1fr; gap: 22px; }
+  .nb-about-head .nb-portrait-stage { width: min(76%, 290px); }
+  .nb-about-title { font-size: clamp(1.35rem, 7cqi, 2.5rem); }
   .nb-exp-grid { grid-template-columns: 1fr; }
   .nb-now { flex-direction: column; gap: 14px; }
   /* grid/flex children default to min-width:auto and refuse to shrink below
@@ -1013,88 +1104,162 @@
 }
 
 /* ============================================================
-   DESERT ROAD 3D CONTACT — full-bleed layout + glassmorphism
+   CONTACT — portrait-led, high-contrast editorial layout
    ============================================================ */
 
-/* Full-bleed canvas fills entire section */
-#desertCanvas {
+/* The 3D contact canvas is intentionally disabled in index.html. */
+#contact {
+  position: relative;
+  overflow: hidden;
+  padding: 110px 48px !important;
+  min-height: 0;
+  background:
+    radial-gradient(ellipse at 12% 30%, rgba(255, 224, 102, 0.52), transparent 34%),
+    linear-gradient(135deg, #f4e9d1 0%, #f8f4e9 48%, #e6f5eb 100%) !important;
+}
+#contact::after {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  display: block;
+  background-image: radial-gradient(rgba(10, 10, 10, 0.15) 0.65px, transparent 0.65px);
+  background-size: 7px 7px;
+  content: "";
+  opacity: 0.15;
   pointer-events: none;
 }
 
-/* Section override: canvas provides all bg, strip old photo + padding */
-#contact {
-  padding: 0 !important;
-  min-height: 720px;
-  background: #f5e3b0 !important; /* warm sand fallback while WebGL loads */
-}
-#contact::before {
-  display: none !important;
-}
-
-/* Centered contact panel with form and quick social links */
 .contact-overlay {
   position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
   align-items: center;
-  min-height: 720px;
-  padding: 80px 48px;
+  gap: clamp(42px, 7vw, 104px);
+  width: min(100%, 1360px);
+  align-items: center;
   margin: 0 auto;
 }
 
-/* Right column stacks form then links */
-.contact-panel {
-  width: min(100%, 640px);
+.contact-portrait-column {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-left: auto;
+  align-items: center;
+  gap: 34px;
+  min-width: 0;
+}
+.contact-portrait-stage {
+  width: min(100%, 450px);
+  max-width: 450px;
+  aspect-ratio: 0.76;
+  transform: rotate(-3deg);
+  box-shadow: 12px 12px 0 var(--neo-black);
+}
+.contact-portrait-stage::before {
+  inset: 10% 8% 0 28%;
+  border-width: 3px;
+  background: var(--neo-mint);
+}
+.contact-portrait-stage .nb-portrait-backdrop {
+  opacity: 0.5;
+  filter: grayscale(1) contrast(0.9);
+}
+.contact-portrait-stage .nb-portrait-cutout {
+  left: -26%;
+  width: 152%;
+  height: 124%;
+  bottom: -7%;
+  filter: drop-shadow(7px 0 0 var(--neo-black));
+}
+.contact-portrait-stage .nb-portrait-index,
+.contact-portrait-stage .nb-portrait-caption {
+  padding: 9px 12px;
+  font-size: 0.65rem;
+}
+.contact-portrait-note {
+  width: min(100%, 450px);
+  padding: 18px 20px;
+  border: var(--neo-border);
+  background: var(--neo-yellow);
+  box-shadow: var(--neo-shadow-sm);
+  transform: rotate(1deg);
+}
+.contact-portrait-note > span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.54rem;
+  line-height: 1.6;
+}
+.contact-portrait-note p {
+  margin: 0;
+  color: #252525;
+  font-size: 0.74rem;
+  line-height: 1.6;
+}
+.contact-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+.contact-heading {
+  max-width: 720px;
+  color: var(--neo-black);
+}
+.contact-kicker {
+  margin-bottom: 14px;
+  font-size: 0.56rem;
+}
+.contact-heading h2 {
+  margin: 0 0 14px;
+  font-family: var(--sans);
+  font-size: clamp(2.4rem, 5.2vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+.contact-heading > p:last-child {
+  max-width: 560px;
+  margin: 0;
+  color: #48443d;
+  font-size: 0.82rem;
+  line-height: 1.7;
 }
 
 /* ── Form glass card ── */
 .cf-form {
-  /* more opaque frosted panel so the fields inside read clearly over the 3D desert */
-  background: rgba(255, 252, 247, 0.55) !important;
-  backdrop-filter: blur(18px) saturate(1.5) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(1.5) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
-  box-shadow: 0 14px 50px rgba(70, 30, 0, 0.28), inset 0 0 0 1px rgba(255,255,255,0.25) !important;
-  padding: 28px !important;
-  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(14px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.2) !important;
+  border: var(--neo-border) !important;
+  box-shadow: 7px 7px 0 var(--neo-black) !important;
+  padding: 26px !important;
+  border-radius: 4px !important;
 }
 
 .f-inp,
 .f-ta {
-  /* near-solid fields with a clear warm border = obviously tappable inputs */
   background: rgba(255, 255, 255, 0.94) !important;
-  border: 1.5px solid rgba(150, 95, 25, 0.45) !important;
-  color: #1a0d00 !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.34) !important;
+  color: #1a1a1a !important;
   border-radius: 6px !important;
   padding: 13px 14px !important;
   font-size: .92rem !important;
-  box-shadow: inset 0 1px 3px rgba(80, 45, 0, 0.08) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08) !important;
   transition: border-color .2s, box-shadow .2s, background .2s !important;
 }
 .f-inp::placeholder,
 .f-ta::placeholder {
-  color: rgba(90, 60, 25, 0.5) !important;
+  color: rgba(40, 40, 40, 0.5) !important;
 }
 .f-inp:focus,
 .f-ta:focus {
-  border-color: #b4500a !important;
-  box-shadow: 0 0 0 4px rgba(190, 85, 5, 0.18), inset 0 1px 3px rgba(80,45,0,0.06) !important;
+  border-color: #149b6b !important;
+  box-shadow: 0 0 0 4px rgba(20, 155, 107, 0.16), inset 0 1px 3px rgba(0,0,0,0.06) !important;
   background: #fff !important;
   outline: none !important;
 }
 .f-lbl {
-  color: #6a3d08 !important;
+  color: #35332e !important;
   font-weight: 700 !important;
   font-size: .6rem !important;
 }
@@ -1164,15 +1329,40 @@
 .cl-link:hover .cl-arr { color: rgba(185, 95, 15, 1) !important; }
 
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
+  #contact { padding: 90px 24px !important; }
   .contact-overlay {
-    padding: 60px 20px;
-    min-height: auto;
+    grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+    gap: 34px;
+  }
+  .contact-portrait-stage {
+    width: min(100%, 340px);
+    max-width: 340px;
+  }
+  .contact-heading h2 {
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
   }
   .cl-links {
     grid-template-columns: 1fr !important;
   }
-  #desertCtrl { display: none; }
+}
+
+@media (max-width: 640px) {
+  #contact { padding: 76px 18px !important; }
+  .contact-overlay { grid-template-columns: 1fr; gap: 44px; }
+  .contact-portrait-column { flex-direction: row; align-items: flex-end; gap: 16px; }
+  .contact-portrait-stage { width: min(58%, 270px); flex: 0 0 auto; }
+  .contact-portrait-note { margin-bottom: 14px; padding: 14px; }
+  .contact-portrait-note > span { font-size: 0.46rem; }
+  .contact-portrait-note p { font-size: 0.68rem; }
+  .contact-heading h2 { font-size: clamp(2.15rem, 10vw, 3.4rem); }
+  .cf-form { padding: 20px !important; }
+}
+
+@media (max-width: 380px) {
+  .contact-portrait-column { align-items: center; flex-direction: column; }
+  .contact-portrait-stage { width: min(76%, 270px); }
+  .contact-portrait-note { width: 100%; margin: 0; }
 }
 
 
@@ -1718,11 +1908,27 @@
 [data-theme="dark"] .ngc-promo-text h2 { color: #f3f4f6 !important; }
 
 /* Contact — darken fallback bg + lift heading */
-[data-theme="dark"] #contact { background: #0d0f14 !important; }
+[data-theme="dark"] #contact {
+  background:
+    radial-gradient(ellipse at 12% 30%, rgba(95, 79, 31, 0.36), transparent 34%),
+    linear-gradient(135deg, #17181d 0%, #111319 55%, #10201a 100%) !important;
+}
+[data-theme="dark"] .contact-heading,
+[data-theme="dark"] .contact-heading h2 { color: #f3f4f6; }
+[data-theme="dark"] .contact-heading > p:last-child { color: #c4c8cf; }
+[data-theme="dark"] .contact-portrait-note { background: #ffe066; }
+[data-theme="dark"] .cl-link {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  color: #f3f4f6 !important;
+}
+[data-theme="dark"] .cl-txt span:first-child { color: #a7adb8 !important; }
+[data-theme="dark"] .cl-txt span:last-child { color: #f3f4f6 !important; }
+[data-theme="dark"] .cl-arr { color: #a7adb8 !important; }
 [data-theme="dark"] .contact-hd h2 { color: #f3f4f6; }
 [data-theme="dark"] .contact-hd p { color: #c4c8cf; }
 [data-theme="dark"] .cf-form {
-  background: rgba(20, 22, 30, 0.75) !important;
+  background: rgba(20, 22, 30, 0.92) !important;
   backdrop-filter: blur(18px) saturate(1.5) !important;
   -webkit-backdrop-filter: blur(18px) saturate(1.5) !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
