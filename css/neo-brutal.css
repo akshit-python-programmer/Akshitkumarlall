@@ -465,11 +465,22 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: radial-gradient(circle, var(--bujo-dot) 1px, transparent 1.3px);
+  background-image: radial-gradient(circle, var(--bujo-dot) 1.4px, transparent 1.8px);
   background-size: 22px 22px;
   background-position: 11px 11px;
   -webkit-mask-image: radial-gradient(118% 96% at 50% 42%, #000 54%, transparent 100%);
   mask-image: radial-gradient(118% 96% at 50% 42%, #000 54%, transparent 100%);
+}
+#home.neo-hero.has-fluid-dots::before {
+  opacity: 0;
+}
+.hero-fluid-dots {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .nb-hero-grid {
@@ -1196,6 +1207,37 @@
   color: #252525;
   font-size: 0.74rem;
   line-height: 1.6;
+}
+.contact-faq {
+  display: grid;
+  gap: 0;
+  margin-top: 28px;
+  border-top: 2px solid var(--neo-black);
+}
+.contact-faq h3 {
+  margin: 18px 0 8px;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+.contact-faq details {
+  border-bottom: 1px solid rgba(10, 10, 10, 0.2);
+}
+.contact-faq summary {
+  padding: 13px 0;
+  color: var(--neo-black);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.contact-faq details p {
+  margin: 0 0 14px;
+  color: #333;
+  font-size: 0.72rem;
+  line-height: 1.7;
+}
+.contact-faq details a {
+  color: inherit;
+  font-weight: 700;
 }
 .contact-panel {
   width: 100%;

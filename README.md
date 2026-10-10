@@ -20,10 +20,11 @@ Then open http://localhost:3000
 - css/labs.css: styles for lab sub-pages
 - js/video-manager.js: lazy-loading behavior for project videos
 - projects.json: project card and modal data
+- robots.txt and sitemap.xml: search crawler access and public page URLs
+- 404.html: GitHub Pages not-found response
 
 ## Contact
 
 - Email: akshitkumarlal@gmail.com
 - LinkedIn: https://linkedin.com/in/akshitkumarlall
 - GitHub: https://github.com/akshit-python-programmer
-
