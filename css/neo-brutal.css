@@ -1146,6 +1146,9 @@
   gap: 34px;
   min-width: 0;
 }
+.contact-portrait-photo {
+  width: min(100%, 360px);
+}
 .contact-portrait-stage {
   width: min(100%, 450px);
   max-width: 450px;
@@ -1335,7 +1338,7 @@
     grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
     gap: 34px;
   }
-  .contact-portrait-stage {
+  #contact .contact-portrait-photo {
     width: min(100%, 340px);
     max-width: 340px;
   }
@@ -1351,7 +1354,7 @@
   #contact { padding: 76px 18px !important; }
   .contact-overlay { grid-template-columns: 1fr; gap: 44px; }
   .contact-portrait-column { flex-direction: row; align-items: flex-end; gap: 16px; }
-  .contact-portrait-stage { width: min(58%, 270px); flex: 0 0 auto; }
+  #contact .contact-portrait-photo { width: min(58%, 270px); max-width: none; flex: 0 0 auto; }
   .contact-portrait-note { margin-bottom: 14px; padding: 14px; }
   .contact-portrait-note > span { font-size: 0.46rem; }
   .contact-portrait-note p { font-size: 0.68rem; }
@@ -1361,7 +1364,7 @@
 
 @media (max-width: 380px) {
   .contact-portrait-column { align-items: center; flex-direction: column; }
-  .contact-portrait-stage { width: min(76%, 270px); }
+  #contact .contact-portrait-photo { width: min(76%, 270px); }
   .contact-portrait-note { width: 100%; margin: 0; }
 }
 
