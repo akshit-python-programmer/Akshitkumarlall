@@ -23,9 +23,12 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.onload=null;this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="css/neo-brutal.css">
+    <link rel="preload" as="image" href="assets/potrait_bgremoved.png" fetchpriority="high">
     <script type="importmap">
     {
       "imports": {
@@ -238,7 +241,44 @@
         box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 14px 30px -18px rgba(0,0,0,.9);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
     .bc:hover{transform:translateY(-7px);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5),0 30px 60px -22px rgba(0,0,0,.95),0 0 50px -14px var(--glow,#06d6a0)}
     .bc-featured{grid-column:span 2;grid-row:span 2}
-    .bc-hidden{display:none}
+    .bc-hidden,.bc-limit-hidden{display:none}
+    #projects:not(.project-controls-ready) #bentoGrid .bc:nth-child(n+7){display:none}
+    .project-more-wrap{display:flex;justify-content:center;margin:34px auto 0}
+    .project-more-btn[hidden]{display:none}
+    .project-more-btn{
+        position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:12px;
+        min-height:54px;padding:0 26px;border:1px solid rgba(255,255,255,.22);border-radius:999px;
+        background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.055) 48%,rgba(139,123,255,.12));
+        color:#fff;font-family:var(--font-code);font-size:.68rem;font-weight:600;letter-spacing:.11em;
+        cursor:var(--cur-point);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 12px 34px -18px rgba(139,123,255,.8);
+        transition:transform .3s var(--ease),border-color .3s,background .3s,box-shadow .3s
+    }
+    .project-more-btn::before{content:'';position:absolute;inset:-1px;z-index:-1;border-radius:inherit;
+        background:linear-gradient(110deg,rgba(77,212,255,.55),transparent 34%,rgba(255,110,196,.5) 72%,rgba(139,123,255,.6));
+        opacity:.35;filter:blur(12px);transition:opacity .3s}
+    .project-more-btn:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.5);
+        background:linear-gradient(135deg,rgba(255,255,255,.23),rgba(255,255,255,.09) 48%,rgba(139,123,255,.2));
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 16px 42px -16px rgba(77,212,255,.55)}
+    .project-more-btn:hover::before{opacity:.8}
+    .project-more-btn:focus-visible{outline:2px solid #8be9ff;outline-offset:4px}
+    .project-more-btn::after{content:'';position:absolute;inset:-45% -65%;z-index:0;pointer-events:none;
+        border-radius:50%;background:radial-gradient(ellipse at 24% 48%,rgba(77,212,255,.48),transparent 38%),
+        radial-gradient(ellipse at 70% 48%,rgba(255,110,196,.42),transparent 40%);
+        opacity:0;transform:translate3d(-9%,3%,0) rotate(-8deg) scale(.92)}
+    .project-more-btn.fluid-active::before{will-change:transform;animation:projectFluidGlow 7s ease-in-out infinite alternate}
+    .project-more-btn.fluid-active::after{will-change:transform,opacity;opacity:.8;animation:projectFluidFlow 6s ease-in-out infinite alternate}
+    .project-more-btn>span,.project-more-btn>i{position:relative;z-index:1}
+    @keyframes projectFluidGlow{
+        from{transform:translate3d(-7%,0,0) rotate(-5deg) scale(.94)}
+        to{transform:translate3d(7%,2%,0) rotate(5deg) scale(1.04)}
+    }
+    @keyframes projectFluidFlow{
+        from{transform:translate3d(-8%,3%,0) rotate(-8deg) scale(.92);opacity:.42}
+        to{transform:translate3d(8%,-3%,0) rotate(8deg) scale(1.06);opacity:.9}
+    }
+    .project-more-btn i{font-size:.8rem;transition:transform .3s var(--ease)}
+    .project-more-btn[aria-expanded="true"] i{transform:rotate(180deg)}
     .bc:nth-child(6n+1){--glow:#ffe066}
     .bc:nth-child(6n+2){--glow:#06d6a0}
     .bc:nth-child(6n+3){--glow:#ffffff}
@@ -313,6 +353,8 @@
         #projects::before,.ph-left h2,.ph-kicker-dot,.bc-frame,.bc-badge-dot{animation:none!important}
         #projects .bento.on .bc{animation:none}
         #projects .bento:not(.on) .bc{opacity:1}
+        .project-more-btn,.project-more-btn i{transition:none}
+        .project-more-btn.fluid-active::before,.project-more-btn.fluid-active::after{animation:none;will-change:auto}
     }
 
     /* ===== PROJECT MODAL ===== */
@@ -659,6 +701,9 @@
     /* ===== SCROLL HIGHLIGHT & LOC TAG ===== */
     .scroll-hl{display:inline;background:linear-gradient(to top,rgba(255,215,0,.42) 40%,transparent 40%);background-size:0% 100%;background-repeat:no-repeat;background-position:0 100%;transition:background-size .9s cubic-bezier(.22,1,.36,1)}
     .scroll-hl.active{background-size:100% 100%}
+    .nb-hero-sub .hero-highlight,.nb-about-lead .hero-highlight{background-image:linear-gradient(rgba(255,220,65,.68),rgba(255,220,65,.68));animation:none;background-size:0% 100%}
+    .nb-hero-sub .hero-highlight.active,.nb-about-lead .hero-highlight.active{animation:hlBg 3.5s ease forwards}
+    @media(prefers-reduced-motion:reduce){.nb-hero-sub .hero-highlight,.nb-about-lead .hero-highlight{animation:none;background-size:100% 100%}}
     .loc-tag{font-weight:800;color:#c8860a;letter-spacing:.08em;position:relative;padding:1px 5px;background:rgba(255,215,0,.18);border-radius:3px;border-bottom:2px solid rgba(255,185,0,.55)}
 
     /* ===== RESPONSIVE ===== */
@@ -773,7 +818,7 @@
             </div>
             <!-- <p class="nb-hero-tagline">I build machines that see.</p> -->
             <p class="nb-hero-tagline font-code">Just a Curious aspiring Innovator and Founder.</p>
-            <p class="nb-hero-sub font-code">Built 150+ projects since class 6. Trying <strong>to solve real-world critical problems</strong> by applying technology creatively and contributing to humanity to a sustainable future world.</p>
+            <p class="nb-hero-sub font-code">Built 150+ projects since class 6. Trying <strong class="hero-highlight">to solve real-world critical problems</strong> by applying technology creatively and contributing to humanity to a sustainable future world.</p>
 
             <!-- <div class="nb-proof font-code"> -->
                 <!-- <span class="nb-proof-item">171 PROJECTS BUILT</span> -->
@@ -786,8 +831,8 @@
         </div>
         <div class="nb-hero-side">
             <figure class="nb-portrait-stage contact-portrait-stage hero-portrait-stage">
-                <img class="nb-portrait-backdrop" src="assets/potrait.png" alt="" aria-hidden="true" decoding="async">
-                <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.png" alt="Portrait of Akshit Kumar Lall" decoding="async">
+                <img class="nb-portrait-backdrop" src="assets/potrait.webp" alt="" aria-hidden="true" decoding="async" fetchpriority="low">
+                <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.png" alt="Portrait of Akshit Kumar Lall" decoding="async" fetchpriority="high">
                 <span class="nb-portrait-index font-code">AKL / 01</span>
                 <figcaption class="nb-portrait-caption font-code">LET'S MAKE IT REAL</figcaption>
             </figure>
@@ -822,7 +867,7 @@
                 <div class="s-label"><span class="ph-kicker-dot"></span>PORTFOLIO — SELECTED WORK</div>
                 <h2>Projects</h2>
                 <p>Selected work: hover for a live preview, click for the full case study.</p>
-                <p class="ph-showing font-code">SHOWING 18 OF 150+ the rest live on GitHub.</p>
+                <p class="ph-showing font-code" id="projectSummary" aria-live="polite">SHOWING 6 OF 18 FEATURED PROJECTS · 150+ BUILT</p>
             </div>
             <div class="ph-right">
                 <div class="ph-counter counter" data-t="150" data-sfx="">0</div>
@@ -843,7 +888,7 @@
         <div class="bento rv" id="bentoGrid">
             <!-- 17: Furti AI — VinHack autonomous desktop agent -->
             <div class="bc" data-id="17" data-cat="ai" style="--i:0">
-                <img src="assets/my projects/furti.png" alt="Furti AI autonomous desktop agent">
+                <img src="assets/my projects/furti.png" alt="Furti AI autonomous desktop agent" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -860,7 +905,7 @@
 
             <!-- 12: Next Gen Camera -->
             <div class="bc" data-id="12" data-cat="cv ai" style="--i:1">
-                <img src="assets/next gen camera/robber detection.png" alt="Next Gen Camera System">
+                <img src="assets/next gen camera/robber detection.png" alt="Next Gen Camera System" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -877,7 +922,7 @@
 
             <!-- 16: JEE Horizon — live full-stack product -->
             <div class="bc" data-id="16" data-cat="web ai" style="--i:2">
-                <img src="assets/my projects/jeehorizon.png" alt="JEE Horizon: AI E-Learning Platform">
+                <img src="assets/my projects/jeehorizon.png" alt="JEE Horizon: AI E-Learning Platform" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -983,7 +1028,7 @@
 
             <!-- 11: Pose Estimation -->
             <div class="bc" data-id="11" data-cat="cv ai" style="--i:8">
-                <img src="assets/my projects/[basic]pose estimation 2 .png" alt="Pose Estimation">
+                <img src="assets/my projects/[basic]pose estimation 2 .png" alt="Pose Estimation" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1000,7 +1045,7 @@
 
             <!-- 14: AI Virtual Teacher -->
             <div class="bc" data-id="14" data-cat="ai" style="--i:9">
-                <img src="assets/my projects/ai-virtual-teacher-cover.svg" alt="AI Virtual Teacher: a Voice “Video Call”">
+                <img src="assets/my projects/ai-virtual-teacher-cover.svg" alt="AI Virtual Teacher: a Voice “Video Call”" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1017,7 +1062,7 @@
 
             <!-- 7: Face Segmentizer -->
             <div class="bc" data-id="7" data-cat="cv ai" style="--i:10">
-                <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.png" alt="Face Segmentizer">
+                <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.png" alt="Face Segmentizer" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1051,7 +1096,7 @@
 
             <!-- 15: Foci -->
             <div class="bc" data-id="15" data-cat="" style="--i:12">
-                <img src="assets/my projects/foci-cover.svg" alt="Foci — Study Planner &amp; Focus App">
+                <img src="assets/my projects/foci-cover.svg" alt="Foci — Study Planner &amp; Focus App" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1102,7 +1147,7 @@
 
             <!-- 8: Multiplayer Game -->
             <div class="bc" data-id="8" data-cat="game" style="--i:15">
-                <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png" alt="Multiplayer Platformer">
+                <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png" alt="Multiplayer Platformer" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1152,6 +1197,11 @@
             </div>
 
         </div><!-- /bento -->
+        <div class="project-more-wrap">
+            <button class="project-more-btn" id="projectMoreBtn" type="button" aria-expanded="false" aria-controls="bentoGrid">
+                <span>SHOW 12 MORE PROJECTS</span><i class="fas fa-arrow-down" aria-hidden="true"></i>
+            </button>
+        </div>
     </div>
 </section>
 
@@ -1164,20 +1214,20 @@
             <p>Competitive wins on national and international stages.</p>
         </div>
         <div class="aw-entry reverse rv">
-            <div class="aw-img aw-img-square"><img src="assets/Vinhack_winner.png" alt="VinHack 2026 1st Prize — VIT Vellore"><div class="aw-img-num">01</div></div>
+            <div class="aw-img aw-img-square"><img src="assets/Vinhack_winner.png" alt="VinHack 2026 1st Prize — VIT Vellore" loading="lazy" decoding="async"><div class="aw-img-num">01</div></div>
             <div class="aw-text">
-                <div class="aw-cat">1ST PRIZE · NATIONAL HACKATHON</div>
+                <div class="aw-cat">1ST PRIZE · HACKATHON</div>
                 <h3 class="aw-title">VinHack 2026 — 1st Prize</h3>
                 <div class="aw-venue"><strong>VIT Vellore</strong> — Gravitas 2026<br>Flagship hackathon by VinnovateIT · 19 Sep 2026</div>
-                <p class="aw-desc">Two months into my freshman year, my team took <strong style="color:white">1st prize</strong> at VinHack 2026 — a 30-hour flagship hackathon with <strong style="color:white">800+ participants</strong>, seniors from 3rd and 4th year among them. I led the team and owned <strong style="color:white">the entire architecture and code, solo</strong>; we shipped <strong style="color:white">Furti AI</strong>, an autonomous desktop-automation agent with a token-efficient CV pipeline.</p>
+                <p class="aw-desc ">Two months into my freshman year, my team took <strong style="color:white ">1st prize</strong> at VinHack 2026 — a 30-hour flagship hackathon with <strong style="color:white">800+ participants</strong>, seniors from 3rd and 4th year among them. I led the team and owned <strong style="color:white">the entire architecture and code, solo</strong>; we shipped <strong style="color:white">Furti AI</strong>, an autonomous desktop-automation agent with a token-efficient CV pipeline.</p>
                 <div class="aw-badges"><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-users"></i> 800+ PARTICIPANTS</span><span class="aw-badge"><i class="fas fa-clock"></i> 30-HOUR BUILD</span><span class="aw-badge"><i class="fas fa-robot"></i> FURTI AI</span></div>
             </div>
         </div>
         <div class="aw-entry rv">
             <div class="aw-img">
                 <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/recieving BIC award on state.jpg" alt="BIC Award"></div>
-                    <div class="aw-slide"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award Stage"></div>
+                    <div class="aw-slide active"><img src="assets/recieving BIC award on state.jpg" alt="BIC Award" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award Stage" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="aw-img-num">02</div>
             </div>
@@ -1190,7 +1240,7 @@
             </div>
         </div>
         <div class="aw-entry reverse rv">
-            <div class="aw-img"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.jpeg" alt="INEX Medal"><div class="aw-img-num">03</div></div>
+            <div class="aw-img"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.jpeg" alt="INEX Medal" loading="lazy" decoding="async"><div class="aw-img-num">03</div></div>
             <div class="aw-text">
                 <div class="aw-cat">SILVER MEDAL · INTERNATIONAL EXPO</div>
                 <h3 class="aw-title">INEX India Silver Medal — IYIIC</h3>
@@ -1203,8 +1253,8 @@
         <div class="aw-entry rv">
             <div class="aw-img">
                 <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" alt="BIT Mesra Presentation"></div>
-                    <div class="aw-slide"><img src="assets/recieving recognition at BIT meshra patna.jpg" alt="BIT Mesra Recognition"></div>
+                    <div class="aw-slide active"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" alt="BIT Mesra Presentation" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide"><img src="assets/recieving recognition at BIT meshra patna.jpg" alt="BIT Mesra Recognition" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="aw-img-num">04</div>
             </div>
@@ -1218,7 +1268,7 @@
         </div>
 
         <div class="aw-entry reverse rv">
-            <div class="aw-img"><img src="assets/explaining next gen camera to foreign researchers.jpg" alt="International researchers"><div class="aw-img-num">05</div></div>
+            <div class="aw-img"><img src="assets/explaining next gen camera to foreign researchers.jpg" alt="International researchers" loading="lazy" decoding="async"><div class="aw-img-num">05</div></div>
             <div class="aw-text">
                 <div class="aw-cat">INTERNATIONAL · RESEARCH ENGAGEMENT</div>
                 <h3 class="aw-title">Presented to International Researchers</h3>
@@ -1230,8 +1280,8 @@
         <div class="aw-entry rv">
             <div class="aw-img">
                 <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award"></div>
-                    <div class="aw-slide"><img src="assets/recieving BIC award on state.jpg" alt="BIC Stage"></div>
+                    <div class="aw-slide active"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide"><img src="assets/recieving BIC award on state.jpg" alt="BIC Stage" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="aw-img-num">06</div>
             </div>
@@ -1260,7 +1310,7 @@
                 </div>
             </div>
             <div class="aw-entry reverse rv">
-                <div class="aw-img"><img src="assets/1st prize at robo fest.jpg" alt="Robo Fest"><div class="aw-img-num">08</div></div>
+                <div class="aw-img"><img src="assets/1st prize at robo fest.jpg" alt="Robo Fest" loading="lazy" decoding="async"><div class="aw-img-num">08</div></div>
                 <div class="aw-text">
                     <div class="aw-cat">1ST PRIZE · ROBOTICS</div>
                     <h3 class="aw-title">Robo Fest — 1st Prize</h3>
@@ -1271,7 +1321,7 @@
                 </div>
             </div>
             <div class="aw-entry rv">
-                <div class="aw-img"><img src="assets/certificates/misc/ingenious geeks.png" alt="Ingenious Geeks Certificate"><div class="aw-img-num">09</div></div>
+                <div class="aw-img"><img src="assets/certificates/misc/ingenious geeks.png" alt="Ingenious Geeks Certificate" loading="lazy" decoding="async"><div class="aw-img-num">09</div></div>
                 <div class="aw-text">
                     <div class="aw-cat">INNOVATION PROGRAM</div>
                     <h3 class="aw-title">Ingenious Geeks — Certificate</h3>
@@ -1284,8 +1334,8 @@
             <div class="aw-entry reverse rv">
                 <div class="aw-img">
                     <div class="aw-carousel">
-                        <div class="aw-slide active"><img src="assets/certificates/misc/ncse.jpeg" alt="National Science Congress certificate"></div>
-                        <div class="aw-slide"><img src="assets/certificates/misc/ncse.jpeg" alt="NCSC Proof"></div>
+                        <div class="aw-slide active"><img src="assets/certificates/misc/ncse.jpeg" alt="National Science Congress certificate" loading="lazy" decoding="async"></div>
+                        <div class="aw-slide"><img src="assets/certificates/misc/ncse.jpeg" alt="NCSC Proof" loading="lazy" decoding="async"></div>
                     </div>
                     <div class="aw-img-num">10</div>
                 </div>
@@ -1322,7 +1372,7 @@
         <div class="nb-about-head rv-l">
             <div class="nb-about-intro">
                 <figure class="nb-portrait-stage">
-                    <img class="nb-portrait-backdrop" src="assets/potrait.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                    <img class="nb-portrait-backdrop" src="assets/potrait.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
                     <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.png" alt="Portrait of Akshit Kumar Lall" loading="lazy" decoding="async">
                     <span class="nb-portrait-index font-code" aria-hidden="true">01 / AKL</span>
                     <figcaption class="nb-portrait-caption font-code">BUILDER BY NATURE</figcaption>
@@ -1333,13 +1383,13 @@
                 </div>
             </div>
             <div class="nb-about-lead">
-                <p class="font-code">I started coding in class 6 and never really stopped. <strong>171 projects</strong> later, that's turned into an <strong>award-winning AI surveillance camera</strong> I've been building since class 7 (it's won at state, national and international level), and paid computer-vision work for clients around the world.</p>
+                <p class="font-code">I started coding in class 6 and never really stopped. <strong>171 projects</strong> later, that's turned into an <strong>award-winning AI surveillance camera</strong> I've been <span class="hero-highlight">building since class 7 (it's won at state, national and international level), and paid computer-vision work for clients around the world.</span></p>
                 <p class="font-code">The other half is the web: I build <strong>full-stack products end to end</strong> — Django, Flask, React, Firebase — most recently <strong>JEE Horizon</strong>, a live AI-powered e-learning platform where students solve questions and compete with each other. And if a problem can be solved in <strong>Python</strong>, I've probably already got the library for it.</p>
                 <p class="font-code">Today I'm the founder of <strong>AKL Technologies</strong> — a humanoid robotics &amp; AI startup — and a freelance CV engineer with <strong>50+ Fiverr clients at a 5.0★ rating</strong>. I care about two things most: shipping things that actually run, and keeping them honest.</p>
             </div>
             <div class="nb-ethos font-code">
                 <span class="nb-ethos-chip nb-c-yellow">FINISHED &gt; PERFECT</span>
-                <span class="nb-ethos-chip nb-c-white">NO FAKE GREEN SQUARES</span>
+                <span class="nb-ethos-chip nb-c-white">NO PAIN, NO GAIN</span>
                 <span class="nb-ethos-chip nb-c-mint">PONDER TILL EUREKA</span>
             </div>
             <p class="nb-ethos-cap font-code">— house rules, since class 6</p>
@@ -1418,7 +1468,7 @@
         </div>
         <div class="vh-body">
             <div class="vh-media">
-                <div class="vh-frame"><img src="assets/Vinhack_winner.png" alt="1st prize at VinHack 2026, VIT Vellore"></div>
+                <div class="vh-frame"><img src="assets/Vinhack_winner_compressed.png" alt="1st prize at VinHack 2026, VIT Vellore" loading="lazy" decoding="async"></div>
             </div>
             <div class="vh-copy">
                 <div class="vh-pills">
@@ -1660,10 +1710,10 @@
                 <button type="submit" class="f-sub"><span>SEND MESSAGE →</span></button>
             </form>
             <div class="cl-links">
-                <a href="mailto:akshitkumarlal@gmail.com" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/gmail.svg" alt="Email" width="24" height="24"></div><div class="cl-txt"><span>EMAIL</span><span>akshitkumarlal@gmail.com</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="24" height="24"></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshit-python-programmer</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="24" height="24"></div><div class="cl-txt"><span>LINKEDIN</span><span>linkedin.com/in/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="22" height="22"></div><div class="cl-txt"><span>TWITTER / X</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="mailto:akshitkumarlal@gmail.com" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/gmail.svg" alt="Email" width="24" height="24" loading="lazy"></div><div class="cl-txt"><span>EMAIL</span><span>akshitkumarlal@gmail.com</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="24" height="24" loading="lazy"></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshit-python-programmer</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="24" height="24" loading="lazy"></div><div class="cl-txt"><span>LINKEDIN</span><span>linkedin.com/in/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
+                <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="22" height="22" loading="lazy"></div><div class="cl-txt"><span>TWITTER / X</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
             </div>
             <section class="contact-faq" aria-labelledby="contact-faq-title">
                 <h3 id="contact-faq-title" class="font-pixel">// QUICK FAQ</h3>
@@ -1691,18 +1741,45 @@
     <div class="ft-logo">AKSHIT KUMAR LALL</div>
     
     <div class="ft-links">
-        <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="22" height="22"></a>
-        <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="22" height="22"></a>
-        <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="20" height="20"></a>
+        <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="22" height="22" loading="lazy"></a>
+        <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="22" height="22" loading="lazy"></a>
+        <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="20" height="20" loading="lazy"></a>
     </div>
 </footer>
 <a href="#contact" class="quick-contact" aria-label="Contact Me">CONTACT ME</a>
 
 <script src="js/video-manager.js"></script>
 <script type="module">
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const journeySection = document.getElementById('journey');
+
+function journeyFallback(err) {
+  const message = err && err.message ? err.message : String(err);
+  window.__driftError = message;
+  console.warn('[drift-journey] static fallback:', message);
+  if (journeySection) {
+    journeySection.classList.remove('is-3d');
+    journeySection.classList.add('journey-static');
+  }
+}
+
+if (journeySection && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  journeySection.classList.add('journey-static');
+} else if (journeySection) {
+  const journeyObserver = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    journeyObserver.disconnect();
+    Promise.all([
+      import('three'),
+      import('three/addons/loaders/GLTFLoader.js'),
+      import('three/addons/environments/RoomEnvironment.js'),
+    ]).then(([THREE, { GLTFLoader }, { RoomEnvironment }]) => {
+      initializeJourney(THREE, GLTFLoader, RoomEnvironment);
+    }).catch(journeyFallback);
+  }, { rootMargin: '1200px 0px' });
+  journeyObserver.observe(journeySection);
+}
+
+function initializeJourney(THREE, GLTFLoader, RoomEnvironment) {
 
 const CONFIG = {
   carUrl: 'assets/cardrift/mazda_rx7_stylised.glb',
@@ -2416,6 +2493,7 @@ if (!section || !canvas || !wrap) {
   try { boot(); }
   catch (e) { fail(e); }
 }
+}
 </script>
 <script type="application/ld+json">
 {
@@ -2536,6 +2614,20 @@ document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>rvObs.observe(el));
 // ===== SCROLL HIGHLIGHT (innovations) =====
 const scrollHlObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');scrollHlObs.unobserve(e.target)}})},{threshold:.45});
 document.querySelectorAll('.scroll-hl').forEach(el=>scrollHlObs.observe(el));
+
+// ===== VIEWPORT HIGHLIGHTS =====
+const heroHighlights=document.querySelectorAll('.nb-hero-sub .hero-highlight,.nb-about-lead .hero-highlight');
+if(heroHighlights.length&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const heroHighlightObs=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add('active');
+                heroHighlightObs.unobserve(entry.target);
+            }
+        });
+    },{threshold:.25});
+    heroHighlights.forEach(highlight=>heroHighlightObs.observe(highlight));
+}
 
 // ===== COUNTERS =====
 const cntObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=+el.dataset.t;if(!t)return;let v=0;const step=Math.max(t/30,.5);const id=setInterval(()=>{v+=step;if(v>=t){v=t;clearInterval(id)}const lbl=el.nextElementSibling?el.nextElementSibling.textContent:'';const s=el.dataset.sfx!==undefined?el.dataset.sfx:(lbl.includes('K+')?' K+':'+');el.textContent=Math.floor(v)+s},35);cntObs.unobserve(el)}})},{threshold:.5});
@@ -2709,21 +2801,85 @@ function initProjectCards() {
   });
 }
 
-// ===== PROJECT FILTER =====
-document.querySelectorAll('.pfb').forEach(btn=>{
-        btn.addEventListener('click',()=>{
-        document.querySelectorAll('.pfb').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        const f=btn.dataset.f;
-        document.querySelectorAll('.bc').forEach(card=>{
-            const cats=card.dataset.cat.split(' ');
-            const show=f==='all'||cats.includes(f);
-            if(show){card.classList.remove('bc-hidden');card.style.opacity='0';card.style.transform='scale(.92)';requestAnimationFrame(()=>{card.style.transition='opacity .4s,transform .4s var(--ease)';card.style.opacity='1';card.style.transform=''})}
-            else{card.classList.add('bc-hidden');if(VM)VM.pauseAllIn(card)}
-        });
-        if(VM)VM.pauseAllBento();
+// ===== PROJECT FILTER + SHOW MORE =====
+const projectCards=Array.from(document.querySelectorAll('#bentoGrid .bc'));
+const projectFilterButtons=Array.from(document.querySelectorAll('.pfb'));
+const projectMoreBtn=document.getElementById('projectMoreBtn');
+const projectSummary=document.getElementById('projectSummary');
+let activeProjectFilter='all';
+let showAllProjects=false;
+
+function updateProjectListing(animate=false){
+    let shown=0;
+    let matching=0;
+    projectCards.forEach(card=>{
+        const matches=activeProjectFilter==='all'||card.dataset.cat.split(' ').includes(activeProjectFilter);
+        const wasHidden=card.classList.contains('bc-hidden')||card.classList.contains('bc-limit-hidden');
+        const limited=matches&&!showAllProjects&&shown>=6;
+        if(matches)matching++;
+        if(matches&&!limited)shown++;
+        card.classList.toggle('bc-hidden',!matches);
+        card.classList.toggle('bc-limit-hidden',limited);
+
+        if(!matches||limited){
+            if(VM)VM.pauseAllIn(card);
+        }else if(animate&&wasHidden){
+            card.style.opacity='0';
+            card.style.transform='scale(.92)';
+            requestAnimationFrame(()=>{
+                card.style.transition='opacity .4s,transform .4s var(--ease)';
+                card.style.opacity='1';
+                card.style.transform='';
+            });
+        }
+    });
+
+    const filterLabels={all:'FEATURED',cv:'COMPUTER VISION',ai:'AI / ML',web:'WEB / CLIENT',game:'GAME / 3D'};
+    const filterLabel=filterLabels[activeProjectFilter];
+    projectSummary.textContent=`SHOWING ${shown} OF ${matching} ${filterLabel} PROJECTS · 150+ BUILT`;
+    projectMoreBtn.hidden=matching<=6;
+    projectMoreBtn.setAttribute('aria-expanded',String(showAllProjects));
+    projectMoreBtn.querySelector('span').textContent=showAllProjects
+        ?'SHOW FEWER PROJECTS'
+        :`SHOW ${matching-shown} MORE PROJECTS`;
+    document.getElementById('projects').classList.add('project-controls-ready');
+    if(VM)VM.pauseAllBento();
+}
+
+updateProjectListing();
+
+projectFilterButtons.forEach(button=>{
+    button.addEventListener('click',()=>{
+        projectFilterButtons.forEach(item=>item.classList.toggle('active',item===button));
+        activeProjectFilter=button.dataset.f;
+        showAllProjects=false;
+        updateProjectListing(true);
     });
 });
+
+projectMoreBtn.addEventListener('click',()=>{
+    showAllProjects=!showAllProjects;
+    updateProjectListing(true);
+});
+
+const fluidMotionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
+const fluidHardwareReady=Number.isFinite(navigator.deviceMemory)
+    &&navigator.deviceMemory>=4
+    &&navigator.hardwareConcurrency>=6
+    &&!navigator.connection?.saveData;
+if(fluidHardwareReady&&!fluidMotionPreference.matches){
+    let fluidButtonVisible=false;
+    const syncFluidMotion=()=>{
+        projectMoreBtn.classList.toggle('fluid-active',fluidButtonVisible&&!document.hidden&&!fluidMotionPreference.matches);
+    };
+    const fluidButtonObserver=new IntersectionObserver(entries=>{
+        fluidButtonVisible=entries.some(entry=>entry.isIntersecting);
+        syncFluidMotion();
+    },{threshold:.1});
+    fluidButtonObserver.observe(projectMoreBtn);
+    document.addEventListener('visibilitychange',syncFluidMotion);
+    fluidMotionPreference.addEventListener('change',syncFluidMotion);
+}
 const showAwardsBtn=document.getElementById('showAwardsBtn');
 const awMoreAwards=document.getElementById('awMoreAwards');
 if(showAwardsBtn && awMoreAwards){
