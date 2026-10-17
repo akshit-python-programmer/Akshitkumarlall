@@ -1,1 +1,54 @@
-/* x-contact.css — CONTACT group (#contact). Owner: contact. */
+/* =====================================================================
+   x-contact.css — CONTACT group (#contact: headline, CTAs, form, links, FAQ). Owner: contact.
+   Headline: noir.css 456-473 + Vision target lock (vision.css 391-393, tag moved BELOW the box).
+   ===================================================================== */
+.x-contact { overflow: hidden; overflow: clip; }
+.x-ct-title { font-size: clamp(3.2rem, 11.6vw, 12.5rem); font-weight: 820; font-stretch: 116%; line-height: 0.88; letter-spacing: -0.05em; text-transform: uppercase; }
+.x-ct-title .x-serif { font-size: 1.04em; letter-spacing: -0.035em; color: var(--x-accent); }
+.x-ct-target { position: relative; display: inline-block; }
+.x-ct-box { position: absolute; inset: -0.02em -0.08em 0.02em -0.06em; border: 1px solid var(--x-lock-line); box-shadow: 0 0 0 1px var(--x-lock-halo); --x-rc: clamp(10px, 1.6vw, 22px); pointer-events: none; }
+.x-ct-box .x-det-tag { top: 100%; bottom: auto; left: auto; right: -1px; margin: 6px 0 0; }
+
+.x-ct-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-top: clamp(40px, 5vw, 72px); }
+.x-ct-intro { display: flex; align-items: center; gap: 18px; max-width: 560px; }
+.contact-portrait-photo.x-ct-avatar { flex: none; width: 72px; height: 72px; border-radius: 50%; overflow: hidden; cursor: pointer; box-shadow: 0 0 0 1px var(--x-line-2); }
+.x-ct-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; filter: grayscale(1) contrast(1.05); transition: filter 0.6s; }
+.x-ct-avatar:hover img, .x-ct-avatar:focus-visible img { filter: none; }
+.x-ct-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+.x-ct-mail { text-transform: none; }
+
+.x-ct-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); margin-top: clamp(56px, 7vw, 104px); padding-top: clamp(32px, 4vw, 56px); border-top: 1px solid var(--x-line); }
+.x-cf { display: grid; gap: 28px; align-content: start; }
+.x-cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.x-cf .x-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }   /* FormSubmit honeypot */
+.x-cf-status { font-size: var(--x-fs-small); color: var(--x-accent-ink); }
+
+.x-ct-links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--x-line); }
+.x-ct-links a { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--x-line); transition: color 0.3s, padding 0.5s var(--x-ease-out); }
+.x-ct-links a:hover { color: var(--x-accent-ink); padding-left: 10px; }
+.x-ct-links .x-label { grid-column: 1; }
+.x-ct-links .x-ct-v { grid-column: 1; font-size: clamp(1.05rem, 1.4vw, 1.3rem); font-weight: 600; letter-spacing: -0.015em; overflow-wrap: anywhere; }
+.x-ct-links .x-ico { grid-column: 2; grid-row: 1 / span 2; width: 1.2rem; height: 1.2rem; }
+
+.x-faq { margin-top: clamp(40px, 5vw, 64px); }
+.x-faq h3 { margin-bottom: 8px; }
+.x-faq details { border-bottom: 1px solid var(--x-line); }
+.x-faq summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 56px; padding: 14px 0; cursor: pointer; list-style: none; font-weight: 600; font-size: 1.0625rem; }
+.x-faq summary::-webkit-details-marker { display: none; }
+.x-faq summary::after { content: "+"; flex: none; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--x-line-2); transition: transform 0.5s var(--x-ease-out); }
+.x-faq details[open] summary::after { transform: rotate(45deg); }
+.x-faq details p { padding: 0 40px 18px 0; color: var(--x-ink-2); }
+.x-faq details a { color: var(--x-accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 960px) {
+  .x-ct-grid { grid-template-columns: 1fr; }
+  .x-ct-row { flex-direction: column; align-items: flex-start; }
+  .x-ct-actions { justify-content: flex-start; }
+}
+@media (max-width: 760px) {
+  .x-ct-title .x-ct-target { display: table; }
+  .x-cf-row { grid-template-columns: 1fr; }
+  .x-ct-actions { width: 100%; }
+  .x-ct-actions .x-btn { width: 100%; }
+  .x-ct-mail .x-btn-in { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+}

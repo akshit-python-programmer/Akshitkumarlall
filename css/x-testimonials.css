@@ -1,1 +1,42 @@
-/* x-testimonials.css — TESTIMONIALS group (#testimonials). Owner: testimonials. */
+/* =====================================================================
+   x-testimonials.css — REVIEWS group (#testimonials). Owner: testimonials.
+   Featured serif quote (noir.css 428-442) + all other reviews visible
+   (vision.css 371-381 grid, 549-551 mobile scroll-snap). No carousel, no tabs.
+   ===================================================================== */
+.x-reviews { background: var(--x-bg-2); }
+.x-rv-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.x-rv-stars { display: flex; gap: 4px; color: var(--x-accent); font-size: 1rem; }
+.x-rv-stars i { width: auto; }
+
+.x-rv-featured { position: relative; margin: 0; padding-left: clamp(0px, 8vw, 140px); }
+.x-rv-mark { position: absolute; left: 0; top: -0.2em; font-family: var(--x-font-serif); font-style: italic; font-size: clamp(6rem, 12vw, 12rem); line-height: 1; color: var(--x-accent); }
+.x-rv-quote { font-family: var(--x-font-serif); font-style: italic; font-size: clamp(2rem, 4.8vw, 5.2rem); line-height: 1.04; letter-spacing: -0.02em; max-width: 24ch; text-wrap: balance; color: var(--x-ink); }
+.x-rv-by { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px; max-width: 860px; margin-top: clamp(26px, 3vw, 44px); padding-top: 18px; border-top: 1px solid var(--x-line); }
+.x-rv-name { font-size: 1.125rem; font-weight: 650; letter-spacing: -0.01em; }
+.x-rv-link { margin-left: auto; }
+
+.x-rv-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 22px); margin-top: clamp(48px, 6vw, 88px); }
+.x-rv-card { padding: 24px; gap: 22px; justify-content: space-between; min-height: 280px; }
+.x-rv-card blockquote { margin: 0; font-size: 1.0625rem; line-height: 1.55; color: var(--x-ink); }
+.x-rv-card blockquote::before { content: "\201C"; display: block; font-family: var(--x-font-serif); font-style: italic; font-size: 3.4rem; line-height: 0.6; margin-bottom: 14px; color: var(--x-accent-ink); }
+.x-rv-card figcaption { display: flex; align-items: center; gap: 12px; }
+.x-rv-av { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--x-accent-dim); color: var(--x-accent-ink); font-weight: 750; font-stretch: 110%; }
+.x-rv-who { display: grid; gap: 2px; min-width: 0; }
+.x-rv-who b { font-weight: 650; }
+.x-rv-who .x-label { color: var(--x-ink-3); }
+.x-rv-card .x-link { margin-left: auto; font-size: 0.875rem; white-space: nowrap; }
+
+@media (max-width: 960px) { .x-rv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .x-rv-meta { align-items: flex-start; }
+  .x-rv-featured { padding-left: 0; padding-top: 44px; }
+  .x-rv-mark { font-size: 6rem; top: -0.2em; }
+  .x-rv-link { margin-left: 0; width: 100%; }
+  .x-rv-grid {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(-1 * var(--x-gutter)); padding: 0 var(--x-gutter) 6px; scroll-padding-inline: var(--x-gutter);
+  }
+  .x-rv-grid::-webkit-scrollbar { display: none; }
+  .x-rv-card { scroll-snap-align: start; min-height: 0; }
+}

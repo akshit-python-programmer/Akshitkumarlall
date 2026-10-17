@@ -1,1 +1,75 @@
-/* x-about.css — ABOUT + TECH STACK group (#about, #skills). Owner: about. */
+/* =====================================================================
+   x-about.css — ABOUT + TECH STACK group (#about, #skills). Owner: about.
+   About: noir.css 408-426 (statement, figure, stats, rules).
+   Stack: new — four domain columns + "also" rows; replaces the icon wall + tilt cards.
+   ===================================================================== */
+
+/* ---- about ---- */
+.x-about { border-top: 1px solid var(--x-line); }
+.x-about-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 28px); align-items: end; }
+.x-about-line { grid-column: 1 / span 8; font-size: var(--x-fs-h2); font-weight: 650; font-stretch: 104%; line-height: 1.04; letter-spacing: -0.035em; max-width: 20ch; text-wrap: balance; }
+.x-about-line .x-serif { color: var(--x-accent-ink); letter-spacing: -0.02em; }
+.x-about-fig { grid-column: 10 / span 3; margin: 0; }
+.x-about-fig .x-media { aspect-ratio: 3 / 4; border-radius: var(--x-r-xs); }
+.x-about-fig .x-media > img { filter: grayscale(1) contrast(1.1) brightness(0.92); object-position: 50% 20%; }
+.x-about-fig:hover .x-media > img { filter: none; }
+.x-about-fig figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; }
+.x-about-body { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 28px); margin-top: clamp(48px, 6vw, 88px); }
+.x-about-lead { grid-column: 1 / span 7; display: grid; gap: 18px; }
+.x-about-lead p { font-size: 1.0625rem; line-height: 1.7; color: var(--x-ink-2); max-width: 62ch; }
+.x-about-lead strong { color: var(--x-ink); font-weight: 600; }
+.x-now { grid-column: 9 / span 4; align-self: start; padding: 24px; display: grid; gap: 12px; }
+.x-now .x-label { color: var(--x-accent-ink); display: inline-flex; align-items: center; gap: 10px; }
+.x-now-title { font-size: var(--x-fs-h3); font-weight: 750; font-stretch: 110%; line-height: 1; letter-spacing: -0.035em; }
+.x-now p:last-child { color: var(--x-ink-2); font-size: var(--x-fs-small); line-height: 1.6; }
+.x-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: clamp(56px, 7vw, 100px) 0 0; border-top: 1px solid var(--x-line); }
+.x-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 14px; padding: 26px 22px 0 0; }
+.x-stat + .x-stat { padding-left: 22px; border-left: 1px solid var(--x-line); }
+.x-stat dd { margin: 0; font-size: clamp(3.2rem, 7vw, 7.5rem); font-weight: 800; font-stretch: 114%; letter-spacing: -0.055em; line-height: 0.9; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.x-stat dd .x-acc { color: var(--x-accent); font-weight: 600; font-size: 0.7em; margin-left: 0.04em; }
+.x-stat dd .fa-star { font-size: 0.5em; vertical-align: 0.5em; width: auto; }
+.x-stat dt { font-size: var(--x-fs-small); color: var(--x-ink-2); max-width: 24ch; }
+.x-rules { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: clamp(40px, 5vw, 72px); }
+.x-rules .x-star { width: 0.9rem; }
+.x-rules .x-rules-cap { color: var(--x-ink-3); text-transform: none; letter-spacing: 0; font-weight: 450; }
+
+/* ---- tech stack (#skills) ---- */
+.x-stack { border-top: 1px solid var(--x-line); }
+#skills .skills-fx { display: none; }                         /* icon wall retired */
+.x-stack-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--x-line); }
+.x-domain { display: grid; gap: 14px; align-content: start; padding: 26px 22px 30px 0; }
+.x-domain + .x-domain { padding-left: 22px; border-left: 1px solid var(--x-line); }
+.x-domain-n { font-family: var(--x-font-serif); font-style: italic; font-size: 1.35rem; line-height: 1; color: var(--x-accent-ink); }
+.x-domain-ic { font-size: 1.1rem; color: var(--x-accent-ink); width: auto; }
+.x-domain h3 { font-size: var(--x-fs-h4); font-weight: 700; font-stretch: 108%; letter-spacing: -0.02em; line-height: 1.15; }
+.x-domain p { font-size: var(--x-fs-small); color: var(--x-ink-2); line-height: 1.55; }
+.x-also { display: grid; grid-template-columns: minmax(180px, 3fr) minmax(0, 9fr); gap: 16px 28px; padding: 22px 0; border-top: 1px solid var(--x-line); }
+.x-also:first-of-type { margin-top: clamp(32px, 4vw, 56px); }
+.x-also .x-label { padding-top: 6px; }
+.x-also-cap { grid-column: 2; font-size: var(--x-fs-small); color: var(--x-ink-3); }
+
+@media (max-width: 1100px) {
+  .x-stack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .x-domain:nth-child(3) { padding-left: 0; border-left: 0; }
+  .x-domain:nth-child(n+3) { border-top: 1px solid var(--x-line); }
+}
+@media (max-width: 960px) {
+  .x-about-line { grid-column: 1 / -1; max-width: 22ch; }
+  .x-about-fig { grid-column: 7 / -1; margin-top: 40px; }
+  .x-about-lead, .x-now { grid-column: 1 / -1; }
+  .x-now { margin-top: 32px; }
+  .x-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .x-stat:nth-child(3) { padding-left: 0; border-left: 0; }
+  .x-stat:nth-child(n+3) { border-top: 1px solid var(--x-line); margin-top: 22px; }
+}
+@media (max-width: 760px) {
+  .x-about-fig { grid-column: 3 / -1; }
+  .x-stat dd { font-size: 3.2rem; }
+  .x-stat { padding-right: 10px; }
+  .x-stat + .x-stat { padding-left: 14px; }
+  .x-stack-grid { grid-template-columns: 1fr; }
+  .x-domain, .x-domain + .x-domain { padding: 22px 0 24px; border-left: 0; }
+  .x-domain + .x-domain { border-top: 1px solid var(--x-line); }
+  .x-also { grid-template-columns: 1fr; gap: 12px; }
+  .x-also-cap { grid-column: 1; }
+}

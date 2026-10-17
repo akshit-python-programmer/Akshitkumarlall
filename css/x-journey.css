@@ -1,1 +1,92 @@
-/* x-journey.css — JOURNEY group (#journey). Owner: journey. */
+/* =====================================================================
+   x-journey.css — JOURNEY group (#journey, three.js drift scene). Owner: journey.
+   Re-implements every mechanic of legacy neo-brutal.css 993-1156 (sticky scroll stage,
+   canvas fill, .is-3d HUD vs static fallback) in NOIR styling. The canvas is untouched.
+   ===================================================================== */
+
+/* ---- mechanics (DO NOT REMOVE) ---- */
+#journey { position: relative; background: var(--x-bg); border-top: 1px solid var(--x-line); }
+#journey .journey-wrap { position: relative; }
+#journey.is-3d .journey-wrap { height: 700vh; }                  /* ≈100vh per milestone — tuned with W/S speed */
+#journey .journey-sticky { position: relative; }
+#journey.is-3d .journey-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+#driftCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+#journey:not(.is-3d) #driftCanvas, #journey:not(.is-3d) .drift-vignette,
+#journey:not(.is-3d) .drift-progress, #journey:not(.is-3d) .drift-hint { display: none; }
+
+/* ---- cinematic grade + letterbox over the canvas ---- */
+.drift-vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, transparent 55%, color-mix(in srgb, var(--x-bg) 70%, transparent) 100%); }
+.drift-vignette::before, .drift-vignette::after { content: ""; position: absolute; left: 0; right: 0; height: clamp(10px, 2.2vh, 22px); background: #050404; }
+.drift-vignette::before { top: 0; }
+.drift-vignette::after { bottom: 0; }
+
+/* ---- header ---- */
+.journey-header { position: relative; z-index: 4; padding: var(--x-section-y) var(--x-gutter) 0; max-width: 760px; }
+#journey.is-3d .journey-header { position: absolute; top: calc(var(--x-nav-h) + 20px); left: 0; padding: 0 var(--x-gutter); pointer-events: none; }
+.journey-header h2 { font-size: clamp(2.4rem, 5.6vw, 5.6rem); font-weight: 800; font-stretch: 112%; line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase; }
+.journey-header p { margin-top: 14px; max-width: 46ch; color: var(--x-ink-2); }
+
+/* ---- events: 3D = one glass card at a time ---- */
+.drift-event { --evc: var(--x-accent-ink); position: relative; }
+.drift-ev-num { font-family: var(--x-font-serif); font-style: italic; font-size: 1.25rem; line-height: 1; color: var(--x-accent-ink); }
+.drift-ev-ic { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--x-accent-dim); color: var(--x-accent-ink); font-size: 0.95rem; }
+.drift-ev-year { display: block; font-size: clamp(2.6rem, 4.6vw, 4.4rem); font-weight: 800; font-stretch: 116%; letter-spacing: -0.05em; line-height: 0.9; color: var(--x-ink); }
+.drift-ev-tag { display: block; font-size: var(--x-fs-label); font-weight: 600; font-stretch: 112%; letter-spacing: var(--x-track-label); text-transform: uppercase; color: var(--x-accent-ink); }
+.drift-event h3 { font-size: var(--x-fs-h4); font-weight: 700; font-stretch: 106%; letter-spacing: -0.02em; line-height: 1.15; color: var(--x-ink); }
+.drift-event p { font-size: var(--x-fs-small); line-height: 1.55; color: var(--x-ink-2); }
+#journey.is-3d .drift-events { position: absolute; z-index: 4; left: var(--x-gutter); bottom: clamp(64px, 10vh, 110px); width: min(440px, 44vw); }
+#journey.is-3d .drift-event {
+  position: absolute; left: 0; bottom: 0; width: 100%; display: grid; gap: 10px; padding: 22px 24px 24px;
+  border-radius: var(--x-r-sm); background: var(--x-glass); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: var(--x-shadow-sm), inset 0 0 0 1px var(--x-line);
+  opacity: 0; transform: translateY(18px); pointer-events: none;
+  transition: opacity 0.5s var(--x-ease-out), transform 0.7s var(--x-ease-out);
+}
+#journey.is-3d .drift-event.active { opacity: 1; transform: none; }
+#journey.is-3d .drift-event { grid-template-columns: 1fr auto; grid-template-areas: "num ic" "year year" "tag tag" "title title" "text text"; align-items: center; }
+#journey.is-3d .drift-ev-num { grid-area: num; }
+#journey.is-3d .drift-ev-ic { grid-area: ic; }
+#journey.is-3d .drift-ev-year { grid-area: year; }
+#journey.is-3d .drift-ev-tag { grid-area: tag; }
+#journey.is-3d .drift-event h3 { grid-area: title; }
+#journey.is-3d .drift-event p { grid-area: text; }
+
+/* ---- progress rail (JS: .drift-bar-fill scaleY(p), .drift-dot.active cumulative) ---- */
+#journey.is-3d .drift-progress { position: absolute; z-index: 4; right: var(--x-gutter); top: 50%; transform: translateY(-50%); display: flex; gap: 14px; align-items: stretch; }
+.drift-bar { position: relative; width: 2px; height: 240px; background: var(--x-line-2); overflow: hidden; }
+.drift-bar-fill { position: absolute; inset: 0; background: var(--x-accent); transform-origin: top; transform: scaleY(0); }
+.drift-dots { display: flex; flex-direction: column; justify-content: space-between; }
+.drift-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--x-line-2); transition: background-color 0.3s, transform 0.3s; }
+.drift-dot.active { background: var(--x-accent); transform: scale(1.25); }
+
+/* ---- hint ---- */
+.drift-hint { position: absolute; z-index: 4; left: 50%; bottom: clamp(24px, 4vh, 40px); transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 16px; border-radius: var(--x-r-pill); background: var(--x-glass); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px var(--x-line); font-size: var(--x-fs-label); font-weight: 600; font-stretch: 110%; letter-spacing: 0.1em; text-transform: uppercase; color: var(--x-ink); transition: opacity 0.6s, color 0.3s; animation: x-hint 2.4s var(--x-ease-inout) infinite; }
+.drift-hint.hide { opacity: 0; pointer-events: none; }
+#journey.drift-driving .drift-hint { color: var(--x-accent-ink); }
+@keyframes x-hint { 50% { transform: translate(-50%, -4px); } }
+
+/* ---- static fallback (reduced motion / no WebGL / CDN failure): a real timeline LINE ---- */
+#journey:not(.is-3d) .drift-events { position: relative; display: grid; gap: 0; margin: clamp(40px, 5vw, 72px) var(--x-gutter) var(--x-section-y); padding-left: 40px; }
+#journey:not(.is-3d) .drift-events::before { content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--x-accent), var(--x-line-2)); }
+#journey:not(.is-3d) .drift-event { display: grid; grid-template-columns: minmax(120px, 2fr) minmax(0, 7fr); grid-template-areas: "year tag" "year title" "year text"; column-gap: 28px; row-gap: 6px; padding: 26px 0; border-bottom: 1px solid var(--x-line); }
+#journey:not(.is-3d) .drift-event::before { content: ""; position: absolute; left: -35px; top: 34px; width: 12px; height: 12px; border-radius: 50%; background: var(--x-bg); box-shadow: inset 0 0 0 2px var(--x-accent); }
+#journey:not(.is-3d) .drift-event:last-child::before { background: var(--x-accent); box-shadow: 0 0 0 6px var(--x-accent-dim); }
+#journey:not(.is-3d) .drift-ev-num, #journey:not(.is-3d) .drift-ev-ic { display: none; }
+#journey:not(.is-3d) .drift-ev-year { grid-area: year; }
+#journey:not(.is-3d) .drift-ev-tag { grid-area: tag; }
+#journey:not(.is-3d) .drift-event h3 { grid-area: title; }
+#journey:not(.is-3d) .drift-event p { grid-area: text; max-width: 62ch; }
+
+@media (max-width: 760px) {
+  #journey.is-3d .journey-header h2 { font-size: clamp(2rem, 9vw, 2.8rem); }
+  #journey.is-3d .journey-header p { display: none; }
+  #journey.is-3d .drift-events { left: var(--x-gutter); right: var(--x-gutter); width: auto; bottom: 84px; }
+  #journey.is-3d .drift-event { background: var(--x-surface); -webkit-backdrop-filter: none; backdrop-filter: none; padding: 18px; }  /* phones may not composite backdrop-filter */
+  #journey.is-3d .drift-progress { top: calc(var(--x-nav-h) + 120px); transform: none; }
+  .drift-bar { height: 130px; }
+  #journey:not(.is-3d) .drift-events { padding-left: 32px; }
+  #journey:not(.is-3d) .drift-events::before { left: 7px; }
+  #journey:not(.is-3d) .drift-event { grid-template-columns: 1fr; grid-template-areas: "year" "tag" "title" "text"; }
+  #journey:not(.is-3d) .drift-event::before { left: -31px; top: 32px; }
+}

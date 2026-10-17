@@ -1,1 +1,157 @@
-/* x-hero.css — HERO group (#home). Owner: hero. */
+/* =====================================================================
+   x-hero.css — HERO group (#home). Owner: hero.
+   Adapted from .design-lab/noir/noir.css 261-306 + 563-581, with the judges' fixes:
+   solid "Kumar", ghost-filled knockout, mobile copy restored, CV detection layer.
+   ===================================================================== */
+.x-hero {
+  --x-pw: min(60vw, calc(89svh * 1.12), 1040px);   /* portrait width — shared by the figure AND the knockout mask */
+  position: relative; height: 100vh; height: 100svh; min-height: 640px;
+  overflow: hidden; overflow: clip; isolation: isolate; background: var(--x-bg);
+}
+.x-hero-gl, .x-hero-fallback { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; pointer-events: none; }
+.x-hero-fallback {
+  background:
+    radial-gradient(42% 52% at 50% 58%, color-mix(in srgb, var(--x-gl-a) 62%, transparent), transparent 70%),
+    radial-gradient(30% 40% at 62% 40%, color-mix(in srgb, var(--x-gl-b) 38%, transparent), transparent 70%),
+    radial-gradient(60% 70% at 40% 70%, color-mix(in srgb, var(--x-gl-c) 70%, transparent), transparent 75%),
+    var(--x-bg);
+}
+.x-hero.gl-on .x-hero-fallback { display: none; }
+.x-hero::after { /* bottom fade into the page */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 18%; z-index: 3; pointer-events: none;
+  background: linear-gradient(to top, color-mix(in srgb, var(--x-bg) 60%, transparent), transparent 70%);
+}
+
+/* stage = name (back) · portrait · name (front). Desktop: fills the hero. */
+.x-hero-stage { position: absolute; inset: 0; z-index: 1; }
+
+/* ---- name knockout ---- */
+.x-hn {
+  position: absolute; left: var(--x-gutter); right: var(--x-gutter); bottom: clamp(44px, 7vh, 72px); margin: 0;
+  font-size: var(--x-fs-mega); line-height: var(--x-lh-tight); font-weight: 820; font-stretch: var(--x-wdth-wide);
+  letter-spacing: var(--x-track-mega); text-transform: uppercase; pointer-events: none; user-select: none;
+}
+.x-hn-line { display: block; overflow: hidden; padding: 0.04em 0.06em 0.02em; margin: -0.04em -0.06em -0.02em; white-space: nowrap; }
+.x-hn-l1 { text-align: left; }
+.x-hn-l2 { text-align: right; }
+.x-hn-w { display: inline-block; }
+.x-hn .x-hn-serif {
+  font-family: var(--x-font-serif); font-style: italic; font-weight: 400; font-stretch: 100%;
+  font-size: 1.04em; text-transform: none; letter-spacing: -0.035em; padding-right: 0.04em;
+}
+.x-hn--back { z-index: 1; color: var(--x-name-ink); }
+.x-hn--back .x-hn-serif { visibility: hidden; }            /* "Kumar" lives only in the front layer */
+/* knockout: a copy of the name, masked by the portrait's own alpha, so the ghost/stroke
+   letters appear ONLY where the portrait covers the solid letters (both themes). */
+.x-hn-knock {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  -webkit-mask: url("../assets/x/portrait-1200.webp") 50% 100% / var(--x-pw) auto no-repeat;
+          mask: url("../assets/x/portrait-1200.webp") 50% 100% / var(--x-pw) auto no-repeat;
+}
+.x-hn--ghost { color: var(--x-name-ghost); -webkit-text-stroke: 1.5px var(--x-name-stroke); }
+.x-hn--ghost .x-hn-serif { visibility: hidden; }
+/* front: only "Kumar", solid accent, above the portrait */
+.x-hn--front { z-index: 3; color: transparent; }
+.x-hn--front .x-hn-w:not(.x-hn-serif) { visibility: hidden; }
+.x-hn--front .x-hn-serif { color: var(--x-name-accent); }
+
+/* OCR bracket around the name (drawn in during the intro, then fades) */
+.x-hn-ocr { position: absolute; inset: -14px -16px -10px -16px; border: 1px solid var(--x-lock-line); box-shadow: 0 0 0 1px var(--x-lock-halo); opacity: 0; pointer-events: none; --x-rc: 18px; }
+.x-hn-ocr .x-det-tag { left: auto; right: -1px; }
+
+/* ---- portrait ---- */
+.x-hero-portrait {
+  position: absolute; z-index: 2; bottom: 0; left: 50%; margin: 0;
+  width: var(--x-pw); aspect-ratio: 1235 / 1100;
+  transform: translateX(-50%); cursor: crosshair; -webkit-tap-highlight-color: transparent;
+}
+.x-hero-portrait:focus-visible { outline-offset: -6px; }
+.x-hero-portrait > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: contrast(1.06) brightness(0.98); }
+html[data-theme="light"] .x-hero-portrait > img { filter: contrast(1.04) brightness(1.02); }
+.x-hp-edges { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; clip-path: inset(50% 50% 50% 50%); }
+.x-hp-scan {
+  position: absolute; left: -4%; right: -4%; top: 0; height: 2px; z-index: 3; pointer-events: none; opacity: 0;
+  background: var(--x-accent); box-shadow: 0 0 18px 2px color-mix(in srgb, var(--x-accent) 60%, transparent);
+}
+.x-hp-lens { position: absolute; left: 0; top: 0; width: 200px; height: 200px; z-index: 1; opacity: 0; pointer-events: none; --x-rc: 16px; transition: opacity var(--x-dur-1); }
+.x-hp-lens::before { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--x-bg) 58%, transparent); }
+.x-hp-lens.is-on { opacity: 1; }
+.x-hp-lens .x-det-tag { top: 100%; bottom: auto; margin: 6px 0 0; }
+.x-hp-det { opacity: 0; transition: opacity 0.5s var(--x-ease-out); }
+.x-hero.is-lensing .x-hp-det { opacity: 0.55; }
+.x-hp-det--sm { --x-rc: 9px; }
+
+/* ---- copy ---- */
+.x-hero-top {
+  position: absolute; z-index: 5; top: calc(var(--x-nav-h) + clamp(20px, 5.5vh, 64px)); left: var(--x-gutter); right: var(--x-gutter);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; pointer-events: none;
+}
+.x-hero-top a, .x-hero-top button { pointer-events: auto; }
+.x-hero-col--l { max-width: 380px; }
+.x-hero-col--r { max-width: 440px; text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+.x-hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.x-hero-pills .x-hero-founder { display: none; }            /* desktop shows the right-column label instead */
+.x-hero-pitch { font-size: clamp(1rem, 1.18vw, 1.12rem); line-height: 1.55; color: var(--x-ink-2); text-wrap: pretty; }
+.x-hero-pitch strong { color: var(--x-ink); font-weight: 560; }
+.x-hero-cta { display: flex; align-items: center; gap: 22px; margin-top: 28px; }
+.x-hero-k { color: var(--x-ink); }
+.x-hero-role { margin-top: 14px; font-family: var(--x-font-serif); font-style: italic; font-size: clamp(2.2rem, 3.5vw, 3.6rem); line-height: 1; letter-spacing: -0.02em; color: var(--x-ink); }
+.x-hero-role .x-amp { color: var(--x-accent-ink); }
+.x-hero-now { margin-top: 18px; display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+.x-hero-now > span:first-child { color: var(--x-ink-2); }
+.x-hero-now #typed { color: var(--x-ink); min-width: 13ch; text-align: right; }
+
+.x-hero-meta {
+  position: absolute; z-index: 5; left: var(--x-gutter); right: var(--x-gutter); bottom: 16px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.x-hero-meta .x-label { color: var(--x-ink); }
+.x-hero-scroll { display: inline-flex; align-items: center; gap: 10px; }
+.x-hero-scroll i { width: 1px; height: 22px; background: var(--x-line-2); position: relative; overflow: hidden; }
+.x-hero-scroll i::after { content: ""; position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--x-ink); animation: x-scrolline 2s var(--x-ease-inout) infinite; }
+@keyframes x-scrolline { 0% { top: -100%; } 60%, 100% { top: 100%; } }
+
+/* ---- first-visit intro gates (html.x-intro is set pre-paint, removed by X.introDone) ---- */
+html.x-intro .x-hero-portrait > img { clip-path: inset(0 0 100% 0); animation: x-hero-failsafe 0s linear 1.6s forwards; }
+html.x-intro .x-hn-knock { opacity: 0; animation: x-hero-failsafe-o 0s linear 1.6s forwards; }
+@keyframes x-hero-failsafe { to { clip-path: inset(0 0 0 0); } }
+@keyframes x-hero-failsafe-o { to { opacity: 1; } }
+
+/* ---- tablet ---- */
+@media (max-width: 1100px) {
+  .x-hero-col--l { max-width: 320px; }
+  .x-hero-role { font-size: clamp(2rem, 3.6vw, 2.8rem); }
+}
+
+/* ---- stacked (phones + portrait tablets): stage on top (name + portrait + role), copy in flow below ---- */
+@media (max-width: 760px), (orientation: portrait) and (max-width: 1100px) {
+  .x-hero { --x-pw: min(165vw, 720px); height: auto; min-height: 0; padding-top: var(--x-nav-h); display: flex; flex-direction: column; }
+  .x-hero::after { display: none; }
+  .x-hero-gl, .x-hero-fallback { bottom: auto; height: calc(var(--x-nav-h) + min(148vw, 78svh)); }  /* shader behind the stage only */
+  .x-hero-stage { position: relative; inset: auto; height: min(148vw, 78svh); flex: none; }
+  .x-hero-stage::after { /* fade the turtleneck into the page so the role line reads in BOTH themes */
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 4; pointer-events: none;
+    background: linear-gradient(to top, var(--x-bg) 8%, color-mix(in srgb, var(--x-bg) 88%, transparent) 38%, transparent 100%);
+  }
+  .x-hn { top: 6px; bottom: auto; line-height: 0.9; }
+  .x-hn-l1 { font-size: calc((100vw - 2 * var(--x-gutter)) / 4.42); }
+  .x-hn-l2 { font-size: calc((100vw - 2 * var(--x-gutter)) / 5.6); text-align: left; }
+  .x-hn-ocr { inset: -8px -8px -6px -8px; --x-rc: 12px; }
+  .x-hero-portrait { bottom: 0; }   /* stays centred so the knockout mask (50% 100%) lines up */
+  .x-hero-top {
+    position: relative; top: auto; left: auto; right: auto; z-index: 5;
+    flex-direction: column; gap: 0; padding: 0 var(--x-gutter) 28px; margin-top: -104px; pointer-events: auto;
+  }
+  .x-hero-col--r { order: -1; text-align: left; align-items: flex-start; max-width: none; }
+  .x-hero-col--r > .x-hero-k { display: none; }
+  .x-hero-role { margin-top: 0; font-size: clamp(2.1rem, 10.4vw, 3rem); }
+  .x-hero-now { justify-content: flex-start; margin-top: 10px; }
+  .x-hero-now #typed { text-align: left; min-width: 0; }
+  .x-hero-col--l { max-width: 52ch; margin-top: 26px; }
+  .x-hero-pills .x-hero-founder { display: inline-flex; }
+  .x-hero-cta { flex-direction: column; align-items: stretch; gap: 14px; margin-top: 24px; }
+  .x-hero-cta .x-btn { width: 100%; }
+  .x-hero-cta .x-link { align-self: center; }
+  .x-hero-meta { position: relative; left: auto; right: auto; bottom: auto; padding: 0 var(--x-gutter) 28px; flex-wrap: wrap; }
+  .x-hero-scroll { display: none; }
+}
