@@ -23,12 +23,12 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.onload=null;this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="css/neo-brutal.css">
-    <link rel="preload" as="image" href="assets/potrait_bgremoved.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/potrait_bgremoved.webp" fetchpriority="high">
     <script type="importmap">
     {
       "imports": {
@@ -533,7 +533,7 @@
         transform:rotate(-2deg);
         transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
     .quick-contact:hover{transform:rotate(0deg) translate(-2px,-2px);box-shadow:11px 11px 0 var(--neo-shadow-color,#0a0a0a)}
-    @media(max-width:720px){.aw-more-grid{grid-template-columns:1fr}.quick-contact{right:16px;bottom:16px;width:calc(100% - 32px);text-align:center}}
+    @media(max-width:720px){.aw-more-grid{grid-template-columns:1fr}.quick-contact{right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:12px 20px;font-size:.68rem;letter-spacing:.12em}}
     .scene-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
     .sr{position:absolute;border-radius:50%;border:1px solid rgba(34,197,94,.08);animation:ringp 3.5s ease-in-out infinite}
     .sr:nth-child(1){width:280px;height:280px}.sr:nth-child(2){width:380px;height:380px;animation-delay:.6s}
@@ -565,7 +565,8 @@
     .cl-ic{width:42px;height:42px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:all .3s}
     .cl-link:hover .cl-ic{background:var(--fg);color:var(--bg)}
     .cl-txt span:first-child{display:block;font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;color:var(--fg4);margin-bottom:3px}
-    .cl-txt span:last-child{font-size:.9rem;font-weight:500}
+    .cl-txt{min-width:0}
+    .cl-txt span:last-child{font-size:.9rem;font-weight:500;overflow-wrap:anywhere}
     .cl-arr{margin-left:auto;color:var(--fg4);transition:all .3s}.cl-link:hover .cl-arr{color:var(--fg);transform:translateX(4px)}
     .cf-form{display:flex;flex-direction:column;gap:16px}
     .fg-g{display:flex;flex-direction:column;gap:6px}
@@ -835,7 +836,7 @@
         <div class="nb-hero-side">
             <figure class="nb-portrait-stage contact-portrait-stage hero-portrait-stage" id="heroPortrait" role="button" tabindex="0" aria-label="Akshit Kumar Lall. Click to say hello.">
                 <img class="nb-portrait-backdrop" src="assets/potrait.webp" alt="" aria-hidden="true" decoding="async" fetchpriority="low">
-                <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.png" alt="Portrait of Akshit Kumar Lall" decoding="async" fetchpriority="high">
+                <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.webp" alt="Portrait of Akshit Kumar Lall" decoding="async" fetchpriority="high">
                 <span class="nb-portrait-index font-code">me == creative ? </span>
                 <figcaption class="nb-portrait-caption font-code">Curious boi.</figcaption>
             </figure>
@@ -892,7 +893,7 @@
         <div class="bento rv" id="bentoGrid">
             <!-- 17: Furti AI — VinHack autonomous desktop agent -->
             <div class="bc" data-id="17" data-cat="ai" style="--i:0">
-                <img src="assets/my projects/furti.png" alt="Furti AI autonomous desktop agent" loading="lazy" decoding="async">
+                <img src="assets/my projects/furti.webp" alt="Furti AI autonomous desktop agent" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -909,7 +910,7 @@
 
             <!-- 12: Next Gen Camera -->
             <div class="bc" data-id="12" data-cat="cv ai" style="--i:1">
-                <img src="assets/next gen camera/robber detection.png" alt="Next Gen Camera System" loading="lazy" decoding="async">
+                <img src="assets/next gen camera/robber detection.webp" alt="Next Gen Camera System" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -926,7 +927,7 @@
 
             <!-- 16: JEE Horizon — live full-stack product -->
             <div class="bc" data-id="16" data-cat="web ai" style="--i:2">
-                <img src="assets/my projects/jeehorizon.png" alt="JEE Horizon: AI E-Learning Platform" loading="lazy" decoding="async">
+                <img src="assets/my projects/jeehorizon.webp" alt="JEE Horizon: AI E-Learning Platform" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -943,7 +944,7 @@
 
             <!-- 0: Property Auto-Furnish (featured) -->
             <div class="bc" data-id="0" data-cat="ai web" style="--i:3">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4"></video>
+                <video preload="none" muted loop playsinline poster="assets/previews/kitchen.webp" data-src="assets/previews/kitchen.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -960,7 +961,7 @@
 
             <!-- 1: Football Tracker -->
             <div class="bc" data-id="1" data-cat="cv ai" style="--i:4">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]full football team score ball tracker and analyzer.mp4"></video>
+                <video preload="none" muted loop playsinline poster="assets/previews/football.webp" data-src="assets/previews/football.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -977,7 +978,7 @@
 
             <!-- 13: Next Gen Parking -->
             <div class="bc" data-id="13" data-cat="cv" style="--i:5">
-                <video preload="none" muted loop playsinline data-src="assets/1st postion in IIT delhi innovation challlenge - NextGenParkingSystem.mp4"></video>
+                <video preload="none" muted loop playsinline poster="assets/previews/parking.webp" data-src="assets/previews/parking.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -995,9 +996,9 @@
             <!-- 2: Sports Recognition — multi-video grid -->
             <div class="bc" data-id="2" data-cat="cv ai" style="--i:6">
                 <div class="bc-multi">
-                    <video class="main-vid" preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/pushups1.mp4"></video>
-                    <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/squats.mp4"></video>
-                    <video preload="none" muted loop playsinline data-src="assets/my projects/[advanced]sports activity recognition analyzer and classifier complex full end to end project/bicep.mp4"></video>
+                    <video class="main-vid" preload="none" muted loop playsinline poster="assets/previews/pushups.webp" data-src="assets/previews/pushups.mp4"></video>
+                    <video preload="none" muted loop playsinline poster="assets/previews/squats.webp" data-src="assets/previews/squats.mp4"></video>
+                    <video preload="none" muted loop playsinline poster="assets/previews/bicep.webp" data-src="assets/previews/bicep.mp4"></video>
                 </div>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
@@ -1015,7 +1016,7 @@
 
             <!-- 4: Violence Detection -->
             <div class="bc" data-id="4" data-cat="ai cv" style="--i:7">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium]voilence detection using python.mp4"></video>
+                <video preload="none" muted loop playsinline poster="assets/previews/violence.webp" data-src="assets/previews/violence.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1032,7 +1033,7 @@
 
             <!-- 11: Pose Estimation -->
             <div class="bc" data-id="11" data-cat="cv ai" style="--i:8">
-                <img src="assets/my projects/[basic]pose estimation 2 .png" alt="Pose Estimation" loading="lazy" decoding="async">
+                <img src="assets/my projects/[basic]pose estimation 2 .webp" alt="Pose Estimation" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1066,7 +1067,7 @@
 
             <!-- 7: Face Segmentizer -->
             <div class="bc" data-id="7" data-cat="cv ai" style="--i:10">
-                <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.png" alt="Face Segmentizer" loading="lazy" decoding="async">
+                <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.webp" alt="Face Segmentizer" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1083,7 +1084,7 @@
 
             <!-- 5: Document Scanner -->
             <div class="bc" data-id="5" data-cat="cv" style="--i:11">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium] document scanner with full GUI.mp4"></video>
+                <video preload="none" muted loop playsinline poster="assets/previews/document-scanner.webp" data-src="assets/previews/document-scanner.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1117,7 +1118,7 @@
 
             <!-- 10: Motion Detection -->
             <div class="bc" data-id="10" data-cat="cv" style="--i:13">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[basic]motion_detection.mp4"></video>
+                <video preload="none" muted loop playsinline poster="assets/previews/motion-detection.webp" data-src="assets/previews/motion-detection.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1134,7 +1135,7 @@
 
             <!-- 3: Squid Game 3D -->
             <div class="bc" data-id="3" data-cat="game" style="--i:14">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[complex]squid game 3d made using ursina python.mp4"></video>
+                <video preload="none" muted loop playsinline poster="assets/previews/squid-game.webp" data-src="assets/previews/squid-game.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1151,7 +1152,7 @@
 
             <!-- 8: Multiplayer Game -->
             <div class="bc" data-id="8" data-cat="game" style="--i:15">
-                <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png" alt="Multiplayer Platformer" loading="lazy" decoding="async">
+                <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.webp" alt="Multiplayer Platformer" loading="lazy" decoding="async">
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1185,7 +1186,7 @@
 
             <!-- 6: Client Website -->
             <div class="bc" data-id="6" data-cat="web" style="--i:17">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[medium]client website-1.mp4"></video>
+                <video preload="none" muted loop playsinline poster="assets/previews/client-website.webp" data-src="assets/previews/client-website.mp4"></video>
                 <div class="bc-grad"></div>
                 <span class="bc-shine"></span>
                 <div class="bc-frame"></div>
@@ -1218,7 +1219,7 @@
             <p>Competitive wins on national and international stages.</p>
         </div>
         <div class="aw-entry reverse rv">
-            <div class="aw-img aw-img-square"><img src="assets/Vinhack_winner.png" alt="VinHack 2026 1st Prize — VIT Vellore" loading="lazy" decoding="async"><div class="aw-img-num">01</div></div>
+            <div class="aw-img aw-img-square"><img src="assets/Vinhack_winner.webp" alt="VinHack 2026 1st Prize — VIT Vellore" loading="lazy" decoding="async"><div class="aw-img-num">01</div></div>
             <div class="aw-text">
                 <div class="aw-cat">1ST PRIZE · HACKATHON</div>
                 <h3 class="aw-title">VinHack 2026 — 1st Prize</h3>
@@ -1230,8 +1231,8 @@
         <div class="aw-entry rv">
             <div class="aw-img">
                 <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/recieving BIC award on state.jpg" alt="BIC Award" loading="lazy" decoding="async"></div>
-                    <div class="aw-slide"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award Stage" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide active"><img src="assets/recieving BIC award on state.webp" alt="BIC Award" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .webp" alt="BIC Award Stage" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="aw-img-num">02</div>
             </div>
@@ -1244,7 +1245,7 @@
             </div>
         </div>
         <div class="aw-entry reverse rv">
-            <div class="aw-img"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.jpeg" alt="INEX Medal" loading="lazy" decoding="async"><div class="aw-img-num">03</div></div>
+            <div class="aw-img"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.webp" alt="INEX Medal" loading="lazy" decoding="async"><div class="aw-img-num">03</div></div>
             <div class="aw-text">
                 <div class="aw-cat">SILVER MEDAL · INTERNATIONAL EXPO</div>
                 <h3 class="aw-title">INEX India Silver Medal — IYIIC</h3>
@@ -1257,8 +1258,8 @@
         <div class="aw-entry rv">
             <div class="aw-img">
                 <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.jpg" alt="BIT Mesra Presentation" loading="lazy" decoding="async"></div>
-                    <div class="aw-slide"><img src="assets/recieving recognition at BIT meshra patna.jpg" alt="BIT Mesra Recognition" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide active"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.webp" alt="BIT Mesra Presentation" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide"><img src="assets/recieving recognition at BIT meshra patna.webp" alt="BIT Mesra Recognition" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="aw-img-num">04</div>
             </div>
@@ -1272,7 +1273,7 @@
         </div>
 
         <div class="aw-entry reverse rv">
-            <div class="aw-img"><img src="assets/explaining next gen camera to foreign researchers.jpg" alt="International researchers" loading="lazy" decoding="async"><div class="aw-img-num">05</div></div>
+            <div class="aw-img"><img src="assets/explaining next gen camera to foreign researchers.webp" alt="International researchers" loading="lazy" decoding="async"><div class="aw-img-num">05</div></div>
             <div class="aw-text">
                 <div class="aw-cat">INTERNATIONAL · RESEARCH ENGAGEMENT</div>
                 <h3 class="aw-title">Presented to International Researchers</h3>
@@ -1284,8 +1285,8 @@
         <div class="aw-entry rv">
             <div class="aw-img">
                 <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .jpg" alt="BIC Award" loading="lazy" decoding="async"></div>
-                    <div class="aw-slide"><img src="assets/recieving BIC award on state.jpg" alt="BIC Stage" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide active"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .webp" alt="BIC Award" loading="lazy" decoding="async"></div>
+                    <div class="aw-slide"><img src="assets/recieving BIC award on state.webp" alt="BIC Stage" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="aw-img-num">06</div>
             </div>
@@ -1304,7 +1305,7 @@
         <button class="show-awards-btn" id="showAwardsBtn">SHOW MORE AWARDS</button>
         <div class="aw-more" id="awMoreAwards">
             <div class="aw-entry rv">
-                <div class="aw-img"><video src="assets/1st postion in IIT delhi innovation challlenge - NextGenParkingSystem.mp4" autoplay muted loop playsinline></video><div class="aw-img-num">07</div></div>
+                <div class="aw-img"><video class="aw-lazy-vid" preload="none" muted loop playsinline poster="assets/previews/parking.webp" data-src="assets/previews/parking.mp4"></video><div class="aw-img-num">07</div></div>
                 <div class="aw-text">
                     <div class="aw-cat">1ST PRIZE · IIT DELHI</div>
                     <h3 class="aw-title">Next Gen Parking System — 1st Prize</h3>
@@ -1314,7 +1315,7 @@
                 </div>
             </div>
             <div class="aw-entry reverse rv">
-                <div class="aw-img"><img src="assets/1st prize at robo fest.jpg" alt="Robo Fest" loading="lazy" decoding="async"><div class="aw-img-num">08</div></div>
+                <div class="aw-img"><img src="assets/1st prize at robo fest.webp" alt="Robo Fest" loading="lazy" decoding="async"><div class="aw-img-num">08</div></div>
                 <div class="aw-text">
                     <div class="aw-cat">1ST PRIZE · ROBOTICS</div>
                     <h3 class="aw-title">Robo Fest — 1st Prize</h3>
@@ -1325,7 +1326,7 @@
                 </div>
             </div>
             <div class="aw-entry rv">
-                <div class="aw-img"><img src="assets/certificates/misc/ingenious geeks.png" alt="Ingenious Geeks Certificate" loading="lazy" decoding="async"><div class="aw-img-num">09</div></div>
+                <div class="aw-img"><img src="assets/certificates/misc/ingenious geeks.webp" alt="Ingenious Geeks Certificate" loading="lazy" decoding="async"><div class="aw-img-num">09</div></div>
                 <div class="aw-text">
                     <div class="aw-cat">INNOVATION PROGRAM</div>
                     <h3 class="aw-title">Ingenious Geeks — Certificate</h3>
@@ -1338,8 +1339,8 @@
             <div class="aw-entry reverse rv">
                 <div class="aw-img">
                     <div class="aw-carousel">
-                        <div class="aw-slide active"><img src="assets/certificates/misc/ncse.jpeg" alt="National Science Congress certificate" loading="lazy" decoding="async"></div>
-                        <div class="aw-slide"><img src="assets/certificates/misc/ncse.jpeg" alt="NCSC Proof" loading="lazy" decoding="async"></div>
+                        <div class="aw-slide active"><img src="assets/certificates/misc/ncse.webp" alt="National Science Congress certificate" loading="lazy" decoding="async"></div>
+                        <div class="aw-slide"><img src="assets/certificates/misc/ncse.webp" alt="NCSC Proof" loading="lazy" decoding="async"></div>
                     </div>
                     <div class="aw-img-num">10</div>
                 </div>
@@ -1377,7 +1378,7 @@
             <div class="nb-about-intro">
                 <figure class="nb-portrait-stage">
                     <img class="nb-portrait-backdrop" src="assets/potrait.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                    <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.png" alt="Portrait of Akshit Kumar Lall" loading="lazy" decoding="async">
+                    <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.webp" alt="Portrait of Akshit Kumar Lall" loading="lazy" decoding="async">
                     <span class="nb-portrait-index font-code" aria-hidden="true">01 / AKL</span>
                     <figcaption class="nb-portrait-caption font-code">BUILDER BY NATURE</figcaption>
                 </figure>
@@ -1473,7 +1474,7 @@
         </div>
         <div class="vh-body">
             <div class="vh-media">
-                <div class="vh-frame"><img src="assets/Vinhack_winner_compressed.png" alt="1st prize at VinHack 2026, VIT Vellore" loading="lazy" decoding="async"></div>
+                <div class="vh-frame"><img src="assets/Vinhack_winner_compressed.webp" alt="1st prize at VinHack 2026, VIT Vellore" loading="lazy" decoding="async"></div>
             </div>
             <div class="vh-copy">
                 <div class="vh-pills">
@@ -2795,7 +2796,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 })();
 
 function initProjectCards() {
-  if(VM)VM.initBento();
+  if(VM){VM.initBento();VM.initLazyAutoplay('.aw-lazy-vid');}
   document.querySelectorAll('.bc').forEach(card=>{
       const id=+card.dataset.id;
       card.addEventListener('click',()=>openModal(id));
@@ -3483,9 +3484,8 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     window.setTimeout(() => {
       email.focus({ preventScroll: true });
       const len = email.value.length;
-      if (typeof email.setSelectionRange === 'function') {
-        email.setSelectionRange(len, len);
-      }
+      // type="email" inputs throw on setSelectionRange in Chromium
+      try { email.setSelectionRange(len, len); } catch (_) {}
     }, 140);
   });
 </script>

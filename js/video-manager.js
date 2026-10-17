@@ -101,6 +101,23 @@
     });
   }
 
+  // Muted decorative videos that should only download and play while on screen
+  // (e.g. inside a collapsed section). Pauses again when scrolled away.
+  function initLazyAutoplay(selector) {
+    const vids = document.querySelectorAll(selector);
+    if (!vids.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) playVideo(en.target);
+          else en.target.pause();
+        });
+      },
+      { rootMargin: '200px 0px', threshold: 0.01 }
+    );
+    vids.forEach((v) => io.observe(v));
+  }
+
   function wireGalleryVideo(wrap) {
     const video = wrap.querySelector('video');
     if (!video) return;
@@ -170,6 +187,7 @@
 
   global.VideoManager = {
     initBento,
+    initLazyAutoplay,
     initModalMedia,
     onModalClose,
     pauseAllBento,

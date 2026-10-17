@@ -15,12 +15,12 @@
     "mainType": "video",
     "main": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4",
     "gallery": [
-      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-4.JPG", "label": "BEFORE — EMPTY ROOM" },
-      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-4.jpg", "label": "AFTER — AI FURNISHED" },
-      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-22.JPG", "label": "BEFORE — BEDROOM 2" },
-      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-22.jpg", "label": "AFTER — BEDROOM 2 FURNISHED" },
-      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-6.JPG", "label": "BEFORE — LIVING ROOM" },
-      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-6 (2).jpg", "label": "AFTER — LIVING ROOM FURNISHED" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-4.webp", "label": "BEFORE — EMPTY ROOM" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-4.webp", "label": "AFTER — AI FURNISHED" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-22.webp", "label": "BEFORE — BEDROOM 2" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-22.webp", "label": "AFTER — BEDROOM 2 FURNISHED" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/input/Middle Way, Little Tangley-6.webp", "label": "BEFORE — LIVING ROOM" },
+      { "type": "img", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/After/Middle Way, Little Tangley-6 (2).webp", "label": "AFTER — LIVING ROOM FURNISHED" },
       { "type": "vid", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/kitchen.mp4", "label": "KITCHEN DEMO" },
       { "type": "vid", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/bathroom.mp4", "label": "BATHROOM DEMO" },
       { "type": "vid", "src": "assets/my projects/[highly advanced] Property auto furnish Image Generator  client-startrek23/single bedroom.mp4", "label": "BEDROOM DEMO" }
@@ -142,7 +142,7 @@
       { "ic": "fas fa-face-smile", "t": "FACE DETECTION" }
     ],
     "mainType": "img",
-    "main": "assets/my projects/[advanced[face sementizer for automatch passport image generator.png",
+    "main": "assets/my projects/[advanced[face sementizer for automatch passport image generator.webp",
     "gallery": []
   },
   {
@@ -158,7 +158,7 @@
       { "ic": "fas fa-running", "t": "PLATFORMER" }
     ],
     "mainType": "img",
-    "main": "assets/my projects/[advanced]full platform multiplayer game using pygame python/project.png",
+    "main": "assets/my projects/[advanced]full platform multiplayer game using pygame python/project.webp",
     "gallery": []
   },
   {
@@ -206,7 +206,7 @@
       { "ic": "fas fa-layer-group", "t": "FOUNDATION PROJECT" }
     ],
     "mainType": "img",
-    "main": "assets/my projects/[basic]pose estimation 2 .png",
+    "main": "assets/my projects/[basic]pose estimation 2 .webp",
     "gallery": []
   },
   {
@@ -222,14 +222,14 @@
       { "ic": "fas fa-eye", "t": "5 DETECTION MODULES" }
     ],
     "mainType": "img",
-    "main": "assets/next gen camera/robber detection.png",
+    "main": "assets/next gen camera/robber detection.webp",
     "page": "next-gen-camera.html",
     "gallery": [
-      { "type": "img", "src": "assets/next gen camera/fire_detection.png", "label": "FIRE DETECTION" },
-      { "type": "img", "src": "assets/next gen camera/faint_detection.png", "label": "FAINT DETECTION" },
-      { "type": "img", "src": "assets/next gen camera/Drowsiness Detection.png", "label": "DROWSINESS DETECTION" },
-      { "type": "img", "src": "assets/explaining next gen camera to foreign researchers.jpg", "label": "INTERNATIONAL RESEARCH PANEL" },
-      { "type": "img", "src": "assets/presenting in BIT Meshra patna about next gen camera-1.jpg", "label": "BIT MESRA SHOWCASE" }
+      { "type": "img", "src": "assets/next gen camera/fire_detection.webp", "label": "FIRE DETECTION" },
+      { "type": "img", "src": "assets/next gen camera/faint_detection.webp", "label": "FAINT DETECTION" },
+      { "type": "img", "src": "assets/next gen camera/Drowsiness Detection.webp", "label": "DROWSINESS DETECTION" },
+      { "type": "img", "src": "assets/explaining next gen camera to foreign researchers.webp", "label": "INTERNATIONAL RESEARCH PANEL" },
+      { "type": "img", "src": "assets/presenting in BIT Meshra patna about next gen camera-1.webp", "label": "BIT MESRA SHOWCASE" }
     ]
   },
   {
@@ -293,7 +293,7 @@
       { "ic": "fas fa-robot", "t": "AI-POWERED" }
     ],
     "mainType": "img",
-    "main": "assets/my projects/jeehorizon.png",
+    "main": "assets/my projects/jeehorizon.webp",
     "page": "https://jeehorizon.web.app/",
     "gallery": []
   },
@@ -310,7 +310,7 @@
       { "ic": "fas fa-bolt", "t": "TOKEN-OPTIMIZED PIPELINE" }
     ],
     "mainType": "img",
-    "main": "assets/my projects/furti.png",
+    "main": "assets/my projects/furti.webp",
     "gallery": []
   }
 ]
