@@ -36,10 +36,6 @@
     <link rel="preload" href="assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/x/portrait-1200.webp" as="image" type="image/webp" fetchpriority="high">
-    <!-- legacy: unlinked at integration (phase 2). Open the page with ?legacy=0 to preview without it. -->
-    <link rel="stylesheet" href="css/neo-brutal.css" data-legacy>
-    <link rel="stylesheet" href="css/legacy-inline.css" data-legacy>
-    <script>if(/[?&]legacy=0/.test(location.search))document.querySelectorAll('link[data-legacy]').forEach(function(l){l.disabled=true});</script>
     <!-- x design system -->
     <link rel="stylesheet" href="assets/vendor/fontawesome/fa-x.css">
     <link rel="stylesheet" href="css/x-base.css">
@@ -77,984 +73,773 @@
 <body>
 <a class="x-skip" href="#main" data-x-noscroll>Skip to content</a>
 <!-- x:shell:nav start -->
-<div id="progress"></div>
-
-<!-- NAV -->
-<nav id="nav">
-    <a href="#home" class="nav-logo">AKL_</a>
-    <ul class="nav-links">
-        <li><a href="#projects">PROJECTS</a></li>
-        <li><a href="#awards">AWARDS</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#testimonials">REVIEWS</a></li>
-        <li><a href="#journey">JOURNEY</a></li>
-        <li><a href="#contact">CONTACT</a></li>
+<div id="progress" aria-hidden="true"></div>
+<header id="nav" class="x-nav">
+  <a href="#home" class="x-nav-logo" aria-label="Akshit Kumar Lall — home"><span class="x-nav-mark">AKL</span><span class="x-nav-sub">Technologies</span></a>
+  <nav aria-label="Primary">
+    <ul class="x-nav-links">
+      <li><a href="#projects" class="x-roll"><span data-text="Projects">Projects</span></a></li>
+      <li><a href="#awards" class="x-roll"><span data-text="Awards">Awards</span></a></li>
+      <li><a href="#about" class="x-roll"><span data-text="About">About</span></a></li>
+      <li><a href="#testimonials" class="x-roll"><span data-text="Reviews">Reviews</span></a></li>
+      <li><a href="#journey" class="x-roll"><span data-text="Journey">Journey</span></a></li>
+      <li><a href="#contact" class="x-roll"><span data-text="Contact">Contact</span></a></li>
     </ul>
-    <div style="display:flex;align-items:center;gap:8px">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
-        <button class="nav-toggle" id="navBtn"><i class="fas fa-bars"></i></button>
+  </nav>
+  <div class="x-nav-end">
+    <span class="x-label x-nav-time">Vellore <span data-x-clock>--:--</span> IST</span>
+    <button class="x-icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme"><span class="x-theme-ic" aria-hidden="true"></span></button>
+    <a href="#contact" class="x-btn x-btn--accent x-btn--sm x-nav-cta" data-x-magnetic><span class="x-btn-in"><span class="x-dot" aria-hidden="true"></span>Let's talk</span></a>
+    <button class="x-menu-btn nav-toggle" id="navBtn" type="button" aria-expanded="false" aria-controls="mobMenu"><span class="x-menu-btn-txt">Menu</span><span class="x-menu-lines" aria-hidden="true"><i></i><i></i></span></button>
+  </div>
+</header>
+<div class="mob-menu x-menu" id="mobMenu" aria-hidden="true" inert>
+  <div class="x-menu-inner" data-lenis-prevent>
+    <p class="x-menu-head x-label"><span>Index · 06 sections</span><span><span data-x-clock-s>--:--:--</span> IST</span></p>
+    <nav class="x-menu-links" aria-label="Mobile">
+      <a href="#projects"><em class="x-serif">01</em><span>Projects</span></a>
+      <a href="#awards"><em class="x-serif">02</em><span>Awards</span></a>
+      <a href="#about"><em class="x-serif">03</em><span>About</span></a>
+      <a href="#testimonials"><em class="x-serif">04</em><span>Reviews</span></a>
+      <a href="#journey"><em class="x-serif">05</em><span>Journey</span></a>
+      <a href="#contact"><em class="x-serif">06</em><span>Contact</span></a>
+    </nav>
+    <div class="x-menu-foot">
+      <a class="x-btn x-btn--accent x-btn--block" href="mailto:akshitkumarlal@gmail.com"><span class="x-btn-in">akshitkumarlal@gmail.com <svg class="x-ico x-ico--ne" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></span></a>
+      <div class="x-menu-soc">
+        <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer">X</a>
+      </div>
+      <p class="x-label" style="display:flex;align-items:center;gap:10px"><span class="x-pulse" aria-hidden="true"></span>Open to new opportunities</p>
+      <button class="mob-close x-link x-menu-close" id="mobClose" type="button">Close menu</button>
     </div>
-</nav>
-<div class="mob-menu" id="mobMenu">
-    <button class="mob-close" id="mobClose"><i class="fas fa-times"></i></button>
-    <a href="#projects">PROJECTS</a><a href="#awards">AWARDS</a><a href="#about">ABOUT</a><a href="#testimonials">REVIEWS</a><a href="#journey">JOURNEY</a><a href="#contact">CONTACT</a>
+  </div>
 </div>
 <!-- x:shell:nav end -->
 <main id="main" tabindex="-1">
 <!-- x:hero start -->
-<!-- HERO -->
-<section id="home" class="neo-hero">
-    <span class="nb-blob nb-blob-1" aria-hidden="true"></span>
-    <span class="nb-blob nb-blob-2" aria-hidden="true"></span>
-    <div class="nb-hero-grid">
-        <div class="nb-hero-main">
-            <div class="nb-hero-status">
-                <span class="nb-pill nb-pill-live"><span class="nb-live-dot"></span>Open to new opportunities</span>
-                <span class="nb-pill font-code">FOUNDER · AKL Technologies</span>
-            </div>
-            <p class="nb-hero-hi font-pixel">HI, I'M</p>
-            <h1 class="nb-name">AKSHIT<br>KUMAR <span class="nb-name-mark">LALL</span></h1>
-            <div class="nb-term">
-                <span class="nb-term-dots"><i></i><i></i><i></i></span>
-                <span class="nb-term-txt font-code">&gt;&nbsp;<span id="typed"></span><span class="caret"></span></span>
-            </div>
-            <!-- <p class="nb-hero-tagline">I build machines that see.</p> -->
-            <p class="nb-hero-tagline font-code">An Innovator and Founder.</p>
-            <p class="nb-hero-sub font-code">Trying <strong class="hero-highlight">to solve real-world critical problems</strong> by <strong class="hero-highlight">applying technology creatively </strong>and contributing to humanity to a sustainable future world.</p>
-
-            <!-- <div class="nb-proof font-code"> -->
-                <!-- <span class="nb-proof-item">171 PROJECTS BUILT</span> -->
-                <!-- <span class="nb-proof-item">AWARD-WINNING AI CAMERA</span> -->
-                <!-- <span class="nb-proof-item">50+ FIVERR CLIENTS · 5.0★</span> -->
-            <!-- </div> -->
-            <div class="nb-cta">
-                <a href="#projects" class="nb-btn nb-btn-dark"><span>VIEW PROJECTS</span> <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="nb-hero-side">
-            <figure class="nb-portrait-stage contact-portrait-stage hero-portrait-stage" id="heroPortrait" role="button" tabindex="0" aria-label="Akshit Kumar Lall. Click to say hello.">
-                <img class="nb-portrait-backdrop" src="assets/potrait.webp" alt="" aria-hidden="true" decoding="async" fetchpriority="low">
-                <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.webp" alt="Portrait of Akshit Kumar Lall" decoding="async" fetchpriority="high">
-                <span class="nb-portrait-index font-code">me == creative ? </span>
-                <figcaption class="nb-portrait-caption font-code">Curious boi.</figcaption>
-            </figure>
-            <div class="nb-badge-float font-code">obssessed <strong>to solve problems <br>and build stuff</strong> </div>
-            <!-- <div class="nb-badge-float font-code"><strong>AWARD</strong>WINNING ·<br>NEXT GEN<br>CAMERA</div> -->
-        </div>
+<section id="home" class="x-hero" aria-label="Introduction">
+  <canvas class="x-hero-gl" id="heroGl" aria-hidden="true"></canvas>
+  <div class="x-hero-fallback" aria-hidden="true"></div>
+  <div class="x-hero-stage">
+    <h1 class="x-hn x-hn--back" id="heroName">
+      <span class="x-sr">Akshit Kumar Lall</span>
+      <span class="x-hn-line x-hn-l1" aria-hidden="true"><span class="x-hn-w">AKSHIT</span></span>
+      <span class="x-hn-line x-hn-l2" aria-hidden="true"><em class="x-hn-w x-hn-serif">Kumar</em> <span class="x-hn-w">LALL</span></span>
+    </h1>
+    <figure class="x-hero-portrait" id="heroPortrait" role="button" tabindex="0" aria-label="Portrait of Akshit Kumar Lall. Press to say hello.">
+      <img src="assets/x/portrait-1200.webp" width="1235" height="1100" alt="Portrait of Akshit Kumar Lall in a black turtleneck" fetchpriority="high" decoding="async">
+      <canvas class="x-hp-edges" aria-hidden="true"></canvas>
+      <span class="x-hp-scan" aria-hidden="true"></span>
+      <span class="x-hp-lens" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">sobel 3×3 · <b id="heroLensMs">0.0</b> ms</span></span>
+      <span class="x-det x-hp-det" style="--x:36%;--y:17%;--w:33%;--h:35%" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">face</span></span>
+      <span class="x-det x-hp-det x-hp-det--sm" style="--x:36.5%;--y:26.5%;--w:34%;--h:11%" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">glasses</span></span>
+    </figure>
+    <div class="x-hn-knock" aria-hidden="true">
+      <div class="x-hn x-hn--ghost">
+        <span class="x-hn-line x-hn-l1"><span class="x-hn-w">AKSHIT</span></span>
+        <span class="x-hn-line x-hn-l2"><em class="x-hn-w x-hn-serif">Kumar</em> <span class="x-hn-w">LALL</span></span>
+      </div>
     </div>
+    <div class="x-hn x-hn--front" aria-hidden="true">
+      <span class="x-hn-line x-hn-l1"><span class="x-hn-w">AKSHIT</span></span>
+      <span class="x-hn-line x-hn-l2"><em class="x-hn-w x-hn-serif">Kumar</em> <span class="x-hn-w">LALL</span></span>
+      <span class="x-hn-ocr"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">ocr · akshit kumar lall</span></span>
+    </div>
+  </div>
+  <div class="x-hero-top">
+    <div class="x-hero-col x-hero-col--l">
+      <div class="x-hero-pills">
+        <span class="x-pill"><span class="x-pulse" aria-hidden="true"></span>Open to new opportunities</span>
+        <span class="x-pill x-hero-founder">Founder · AKL Technologies</span>
+      </div>
+      <p class="x-hero-pitch">Trying <strong>to solve real-world critical problems</strong> by <strong>applying technology creatively</strong> and contributing to humanity to a sustainable future world.</p>
+      <div class="x-hero-cta">
+        <a href="#projects" class="x-btn x-btn--accent" data-x-magnetic><span class="x-btn-in">View projects <svg class="x-ico x-ico--e" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+        <a href="#contact" class="x-link">Get in touch</a>
+      </div>
+    </div>
+    <div class="x-hero-col x-hero-col--r">
+      <p class="x-label x-hero-k">Founder — AKL Technologies</p>
+      <p class="x-hero-role">An Innovator <span class="x-amp">&amp;</span> Founder.</p>
+      <p class="x-label x-hero-now" aria-label="Now building: computer vision, robotics and hardware"><span>Now building —</span> <span id="typed" aria-hidden="true">Computer Vision.</span></p>
+    </div>
+  </div>
+  <div class="x-hero-meta">
+    <span class="x-label">Freshman — VIT Vellore</span>
+    <span class="x-label x-hero-scroll"><i aria-hidden="true"></i>Scroll</span>
+    <span class="x-label">150+ projects since class 6</span>
+  </div>
 </section>
 <!-- x:hero end -->
 <!-- x:shell:marquee start -->
-<!-- Marquee -->
-<div class="marquee-wrap">
-    <div class="marquee-track">
-        <span class="m-i">PYTHON</span><span class="m-i">C++</span><span class="m-i">OPENCV</span><span class="m-i">YOLO</span><span class="m-i">MEDIAPIPE</span><span class="m-i">PYTORCH</span><span class="m-i">REACT</span><span class="m-i">DJANGO</span><span class="m-i">FLASK</span><span class="m-i">FIREBASE</span><span class="m-i">FUSION 360</span><span class="m-i">ARDUINO</span><span class="m-i">EMBEDDED</span><span class="m-i">NEXT GEN CAMERA</span>
-        <span class="m-i">PYTHON</span><span class="m-i">C++</span><span class="m-i">OPENCV</span><span class="m-i">YOLO</span><span class="m-i">MEDIAPIPE</span><span class="m-i">PYTORCH</span><span class="m-i">REACT</span><span class="m-i">DJANGO</span><span class="m-i">FLASK</span><span class="m-i">FIREBASE</span><span class="m-i">FUSION 360</span><span class="m-i">ARDUINO</span><span class="m-i">EMBEDDED</span><span class="m-i">NEXT GEN CAMERA</span>
+<section class="x-marquee" aria-label="Technologies I build with">
+  <p class="x-marquee-head"><span class="x-label">Stack — 14 technologies</span><a class="x-link x-label" href="#skills">Full stack <svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg></a></p>
+  <div class="x-marquee-track" aria-hidden="true">
+    <div class="x-marquee-set">
+      <span>Python</span><i class="x-star"></i><span class="o">C++</span><i class="x-star"></i><span>OpenCV</span><i class="x-star"></i><span class="o">YOLO</span><i class="x-star"></i>
+      <span>MediaPipe</span><i class="x-star"></i><span class="o">PyTorch</span><i class="x-star"></i><span>React</span><i class="x-star"></i><span class="o">Django</span><i class="x-star"></i>
+      <span>Flask</span><i class="x-star"></i><span class="o">Firebase</span><i class="x-star"></i><span>Fusion 360</span><i class="x-star"></i><span class="o">Arduino</span><i class="x-star"></i>
+      <span>Embedded</span><i class="x-star"></i><span class="o">Next Gen Camera</span><i class="x-star"></i>
     </div>
-</div>
+  </div>
+  <p class="x-sr">Python, C++, OpenCV, YOLO, MediaPipe, PyTorch, React, Django, Flask, Firebase, Fusion 360, Arduino, Embedded systems, Next Gen Camera.</p>
+</section>
 <!-- x:shell:marquee end -->
 <!-- x:projects start -->
-<!-- ================================================================
-     PROJECT SHOWCASE — DARK BENTO GRID
-================================================================ -->
-<section id="projects">
-    <div class="s-max">
-
-        <!-- Header -->
-        <div class="ph rv">
-            <div class="ph-left">
-                <div class="s-label"><span class="ph-kicker-dot"></span>PORTFOLIO — SELECTED WORK</div>
-                <h2>Projects</h2>
-                <p>Selected work: hover for a live preview, click for the full case study.</p>
-                <p class="ph-showing font-code" id="projectSummary" aria-live="polite">SHOWING 6 OF 18 FEATURED PROJECTS · 150+ BUILT</p>
-            </div>
-            <div class="ph-right">
-                <div class="ph-counter counter" data-t="150" data-sfx="">0</div>
-                <div class="ph-counter-sub">PROJECTS BUILT</div>
-            </div>
+<section id="projects" class="x-section x-projects" aria-labelledby="projectsTitle">
+  <div class="x-wrap">
+    <header class="x-sec-head">
+      <p class="x-eyebrow" data-x-reveal="fade"><span class="x-idx">(01)</span><span>Portfolio — selected work</span></p>
+      <div class="x-sec-head-row">
+        <h2 class="x-title" id="projectsTitle" data-x-reveal="lines">Projects</h2>
+        <div class="x-proj-count" data-x-reveal="up"><span class="x-proj-count-n"><span data-x-count="150">150</span><span class="x-acc">+</span></span><span class="x-label">Projects built since class 6</span></div>
+      </div>
+      <div class="x-sec-head-foot" data-x-reveal="up">
+        <div>
+          <p class="x-sub"><span class="x-fine-only">Hover a project for a live preview — click for the full case study.</span><span class="x-touch-only">Tap a project for the full case study.</span></p>
+          <p class="x-label" id="projectSummary" aria-live="polite">Showing 6 of 18 featured projects · 150+ built</p>
         </div>
-
-        <!-- Filter -->
-        <div class="proj-filter rv">
-            <button class="pfb active" data-f="all">FEATURED <span class="cnt">18</span></button>
-            <button class="pfb" data-f="cv">COMPUTER VISION <span class="cnt">9</span></button>
-            <button class="pfb" data-f="ai">AI / ML <span class="cnt">10</span></button>
-            <button class="pfb" data-f="web">WEB / CLIENT <span class="cnt">3</span></button>
-            <button class="pfb" data-f="game">GAME / 3D <span class="cnt">3</span></button>
+        <div class="proj-filter x-proj-filters" role="toolbar" aria-label="Filter projects">
+          <button class="pfb x-chip active" type="button" data-f="all" aria-pressed="true">Featured <span class="cnt x-chip-n">18</span></button>
+          <button class="pfb x-chip" type="button" data-f="cv" aria-pressed="false">Computer vision <span class="cnt x-chip-n">9</span></button>
+          <button class="pfb x-chip" type="button" data-f="ai" aria-pressed="false">AI / ML <span class="cnt x-chip-n">10</span></button>
+          <button class="pfb x-chip" type="button" data-f="web" aria-pressed="false">Web / client <span class="cnt x-chip-n">3</span></button>
+          <button class="pfb x-chip" type="button" data-f="game" aria-pressed="false">Game / 3D <span class="cnt x-chip-n">3</span></button>
         </div>
+      </div>
+    </header>
 
-        <!-- ============ BENTO GRID ============ -->
-        <div class="bento rv" id="bentoGrid">
-            <!-- 17: Furti AI — VinHack autonomous desktop agent -->
-            <div class="bc" data-id="17" data-cat="ai" style="--i:0">
-                <img src="assets/my projects/furti.webp" alt="Furti AI autonomous desktop agent" loading="lazy" decoding="async">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">01</div>
-                <div class="bc-badge accent">VINHACK · AI AGENT</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>AUTONOMOUS DESKTOP AGENT</div>
-                    <h3 class="bc-title">Furti AI :Beyond the Browser</h3>
-                    <p class="bc-blurb">An autonomous desktop agent that handles repetitive workflows across software, using a token-efficient vision pipeline and TypeSafe AI Jev for structured decisions.</p>
-                    <div class="bc-tags"><span class="bc-tag">desktop-agent</span><span class="bc-tag">computer-vision</span><span class="bc-tag">jev</span></div>
-                    <button class="bc-expand"><span>VIEW CASE STUDY</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 12: Next Gen Camera -->
-            <div class="bc" data-id="12" data-cat="cv ai" style="--i:1">
-                <img src="assets/next gen camera/robber detection.webp" alt="Next Gen Camera System" loading="lazy" decoding="async">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">02</div>
-                <div class="bc-badge paid"><span class="bc-badge-dot"></span>FLAGSHIP · 4 AWARDS</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>AI SECURITY · 5 DETECTION MODULES</div>
-                    <h3 class="bc-title">Next Gen Camera System</h3>
-                    <p class="bc-blurb">An AI security layer for existing CCTV - spots robbers, fire, faints, faces &amp; anomalies in real time and acts (buzzer + calls/alerts) instead of just recording.</p>
-                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">deep-learning</span><span class="bc-tag">embedded</span></div>
-                    <button class="bc-expand"><span>VIEW CASE STUDY</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 16: JEE Horizon — live full-stack product -->
-            <div class="bc" data-id="16" data-cat="web ai" style="--i:2">
-                <img src="assets/my projects/jeehorizon.webp" alt="JEE Horizon: AI E-Learning Platform" loading="lazy" decoding="async">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">03</div>
-                <div class="bc-badge accent">SHIPPED &amp; LIVE</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>FULL-STACK · AI E-LEARNING</div>
-                    <h3 class="bc-title">JEE Horizon: AI E-Learning Platform</h3>
-                    <p class="bc-blurb">A live platform where students solve practice questions, get AI help when they're stuck, and compete against each other on the leaderboard. Shipped and running in production.</p>
-                    <div class="bc-tags"><span class="bc-tag">react</span><span class="bc-tag">firebase</span><span class="bc-tag">ai</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 0: Property Auto-Furnish (featured) -->
-            <div class="bc" data-id="0" data-cat="ai web" style="--i:3">
-                <video preload="none" muted loop playsinline poster="assets/previews/kitchen.webp" data-src="assets/previews/kitchen.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">04</div>
-                <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>HIGHLY ADVANCED · UK REAL ESTATE</div>
-                    <h3 class="bc-title">AI Property Auto-Furnish Image Generator</h3>
-                    <p class="bc-blurb">Empty rooms in, photorealistic AI-staged interiors out a paid, end-to-end generative pipeline delivered for a UK real-estate client.</p>
-                    <div class="bc-tags"><span class="bc-tag">client-work</span><span class="bc-tag">generative-ai</span><span class="bc-tag">deep-learning</span></div>
-                    <button class="bc-expand"><span>VIEW CASE STUDY</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 1: Football Tracker -->
-            <div class="bc" data-id="1" data-cat="cv ai" style="--i:4">
-                <video preload="none" muted loop playsinline poster="assets/previews/football.webp" data-src="assets/previews/football.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">05</div>
-                <div class="bc-badge accent">ADVANCED · CV</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>FOOTBALL ANALYSIS</div>
-                    <h3 class="bc-title">Full Match Ball Tracker &amp; Score Analyzer</h3>
-                    <p class="bc-blurb">YOLOv8 tracks every player and the ball in real time, with a live score and tactical overlay.</p>
-                    <div class="bc-tags"><span class="bc-tag">yolo</span><span class="bc-tag">opencv</span><span class="bc-tag">tracking</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 13: Next Gen Parking -->
-            <div class="bc" data-id="13" data-cat="cv" style="--i:5">
-                <video preload="none" muted loop playsinline poster="assets/previews/parking.webp" data-src="assets/previews/parking.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">06</div>
-                <div class="bc-badge accent">1ST PRIZE · IIT DELHI</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>CLASSICAL CV · NO ML</div>
-                    <h3 class="bc-title">Next Gen Parking: Single-Camera Smart Parking</h3>
-                    <p class="bc-blurb">One camera replaces a sensor per parking spots real-time free/occupied detection using pure classical computer vision. No neural network anywhere in the pipeline, and that’s the point.</p>
-                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">classical-cv</span><span class="bc-tag">real-time</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 2: Sports Recognition — multi-video grid -->
-            <div class="bc" data-id="2" data-cat="cv ai" style="--i:6">
-                <div class="bc-multi">
-                    <video class="main-vid" preload="none" muted loop playsinline poster="assets/previews/pushups.webp" data-src="assets/previews/pushups.mp4"></video>
-                    <video preload="none" muted loop playsinline poster="assets/previews/squats.webp" data-src="assets/previews/squats.mp4"></video>
-                    <video preload="none" muted loop playsinline poster="assets/previews/bicep.webp" data-src="assets/previews/bicep.mp4"></video>
-                </div>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">07</div>
-                <div class="bc-badge accent">ADVANCED · AI</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>12+ EXERCISES</div>
-                    <h3 class="bc-title">Sports Activity Recognition &amp; Classifier</h3>
-                    <p class="bc-blurb">A MediaPipe pose engine that recognises and counts 12+ exercises with live form feedback.</p>
-                    <div class="bc-tags"><span class="bc-tag">pose-estimation</span><span class="bc-tag">mediapipe</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 4: Violence Detection -->
-            <div class="bc" data-id="4" data-cat="ai cv" style="--i:7">
-                <video preload="none" muted loop playsinline poster="assets/previews/violence.webp" data-src="assets/previews/violence.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">08</div>
-                <div class="bc-badge accent">MEDIUM · AI</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>SURVEILLANCE AI</div>
-                    <h3 class="bc-title">Real-Time Violence Detection System</h3>
-                    <p class="bc-blurb">Deep-learning CNNs flag violent motion in live video for real-time security alerting.</p>
-                    <div class="bc-tags"><span class="bc-tag">cnn</span><span class="bc-tag">video-classification</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 11: Pose Estimation -->
-            <div class="bc" data-id="11" data-cat="cv ai" style="--i:8">
-                <img src="assets/my projects/[basic]pose estimation 2 .webp" alt="Pose Estimation" loading="lazy" decoding="async">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">09</div>
-                <div class="bc-badge accent">CV · AI</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>BODY TRACKING</div>
-                    <h3 class="bc-title">Human Pose Estimation</h3>
-                    <p class="bc-blurb">33-point skeletal tracking in real time, the foundation of my sports-AI systems.</p>
-                    <div class="bc-tags"><span class="bc-tag">mediapipe</span><span class="bc-tag">skeleton</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 14: AI Virtual Teacher -->
-            <div class="bc" data-id="14" data-cat="ai" style="--i:9">
-                <img src="assets/my projects/ai-virtual-teacher-cover.svg" alt="AI Virtual Teacher: a Voice “Video Call”" loading="lazy" decoding="async">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">10</div>
-                <div class="bc-badge accent">BUILT AT 14</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>2021 · SPEECH + TTS</div>
-                    <h3 class="bc-title">AI Virtual Teacher: a Voice “Video Call”</h3>
-                    <p class="bc-blurb">Speech recognition, an intent matcher and TTS running as separate processes passing messages through files — I reinvented message queues before I knew threads existed. Preserved as originally written.</p>
-                    <div class="bc-tags"><span class="bc-tag">python</span><span class="bc-tag">speech</span><span class="bc-tag">multiprocessing</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 7: Face Segmentizer -->
-            <div class="bc" data-id="7" data-cat="cv ai" style="--i:10">
-                <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.webp" alt="Face Segmentizer" loading="lazy" decoding="async">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">11</div>
-                <div class="bc-badge accent">ADVANCED · CV</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>SEGMENTATION</div>
-                    <h3 class="bc-title">Face Segmentizer — Auto Passport Photo</h3>
-                    <p class="bc-blurb">Deep segmentation auto-crops faces to regulation passport photos from any background.</p>
-                    <div class="bc-tags"><span class="bc-tag">segmentation</span><span class="bc-tag">face-detection</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 5: Document Scanner -->
-            <div class="bc" data-id="5" data-cat="cv" style="--i:11">
-                <video preload="none" muted loop playsinline poster="assets/previews/document-scanner.webp" data-src="assets/previews/document-scanner.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">12</div>
-                <div class="bc-badge accent">MEDIUM · CV</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>DESKTOP APP</div>
-                    <h3 class="bc-title">Document Scanner with Full GUI</h3>
-                    <p class="bc-blurb">An OpenCV edge-detection scanner with a full desktop GUI — angled photos to clean, flat scans.</p>
-                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">tkinter</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 15: Foci -->
-            <div class="bc" data-id="15" data-cat="" style="--i:12">
-                <img src="assets/my projects/foci-cover.svg" alt="Foci — Study Planner &amp; Focus App" loading="lazy" decoding="async">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">13</div>
-                <div class="bc-badge accent">OPEN SOURCE</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>DESKTOP APP · WINDOWS</div>
-                    <h3 class="bc-title">Foci — Study Planner &amp; Focus App</h3>
-                    <p class="bc-blurb">Daily timeline, focus timer, lofi player, stats and rewards across 8 themes — built to run my own discipline system, then shipped with a landing page.</p>
-                    <div class="bc-tags"><span class="bc-tag">python</span><span class="bc-tag">pygame</span><span class="bc-tag">desktop</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 10: Motion Detection -->
-            <div class="bc" data-id="10" data-cat="cv" style="--i:13">
-                <video preload="none" muted loop playsinline poster="assets/previews/motion-detection.webp" data-src="assets/previews/motion-detection.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">14</div>
-                <div class="bc-badge accent">CV</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>REAL-TIME</div>
-                    <h3 class="bc-title">Real-Time Motion Detection</h3>
-                    <p class="bc-blurb">Frame-differencing motion detection on live webcam feeds, running at 60+ FPS.</p>
-                    <div class="bc-tags"><span class="bc-tag">opencv</span><span class="bc-tag">frame-diff</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 3: Squid Game 3D -->
-            <div class="bc" data-id="3" data-cat="game" style="--i:14">
-                <video preload="none" muted loop playsinline poster="assets/previews/squid-game.webp" data-src="assets/previews/squid-game.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">15</div>
-                <div class="bc-badge accent">COMPLEX · 3D</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>PYTHON 3D ENGINE</div>
-                    <h3 class="bc-title">Squid Game 3D — Full Game in Python</h3>
-                    <p class="bc-blurb">Red Light, Green Light rebuilt as a full 3D game — entirely in Python with the Ursina engine.</p>
-                    <div class="bc-tags"><span class="bc-tag">ursina</span><span class="bc-tag">python</span><span class="bc-tag">3d</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 8: Multiplayer Game -->
-            <div class="bc" data-id="8" data-cat="game" style="--i:15">
-                <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.webp" alt="Multiplayer Platformer" loading="lazy" decoding="async">
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">16</div>
-                <div class="bc-badge accent">ADVANCED · GAME</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>PYGAME NETWORKING</div>
-                    <h3 class="bc-title">Multiplayer Platformer — Pygame</h3>
-                    <p class="bc-blurb">A 2D platformer with real-time socket multiplayer, a physics engine and enemy AI — built in Pygame.</p>
-                    <div class="bc-tags"><span class="bc-tag">pygame</span><span class="bc-tag">sockets</span><span class="bc-tag">multiplayer</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 9: OpenGL -->
-            <div class="bc" data-id="9" data-cat="game" style="--i:16">
-                <video preload="none" muted loop playsinline data-src="assets/my projects/[basic] opengl demo.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">17</div>
-                <div class="bc-badge accent">GRAPHICS</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>GPU RENDERING</div>
-                    <h3 class="bc-title">OpenGL 3D Rendering Demo</h3>
-                    <p class="bc-blurb">Real-time GPU rendering with custom GLSL shaders, lighting and camera controls in OpenGL.</p>
-                    <div class="bc-tags"><span class="bc-tag">opengl</span><span class="bc-tag">shaders</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <!-- 6: Client Website -->
-            <div class="bc" data-id="6" data-cat="web" style="--i:17">
-                <video preload="none" muted loop playsinline poster="assets/previews/client-website.webp" data-src="assets/previews/client-website.mp4"></video>
-                <div class="bc-grad"></div>
-                <span class="bc-shine"></span>
-                <div class="bc-frame"></div>
-                <div class="bc-num">18</div>
-                <div class="bc-badge paid"><span class="bc-badge-dot"></span>PAID CLIENT</div>
-                <div class="bc-content">
-                    <div class="bc-level"><span class="bc-dot"></span>WEB DEVELOPMENT</div>
-                    <h3 class="bc-title">Client Website — Full Build</h3>
-                    <p class="bc-blurb">A complete responsive website designed, built and shipped end-to-end for a paying client.</p>
-                    <div class="bc-tags"><span class="bc-tag">html</span><span class="bc-tag">css</span><span class="bc-tag">javascript</span></div>
-                    <button class="bc-expand"><span>EXPAND</span> <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-        </div><!-- /bento -->
-        <div class="project-more-wrap">
-            <button class="project-more-btn" id="projectMoreBtn" type="button" aria-expanded="false" aria-controls="bentoGrid">
-                <span>SHOW 12 MORE PROJECTS</span><i class="fas fa-arrow-down" aria-hidden="true"></i>
-            </button>
+    <div class="x-bento" id="bentoGrid">
+      <article class="bc x-card x-lockable bc-lead" data-id="17" data-cat="ai" style="--i:0">
+        <div class="x-media" data-x-cursor="View">
+          <img src="assets/my projects/furti.webp" alt="Furti AI autonomous desktop agent" loading="lazy" decoding="async">
+          <span class="x-card-badge">Vinhack · ai agent</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">furti_ai · autonomous desktop agent</span></span>
         </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">01</span><span>Autonomous desktop agent</span></p>
+          <h3 class="bc-title x-card-title">Furti AI :Beyond the Browser</h3>
+          <p class="bc-blurb x-card-desc">An autonomous desktop agent that handles repetitive workflows across software, using a token-efficient vision pipeline and TypeSafe AI Jev for structured decisions.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">desktop-agent</li><li class="bc-tag x-tag">computer-vision</li><li class="bc-tag x-tag">jev</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Furti AI :Beyond the Browser"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="12" data-cat="cv ai" style="--i:1">
+        <div class="x-media" data-x-cursor="View">
+          <img src="assets/next gen camera/robber detection.webp" alt="Next Gen Camera System" loading="lazy" decoding="async">
+          <span class="x-card-badge">Flagship · 4 awards</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">next_gen_camera_system · ai security · 5 detection modules</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">02</span><span>Ai security · 5 detection modules</span></p>
+          <h3 class="bc-title x-card-title">Next Gen Camera System</h3>
+          <p class="bc-blurb x-card-desc">An AI security layer for existing CCTV - spots robbers, fire, faints, faces &amp; anomalies in real time and acts (buzzer + calls/alerts) instead of just recording.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">opencv</li><li class="bc-tag x-tag">deep-learning</li><li class="bc-tag x-tag">embedded</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Next Gen Camera System"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="16" data-cat="web ai" style="--i:2">
+        <div class="x-media" data-x-cursor="View">
+          <img src="assets/my projects/jeehorizon.webp" alt="JEE Horizon: AI E-Learning Platform" loading="lazy" decoding="async">
+          <span class="x-card-badge">Shipped &amp; live</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">jee_horizon · full-stack · ai e-learning</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">03</span><span>Full-stack · ai e-learning</span></p>
+          <h3 class="bc-title x-card-title">JEE Horizon: AI E-Learning Platform</h3>
+          <p class="bc-blurb x-card-desc">A live platform where students solve practice questions, get AI help when they're stuck, and compete against each other on the leaderboard. Shipped and running in production.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">react</li><li class="bc-tag x-tag">firebase</li><li class="bc-tag x-tag">ai</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: JEE Horizon: AI E-Learning Platform"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="0" data-cat="ai web" style="--i:3">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="assets/previews/kitchen.webp" data-src="assets/previews/kitchen.mp4"></video>
+          <span class="x-card-badge">Paid client</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">ai_property_auto · highly advanced · uk real estate</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">04</span><span>Highly advanced · uk real estate</span></p>
+          <h3 class="bc-title x-card-title">AI Property Auto-Furnish Image Generator</h3>
+          <p class="bc-blurb x-card-desc">Empty rooms in, photorealistic AI-staged interiors out a paid, end-to-end generative pipeline delivered for a UK real-estate client.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">client-work</li><li class="bc-tag x-tag">generative-ai</li><li class="bc-tag x-tag">deep-learning</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: AI Property Auto-Furnish Image Generator"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="1" data-cat="cv ai" style="--i:4">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="assets/previews/football.webp" data-src="assets/previews/football.mp4"></video>
+          <span class="x-card-badge">Advanced · cv</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">full_match_ball_tracker_scor · football analysis</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">05</span><span>Football analysis</span></p>
+          <h3 class="bc-title x-card-title">Full Match Ball Tracker &amp; Score Analyzer</h3>
+          <p class="bc-blurb x-card-desc">YOLOv8 tracks every player and the ball in real time, with a live score and tactical overlay.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">yolo</li><li class="bc-tag x-tag">opencv</li><li class="bc-tag x-tag">tracking</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Full Match Ball Tracker &amp; Score Analyzer"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="13" data-cat="cv" style="--i:5">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="assets/previews/parking.webp" data-src="assets/previews/parking.mp4"></video>
+          <span class="x-card-badge">1st prize · iit delhi</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">next_gen_parking · classical cv · no ml</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">06</span><span>Classical cv · no ml</span></p>
+          <h3 class="bc-title x-card-title">Next Gen Parking: Single-Camera Smart Parking</h3>
+          <p class="bc-blurb x-card-desc">One camera replaces a sensor per parking spots real-time free/occupied detection using pure classical computer vision. No neural network anywhere in the pipeline, and that’s the point.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">opencv</li><li class="bc-tag x-tag">classical-cv</li><li class="bc-tag x-tag">real-time</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Next Gen Parking: Single-Camera Smart Parking"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="2" data-cat="cv ai" style="--i:6">
+        <div class="x-media" data-x-cursor="Play">
+          <div class="bc-multi"><video class="main-vid" preload="none" muted loop playsinline poster="assets/previews/pushups.webp" data-src="assets/previews/pushups.mp4"></video><video preload="none" muted loop playsinline poster="assets/previews/squats.webp" data-src="assets/previews/squats.mp4"></video><video preload="none" muted loop playsinline poster="assets/previews/bicep.webp" data-src="assets/previews/bicep.mp4"></video></div>
+          <span class="x-card-badge">Advanced · ai</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">sports_activity_recognition_ · 12+ exercises</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">07</span><span>12+ exercises</span></p>
+          <h3 class="bc-title x-card-title">Sports Activity Recognition &amp; Classifier</h3>
+          <p class="bc-blurb x-card-desc">A MediaPipe pose engine that recognises and counts 12+ exercises with live form feedback.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">pose-estimation</li><li class="bc-tag x-tag">mediapipe</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Sports Activity Recognition &amp; Classifier"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="4" data-cat="ai cv" style="--i:7">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="assets/previews/violence.webp" data-src="assets/previews/violence.mp4"></video>
+          <span class="x-card-badge">Medium · ai</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">real · surveillance ai</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">08</span><span>Surveillance ai</span></p>
+          <h3 class="bc-title x-card-title">Real-Time Violence Detection System</h3>
+          <p class="bc-blurb x-card-desc">Deep-learning CNNs flag violent motion in live video for real-time security alerting.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">cnn</li><li class="bc-tag x-tag">video-classification</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Real-Time Violence Detection System"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="11" data-cat="cv ai" style="--i:8">
+        <div class="x-media" data-x-cursor="View">
+          <img src="assets/my projects/[basic]pose estimation 2 .webp" alt="Pose Estimation" loading="lazy" decoding="async">
+          <span class="x-card-badge">Cv · ai</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">human_pose_estimation · body tracking</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">09</span><span>Body tracking</span></p>
+          <h3 class="bc-title x-card-title">Human Pose Estimation</h3>
+          <p class="bc-blurb x-card-desc">33-point skeletal tracking in real time, the foundation of my sports-AI systems.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">mediapipe</li><li class="bc-tag x-tag">skeleton</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Human Pose Estimation"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="14" data-cat="ai" style="--i:9">
+        <div class="x-media" data-x-cursor="View">
+          <img src="assets/my projects/ai-virtual-teacher-cover.svg" alt="AI Virtual Teacher: a Voice “Video Call”" loading="lazy" decoding="async">
+          <span class="x-card-badge">Built at 14</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">ai_virtual_teacher · 2021 · speech + tts</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">10</span><span>2021 · speech + tts</span></p>
+          <h3 class="bc-title x-card-title">AI Virtual Teacher: a Voice “Video Call”</h3>
+          <p class="bc-blurb x-card-desc">Speech recognition, an intent matcher and TTS running as separate processes passing messages through files — I reinvented message queues before I knew threads existed. Preserved as originally written.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">python</li><li class="bc-tag x-tag">speech</li><li class="bc-tag x-tag">multiprocessing</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: AI Virtual Teacher: a Voice “Video Call”"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="7" data-cat="cv ai" style="--i:10">
+        <div class="x-media" data-x-cursor="View">
+          <img src="assets/my projects/[advanced[face sementizer for automatch passport image generator.webp" alt="Face Segmentizer" loading="lazy" decoding="async">
+          <span class="x-card-badge">Advanced · cv</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">face_segmentizer · segmentation</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">11</span><span>Segmentation</span></p>
+          <h3 class="bc-title x-card-title">Face Segmentizer — Auto Passport Photo</h3>
+          <p class="bc-blurb x-card-desc">Deep segmentation auto-crops faces to regulation passport photos from any background.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">segmentation</li><li class="bc-tag x-tag">face-detection</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Face Segmentizer — Auto Passport Photo"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="5" data-cat="cv" style="--i:11">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="assets/previews/document-scanner.webp" data-src="assets/previews/document-scanner.mp4"></video>
+          <span class="x-card-badge">Medium · cv</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">document_scanner_with_full_g · desktop app</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">12</span><span>Desktop app</span></p>
+          <h3 class="bc-title x-card-title">Document Scanner with Full GUI</h3>
+          <p class="bc-blurb x-card-desc">An OpenCV edge-detection scanner with a full desktop GUI — angled photos to clean, flat scans.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">opencv</li><li class="bc-tag x-tag">tkinter</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Document Scanner with Full GUI"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="15" data-cat="" style="--i:12">
+        <div class="x-media" data-x-cursor="View">
+          <img src="assets/my projects/foci-cover.svg" alt="Foci — Study Planner &amp; Focus App" loading="lazy" decoding="async">
+          <span class="x-card-badge">Open source</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">foci · desktop app · windows</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">13</span><span>Desktop app · windows</span></p>
+          <h3 class="bc-title x-card-title">Foci — Study Planner &amp; Focus App</h3>
+          <p class="bc-blurb x-card-desc">Daily timeline, focus timer, lofi player, stats and rewards across 8 themes — built to run my own discipline system, then shipped with a landing page.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">python</li><li class="bc-tag x-tag">pygame</li><li class="bc-tag x-tag">desktop</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Foci — Study Planner &amp; Focus App"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="10" data-cat="cv" style="--i:13">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="assets/previews/motion-detection.webp" data-src="assets/previews/motion-detection.mp4"></video>
+          <span class="x-card-badge">Cv</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">real · real-time</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">14</span><span>Real-time</span></p>
+          <h3 class="bc-title x-card-title">Real-Time Motion Detection</h3>
+          <p class="bc-blurb x-card-desc">Frame-differencing motion detection on live webcam feeds, running at 60+ FPS.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">opencv</li><li class="bc-tag x-tag">frame-diff</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Real-Time Motion Detection"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="3" data-cat="game" style="--i:14">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="assets/previews/squid-game.webp" data-src="assets/previews/squid-game.mp4"></video>
+          <span class="x-card-badge">Complex · 3d</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">squid_game_3d · python 3d engine</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">15</span><span>Python 3d engine</span></p>
+          <h3 class="bc-title x-card-title">Squid Game 3D — Full Game in Python</h3>
+          <p class="bc-blurb x-card-desc">Red Light, Green Light rebuilt as a full 3D game — entirely in Python with the Ursina engine.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">ursina</li><li class="bc-tag x-tag">python</li><li class="bc-tag x-tag">3d</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Squid Game 3D — Full Game in Python"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="8" data-cat="game" style="--i:15">
+        <div class="x-media" data-x-cursor="View">
+          <img src="assets/my projects/[advanced]full platform multiplayer game using pygame python/project.webp" alt="Multiplayer Platformer" loading="lazy" decoding="async">
+          <span class="x-card-badge">Advanced · game</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">multiplayer_platformer · pygame networking</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">16</span><span>Pygame networking</span></p>
+          <h3 class="bc-title x-card-title">Multiplayer Platformer — Pygame</h3>
+          <p class="bc-blurb x-card-desc">A 2D platformer with real-time socket multiplayer, a physics engine and enemy AI — built in Pygame.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">pygame</li><li class="bc-tag x-tag">sockets</li><li class="bc-tag x-tag">multiplayer</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Multiplayer Platformer — Pygame"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="9" data-cat="game" style="--i:16">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="" data-src="assets/my projects/[basic] opengl demo.mp4"></video>
+          <span class="x-card-badge">Graphics</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">opengl_3d_rendering_demo · gpu rendering</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">17</span><span>Gpu rendering</span></p>
+          <h3 class="bc-title x-card-title">OpenGL 3D Rendering Demo</h3>
+          <p class="bc-blurb x-card-desc">Real-time GPU rendering with custom GLSL shaders, lighting and camera controls in OpenGL.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">opengl</li><li class="bc-tag x-tag">shaders</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: OpenGL 3D Rendering Demo"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
+      <article class="bc x-card x-lockable" data-id="6" data-cat="web" style="--i:17">
+        <div class="x-media" data-x-cursor="Play">
+          <video preload="none" muted loop playsinline poster="assets/previews/client-website.webp" data-src="assets/previews/client-website.mp4"></video>
+          <span class="x-card-badge">Paid client</span>
+          <span class="x-lock" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">client_website · web development</span></span>
+        </div>
+        <div class="bc-content x-card-body">
+          <p class="x-card-kicker x-label"><span class="x-num">18</span><span>Web development</span></p>
+          <h3 class="bc-title x-card-title">Client Website — Full Build</h3>
+          <p class="bc-blurb x-card-desc">A complete responsive website designed, built and shipped end-to-end for a paying client.</p>
+          <ul class="bc-tags x-tags"><li class="bc-tag x-tag">html</li><li class="bc-tag x-tag">css</li><li class="bc-tag x-tag">javascript</li></ul>
+          <div class="x-card-foot"><button class="bc-expand x-card-cta" type="button" aria-label="Open case study: Client Website — Full Build"><span>Case study</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></button></div>
+        </div>
+      </article>
     </div>
+    <div class="x-proj-more">
+      <button class="project-more-btn x-btn x-btn--ghost" id="projectMoreBtn" type="button" aria-expanded="false" aria-controls="bentoGrid"><span>Show 12 more projects</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg></button>
+    </div>
+  </div>
 </section>
 <!-- x:projects end -->
 <!-- x:awards start -->
-<!-- AWARDS -->
-<section id="awards">
-    <div class="s-max">
-        <div class="aw-header rv">
-            <div class="s-label">RECOGNITION</div>
-            <h2>Awards &amp;<br>Achievements</h2>
-            <p>Competitive wins on national and international stages.</p>
+<section id="awards" class="x-section x-awards" aria-labelledby="awardsTitle">
+  <div class="x-wrap">
+    <header class="x-sec-head">
+      <p class="x-eyebrow" data-x-reveal="fade"><span class="x-idx">(02)</span><span>Recognition</span></p>
+      <div class="x-sec-head-row">
+        <h2 class="x-title" id="awardsTitle" data-x-reveal="lines">Awards</h2>
+        <p class="x-sub" data-x-reveal="up">Competitive wins on national and international stages.</p>
+      </div>
+    </header>
+    <article class="x-aw-feature">
+      <figure class="x-aw-media" data-x-cursor="View">
+        <div class="x-media x-aw-frame" data-x-reveal="clip">
+          <img src="assets/Vinhack_winner.webp" alt="VinHack 2026 stage at VIT Vellore and the winning team line-up" width="1200" height="1200" loading="lazy" decoding="async">
+          <span class="x-det" style="--x:6%;--y:57%;--w:88%;--h:39%" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">team · 1st prize</span></span>
         </div>
-        <div class="aw-entry reverse rv">
-            <div class="aw-img aw-img-square"><img src="assets/Vinhack_winner.webp" alt="VinHack 2026 1st Prize — VIT Vellore" loading="lazy" decoding="async"><div class="aw-img-num">01</div></div>
-            <div class="aw-text">
-                <div class="aw-cat">1ST PRIZE · HACKATHON</div>
-                <h3 class="aw-title">VinHack 2026 — 1st Prize</h3>
-                <div class="aw-venue"><strong>VIT Vellore</strong> — Gravitas 2026<br>Flagship hackathon by VinnovateIT · 19 Sep 2026</div>
-                <p class="aw-desc ">Two months into my freshman year, my team took <strong style="color:white ">1st prize</strong> at VinHack 2026 — a 30-hour flagship hackathon with <strong style="color:white">800+ participants</strong>, seniors from 3rd and 4th year among them. I led the team and owned <strong style="color:white">the entire architecture and code, solo</strong>; we shipped <strong style="color:white">Furti AI</strong>, an autonomous desktop-automation agent with a token-efficient CV pipeline.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-users"></i> 800+ PARTICIPANTS</span><span class="aw-badge"><i class="fas fa-clock"></i> 30-HOUR BUILD</span><span class="aw-badge"><i class="fas fa-robot"></i> FURTI AI</span></div>
-            </div>
-        </div>
-        <div class="aw-entry rv">
-            <div class="aw-img">
-                <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/recieving BIC award on state.webp" alt="BIC Award" loading="lazy" decoding="async"></div>
-                    <div class="aw-slide"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .webp" alt="BIC Award Stage" loading="lazy" decoding="async"></div>
-                </div>
-                <div class="aw-img-num">02</div>
-            </div>
-            <div class="aw-text">
-                <div class="aw-cat">1ST PRIZE · STATE-LEVEL INNOVATION</div>
-                <h3 class="aw-title">Bihar Innovation Challenge — 1st Prize</h3>
-                <div class="aw-venue"><strong>Government of Bihar</strong> (#BiharHaiTaiyar)<br>State-Level Engineering Innovation Competition</div>
-                <p class="aw-desc">Won <strong style="color:white">first place</strong> at the Bihar Innovation Challenge — a state-level competition where hundreds of innovators competed. Presented the Next Gen Camera to a panel of government judges and received the award on a public stage, along with a <strong style="color:white">MacBook</strong> as the grand prize.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-map-marker-alt"></i> STATE LEVEL</span><span class="aw-badge"><i class="fas fa-laptop"></i> WON MACBOOK</span></div>
-            </div>
-        </div>
-        <div class="aw-entry reverse rv">
-            <div class="aw-img"><img src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.webp" alt="INEX Medal" loading="lazy" decoding="async"><div class="aw-img-num">03</div></div>
-            <div class="aw-text">
-                <div class="aw-cat">SILVER MEDAL · INTERNATIONAL EXPO</div>
-                <h3 class="aw-title">INEX India Silver Medal — IYIIC</h3>
-                <div class="aw-venue"><strong>India International Innovation &amp; Invention Expo</strong><br>Indian Young Innovators &amp; Inventors Challenge</div>
-                <p class="aw-desc">Awarded the <strong style="color:white">INEX India Silver Medal</strong> at an international-level expo where young innovators from across India competed. Recognized by an international panel of judges for outstanding innovation in computer vision and engineering technology.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-medal"></i> SILVER MEDAL</span><span class="aw-badge"><i class="fas fa-globe"></i> INTERNATIONAL EXPO</span></div>
-                <a class="aw-cert-link" href="assets/certificates/India%20International%20Innovation%20and%20Invention%20Expo.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-            </div>
-        </div>
-        <div class="aw-entry rv">
-            <div class="aw-img">
-                <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/presenting in BIT Meshra patna about next gen camera-1.webp" alt="BIT Mesra Presentation" loading="lazy" decoding="async"></div>
-                    <div class="aw-slide"><img src="assets/recieving recognition at BIT meshra patna.webp" alt="BIT Mesra Recognition" loading="lazy" decoding="async"></div>
-                </div>
-                <div class="aw-img-num">04</div>
-            </div>
-            <div class="aw-text">
-                <div class="aw-cat">PRESENTATION · PREMIER ENGINEERING INSTITUTE</div>
-                <h3 class="aw-title">BIT Mesra Patna — Innovation Showcase</h3>
-                <div class="aw-venue"><strong>Birla Institute of Technology, Mesra</strong> — Patna Campus<br>Innovation Presentation &amp; Recognition Event</div>
-                <p class="aw-desc">Selected to present the Next Gen Camera at <strong style="color:white">BIT Mesra, Patna</strong> — one of India's premier engineering institutes. Delivered a full technical presentation and live demonstration of all 5 detection modules to faculty, researchers, and students.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-university"></i> BIT MESRA</span><span class="aw-badge"><i class="fas fa-certificate"></i> RECOGNIZED</span></div>
-            </div>
-        </div>
+        <figcaption class="x-label"><span>Frame 01 / 11</span><span>VIT Vellore — 19 Sep 2026</span></figcaption>
+      </figure>
+      <div class="x-aw-body" data-x-reveal="stagger">
+        <span class="x-aw-index" aria-hidden="true">01</span>
+        <p class="x-label x-acc">1st prize · Hackathon</p>
+        <h3 class="x-aw-title">VinHack 2026 — <span class="x-acc">1st Prize</span></h3>
+        <p class="x-aw-venue"><strong>VIT Vellore</strong> — Gravitas 2026 · Flagship hackathon by VinnovateIT · 19 Sep 2026</p>
+        <p class="x-body">Two months into my freshman year, my team took <strong>1st prize</strong> at VinHack 2026 — a 30-hour flagship hackathon with <strong>800+ participants</strong>, seniors from 3rd and 4th year among them. I led the team and owned <strong>the entire architecture and code, solo</strong>; we shipped <strong>Furti AI</strong>, an autonomous desktop-automation agent with a token-efficient CV pipeline.</p>
+        <dl class="x-aw-stats">
+          <div><dt>Place</dt><dd>1st</dd></div>
+          <div><dt>Participants</dt><dd><span data-x-count="800">800</span>+</dd></div>
+          <div><dt>Build</dt><dd>30h</dd></div>
+          <div><dt>Shipped</dt><dd>Furti AI</dd></div>
+        </dl>
+      </div>
+    </article>
 
-        <div class="aw-entry reverse rv">
-            <div class="aw-img"><img src="assets/explaining next gen camera to foreign researchers.webp" alt="International researchers" loading="lazy" decoding="async"><div class="aw-img-num">05</div></div>
-            <div class="aw-text">
-                <div class="aw-cat">INTERNATIONAL · RESEARCH ENGAGEMENT</div>
-                <h3 class="aw-title">Presented to International Researchers</h3>
-                <div class="aw-venue"><strong>International Innovation Exhibition</strong><br>Engagement with Foreign Research Delegates</div>
-                <p class="aw-desc"><strong style="color:white">International researchers and delegates</strong> engaged in detailed technical discussions about the Next Gen Camera's architecture. Explained the CV pipeline, real-time inference approach, and custom-built detection modules to a foreign research panel who expressed strong interest in the innovation.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-globe-americas"></i> INTERNATIONAL</span><span class="aw-badge"><i class="fas fa-comments"></i> TECH DISCUSSION</span></div>
-            </div>
+    <div class="x-aw-list" data-x-reveal="stagger">
+      <details class="x-aw-row" data-x-img="assets/recieving BIC award on state.webp">
+        <summary><span class="x-aw-n">02</span><span class="x-aw-t">Bihar Innovation Challenge — 1st Prize</span><span class="x-aw-v">Government of Bihar</span><span class="x-tag x-tag--acc">1st place</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><div class="aw-carousel">
+<div class="aw-slide active"><img alt="BIC Award" decoding="async" loading="lazy" src="assets/recieving BIC award on state.webp"/></div>
+<div class="aw-slide"><img alt="BIC Award Stage" decoding="async" loading="lazy" src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .webp"/></div>
+</div></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>Government of Bihar</strong> — (#BiharHaiTaiyar) · State-Level Engineering Innovation Competition</p>
+            <p class="x-body">Won <strong>first place</strong> at the Bihar Innovation Challenge — a state-level competition where hundreds of innovators competed. Presented the Next Gen Camera to a panel of government judges and received the award on a public stage, along with a <strong>MacBook</strong> as the grand prize.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-trophy"></i>1st place</span><span class="x-tag"><i class="fas fa-map-marker-alt"></i>State level</span><span class="x-tag"><i class="fas fa-laptop"></i>Won macbook</span></div>
+            
+          </div>
         </div>
-        <div class="aw-entry rv">
-            <div class="aw-img">
-                <div class="aw-carousel">
-                    <div class="aw-slide active"><img src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .webp" alt="BIC Award" loading="lazy" decoding="async"></div>
-                    <div class="aw-slide"><img src="assets/recieving BIC award on state.webp" alt="BIC Stage" loading="lazy" decoding="async"></div>
-                </div>
-                <div class="aw-img-num">06</div>
-            </div>
-            <div class="aw-text">
-                <div class="aw-cat">MULTIPLE AWARDS · NATIONAL LEVEL</div>
-                <h3 class="aw-title">Aryabhat Award, NCSC, Robo Fest &amp; More</h3>
-                <div class="aw-venue"><strong>Multiple National Competitions</strong><br>Science, Engineering &amp; Robotics Events</div>
-                <p class="aw-desc">Beyond the flagship wins: <strong style="color:white">Aryabhat National Award</strong> for scientific excellence, <strong style="color:white">National Children's Science Congress</strong>, <strong style="color:white">Robo Fest</strong> robotics competition, <strong style="color:white">Ingenious Geeks</strong>, <strong style="color:white">Inter-School Model Making</strong>, and <strong style="color:white">NAEST 2022</strong>. Each win validated a different dimension of engineering capability.</p>
-                <div class="aw-badges"><span class="aw-badge"><i class="fas fa-star"></i> ARYABHAT</span><span class="aw-badge"><i class="fas fa-microscope"></i> NCSC</span><span class="aw-badge"><i class="fas fa-robot"></i> ROBO FEST</span><span class="aw-badge"><i class="fas fa-flask"></i> NAEST 2022</span></div>
-                <div class="aw-cert-row">
-                    <a class="aw-cert-link" href="assets/certificates/aryabhat%20national%20award.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> ARYABHAT CERTIFICATE →</a>
-                    <a class="aw-cert-link" href="assets/certificates/naest-2022.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> NAEST 2022 CERTIFICATE →</a>
-                </div>
-            </div>
+      </details>
+      <details class="x-aw-row" data-x-img="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.webp">
+        <summary><span class="x-aw-n">03</span><span class="x-aw-t">INEX India Silver Medal — IYIIC</span><span class="x-aw-v">India International Innovation &amp; Invention Expo</span><span class="x-tag x-tag--acc">International expo</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><img alt="INEX Medal" decoding="async" loading="lazy" src="assets/my inex silver medal which i won at IYIIC ( indian young innovators and inventors challenge.webp"/></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>India International Innovation &amp; Invention Expo</strong> — Indian Young Innovators &amp; Inventors Challenge</p>
+            <p class="x-body">Awarded the <strong>INEX India Silver Medal</strong> at an international-level expo where young innovators from across India competed. Recognized by an international panel of judges for outstanding innovation in computer vision and engineering technology.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-medal"></i>Silver medal</span><span class="x-tag"><i class="fas fa-globe"></i>International expo</span></div>
+            <div class="x-aw-certs"><a class="x-btn x-btn--ghost x-btn--sm" href="assets/certificates/India%20International%20Innovation%20and%20Invention%20Expo.pdf" target="_blank" rel="noopener noreferrer"><span class="x-btn-in"><i class="fas fa-file-pdf"></i>Open certificate</span></a></div>
+          </div>
         </div>
-        <button class="show-awards-btn" id="showAwardsBtn">SHOW MORE AWARDS</button>
-        <div class="aw-more" id="awMoreAwards">
-            <div class="aw-entry rv">
-                <div class="aw-img"><video class="aw-lazy-vid" preload="none" muted loop playsinline poster="assets/previews/parking.webp" data-src="assets/previews/parking.mp4"></video><div class="aw-img-num">07</div></div>
-                <div class="aw-text">
-                    <div class="aw-cat">1ST PRIZE · IIT DELHI</div>
-                    <h3 class="aw-title">Next Gen Parking System — 1st Prize</h3>
-                    <div class="aw-venue"><strong>IIT Delhi Innovation Challenge</strong><br>Single-camera smart parking using classical computer vision</div>
-                    <p class="aw-desc">Won <strong style="color:white">first prize</strong> at the IIT Delhi innovation challenge with a smart parking system where <strong style="color:white">one camera replaces a sensor per parking spot</strong> — real-time free/occupied detection built on classical computer vision, presented with a polished physical demo.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-award"></i> IIT DELHI</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span><span class="aw-badge"><i class="fas fa-eye"></i> CLASSICAL CV</span></div>
-                </div>
-            </div>
-            <div class="aw-entry reverse rv">
-                <div class="aw-img"><img src="assets/1st prize at robo fest.webp" alt="Robo Fest" loading="lazy" decoding="async"><div class="aw-img-num">08</div></div>
-                <div class="aw-text">
-                    <div class="aw-cat">1ST PRIZE · ROBOTICS</div>
-                    <h3 class="aw-title">Robo Fest — 1st Prize</h3>
-                    <div class="aw-venue"><strong>Robo Fest</strong><br>Competitive robotics design and execution</div>
-                    <p class="aw-desc">Awarded the <strong style="color:white">first prize</strong> for a robotics system that excelled in technical execution, reliability, and presentation. The win is backed by the official Robo Fest certificate and a trophy photograph.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-robot"></i> ROBOTICS</span><span class="aw-badge"><i class="fas fa-trophy"></i> 1ST PLACE</span></div>
-                    <a class="aw-cert-link" href="assets/certificates/Robo%20Fest.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-                </div>
-            </div>
-            <div class="aw-entry rv">
-                <div class="aw-img"><img src="assets/certificates/misc/ingenious geeks.webp" alt="Ingenious Geeks Certificate" loading="lazy" decoding="async"><div class="aw-img-num">09</div></div>
-                <div class="aw-text">
-                    <div class="aw-cat">INNOVATION PROGRAM</div>
-                    <h3 class="aw-title">Ingenious Geeks — Certificate</h3>
-                    <div class="aw-venue"><strong>Ingenious Geeks</strong><br>National technology and invention showcase</div>
-                    <p class="aw-desc">Recognized by the Ingenious Geeks program for outstanding invention and creative engineering. The certificate backs the project’s innovation strength and practical impact.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-lightbulb"></i> INNOVATION</span><span class="aw-badge"><i class="fas fa-certificate"></i> CERTIFIED</span></div>
-                    <a class="aw-cert-link" href="assets/certificates/Ingenious%20geeks.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-                </div>
-            </div>
-            <div class="aw-entry reverse rv">
-                <div class="aw-img">
-                    <div class="aw-carousel">
-                        <div class="aw-slide active"><img src="assets/certificates/misc/ncse.webp" alt="National Science Congress certificate" loading="lazy" decoding="async"></div>
-                        <div class="aw-slide"><img src="assets/certificates/misc/ncse.webp" alt="NCSC Proof" loading="lazy" decoding="async"></div>
-                    </div>
-                    <div class="aw-img-num">10</div>
-                </div>
-                <div class="aw-text">
-                    <div class="aw-cat">NATIONAL SCIENCE PROGRAM</div>
-                    <h3 class="aw-title">National Children's Science Congress</h3>
-                    <div class="aw-venue"><strong>NCSC</strong><br>School-level science research event</div>
-                    <p class="aw-desc">Selected to present research at the National Children's Science Congress, demonstrating both technical depth and communication skills. The award reflects strong scientific curiosity and project coherence.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-flask"></i> SCIENCE PROJECT</span><span class="aw-badge"><i class="fas fa-award"></i> NATIONAL</span></div>
-                    <a class="aw-cert-link" href="assets/certificates/Natioal%20Childrens%20Science%20Congress.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-                </div>
-            </div>
-            <div class="aw-entry rv">
-                <div class="aw-img placeholder">
-                <div class="aw-placeholder-inner"><i class="fas fa-file-pdf"></i><p>Official certificate attached — open it from the link beside.</p></div>
-                <div class="aw-img-num">11</div>
-            </div>
-                <div class="aw-text">
-                    <div class="aw-cat">MODEL MAKING · DESIGN</div>
-                    <h3 class="aw-title">Inter-School Model Making</h3>
-                    <div class="aw-venue"><strong>Inter-School Competition</strong><br>Physical model design and execution</div>
-                    <p class="aw-desc">Recognized for an engineered model that combined creativity with precision. The project was judged on technical accuracy, aesthetics, and presentation quality.</p>
-                    <div class="aw-badges"><span class="aw-badge"><i class="fas fa-tools"></i> MODEL DESIGN</span><span class="aw-badge"><i class="fas fa-check-circle"></i> COMPETITION</span></div>
-                    <a class="aw-cert-link" href="assets/certificates/inter%20school%20model%20making.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> OPEN CERTIFICATE →</a>
-                </div>
-            </div>
+      </details>
+      <details class="x-aw-row" data-x-img="assets/presenting in BIT Meshra patna about next gen camera-1.webp">
+        <summary><span class="x-aw-n">04</span><span class="x-aw-t">BIT Mesra Patna — Innovation Showcase</span><span class="x-aw-v">Birla Institute of Technology, Mesra</span><span class="x-tag x-tag--acc">Recognized</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><div class="aw-carousel">
+<div class="aw-slide active"><img alt="BIT Mesra Presentation" decoding="async" loading="lazy" src="assets/presenting in BIT Meshra patna about next gen camera-1.webp"/></div>
+<div class="aw-slide"><img alt="BIT Mesra Recognition" decoding="async" loading="lazy" src="assets/recieving recognition at BIT meshra patna.webp"/></div>
+</div></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>Birla Institute of Technology, Mesra</strong> — — Patna Campus · Innovation Presentation &amp; Recognition Event</p>
+            <p class="x-body">Selected to present the Next Gen Camera at <strong>BIT Mesra, Patna</strong> — one of India's premier engineering institutes. Delivered a full technical presentation and live demonstration of all 5 detection modules to faculty, researchers, and students.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-university"></i>Bit mesra</span><span class="x-tag"><i class="fas fa-certificate"></i>Recognized</span></div>
+            
+          </div>
         </div>
+      </details>
+      <details class="x-aw-row" data-x-img="assets/explaining next gen camera to foreign researchers.webp">
+        <summary><span class="x-aw-n">05</span><span class="x-aw-t">Presented to International Researchers</span><span class="x-aw-v">International Innovation Exhibition</span><span class="x-tag x-tag--acc">Tech discussion</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><img alt="International researchers" decoding="async" loading="lazy" src="assets/explaining next gen camera to foreign researchers.webp"/></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>International Innovation Exhibition</strong> — Engagement with Foreign Research Delegates</p>
+            <p class="x-body"><strong>International researchers and delegates</strong> engaged in detailed technical discussions about the Next Gen Camera's architecture. Explained the CV pipeline, real-time inference approach, and custom-built detection modules to a foreign research panel who expressed strong interest in the innovation.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-globe-americas"></i>International</span><span class="x-tag"><i class="fas fa-comments"></i>Tech discussion</span></div>
+            
+          </div>
+        </div>
+      </details>
+      <details class="x-aw-row" data-x-img="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .webp">
+        <summary><span class="x-aw-n">06</span><span class="x-aw-t">Aryabhat Award, NCSC, Robo Fest &amp; More</span><span class="x-aw-v">Multiple National Competitions</span><span class="x-tag x-tag--acc">Naest 2022</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><div class="aw-carousel">
+<div class="aw-slide active"><img alt="BIC Award" decoding="async" loading="lazy" src="assets/1st prize winner at BIC bihar innovation challenge where I also won a macbook .webp"/></div>
+<div class="aw-slide"><img alt="BIC Stage" decoding="async" loading="lazy" src="assets/recieving BIC award on state.webp"/></div>
+</div></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>Multiple National Competitions</strong> — Science, Engineering &amp; Robotics Events</p>
+            <p class="x-body">Beyond the flagship wins: <strong>Aryabhat National Award</strong> for scientific excellence, <strong>National Children's Science Congress</strong>, <strong>Robo Fest</strong> robotics competition, <strong>Ingenious Geeks</strong>, <strong>Inter-School Model Making</strong>, and <strong>NAEST 2022</strong>. Each win validated a different dimension of engineering capability.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-star"></i>Aryabhat</span><span class="x-tag"><i class="fas fa-microscope"></i>Ncsc</span><span class="x-tag"><i class="fas fa-robot"></i>Robo fest</span><span class="x-tag"><i class="fas fa-flask"></i>Naest 2022</span></div>
+            <div class="x-aw-certs"><a class="x-btn x-btn--ghost x-btn--sm" href="assets/certificates/aryabhat%20national%20award.pdf" target="_blank" rel="noopener noreferrer"><span class="x-btn-in"><i class="fas fa-file-pdf"></i>Aryabhat certificate</span></a><a class="x-btn x-btn--ghost x-btn--sm" href="assets/certificates/naest-2022.pdf" target="_blank" rel="noopener noreferrer"><span class="x-btn-in"><i class="fas fa-file-pdf"></i>Naest 2022 certificate</span></a></div>
+          </div>
+        </div>
+      </details>
     </div>
+    <div class="aw-more" id="awMoreAwards">
+      <div class="x-aw-list">
+      <details class="x-aw-row" data-x-img="assets/previews/parking.webp">
+        <summary><span class="x-aw-n">07</span><span class="x-aw-t">Next Gen Parking System — 1st Prize</span><span class="x-aw-v">IIT Delhi Innovation Challenge</span><span class="x-tag x-tag--acc">1st place</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><video class="aw-lazy-vid" data-src="assets/previews/parking.mp4" loop="" muted="" playsinline="" poster="assets/previews/parking.webp" preload="none"></video></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>IIT Delhi Innovation Challenge</strong> — Single-camera smart parking using classical computer vision</p>
+            <p class="x-body">Won <strong>first prize</strong> at the IIT Delhi innovation challenge with a smart parking system where <strong>one camera replaces a sensor per parking spot</strong> — real-time free/occupied detection built on classical computer vision, presented with a polished physical demo.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-award"></i>Iit delhi</span><span class="x-tag"><i class="fas fa-trophy"></i>1st place</span><span class="x-tag"><i class="fas fa-eye"></i>Classical cv</span></div>
+            
+          </div>
+        </div>
+      </details>
+      <details class="x-aw-row" data-x-img="assets/1st prize at robo fest.webp">
+        <summary><span class="x-aw-n">08</span><span class="x-aw-t">Robo Fest — 1st Prize</span><span class="x-aw-v">Robo Fest</span><span class="x-tag x-tag--acc">1st place</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><img alt="Robo Fest" decoding="async" loading="lazy" src="assets/1st prize at robo fest.webp"/></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>Robo Fest</strong> — Competitive robotics design and execution</p>
+            <p class="x-body">Awarded the <strong>first prize</strong> for a robotics system that excelled in technical execution, reliability, and presentation. The win is backed by the official Robo Fest certificate and a trophy photograph.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-robot"></i>Robotics</span><span class="x-tag"><i class="fas fa-trophy"></i>1st place</span></div>
+            <div class="x-aw-certs"><a class="x-btn x-btn--ghost x-btn--sm" href="assets/certificates/Robo%20Fest.pdf" target="_blank" rel="noopener noreferrer"><span class="x-btn-in"><i class="fas fa-file-pdf"></i>Open certificate</span></a></div>
+          </div>
+        </div>
+      </details>
+      <details class="x-aw-row" data-x-img="assets/certificates/misc/ingenious geeks.webp">
+        <summary><span class="x-aw-n">09</span><span class="x-aw-t">Ingenious Geeks — Certificate</span><span class="x-aw-v">Ingenious Geeks</span><span class="x-tag x-tag--acc">Certified</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><img alt="Ingenious Geeks Certificate" decoding="async" loading="lazy" src="assets/certificates/misc/ingenious geeks.webp"/></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>Ingenious Geeks</strong> — National technology and invention showcase</p>
+            <p class="x-body">Recognized by the Ingenious Geeks program for outstanding invention and creative engineering. The certificate backs the project’s innovation strength and practical impact.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-lightbulb"></i>Innovation</span><span class="x-tag"><i class="fas fa-certificate"></i>Certified</span></div>
+            <div class="x-aw-certs"><a class="x-btn x-btn--ghost x-btn--sm" href="assets/certificates/Ingenious%20geeks.pdf" target="_blank" rel="noopener noreferrer"><span class="x-btn-in"><i class="fas fa-file-pdf"></i>Open certificate</span></a></div>
+          </div>
+        </div>
+      </details>
+      <details class="x-aw-row" data-x-img="assets/certificates/misc/ncse.webp">
+        <summary><span class="x-aw-n">10</span><span class="x-aw-t">National Children&#x27;s Science Congress</span><span class="x-aw-v">NCSC</span><span class="x-tag x-tag--acc">National</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          <div class="aw-img x-aw-pmedia"><div class="aw-carousel">
+<div class="aw-slide active"><img alt="National Science Congress certificate" decoding="async" loading="lazy" src="assets/certificates/misc/ncse.webp"/></div>
+<div class="aw-slide"><img alt="NCSC Proof" decoding="async" loading="lazy" src="assets/certificates/misc/ncse.webp"/></div>
+</div></div>
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>NCSC</strong> — School-level science research event</p>
+            <p class="x-body">Selected to present research at the National Children's Science Congress, demonstrating both technical depth and communication skills. The award reflects strong scientific curiosity and project coherence.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-flask"></i>Science project</span><span class="x-tag"><i class="fas fa-award"></i>National</span></div>
+            <div class="x-aw-certs"><a class="x-btn x-btn--ghost x-btn--sm" href="assets/certificates/Natioal%20Childrens%20Science%20Congress.pdf" target="_blank" rel="noopener noreferrer"><span class="x-btn-in"><i class="fas fa-file-pdf"></i>Open certificate</span></a></div>
+          </div>
+        </div>
+      </details>
+      <details class="x-aw-row">
+        <summary><span class="x-aw-n">11</span><span class="x-aw-t">Inter-School Model Making</span><span class="x-aw-v">Inter-School Competition</span><span class="x-tag x-tag--acc">Competition</span><span class="x-aw-plus" aria-hidden="true"></span></summary>
+        <div class="x-aw-panel">
+          
+          <div class="x-aw-ptext">
+            <p class="x-aw-venue"><strong>Inter-School Competition</strong> — Physical model design and execution</p>
+            <p class="x-body">Recognized for an engineered model that combined creativity with precision. The project was judged on technical accuracy, aesthetics, and presentation quality.</p>
+            <div class="x-aw-badges"><span class="x-tag"><i class="fas fa-tools"></i>Model design</span><span class="x-tag"><i class="fas fa-check-circle"></i>Competition</span></div>
+            <div class="x-aw-certs"><a class="x-btn x-btn--ghost x-btn--sm" href="assets/certificates/inter%20school%20model%20making.pdf" target="_blank" rel="noopener noreferrer"><span class="x-btn-in"><i class="fas fa-file-pdf"></i>Open certificate</span></a></div>
+          </div>
+        </div>
+      </details>
+      </div>
+    </div>
+    <div class="x-aw-more"><button class="show-awards-btn x-btn x-btn--ghost" id="showAwardsBtn" type="button" aria-expanded="false" aria-controls="awMoreAwards">Show all 11 awards</button></div>
+  </div>
+  <div class="x-aw-float" aria-hidden="true"><img alt=""></div>
 </section>
 <!-- x:awards end -->
 <!-- x:about start -->
-<!-- ABOUT -->
-<section id="about" class="neo-about">
-    <div class="nb-about-inner">
-        <div class="nb-about-head rv-l">
-            <div class="nb-about-intro">
-                <figure class="nb-portrait-stage">
-                    <img class="nb-portrait-backdrop" src="assets/potrait.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                    <img class="nb-portrait-cutout" src="assets/potrait_bgremoved.webp" alt="Portrait of Akshit Kumar Lall" loading="lazy" decoding="async">
-                    <span class="nb-portrait-index font-code" aria-hidden="true">01 / AKL</span>
-                    <figcaption class="nb-portrait-caption font-code">BUILDER BY NATURE</figcaption>
-                </figure>
-                <div class="nb-about-heading">
-                    <p class="nb-kicker font-pixel">// ABOUT ME</p>
-                    <h2 class="nb-about-title">ENGINEER.<br>INNOVATOR.<br><span class="nb-name-mark">ENTREPRENEUR.</span></h2>
-                </div>
-            </div>
-            <div class="nb-about-lead">
-                <p class="font-code">I started coding in class 6 and never really stopped. <strong>150+ projects</strong> later, that's turned into an <strong>award-winning AI surveillance camera</strong> I've been <span class="hero-highlight">building since class 7 (it's won at state, national and international level), and paid computer-vision work for clients around the world.</span></p>
-                <p class="font-code">The other half is the web: I build <strong>full-stack products end to end</strong> — Django, Flask, React, Firebase — most recently <strong>JEE Horizon</strong>, a live AI-powered e-learning platform where students solve questions and compete with each other. And if a problem can be solved in <strong>Python</strong>, I've probably already got the library for it.</p>
-                <p class="font-code">Today I'm the founder of <strong>AKL Technologies</strong> — a humanoid robotics &amp; AI startup — and a freelance CV engineer with <strong>50+ Fiverr clients at a 5.0★ rating</strong>. I care about two things most: shipping things that actually run, and keeping them honest.</p>
-            </div>
-            <div class="nb-ethos font-code">
-                <span class="nb-ethos-chip nb-c-yellow">FINISHED &gt; PERFECT</span>
-                <span class="nb-ethos-chip nb-c-white">NO PAIN, NO GAIN</span>
-                <span class="nb-ethos-chip nb-c-mint">PONDER TILL EUREKA</span>
-            </div>
-            <p class="nb-ethos-cap font-code">— house rules, since class 6</p>
-        </div>
-        <div class="nb-about-right rv-r">
-            <div class="nb-exp-grid">
-                <div class="nb-exp nb-c-white"><span class="nb-exp-ic">👁️</span><h3 class="font-code">COMPUTER VISION</h3><p class="font-code">Detection, tracking &amp; recognition systems in production.</p></div>
-                <div class="nb-exp nb-c-yellow"><span class="nb-exp-ic">🧠</span><h3 class="font-code">AI / ML</h3><p class="font-code">Training &amp; deploying machine-learning pipelines end to end.</p></div>
-                <div class="nb-exp nb-c-mint"><span class="nb-exp-ic">🌐</span><h3 class="font-code">FULL-STACK WEB</h3><p class="font-code">Django, Flask, React &amp; Firebase — shipped, live products.</p></div>
-                <div class="nb-exp nb-c-white"><span class="nb-exp-ic">🤖</span><h3 class="font-code">ROBOTICS &amp; HARDWARE</h3><p class="font-code">Humanoid robotics, embedded systems &amp; CAD-driven builds.</p></div>
-            </div>
-            <div class="nb-now">
-                <span class="nb-now-tag font-pixel">NOW</span>
-                <div class="nb-now-body">
-                    <p class="nb-now-title">BUILDING <span class="nb-name-mark">AKL Technologies</span></p>
-                    <p class="nb-now-sub font-code">A humanoid robotics &amp; AI startup — alongside freelancing (<strong>50+ Fiverr clients · 5.0★</strong>) and a <strong>171-project archive</strong>.</p>
-                </div>
-            </div>
-        </div>
+<section id="about" class="x-section x-about" aria-labelledby="aboutTitle">
+  <div class="x-wrap">
+    <p class="x-eyebrow" data-x-reveal="fade"><span class="x-idx">(03)</span><span>About — builder by nature</span></p>
+    <div class="x-about-grid">
+      <h2 class="x-about-line" id="aboutTitle" data-x-scrub>I started coding in class 6 and <span class="x-serif">never really stopped.</span> Today I'm building a humanoid robotics &amp; AI startup.</h2>
+      <figure class="x-about-fig" data-x-cursor="View">
+        <div class="x-media" data-x-reveal="clip"><img src="assets/x/about-builder.webp" alt="Akshit at his desk wiring an electronics project" width="900" height="1200" loading="lazy" decoding="async"></div>
+        <figcaption><span class="x-label">Builder by nature</span><span class="x-label">Est. 2007</span></figcaption>
+      </figure>
     </div>
+    <div class="x-about-body">
+      <div class="x-about-lead" data-x-reveal="up">
+        <p>I started coding in class 6 and never really stopped. <strong>150+ projects</strong> later, that's turned into an <strong>award-winning AI surveillance camera</strong> I've been building since class 7 (it's won at state, national and international level), and paid computer-vision work for clients around the world.</p>
+        <p>The other half is the web: I build <strong>full-stack products end to end</strong> — Django, Flask, React, Firebase — most recently <strong>JEE Horizon</strong>, a live AI-powered e-learning platform.</p>
+        <p>Today I'm the founder of <strong>AKL Technologies</strong> — a humanoid robotics &amp; AI startup — and a freelance CV engineer with <strong>50+ Fiverr clients at a 5.0★ rating</strong>.</p>
+      </div>
+      <aside class="x-card x-now" data-x-reveal="up">
+        <p class="x-label"><span class="x-pulse" aria-hidden="true"></span>Now</p>
+        <p class="x-now-title">Building AKL Technologies</p>
+        <p>A humanoid robotics &amp; AI startup — alongside freelancing (<strong>50+ Fiverr clients · 5.0★</strong>) and a 171-project archive.</p>
+      </aside>
+    </div>
+    <dl class="x-stats" data-x-reveal="stagger">
+      <div class="x-stat"><dt>Projects built since class 6</dt><dd><span data-x-count="150">150</span><span class="x-acc">+</span></dd></div>
+      <div class="x-stat"><dt>Fiverr clients worldwide</dt><dd><span data-x-count="50">50</span><span class="x-acc">+</span></dd></div>
+      <div class="x-stat"><dt>Average client rating</dt><dd><span data-x-count="5" data-x-dec="1">5.0</span><span class="x-acc"><i class="fas fa-star" aria-hidden="true"></i></span></dd></div>
+      <div class="x-stat"><dt>Awards for the Next Gen Camera</dt><dd><span data-x-count="4">4</span><span class="x-acc">×</span></dd></div>
+    </dl>
+    <p class="x-rules x-label" data-x-reveal="fade"><span>Finished &gt; perfect</span><i class="x-star" aria-hidden="true"></i><span>No pain, no gain</span><i class="x-star" aria-hidden="true"></i><span>Ponder till eureka</span><span class="x-rules-cap">— house rules, since class 6</span></p>
+  </div>
 </section>
-
-<!-- SKILLS -->
-<section id="skills">
-    <div class="skills-fx" id="skillsFx" aria-hidden="true"></div>
-    <div class="drift-guide skills-guide" id="skillsGuide" aria-hidden="true"><span id="skillsGuideText"></span><span class="drift-guide-caret" aria-hidden="true"></span></div>
-    <div class="s-max">
-        <div class="skills-header rv">
-            <div class="s-label">EXPERTISE</div>
-            <h2>Tech Stack</h2>
-            <p>Production tools I work with daily.</p>
-        </div>
-        <div class="skills-grid">
-            <div class="sk-card gc rv"><span class="sk-ic">👁️</span><div class="sk-name">COMPUTER VISION</div><div class="sk-tags"><span class="sk-tag">OpenCV</span><span class="sk-tag">YOLO</span><span class="sk-tag">MediaPipe</span><span class="sk-tag">Object Detection</span><span class="sk-tag">Face Recognition</span><span class="sk-tag">Image Processing</span><span class="sk-tag">Optical Flow</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">🧠</span><div class="sk-name">AI &amp; MACHINE LEARNING</div><div class="sk-tags"><span class="sk-tag">TensorFlow</span><span class="sk-tag">PyTorch</span><span class="sk-tag">Scikit-learn</span><span class="sk-tag">Deep Learning</span><span class="sk-tag">Neural Networks</span><span class="sk-tag">CNNs</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">🌐</span><div class="sk-name">FULL-STACK WEB</div><div class="sk-tags"><span class="sk-tag">Django</span><span class="sk-tag">Flask</span><span class="sk-tag">React</span><span class="sk-tag">Firebase</span><span class="sk-tag">JavaScript</span><span class="sk-tag">HTML5</span><span class="sk-tag">CSS3</span><span class="sk-tag">REST APIs</span></div></div>
-            <div class="sk-card gc rv"><span class="sk-ic">🤖</span><div class="sk-name">HARDWARE &amp; ROBOTICS</div><div class="sk-tags"><span class="sk-tag">Arduino</span><span class="sk-tag">Fusion 360</span><span class="sk-tag">Embedded</span><span class="sk-tag">Prototyping</span><span class="sk-tag">PCB Design</span><span class="sk-tag">Servo Systems</span><span class="sk-tag">3D Printing</span></div></div>
-        </div>
-
-        <div class="sk-also rv">
-            <span class="sk-also-lbl">PYTHON, END TO END:</span>
-            <span class="sk-tag">NumPy</span><span class="sk-tag">Pandas</span><span class="sk-tag">Matplotlib</span><span class="sk-tag">Pillow</span><span class="sk-tag">SciPy</span><span class="sk-tag">Pygame</span><span class="sk-tag">Ursina</span><span class="sk-tag">PyOpenGL</span><span class="sk-tag">Tkinter</span><span class="sk-tag">PyQt</span><span class="sk-tag">Selenium</span><span class="sk-tag">BeautifulSoup</span><span class="sk-tag">Requests</span><span class="sk-tag">Sockets</span><span class="sk-tag">Multiprocessing</span>
-        </div>
-        <p class="sk-also-cap font-code">…and whatever else the problem needs. If it can be built in Python, I can build it.</p>
-
-        <div class="sk-also rv">
-            <span class="sk-also-lbl">ALSO SHIP WITH:</span>
-            <span class="sk-tag">C++</span><span class="sk-tag">OpenGL</span><span class="sk-tag">SQL</span><span class="sk-tag">Git</span><span class="sk-tag">Linux</span>
-        </div>
-
-        <div class="sk-also rv">
-            <span class="sk-also-lbl">BUSINESS &amp; GROWTH:</span>
-            <span class="sk-tag">Marketing</span><span class="sk-tag">Go-to-Market</span><span class="sk-tag">Branding</span><span class="sk-tag">SaaS Building</span><span class="sk-tag">Sales</span><span class="sk-tag">Product Strategy</span><span class="sk-tag">Startups</span>
-        </div>
-        <p class="sk-also-cap font-code">Founder of AKL Technologies — building the product is only half of it.</p>
+<section id="skills" class="x-section x-stack" aria-labelledby="skillsTitle">
+  <div class="drift-guide skills-guide" id="skillsGuide" aria-hidden="true"><span id="skillsGuideText"></span><span class="drift-guide-caret" aria-hidden="true"></span></div>
+  <div class="s-max x-wrap">
+    <header class="x-sec-head">
+      <p class="x-eyebrow" data-x-reveal="fade"><span class="x-idx">(03)</span><span>About — the stack</span></p>
+      <div class="x-sec-head-row">
+        <h2 class="x-title" id="skillsTitle" data-x-reveal="lines">Tech stack</h2>
+        <p class="x-sub" data-x-reveal="up">Production tools I work with daily.</p>
+      </div>
+    </header>
+    <div class="x-stack-grid" data-x-reveal="stagger">
+      <div class="x-domain"><span class="x-domain-n">01</span><h3>Computer vision</h3><p>Detection, tracking &amp; recognition systems in production.</p><ul class="x-tags"><li class="x-tag">OpenCV</li><li class="x-tag">YOLO</li><li class="x-tag">MediaPipe</li><li class="x-tag">Object Detection</li><li class="x-tag">Face Recognition</li></ul></div>
+      <div class="x-domain"><span class="x-domain-n">02</span><h3>AI &amp; machine learning</h3><p>Training &amp; deploying machine-learning pipelines end to end.</p><ul class="x-tags"><li class="x-tag">TensorFlow</li><li class="x-tag">PyTorch</li><li class="x-tag">Scikit-learn</li><li class="x-tag">Deep Learning</li></ul></div>
+      <div class="x-domain"><span class="x-domain-n">03</span><h3>Full-stack web</h3><p>Django, Flask, React &amp; Firebase — shipped, live products.</p><ul class="x-tags"><li class="x-tag">Django</li><li class="x-tag">Flask</li><li class="x-tag">React</li><li class="x-tag">Firebase</li></ul></div>
+      <div class="x-domain"><span class="x-domain-n">04</span><h3>Hardware &amp; robotics</h3><p>Humanoid robotics, embedded systems &amp; CAD-driven builds.</p><ul class="x-tags"><li class="x-tag">Arduino</li><li class="x-tag">Fusion 360</li><li class="x-tag">Embedded</li><li class="x-tag">PCB Design</li></ul></div>
     </div>
+    <div class="x-also" data-x-reveal="up"><p class="x-label">Python, end to end</p><ul class="x-tags"><li class="x-tag">NumPy</li><li class="x-tag">Pandas</li><li class="x-tag">Matplotlib</li><li class="x-tag">Pillow</li><li class="x-tag">SciPy</li><li class="x-tag">Pygame</li><li class="x-tag">Ursina</li></ul><p class="x-also-cap">…and whatever else the problem needs. If it can be built in Python, I can build it.</p></div>
+    <div class="x-also" data-x-reveal="up"><p class="x-label">Also ship with</p><ul class="x-tags"><li class="x-tag">C++</li><li class="x-tag">OpenGL</li><li class="x-tag">SQL</li><li class="x-tag">Git</li><li class="x-tag">Linux</li></ul></div>
+  </div>
 </section>
 <!-- x:about end -->
 <!-- x:testimonials start -->
-<!-- ================================================================
-     TESTIMONIALS
-================================================================ -->
-<section id="testimonials">
-    <div class="s-max">
-        <div class="test-header rv">
-            <div class="s-label">▶ NOW PLAYING · CLIENT TAPES</div>
-            <h2>What Clients Say</h2>
-            <p>Client reviews from Fiverr — 5.0 rating, all verifiable.</p>
-        </div>
-        <div class="test-platform rv">
-            <span class="vhs-rec">● REC</span>
-            <div class="stars-row"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-            <span>5.0 RATING · VERIFIED TAPES · FIVERR</span>
-        </div>
-        <div class="test-grid rv">
-            <div class="test-card gc">
-                <div class="test-flag flag-in" aria-hidden="true"></div>
-                <span class="test-num">01</span>
-                <div class="test-vhs-bar"><span class="vhs-rec">● REC</span><span class="vhs-tape">TAPE 01</span></div>
-                <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="test-text">Very helpful and communicative seller. Made me understand the whole project very patiently. Would surely recommend him.</p>
-                <div class="test-divider"></div>
-                <div class="test-person">
-                    <span class="test-avatar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#ffd9e6"/><path d="M14 64c0-11 8-17 18-17s18 6 18 17Z" fill="#e8568a"/><path d="M16 31c0-12 7-20 16-20s16 8 16 20c0 5-1 9-3 11V29a13 13 0 0 0-26 0v13c-2-2-3-6-3-11Z" fill="#3a2a2a"/><circle cx="32" cy="31" r="12" fill="#f4c6a0"/><path d="M20 29c0-9 5-15 12-15s12 6 12 15c-3-3-7-5-12-5s-9 2-12 5Z" fill="#3a2a2a"/><circle cx="27" cy="31" r="1.6" fill="#2a1e1e"/><circle cx="37" cy="31" r="1.6" fill="#2a1e1e"/><path d="M27 36q5 4 10 0" fill="none" stroke="#9c5b3b" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-                    <div>
-                        <div class="test-name">Rina</div>
-                        <div class="test-meta">CLIENT · <span class="loc-tag">INDIA</span></div>
-                    </div>
-                </div>
-                <a href="https://flic.kr/p/2r83uR9" rel="noopener noreferrer" target="_blank" class="test-play" aria-label="Play verified review screenshot">
-                    <span class="test-play-btn"><i class="fas fa-play"></i></span>
-                    <span class="test-play-main">VIEW VERIFIED TAPE</span>
-                    <span class="test-play-time">0:00:31</span>
-                </a>
-            </div>
-            <div class="test-card gc">
-                <div class="test-flag flag-fr" aria-hidden="true"></div>
-                <span class="test-num">02</span>
-                <div class="test-vhs-bar"><span class="vhs-rec">● REC</span><span class="vhs-tape">TAPE 02</span></div>
-                <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="test-text">I was glad to work with Akshit, very professional and high level of competency. Will see you again for more jobs.</p>
-                <div class="test-divider"></div>
-                <div class="test-person">
-                    <span class="test-avatar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#d6e4ff"/><path d="M14 64c0-11 8-17 18-17s18 6 18 17Z" fill="#3b6fd6"/><path d="M27 48l5 6 5-6Z" fill="#fff"/><path d="M19 28c0-9 6-15 13-15s13 6 13 15c-2-2-3-4-5-5-3-2-13-2-16 0-2 1-3 3-5 5Z" fill="#5a4632"/><circle cx="32" cy="31" r="12" fill="#f0c49a"/><circle cx="27" cy="31" r="3.4" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="37" cy="31" r="3.4" fill="none" stroke="#2a2a2a" stroke-width="1.2"/><line x1="30.4" y1="31" x2="33.6" y2="31" stroke="#2a2a2a" stroke-width="1.2"/><circle cx="27" cy="31" r="1.3" fill="#2a1e1e"/><circle cx="37" cy="31" r="1.3" fill="#2a1e1e"/><path d="M28 37q4 3 8 0" fill="none" stroke="#a86b45" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-                    <div>
-                        <div class="test-name">Frisbeeparis</div>
-                        <div class="test-meta">CEO · <span class="loc-tag">FRANCE</span></div>
-                    </div>
-                </div>
-                <a href="https://flic.kr/p/2r88X4X" rel="noopener noreferrer" target="_blank" class="test-play" aria-label="Play verified review screenshot">
-                    <span class="test-play-btn"><i class="fas fa-play"></i></span>
-                    <span class="test-play-main">VIEW VERIFIED TAPE</span>
-                    <span class="test-play-time">0:01:12</span>
-                </a>
-            </div>
-            <div class="test-card gc">
-                <div class="test-flag flag-gr" aria-hidden="true"></div>
-                <span class="test-num">03</span>
-                <div class="test-vhs-bar"><span class="vhs-rec">● REC</span><span class="vhs-tape">TAPE 03</span></div>
-                <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="test-text">Akshit helped me with every problem I had during and after working with him. He is very professional and knows what he is doing.</p>
-                <div class="test-divider"></div>
-                <div class="test-person">
-                    <span class="test-avatar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#d4f3e0"/><path d="M14 64c0-11 8-17 18-17s18 6 18 17Z" fill="#1f9d6b"/><circle cx="32" cy="31" r="12" fill="#e0b083"/><path d="M21 32c0 9 5 14 11 14s11-5 11-14c-2 3-5 5-11 5s-9-2-11-5Z" fill="#3a2c1e"/><path d="M19 29c0-10 6-16 13-16s13 6 13 16c-2-3-4-5-6-6-3-2-11-2-14 0-2 1-4 3-6 6Z" fill="#3a2c1e"/><circle cx="27" cy="30" r="1.6" fill="#2a1e1e"/><circle cx="37" cy="30" r="1.6" fill="#2a1e1e"/><path d="M28 35q4 2 8 0" fill="none" stroke="#5e3a22" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-                    <div>
-                        <div class="test-name">Dionisiszervas</div>
-                        <div class="test-meta">CLIENT · <span class="loc-tag">GREECE</span></div>
-                    </div>
-                </div>
-                <a href="https://flic.kr/p/2r89eJV" rel="noopener noreferrer" target="_blank" class="test-play" aria-label="Play verified review screenshot">
-                    <span class="test-play-btn"><i class="fas fa-play"></i></span>
-                    <span class="test-play-main">VIEW VERIFIED TAPE</span>
-                    <span class="test-play-time">0:02:05</span>
-                </a>
-            </div>
-            <div class="test-card gc">
-                <div class="test-flag flag-us" aria-hidden="true"></div>
-                <span class="test-num">04</span>
-                <div class="test-vhs-bar"><span class="vhs-rec">● REC</span><span class="vhs-tape">TAPE 04</span></div>
-                <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="test-text">Amazing Developer. Akshit completed my project within 5 hours instead of 7 days. Highly intelligent.</p>
-                <div class="test-divider"></div>
-                <div class="test-person">
-                    <span class="test-avatar"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#ffe6cc"/><path d="M14 64c0-11 8-17 18-17s18 6 18 17Z" fill="#f08a24"/><path d="M20 28c0-9 5-15 12-15s12 6 12 15c-2-2-3-4-5-5-3-2-11-2-14 0-2 1-3 3-5 5Z" fill="#e3b34b"/><circle cx="32" cy="31" r="12" fill="#f2c9a0"/><path d="M21 26q11 -6 22 0c-3-2-7-3-11-3s-8 1-11 3Z" fill="#e3b34b"/><circle cx="27" cy="31" r="1.6" fill="#2a1e1e"/><circle cx="37" cy="31" r="1.6" fill="#2a1e1e"/><path d="M27 36q5 3 10 0" fill="none" stroke="#b5754a" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-                    <div>
-                        <div class="test-name">Steve Panel</div>
-                        <div class="test-meta">CLIENT · <span class="loc-tag">USA </span></div>
-                    </div>
-                </div>
-                <a href="https://flic.kr/p/2r89eK6" rel="noopener noreferrer" target="_blank" class="test-play" aria-label="Play verified review screenshot">
-                    <span class="test-play-btn"><i class="fas fa-play"></i></span>
-                    <span class="test-play-main">VIEW VERIFIED TAPE</span>
-                    <span class="test-play-time">0:03:48</span>
-                </a>
-            </div>
-        </div>
+<section id="testimonials" class="x-section x-reviews" aria-labelledby="rvTitle">
+  <div class="x-wrap">
+    <header class="x-sec-head">
+      <p class="x-eyebrow" data-x-reveal="fade"><span class="x-idx">(04)</span><span>Client reviews — Fiverr</span></p>
+      <div class="x-sec-head-row">
+        <h2 class="x-title" id="rvTitle" data-x-reveal="lines">What clients say</h2>
+        <div class="x-rv-meta" data-x-reveal="up"><span class="x-rv-stars" role="img" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span><span class="x-label">5.0 rating · all verifiable</span></div>
+      </div>
+    </header>
+    <figure class="x-rv-featured">
+      <span class="x-rv-mark" aria-hidden="true">&ldquo;</span>
+      <blockquote class="x-rv-quote" data-x-reveal="lines">Amazing Developer. Akshit completed my project within 5 hours instead of 7 days. Highly intelligent.</blockquote>
+      <figcaption class="x-rv-by" data-x-reveal="up"><span class="x-rv-name">Steve Panel</span><span class="x-label">Client · USA</span><a class="x-link x-rv-link" href="https://flic.kr/p/2r89eK6" target="_blank" rel="noopener noreferrer" aria-label="Verified review from Steve Panel (opens Flickr)">Verified review <svg class="x-ico x-ico--ne" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></a></figcaption>
+    </figure>
+    <div class="x-rv-grid" data-x-reveal="stagger">
+      <figure class="x-card x-rv-card"><blockquote>Very helpful and communicative seller. Made me understand the whole project very patiently. Would surely recommend him.</blockquote><figcaption><span class="x-rv-av" aria-hidden="true">R</span><span class="x-rv-who"><b>Rina</b><span class="x-label">Client · India</span></span><a class="x-link" href="https://flic.kr/p/2r83uR9" target="_blank" rel="noopener noreferrer" aria-label="Verified review from Rina (opens Flickr)">Verified ↗</a></figcaption></figure>
+      <figure class="x-card x-rv-card"><blockquote>I was glad to work with Akshit, very professional and high level of competency. Will see you again for more jobs.</blockquote><figcaption><span class="x-rv-av" aria-hidden="true">F</span><span class="x-rv-who"><b>Frisbeeparis</b><span class="x-label">CEO · France</span></span><a class="x-link" href="https://flic.kr/p/2r88X4X" target="_blank" rel="noopener noreferrer" aria-label="Verified review from Frisbeeparis (opens Flickr)">Verified ↗</a></figcaption></figure>
+      <figure class="x-card x-rv-card"><blockquote>Akshit helped me with every problem I had during and after working with him. He is very professional and knows what he is doing.</blockquote><figcaption><span class="x-rv-av" aria-hidden="true">D</span><span class="x-rv-who"><b>Dionisiszervas</b><span class="x-label">Client · Greece</span></span><a class="x-link" href="https://flic.kr/p/2r89eJV" target="_blank" rel="noopener noreferrer" aria-label="Verified review from Dionisiszervas (opens Flickr)">Verified ↗</a></figcaption></figure>
     </div>
+  </div>
 </section>
 <!-- x:testimonials end -->
 <!-- x:journey start -->
-<!-- ================================================================
-     JOURNEY TIMELINE
-================================================================ -->
-<section id="journey">
-    <div class="journey-wrap">
-        <div class="journey-sticky">
-            <canvas id="driftCanvas" aria-hidden="true"></canvas>
-            <div class="drift-vignette" aria-hidden="true"></div>
-            <div class="journey-header">
-                <div class="s-label">MY JOURNEY</div>
-                <h2>Life Timeline : The Drive So Far</h2>
-                <p>Scroll through the timeline, or hold <kbd>W</kbd> / <kbd>S</kbd> to drive the car between milestones.</p>
-            </div>
-            <div class="drift-events">
-                <article class="drift-event" data-i="0">
-                    <span class="drift-ev-num">01</span>
-                    <i class="fas fa-baby drift-ev-ic"></i>
-                    <span class="drift-ev-year">2007</span>
-                    <span class="drift-ev-tag">WHERE IT ALL BEGAN</span>
-                    <h3>Born in Ranchi, Jharkhand</h3>
-                    <p>Born and raised in Ranchi — the city of waterfalls. Started tinkering with electronics and computers at a young age.</p>
-                </article>
-                <article class="drift-event" data-i="1">
-                    <span class="drift-ev-num">02</span>
-                    <i class="fas fa-code drift-ev-ic"></i>
-                    <span class="drift-ev-year">2019</span>
-                    <span class="drift-ev-tag">CLASS 6 · SELF-TAUGHT</span>
-                    <h3>First Lines of Code</h3>
-                    <p>Self-taught from YouTube and docs — the start of a habit that never stopped.</p>
-                </article>
-                <article class="drift-event" data-i="2">
-                    <span class="drift-ev-num">03</span>
-                    <i class="fas fa-camera drift-ev-ic"></i>
-                    <span class="drift-ev-year">2020</span>
-                    <span class="drift-ev-tag">CLASS 7 · NEXT GEN CAMERA v0</span>
-                    <h3>Next Gen Camera v0</h3>
-                    <p>Started building the AI surveillance camera that would go on to win state, national and international awards — and is still evolving today.</p>
-                </article>
-                <article class="drift-event" data-i="3">
-                    <span class="drift-ev-num">04</span>
-                    <i class="fas fa-school drift-ev-ic"></i>
-                    <span class="drift-ev-year">2023</span>
-                    <span class="drift-ev-tag">DELHI PUBLIC SCHOOL · PATNA</span>
-                    <h3>Completed Class 10th — DPS Patna</h3>
-                    <p>Finished schooling at DPS Patna — winning national awards, building the Next Gen Camera, and freelancing all while still in school.</p>
-                </article>
-                <article class="drift-event" data-i="4">
-                    <span class="drift-ev-num">05</span>
-                    <i class="fas fa-trophy drift-ev-ic"></i>
-                    <span class="drift-ev-year">2023</span>
-                    <span class="drift-ev-tag">BIC · INEX · ARYABHAT · NCSC</span>
-                    <h3>Multiple National Awards</h3>
-                    <p>Bihar Innovation Challenge (1st Prize + MacBook), INEX Silver Medal, Aryabhat National Award, Robo Fest and more.</p>
-                </article>
-                <article class="drift-event" data-i="5">
-                    <span class="drift-ev-num">06</span>
-                    <i class="fas fa-fire drift-ev-ic"></i>
-                    <span class="drift-ev-year">2026</span>
-                    <span class="drift-ev-tag">VELLORE INSTITUTE OF TECHNOLOGY</span>
-                    <h3>VIT Vellore — CSE</h3>
-                    <p>Pursuing Computer Science &amp; Engineering at VIT Vellore — blending academics with freelancing, innovation and entrepreneurship.</p>
-                </article>
-                <article class="drift-event" data-i="6">
-                    <span class="drift-ev-num">07</span>
-                    <i class="fas fa-rocket drift-ev-ic"></i>
-                    <span class="drift-ev-year">NOW</span>
-                    <span class="drift-ev-tag">STUDYING · BUILDING · INNOVATING</span>
-                    <h3>VIT + Founder of AKL Technologies</h3>
-                    <p>Building a Humanoid Robotics &amp; AI startup while at VIT. The road keeps turning — the drive is just getting started.</p>
-                </article>
-            </div>
-            <div class="drift-progress" aria-hidden="true">
-                <div class="drift-bar"><span class="drift-bar-fill"></span></div>
-                <div class="drift-dots">
-                    <span class="drift-dot"></span>
-                    <span class="drift-dot"></span>
-                    <span class="drift-dot"></span>
-                    <span class="drift-dot"></span>
-                    <span class="drift-dot"></span>
-                    <span class="drift-dot"></span>
-                    <span class="drift-dot"></span>
-                </div>
-            </div>
-            <div class="drift-hint"><i class="fas fa-computer-mouse"></i> SCROLL OR HOLD W / S TO DRIVE</div>
-            <div class="drift-guide" id="driftGuide" aria-hidden="true"><span id="driftGuideText"></span><span class="drift-guide-caret" aria-hidden="true"></span></div>
-        </div>
+<section id="journey" aria-labelledby="journeyTitle">
+  <div class="journey-wrap">
+    <div class="journey-sticky">
+      <canvas id="driftCanvas" aria-hidden="true"></canvas>
+      <div class="drift-vignette" aria-hidden="true"></div>
+      <div class="journey-header">
+        <p class="x-eyebrow"><span class="x-idx">(05)</span><span>Life timeline</span></p>
+        <h2 id="journeyTitle">The drive so far</h2>
+        <p>Scroll through the timeline, or hold <kbd>W</kbd> / <kbd>S</kbd> to drive the car between milestones.</p>
+      </div>
+      <div class="drift-events">
+        <article class="drift-event" data-i="0"><span class="drift-ev-num">01</span><i class="fas fa-baby drift-ev-ic" aria-hidden="true"></i><span class="drift-ev-year">2007</span><span class="drift-ev-tag">Where it all began</span><h3>Born in Ranchi, Jharkhand</h3><p>Born and raised in Ranchi — the city of waterfalls. Started tinkering with electronics and computers at a young age.</p></article>
+        <article class="drift-event" data-i="1"><span class="drift-ev-num">02</span><i class="fas fa-code drift-ev-ic" aria-hidden="true"></i><span class="drift-ev-year">2019</span><span class="drift-ev-tag">Class 6 · self-taught</span><h3>First Lines of Code</h3><p>Self-taught from YouTube and docs — the start of a habit that never stopped.</p></article>
+        <article class="drift-event" data-i="2"><span class="drift-ev-num">03</span><i class="fas fa-camera drift-ev-ic" aria-hidden="true"></i><span class="drift-ev-year">2020</span><span class="drift-ev-tag">Class 7 · Next Gen Camera v0</span><h3>Next Gen Camera v0</h3><p>Started building the AI surveillance camera that would go on to win state, national and international awards.</p></article>
+        <article class="drift-event" data-i="3"><span class="drift-ev-num">04</span><i class="fas fa-school drift-ev-ic" aria-hidden="true"></i><span class="drift-ev-year">2023</span><span class="drift-ev-tag">Delhi Public School · Patna</span><h3>Completed Class 10th — DPS Patna</h3><p>Finished schooling at DPS Patna.</p></article>
+        <article class="drift-event" data-i="4"><span class="drift-ev-num">05</span><i class="fas fa-trophy drift-ev-ic" aria-hidden="true"></i><span class="drift-ev-year">2023</span><span class="drift-ev-tag">BIC · INEX · Aryabhat · NCSC</span><h3>Multiple National Awards</h3><p>Bihar Innovation Challenge (1st Prize + MacBook), INEX Silver Medal, Aryabhat National Award, Robo Fest and more.</p></article>
+        <article class="drift-event" data-i="5"><span class="drift-ev-num">06</span><i class="fas fa-fire drift-ev-ic" aria-hidden="true"></i><span class="drift-ev-year">2026</span><span class="drift-ev-tag">VIT Vellore</span><h3>VIT Vellore — CSE</h3><p>Freshman year — and VinHack 2026 1st prize two months in.</p></article>
+        <article class="drift-event" data-i="6"><span class="drift-ev-num">07</span><i class="fas fa-rocket drift-ev-ic" aria-hidden="true"></i><span class="drift-ev-year">Now</span><span class="drift-ev-tag">Founder</span><h3>AKL Technologies</h3><p>Building a humanoid robotics &amp; AI startup.</p></article>
+      </div>
+      <div class="drift-progress" aria-hidden="true"><div class="drift-bar"><span class="drift-bar-fill"></span></div><div class="drift-dots"><span class="drift-dot"></span><span class="drift-dot"></span><span class="drift-dot"></span><span class="drift-dot"></span><span class="drift-dot"></span><span class="drift-dot"></span><span class="drift-dot"></span></div></div>
+      <div class="drift-hint"><i class="fas fa-computer-mouse" aria-hidden="true"></i>Scroll or hold W / S to drive</div>
+      <div class="drift-guide" id="driftGuide" aria-hidden="true"><span id="driftGuideText"></span><span class="drift-guide-caret" aria-hidden="true"></span></div>
     </div>
+  </div>
 </section>
 <!-- x:journey end -->
 <!-- x:contact start -->
-<!-- CONTACT -->
-<section id="contact">
-    <!-- Contact 3D scene disabled; restore the canvas and module script below to re-enable it. -->
-    <!--
-    <canvas id="desertCanvas" aria-hidden="true"></canvas>
-    -->
-
-    <div class="contact-overlay">
-        <div class="contact-portrait-column">
-            <div class="nb-photo contact-portrait-photo" id="contactPortrait" role="button" tabindex="0" aria-label="Akshit Kumar Lall. Click to say hello.">
-                <img src="assets/me op.jpeg" alt="Akshit Kumar Lall" loading="lazy" decoding="async">
-                <span class="nb-photo-tag font-pixel">AKL</span>
-            </div>
-            <div class="contact-portrait-note">
-                <span class="font-pixel">HAVE A GOOD ONE?</span>
-                <p class="font-code">Tell me what you’re building. I’m always up for a thoughtful challenge.</p>
-            </div>
-        </div>
-        <div class="contact-panel">
-            <div class="contact-heading">
-                <p class="contact-kicker font-pixel">// CONTACT</p>
-                <h2>LET'S BUILD<br><span class="nb-name-mark">SOMETHING REAL.</span></h2>
-                <p class="font-code">Have a project, a question, or an ambitious idea? Send me a note.</p>
-            </div>
-            <form class="cf-form" id="cForm" action="https://formsubmit.co/bd77b285c94cff82cad9750bd3b1d895" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_subject" value="Portfolio Contact">
-                <div class="fg-g"><label class="f-lbl">YOUR NAME</label><input type="text" name="name" class="f-inp" placeholder="John Doe" value="Akshit Kumar Lall" required></div>
-                <div class="fg-g"><label class="f-lbl">EMAIL ADDRESS</label><input type="email" id="contactEmail" name="email" class="f-inp" placeholder="john@example.com" value="" required></div>
-                <div class="fg-g"><label class="f-lbl">MESSAGE</label><textarea name="message" class="f-ta" placeholder="Tell me about your project..." required>Hi Akshit, I’d love to discuss a project idea and explore how we can build it together.</textarea></div>
-                <button type="submit" class="f-sub"><span>SEND MESSAGE →</span></button>
-            </form>
-            <div class="cl-links">
-                <a href="mailto:akshitkumarlal@gmail.com" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/gmail.svg" alt="Email" width="24" height="24" loading="lazy"></div><div class="cl-txt"><span>EMAIL</span><span>akshitkumarlal@gmail.com</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="24" height="24" loading="lazy"></div><div class="cl-txt"><span>GITHUB</span><span>github.com/akshit-python-programmer</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="24" height="24" loading="lazy"></div><div class="cl-txt"><span>LINKEDIN</span><span>linkedin.com/in/akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-                <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" class="cl-link gc"><div class="cl-ic"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="22" height="22" loading="lazy"></div><div class="cl-txt"><span>TWITTER / X</span><span>@akshitkumarlall</span></div><i class="fas fa-arrow-right cl-arr"></i></a>
-            </div>
-            <section class="contact-faq" aria-labelledby="contact-faq-title">
-                <h3 id="contact-faq-title" class="font-pixel">// QUICK FAQ</h3>
-                <details>
-                    <summary class="font-code">What does Akshit work on?</summary>
-                    <p class="font-code">Akshit builds computer vision and AI systems, robotics projects, and full-stack products, including the award-winning Next Gen Camera.</p>
-                </details>
-                <details>
-                    <summary class="font-code">What is the Next Gen Camera?</summary>
-                    <p class="font-code">It is an award-winning AI security system designed to add real-time detection capabilities to existing CCTV, with processing performed on-device.</p>
-                </details>
-                <details>
-                    <summary class="font-code">How can I discuss a project?</summary>
-                    <p class="font-code">Use the contact form above or email <a href="mailto:akshitkumarlal@gmail.com">akshitkumarlal@gmail.com</a> to share your idea.</p>
-                </details>
-            </section>
-        </div>
+<section id="contact" class="x-section x-contact" aria-labelledby="ctTitle">
+  <div class="x-wrap">
+    <p class="x-eyebrow" data-x-reveal="fade"><span class="x-idx">(06)</span><span>Contact</span></p>
+    <h2 class="x-ct-title" id="ctTitle" data-x-reveal="up">Let's build <span class="x-serif">something</span> <span class="x-ct-target">real.<span class="x-ct-box" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">target · locked</span></span></span></h2>
+    <div class="x-ct-row" data-x-reveal="up">
+      <div class="x-ct-intro">
+        <div class="contact-portrait-photo x-ct-avatar" id="contactPortrait" role="button" tabindex="0" aria-label="Akshit Kumar Lall. Press to say hello."><img src="assets/me%20op.jpeg" alt="" width="269" height="407" loading="lazy" decoding="async"></div>
+        <p class="x-lead">Have a project, a question, or an ambitious idea? Tell me what you're building — I'm always up for a thoughtful challenge.</p>
+      </div>
+      <div class="x-ct-actions">
+        <a class="x-btn x-btn--accent x-btn--lg x-ct-mail" href="mailto:akshitkumarlal@gmail.com" data-x-magnetic="0.2"><span class="x-btn-in">akshitkumarlal@gmail.com <svg class="x-ico x-ico--ne" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></span></a>
+        <a class="x-btn x-btn--ghost x-btn--lg" href="#cForm" data-x-open-form><span class="x-btn-in">Open the form</span></a>
+      </div>
     </div>
+    <div class="x-ct-grid">
+      <form class="cf-form x-cf" id="cForm" action="https://formsubmit.co/bd77b285c94cff82cad9750bd3b1d895" method="POST" data-x-reveal="up">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_subject" value="Portfolio Contact">
+        <input type="hidden" name="_next" value="https://akshitkumarlall.com/?sent=1#contact">
+        <input type="text" name="_honey" class="x-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="x-cf-status" id="cfStatus" role="status" hidden></p>
+        <div class="x-cf-row">
+          <div class="x-field fg-g"><label class="x-field-label f-lbl" for="cfName">Your name</label><input class="x-input f-inp" id="cfName" type="text" name="name" autocomplete="name" placeholder="Jane Doe" required></div>
+          <div class="x-field fg-g"><label class="x-field-label f-lbl" for="contactEmail">Email address</label><input class="x-input f-inp" id="contactEmail" type="email" name="email" autocomplete="email" placeholder="jane@company.com" required></div>
+        </div>
+        <div class="x-field fg-g"><label class="x-field-label f-lbl" for="cfMsg">Message</label><textarea class="x-textarea f-ta" id="cfMsg" name="message" placeholder="Hi Akshit, I'd love to discuss a project idea…" required></textarea></div>
+        <button type="submit" class="f-sub x-btn x-btn--accent x-btn--block"><span class="x-btn-in">Send message <svg class="x-ico x-ico--e" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button>
+      </form>
+      <div data-x-reveal="up">
+        <ul class="x-ct-links">
+          <li><a href="mailto:akshitkumarlal@gmail.com"><span class="x-label">Email</span><span class="x-ct-v">akshitkumarlal@gmail.com</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></a></li>
+          <li><a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer"><span class="x-label">GitHub</span><span class="x-ct-v">akshit-python-programmer</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></a></li>
+          <li><a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer"><span class="x-label">LinkedIn</span><span class="x-ct-v">in/akshitkumarlall</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></a></li>
+          <li><a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer"><span class="x-label">X / Twitter</span><span class="x-ct-v">@akshitkumarlall</span><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></svg></a></li>
+        </ul>
+        <section class="contact-faq x-faq" aria-labelledby="contact-faq-title">
+          <h3 id="contact-faq-title" class="x-label">Quick FAQ</h3>
+          <details><summary>What does Akshit work on?</summary><p>Akshit builds computer vision and AI systems, robotics projects, and full-stack products, including the award-winning Next Gen Camera.</p></details>
+          <details><summary>What is the Next Gen Camera?</summary><p>It is an award-winning AI security system designed to add real-time detection capabilities to existing CCTV, with processing performed on-device.</p></details>
+          <details><summary>How can I discuss a project?</summary><p>Use the contact form above or email <a href="mailto:akshitkumarlal@gmail.com">akshitkumarlal@gmail.com</a> to share your idea.</p></details>
+        </section>
+      </div>
+    </div>
+  </div>
 </section>
 <!-- x:contact end -->
 </main>
 <div class="drift-guide portrait-guide" id="portraitGuide" aria-hidden="true"><span id="portraitGuideText"></span><span class="drift-guide-caret" aria-hidden="true"></span></div>
 <!-- x:projects:modal start -->
-<!-- PROJECT MODAL -->
-<div class="proj-modal" id="projModal">
-    <div class="pm-bg" id="pmBg"></div>
-    <div class="pm-panel">
-        <button class="pm-close" id="pmClose"><i class="fas fa-times">❌</i></button>
-        <!-- Media side -->
-        <div class="pm-media" id="pmMedia"></div>
-        <!-- Info side -->
-        <div class="pm-info" id="pmInfo"></div>
-    </div>
+<div class="proj-modal" id="projModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle" aria-hidden="true">
+  <div class="pm-bg" id="pmBg"></div>
+  <div class="pm-panel" data-lenis-prevent>
+    <button class="pm-close x-icon-btn" id="pmClose" type="button" aria-label="Close case study"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+    <div class="pm-media" id="pmMedia"></div>
+    <div class="pm-info" id="pmInfo"></div>
+  </div>
 </div>
 <!-- x:projects:modal end -->
 <!-- x:shell:popup start -->
-<!-- RECENT WIN ANNOUNCEMENT — revealed by JS, auto-dismisses after 10s -->
-<div class="vh-pop" id="vhPop" role="dialog" aria-modal="true" aria-labelledby="vhTitle" hidden>
-    <div class="vh-card">
-        <div class="vh-top">
-            <span class="vh-kicker font-pixel">// RECENT WIN</span>
-            <button class="vh-close" id="vhClose" type="button" aria-label="Close announcement"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="vh-body">
-            <div class="vh-media">
-                <div class="vh-frame"><img src="assets/Vinhack_winner_compressed.webp" alt="1st prize at VinHack 2026, VIT Vellore" loading="lazy" decoding="async"></div>
-            </div>
-            <div class="vh-copy">
-                <div class="vh-pills">
-                    <span class="nb-pill font-code"><i class="fas fa-trophy"></i> 1ST PRIZE</span>
-                    <span class="nb-pill font-code"><i class="fas fa-users"></i> 800+ PARTICIPANTS</span>
-                </div>
-                <h2 class="vh-title" id="vhTitle">VINHACK 2026<br><span class="nb-name-mark">1ST PRIZE</span></h2>
-                <p class="vh-meta font-code">VIT VELLORE · GRAVITAS 2026 · 19 SEP 2026</p>
-                <p class="vh-desc">Two months into my freshman year, we took <strong>1st prize</strong> at this 30-hour flagship hackathon — I led the team and wrote the entire architecture and code solo. Our build: <strong>Furti AI</strong>, an autonomous desktop-automation agent.</p>
-                <a href="#awards" class="nb-btn nb-btn-dark vh-go" id="vhGo"><span>SEE THE AWARD</span> <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="vh-foot">
-            <span class="vh-foot-lbl font-code">AUTO-CLOSES IN 10S</span>
-            <span class="vh-track"><i></i></span>
-        </div>
+<aside class="vh-pop x-toast" id="vhPop" aria-labelledby="vhTitle" hidden>
+  <div class="x-toast-bar"><span class="x-label"><span class="x-pulse" aria-hidden="true"></span><span class="x-toast-k-long">New detection ·&nbsp;</span>Recent win</span><button class="vh-close x-icon-btn" id="vhClose" type="button" aria-label="Dismiss announcement"><i class="fas fa-xmark" aria-hidden="true"></i></button></div>
+  <div class="x-toast-body">
+    <div class="x-toast-media"><img src="assets/Vinhack_winner_compressed.webp" alt="" width="88" height="88" loading="lazy" decoding="async"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i></div>
+    <div>
+      <p class="vh-title" id="vhTitle">VinHack 2026 — 1st Prize</p>
+      <p class="vh-meta">VIT Vellore · 800+ participants · Furti AI</p>
+      <a href="#awards" class="vh-go x-link" id="vhGo">See the award <svg class="x-ico x-ico--e" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
-</div>
+  </div>
+  <span class="vh-track" aria-hidden="true"><i></i></span>
+</aside>
 <!-- x:shell:popup end -->
 <!-- x:shell:footer start -->
-<footer>
-    <div class="ft-logo">AKSHIT KUMAR LALL</div>
-    
+<footer class="x-footer">
+  <div class="x-wrap x-ft-row">
+    <span class="x-label">&copy; 2026 Akshit Kumar Lall</span>
+    <span class="x-label">Founder — AKL Technologies</span>
+    <span class="x-label">Vellore <span data-x-clock>--:--</span> IST</span>
     <div class="ft-links">
-        <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="soc-ic" src="assets/icons/social/github.svg" alt="GitHub" width="22" height="22" loading="lazy"></a>
-        <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img class="soc-ic" src="assets/icons/social/linkedin.svg" alt="LinkedIn" width="22" height="22" loading="lazy"></a>
-        <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img class="soc-ic" src="assets/icons/social/x.svg" alt="X (Twitter)" width="20" height="20" loading="lazy"></a>
+      <a href="https://github.com/akshit-python-programmer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+      <a href="https://linkedin.com/in/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+      <a href="https://x.com/akshitkumarlall" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
     </div>
+    <a href="#home" class="x-link x-label">Back to top <svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4"/></svg></a>
+  </div>
+  <div class="x-ft-mark" aria-hidden="true"><span class="x-ft-mark-in">Akshit Kumar Lall</span></div>
 </footer>
-<a href="#contact" class="quick-contact" aria-label="Contact Me">CONTACT ME</a>
+<a href="#contact" class="quick-contact x-pill-fab" aria-label="Contact me"><img class="x-pill-av" src="assets/x/avatar-96.webp" alt="" width="38" height="38"><span class="x-pill-txt">Contact me</span><span class="x-dot" aria-hidden="true"></span></a>
 <!-- x:shell:footer end -->
 <div class="x-grain" aria-hidden="true"></div>
 <script src="js/video-manager.js"></script>
@@ -1861,56 +1646,52 @@ if (!section || !canvas || !wrap) {
 // No JS cursor element, no mousemove handler, no dark-section observer.
 
 // ===== [x:shell] UNIFIED SCROLL DISPATCHER =====
-// All scroll-driven work funnels through here so we attach ONE scroll
-// listener and do at most one layout read + one batch of writes per frame.
 const scrollCbs=[];
 let scrollTick=false;
-function onScrollFrame(){
-    scrollTick=false;
-    const y=window.scrollY;
-    for(let i=0;i<scrollCbs.length;i++)scrollCbs[i](y);
-}
-window.addEventListener('scroll',()=>{
-    if(scrollTick)return;
-    scrollTick=true;
-    requestAnimationFrame(onScrollFrame);
-},{passive:true});
+function onScrollFrame(){scrollTick=false;const y=window.scrollY;for(let i=0;i<scrollCbs.length;i++)scrollCbs[i](y);}
+window.addEventListener('scroll',()=>{if(scrollTick)return;scrollTick=true;requestAnimationFrame(onScrollFrame);},{passive:true});
 
 // ===== [x:shell] SCROLL PROGRESS =====
 const prog=document.getElementById('progress');
-if(prog)scrollCbs.push(y=>{
-    const max=document.documentElement.scrollHeight-window.innerHeight;
-    prog.style.width=(max>0?y/max*100:0)+'%';
-});
+if(prog)scrollCbs.push(y=>{const max=document.documentElement.scrollHeight-window.innerHeight;prog.style.width=(max>0?y/max*100:0)+'%';});
 
 // ===== [x:shell] NAV + MOBILE MENU =====
-const navEl=document.getElementById('nav');
+const navEl=document.getElementById('nav'),navBtn=document.getElementById('navBtn'),mobMenu=document.getElementById('mobMenu'),mobClose=document.getElementById('mobClose');
 let navScrolled=false;
-if(navEl)scrollCbs.push(y=>{
-    const s=y>50;
-    if(s!==navScrolled){navScrolled=s;navEl.classList.toggle('scrolled',s);}
-});
-const navBtn=document.getElementById('navBtn'),mobClose=document.getElementById('mobClose');
-if(navBtn)navBtn.addEventListener('click',()=>{document.getElementById('mobMenu').classList.add('open')});
-if(mobClose)mobClose.addEventListener('click',()=>{document.getElementById('mobMenu').classList.remove('open')});
-document.querySelectorAll('.mob-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open')));
+if(navEl)scrollCbs.push(y=>{const s=y>50;if(s!==navScrolled){navScrolled=s;navEl.classList.toggle('scrolled',s);}});
+if(navBtn&&mobMenu){
+    const root=document.documentElement;
+    const setMenu=open=>{
+        if(open===mobMenu.classList.contains('open'))return;
+        mobMenu.classList.toggle('open',open);
+        root.classList.toggle('x-menu-open',open);
+        navBtn.setAttribute('aria-expanded',String(open));
+        mobMenu.setAttribute('aria-hidden',String(!open));
+        mobMenu.inert=!open;
+        const t=navBtn.querySelector('.x-menu-btn-txt');if(t)t.textContent=open?'Close':'Menu';
+        if(window.X)(open?window.X.lock:window.X.unlock)();
+        if(open){const f=mobMenu.querySelector('a');if(f)setTimeout(()=>f.focus({preventScroll:true}),60);}
+    };
+    navBtn.addEventListener('click',()=>setMenu(!mobMenu.classList.contains('open')));
+    if(mobClose)mobClose.addEventListener('click',()=>{setMenu(false);navBtn.focus({preventScroll:true});});
+    mobMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mobMenu.classList.contains('open')){setMenu(false);navBtn.focus({preventScroll:true});}});
+    window.addEventListener('resize',()=>{if(window.innerWidth>960&&mobMenu.classList.contains('open'))setMenu(false);});
+}
 
 // ===== [x:shell] THEME TOGGLE =====
-// data-theme is already set pre-paint by the boot script in <head>. Here we
-// just sync the icon and let the button flip + persist the choice.
 (function(){
-    const root=document.documentElement, btn=document.getElementById('themeToggle');
+    const root=document.documentElement,btn=document.getElementById('themeToggle');
     if(!btn)return;
-    const syncIcon=()=>{const dark=root.dataset.theme==='dark';btn.innerHTML=dark?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';};
-    syncIcon();
+    const sync=()=>{const light=root.dataset.theme==='light';btn.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');};
+    sync();
     btn.addEventListener('click',()=>{
-        const next=root.dataset.theme==='dark'?'light':'dark';
-        root.dataset.theme=next;
-        try{localStorage.setItem('theme',next)}catch(e){}
-        syncIcon();
-        // let the 3D scenes recolour to match (night sky / headlights)
+        const next=root.dataset.theme==='light'?'dark':'light';
+        if(window.X&&window.X.setTheme){window.X.setTheme(next);return;}   // wipe + store + 'themechange' + 'x:theme'
+        root.dataset.theme=next;try{localStorage.setItem('theme',next)}catch(e){}
         window.dispatchEvent(new CustomEvent('themechange',{detail:next}));
     });
+    window.addEventListener('themechange',sync);
 })();
 
 // ===== [x:foundation] GLOW CARD =====
@@ -1922,32 +1703,17 @@ document.querySelectorAll('.gc').forEach(c=>{
 });
 
 // ===== [x:hero] TYPEWRITER =====
-const roles=['Computer Vision.','Robotics & Hardware.'];
-let ri=0,ci=0,del=false;const typedEl=document.getElementById('typed');
-function type(){const cur=roles[ri];if(!del){typedEl.textContent=cur.slice(0,ci+1);ci++;if(ci===cur.length){del=true;setTimeout(type,1600);return}}else{typedEl.textContent=cur.slice(0,ci-1);ci--;if(ci===0){del=false;ri=(ri+1)%roles.length}}setTimeout(type,del?35:72)}
-if(typedEl)type();
+// moved to js/x-hero.js (startRoles: ScrambleText rotation, static under reduced motion). #typed keeps its final text in the HTML.
 
 // ===== [x:foundation] SCROLL REVEAL (legacy .rv) =====
 const rvObs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*50)})},{threshold:.06});
 document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>rvObs.observe(el));
 
 // ===== [x:hero] VIEWPORT HIGHLIGHTS =====
-const heroHighlights=document.querySelectorAll('.nb-hero-sub .hero-highlight,.nb-about-lead .hero-highlight');
-if(heroHighlights.length&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    const heroHighlightObs=new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-            if(entry.isIntersecting){
-                entry.target.classList.add('active');
-                heroHighlightObs.unobserve(entry.target);
-            }
-        });
-    },{threshold:.25});
-    heroHighlights.forEach(highlight=>heroHighlightObs.observe(highlight));
-}
+// retired: .hero-highlight no longer exists (hero + about use <strong>).
 
 // ===== [x:projects] COUNTERS =====
-const cntObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=+el.dataset.t;if(!t)return;let v=0;const step=Math.max(t/30,.5);const id=setInterval(()=>{v+=step;if(v>=t){v=t;clearInterval(id)}const lbl=el.nextElementSibling?el.nextElementSibling.textContent:'';const s=el.dataset.sfx!==undefined?el.dataset.sfx:(lbl.includes('K+')?' K+':'+');el.textContent=Math.floor(v)+s},35);cntObs.unobserve(el)}})},{threshold:.5});
-document.querySelectorAll('.counter').forEach(el=>cntObs.observe(el));
+// retired: the projects count uses data-x-count (js/x-core.js), final value stays in the HTML.
 
 // ===== [x:projects] PROJECT DATA =====
 // Source of truth: projects.json. To add/edit a project, edit that file AND add/update a
@@ -1968,155 +1734,90 @@ const modal=document.getElementById('projModal');
 const pmMedia=document.getElementById('pmMedia');
 const pmInfo=document.getElementById('pmInfo');
 const VM=window.VideoManager;
-
-function openModal(id){
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let modalReturn=null,modalSeq=0;
+function detFrame(label){
+    return label?`<span class="x-det" style="--x:2%;--y:3%;--w:96%;--h:94%" aria-hidden="true"><i class="x-rc x-rc--tl"></i><i class="x-rc x-rc--tr"></i><i class="x-rc x-rc--bl"></i><i class="x-rc x-rc--br"></i><span class="x-det-tag">${esc(label)}</span></span>`:'';
+}
+function openModal(id,trigger){
     const p=PROJS[id];
-    if(!p) return; // PROJS not loaded yet
+    if(!p||!modal||!pmMedia||!pmInfo)return;               // PROJS not loaded yet
+    modalSeq++;
     if(VM)VM.pauseAllBento();
-
-    let mediaHTML='';
-    if(p.mainType==='video'){
-        mediaHTML+=`<div style="position:relative;width:100%;aspect-ratio:16/10;"><video class="pm-main-vid" data-src="${p.main}" preload="none" muted loop playsinline></video></div>`;
-    }else{
-        mediaHTML+=`<img class="pm-main-img" src="${p.main}" alt="${p.title}" loading="lazy">`;
-    }
+    const card=document.querySelector(`#bentoGrid .bc[data-id="${id}"]`);
+    const cardVid=card&&card.querySelector('video');
+    const poster=cardVid?cardVid.getAttribute('poster')||'':'';
+    const tag=card&&card.querySelector('.x-lock .x-det-tag');
+    const plainTitle=esc(String(p.title).replace(/<[^>]+>/g,''));
+    let mediaHTML=p.mainType==='video'
+        ?`<div class="pm-main"><video class="pm-main-vid" data-src="${p.main}"${poster?` poster="${poster}"`:''} preload="none" muted loop playsinline></video>${detFrame(tag&&tag.textContent)}</div>`
+        :`<div class="pm-main"><img class="pm-main-img" src="${p.main}" alt="${plainTitle}" loading="lazy">${detFrame(tag&&tag.textContent)}</div>`;
     if(p.gallery&&p.gallery.length){
-        const imgs=p.gallery.filter(m=>m.type==='img');
-        const vids=p.gallery.filter(m=>m.type==='vid');
-        const hasBa=imgs.length>=2;
-        if(hasBa){
-            mediaHTML+=`<div class="pm-ba">`;
-            imgs.forEach(m=>{
-                mediaHTML+=`<div class="pm-ba-side"><img src="${m.src}" alt="${m.label}" loading="lazy"><div class="pm-ba-tag">${m.label}</div></div>`;
-            });
-            mediaHTML+=`</div>`;
-            if(vids.length){
-                mediaHTML+=`<div class="pm-gallery">`;
-                vids.forEach(m=>{
-                    mediaHTML+=`<div class="pm-gal-item pm-vid-wrap" data-src="${m.src}"><video preload="none" muted loop playsinline></video><div class="pm-gal-label">${m.label}</div></div>`;
-                });
-                mediaHTML+=`</div>`;
-            }
+        const imgs=p.gallery.filter(m=>m.type==='img'),vids=p.gallery.filter(m=>m.type==='vid');
+        const vidItem=m=>`<div class="pm-gal-item pm-vid-wrap" data-src="${m.src}"><video preload="none" muted loop playsinline></video><div class="pm-gal-label">${esc(m.label)}</div></div>`;
+        if(imgs.length>=2){
+            mediaHTML+=`<div class="pm-ba">`+imgs.map(m=>`<div class="pm-ba-side"><img src="${m.src}" alt="${esc(m.label)}" loading="lazy"><div class="pm-ba-tag">${esc(m.label)}</div></div>`).join('')+`</div>`;
+            if(vids.length)mediaHTML+=`<div class="pm-gallery">`+vids.map(vidItem).join('')+`</div>`;
         }else{
-            mediaHTML+=`<div class="pm-gallery">`;
-            p.gallery.forEach(m=>{
-                if(m.type==='vid') mediaHTML+=`<div class="pm-gal-item pm-vid-wrap" data-src="${m.src}"><video preload="none" muted loop playsinline></video><div class="pm-gal-label">${m.label}</div></div>`;
-                else mediaHTML+=`<div class="pm-gal-item"><img src="${m.src}" alt="${m.label}" loading="lazy"><div class="pm-gal-label">${m.label}</div></div>`;
-            });
-            mediaHTML+=`</div>`;
+            mediaHTML+=`<div class="pm-gallery">`+p.gallery.map(m=>m.type==='vid'?vidItem(m):`<div class="pm-gal-item"><img src="${m.src}" alt="${esc(m.label)}" loading="lazy"><div class="pm-gal-label">${esc(m.label)}</div></div>`).join('')+`</div>`;
         }
     }
     pmMedia.innerHTML=mediaHTML;
     if(VM)VM.initModalMedia(pmMedia);
-
-    const stackItems=p.stack.map(s=>`<span class="pm-st">${s}</span>`).join('');
-    const badgeItems=p.badges.map(b=>`<span class="pm-badge"><i class="${b.ic}"></i> ${b.t}</span>`).join('');
-    let clientHTML=p.client?`<div class="pm-client"><i class="fas fa-user"></i> ${p.client}</div>`:'';
-    // optional links per project (projects.json): p.page = case-study page, p.repo = GitHub repo
-    // an absolute p.page is a live deployment, not a local case study — new tab, different label
-    const pageExt=p.page&&/^https?:\/\//.test(p.page);
-    const linkItems=[
-        p.page?`<a class="pm-link" href="${p.page}"${pageExt?' target="_blank" rel="noopener noreferrer"':''}>${pageExt?'VISIT LIVE SITE':'FULL PROJECT PAGE'} <i class="fas fa-arrow-right"></i></a>`:'',
-        p.repo?`<a class="pm-link" href="${p.repo}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> VIEW CODE</a>`:''
+    const stack=(p.stack||[]).map(s=>`<span class="pm-st">${s}</span>`).join('');
+    const badges=(p.badges||[]).map(b=>`<span class="pm-badge"><i class="${b.ic}" aria-hidden="true"></i> ${b.t}</span>`).join('');
+    const client=p.client?`<div class="pm-client"><i class="fas fa-user" aria-hidden="true"></i> ${p.client}</div>`:'';
+    const ext=p.page&&/^https?:\/\//.test(p.page);
+    const links=[
+        p.page?`<a class="pm-link" href="${p.page}"${ext?' target="_blank" rel="noopener noreferrer"':''}>${ext?'Visit live site':'Full project page'} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>`:'',
+        p.repo?`<a class="pm-link" href="${p.repo}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> View code</a>`:''
     ].join('');
-    pmInfo.innerHTML=`
-        <div class="pm-level">${p.level}</div>
-        <div class="pm-num">${p.num}</div>
-        <h2 class="pm-title">${p.title}</h2>
-        ${clientHTML}
-        <div class="pm-divider"></div>
-        <p class="pm-desc">${p.desc}</p>
-        <div class="pm-stack-label">TECH STACK</div>
-        <div class="pm-stack">${stackItems}</div>
-        <div class="pm-badges">${badgeItems}</div>
-        ${linkItems?`<div class="pm-links">${linkItems}</div>`:''}`;
-
+    pmInfo.innerHTML=`<div class="pm-level">${p.level}</div><div class="pm-num">${((card&&card.querySelector('.x-card-kicker .x-num'))||{}).textContent||p.num}</div>
+        <h2 class="pm-title" id="pmTitle">${p.title}</h2>${client}<div class="pm-divider"></div><p class="pm-desc">${p.desc}</p>
+        <div class="pm-stack-label">Tech stack</div><div class="pm-stack">${stack}</div><div class="pm-badges">${badges}</div>${links?`<div class="pm-links">${links}</div>`:''}`;
     modal.classList.add('active');
-    document.body.style.overflow='hidden';
+    modal.setAttribute('aria-hidden','false');
+    if(window.X)window.X.lock();else document.body.style.overflow='hidden';
+    modalReturn=trigger||document.activeElement;
+    const closeBtn=document.getElementById('pmClose');
+    if(closeBtn)setTimeout(()=>closeBtn.focus({preventScroll:true}),60);
 }
-
 function closeModal(){
+    if(!modal||!modal.classList.contains('active'))return;
     if(VM)VM.onModalClose(pmMedia);
     modal.classList.remove('active');
-    document.body.style.overflow='';
-    setTimeout(()=>{pmMedia.innerHTML='';pmInfo.innerHTML=''},600);
+    modal.setAttribute('aria-hidden','true');
+    if(window.X)window.X.unlock();else document.body.style.overflow='';
+    const seq=modalSeq;
+    setTimeout(()=>{if(seq===modalSeq&&!modal.classList.contains('active')){pmMedia.innerHTML='';pmInfo.innerHTML='';}},800);   // no reopen race
+    if(modalReturn&&modalReturn.focus)modalReturn.focus({preventScroll:true});
 }
-
 const pmCloseEl=document.getElementById('pmClose'),pmBgEl=document.getElementById('pmBg');
 if(pmCloseEl)pmCloseEl.addEventListener('click',closeModal);
 if(pmBgEl)pmBgEl.addEventListener('click',closeModal);
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal&&modal.classList.contains('active'))closeModal()});
+document.addEventListener('keydown',e=>{
+    if(!modal||!modal.classList.contains('active'))return;
+    if(e.key==='Escape'){closeModal();return;}
+    if(e.key!=='Tab')return;
+    const f=[...modal.querySelectorAll('button,a[href],video[controls],[tabindex]:not([tabindex="-1"])')].filter(n=>n.offsetParent!==null);
+    if(!f.length)return;
+    const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
 
 // ===== [x:shell] RECENT WIN ANNOUNCEMENT POPUP =====
-// Once per browser session; auto-dismisses after 10s; never shown on viewports
-// too small to host a modal comfortably.
-(function(){
-    const pop=document.getElementById('vhPop');
-    if(!pop) return;
-    const AUTO_CLOSE_MS=10000, SHOW_DELAY_MS=1200, MIN_W=340, MIN_H=500, FADE_MS=400;
-    const SEEN_KEY='vhPopSeen';
-
-    const tooSmall=()=>window.innerWidth<MIN_W||window.innerHeight<MIN_H;
-    let seen=false;
-    try{ seen=sessionStorage.getItem(SEEN_KEY)==='1'; }catch(e){}
-
-    let timer=null, lastFocus=null;
-
-    function close(){
-        if(!pop.classList.contains('open')) return;
-        clearTimeout(timer); timer=null;
-        pop.classList.remove('open');
-        document.body.style.overflow='';
-        try{ sessionStorage.setItem(SEEN_KEY,'1'); }catch(e){}
-        // preventScroll: the popup opens by itself, so the previously focused
-        // element (the contact field) must not drag the page down to itself
-        if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
-        setTimeout(()=>{ pop.hidden=true; },FADE_MS);
-    }
-
-    function open(){
-        if(tooSmall()) return;
-        lastFocus=document.activeElement;
-        pop.hidden=false;
-        // next frame, so the reveal transition runs and the card is focusable
-        requestAnimationFrame(()=>{
-            pop.classList.add('open');
-            const btn=document.getElementById('vhClose');
-            if(btn) btn.focus({preventScroll:true});
-        });
-        document.body.style.overflow='hidden';
-        timer=setTimeout(close,AUTO_CLOSE_MS);
-    }
-
-    pop.addEventListener('click',e=>{
-        if(e.target===pop || e.target.closest('#vhClose, #vhGo')) close();
-    });
-    document.addEventListener('keydown',e=>{
-        if(e.key==='Escape'&&pop.classList.contains('open')) close();
-    });
-    // a resize that drops below the threshold dismisses it, same as never opening
-    window.addEventListener('resize',()=>{ if(pop.classList.contains('open')&&tooSmall()) close(); });
-
-    if(!seen) setTimeout(open,SHOW_DELAY_MS);
-})();
+// moved to js/x-shell.js (wireToast) — non-modal toast, no scroll lock, no focus steal.
 
 // ===== [x:projects] PROJECT CARDS =====
-function initProjectCards() {
-  if(VM){VM.initBento();VM.initLazyAutoplay('.aw-lazy-vid');}
-  document.querySelectorAll('.bc').forEach(card=>{
-      const id=+card.dataset.id;
-      card.addEventListener('click',()=>openModal(id));
-      const ex=card.querySelector('.bc-expand');if(ex)ex.addEventListener('click',e=>{e.stopPropagation();openModal(id)});
-      // cursor-follow spotlight (rect cached on enter to avoid per-move layout reads)
-      let r=null;
-      card.addEventListener('mouseenter',()=>{r=card.getBoundingClientRect()});
-      card.addEventListener('mousemove',e=>{
-          if(!r)return;
-          card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
-          card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
-      });
-      card.addEventListener('mouseleave',()=>{r=null});
-  });
+function initProjectCards(){
+    if(VM)VM.initBento();                                   // (.aw-lazy-vid moved to js/x-awards.js)
+    document.querySelectorAll('#bentoGrid .bc').forEach(card=>{
+        const id=+card.dataset.id;
+        card.addEventListener('click',e=>{if(e.target.closest('a'))return;openModal(id,card.querySelector('.bc-expand'));});
+        const ex=card.querySelector('.bc-expand');
+        if(ex)ex.addEventListener('click',e=>{e.stopPropagation();openModal(id,ex);});
+    });
 }
 
 // ===== [x:projects] PROJECT FILTER + SHOW MORE =====
@@ -2124,179 +1825,72 @@ const projectCards=Array.from(document.querySelectorAll('#bentoGrid .bc'));
 const projectFilterButtons=Array.from(document.querySelectorAll('.pfb'));
 const projectMoreBtn=document.getElementById('projectMoreBtn');
 const projectSummary=document.getElementById('projectSummary');
-let activeProjectFilter='all';
-let showAllProjects=false;
-
+let activeProjectFilter='all',showAllProjects=false;
+const filterLabels={all:'featured',cv:'computer vision',ai:'AI / ML',web:'web / client',game:'game / 3D'};
 function updateProjectListing(animate=false){
-    let shown=0;
-    let matching=0;
+    let shown=0,matching=0,lead=null;
+    const revealed=[];
     projectCards.forEach(card=>{
-        const matches=activeProjectFilter==='all'||card.dataset.cat.split(' ').includes(activeProjectFilter);
+        const matches=activeProjectFilter==='all'||(card.dataset.cat||'').split(' ').includes(activeProjectFilter);
         const wasHidden=card.classList.contains('bc-hidden')||card.classList.contains('bc-limit-hidden');
         const limited=matches&&!showAllProjects&&shown>=6;
         if(matches)matching++;
-        if(matches&&!limited)shown++;
+        if(matches&&!limited){shown++;if(!lead)lead=card;if(wasHidden)revealed.push(card);}
         card.classList.toggle('bc-hidden',!matches);
         card.classList.toggle('bc-limit-hidden',limited);
-
-        if(!matches||limited){
-            if(VM)VM.pauseAllIn(card);
-        }else if(animate&&wasHidden){
-            card.style.opacity='0';
-            card.style.transform='scale(.92)';
-            requestAnimationFrame(()=>{
-                card.style.transition='opacity .4s,transform .4s var(--ease)';
-                card.style.opacity='1';
-                card.style.transform='';
-            });
-        }
+        if((!matches||limited)&&VM)VM.pauseAllIn(card);
     });
-
-    const filterLabels={all:'FEATURED',cv:'COMPUTER VISION',ai:'AI / ML',web:'WEB / CLIENT',game:'GAME / 3D'};
-    const filterLabel=filterLabels[activeProjectFilter];
-    if(projectSummary)projectSummary.textContent=`SHOWING ${shown} OF ${matching} ${filterLabel} PROJECTS · 150+ BUILT`;
+    projectCards.forEach(c=>c.classList.toggle('bc-lead',c===lead));   // lead = 8×2 tile on desktop
+    if(projectSummary)projectSummary.textContent=`Showing ${shown} of ${matching} ${filterLabels[activeProjectFilter]||''} projects · 150+ built`;
     if(projectMoreBtn){
-    projectMoreBtn.hidden=matching<=6;
-    projectMoreBtn.setAttribute('aria-expanded',String(showAllProjects));
-    projectMoreBtn.querySelector('span').textContent=showAllProjects
-        ?'SHOW FEWER PROJECTS'
-        :`SHOW ${matching-shown} MORE PROJECTS`;
+        projectMoreBtn.hidden=matching<=6;
+        projectMoreBtn.setAttribute('aria-expanded',String(showAllProjects));
+        const label=projectMoreBtn.querySelector('span');
+        if(label)label.textContent=showAllProjects?'Show fewer projects':`Show ${matching-shown} more projects`;
     }
-    document.getElementById('projects').classList.add('project-controls-ready');
+    const sec=document.getElementById('projects');if(sec)sec.classList.add('project-controls-ready');
     if(VM)VM.pauseAllBento();
+    const X=window.X;
+    if(X&&X.ScrollTrigger)X.ScrollTrigger.refresh();
+    if(animate&&X&&X.motion&&revealed.length)X.gsap.fromTo(revealed,{opacity:0,y:24},{opacity:1,y:0,stagger:.05,duration:.7,clearProps:'opacity,transform'});
 }
-
 updateProjectListing();
-
-projectFilterButtons.forEach(button=>{
-    button.addEventListener('click',()=>{
-        projectFilterButtons.forEach(item=>item.classList.toggle('active',item===button));
-        activeProjectFilter=button.dataset.f;
-        showAllProjects=false;
-        updateProjectListing(true);
-    });
-});
-
-if(projectMoreBtn)projectMoreBtn.addEventListener('click',()=>{
-    showAllProjects=!showAllProjects;
-    updateProjectListing(true);
-});
-
-const fluidMotionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
-const fluidHardwareReady=Number.isFinite(navigator.deviceMemory)
-    &&navigator.deviceMemory>=4
-    &&navigator.hardwareConcurrency>=6
-    &&!navigator.connection?.saveData;
-if(projectMoreBtn&&fluidHardwareReady&&!fluidMotionPreference.matches){
-    let fluidButtonVisible=false;
-    const syncFluidMotion=()=>{
-        projectMoreBtn.classList.toggle('fluid-active',fluidButtonVisible&&!document.hidden&&!fluidMotionPreference.matches);
-    };
-    const fluidButtonObserver=new IntersectionObserver(entries=>{
-        fluidButtonVisible=entries.some(entry=>entry.isIntersecting);
-        syncFluidMotion();
-    },{threshold:.1});
-    fluidButtonObserver.observe(projectMoreBtn);
-    document.addEventListener('visibilitychange',syncFluidMotion);
-    fluidMotionPreference.addEventListener('change',syncFluidMotion);
-}
+projectFilterButtons.forEach(button=>button.addEventListener('click',()=>{
+    projectFilterButtons.forEach(b=>{const on=b===button;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
+    activeProjectFilter=button.dataset.f;showAllProjects=false;updateProjectListing(true);
+}));
+if(projectMoreBtn)projectMoreBtn.addEventListener('click',()=>{showAllProjects=!showAllProjects;updateProjectListing(true);});
+// (the Chromium-only "fluid" button gate is deleted)
 
 // ===== [x:awards] SHOW MORE AWARDS =====
-const showAwardsBtn=document.getElementById('showAwardsBtn');
-const awMoreAwards=document.getElementById('awMoreAwards');
-if(showAwardsBtn && awMoreAwards){
+const showAwardsBtn=document.getElementById('showAwardsBtn'),awMoreAwards=document.getElementById('awMoreAwards');
+if(showAwardsBtn&&awMoreAwards){
     showAwardsBtn.addEventListener('click',()=>{
         const expanded=awMoreAwards.classList.toggle('active');
-        showAwardsBtn.textContent=expanded?'HIDE AWARDS':'SHOW MORE AWARDS';
-        if(expanded)awMoreAwards.scrollIntoView({behavior:'smooth',block:'center'});
+        showAwardsBtn.textContent=expanded?'Show fewer awards':'Show all 11 awards';     // text-only button: the "+" is a CSS ::after
+        showAwardsBtn.setAttribute('aria-expanded',String(expanded));
+        if(window.X&&window.X.ScrollTrigger)window.X.ScrollTrigger.refresh();
+        if(expanded){const first=awMoreAwards.querySelector('summary');if(first)first.focus({preventScroll:true});}
     });
 }
 
 // ===== [x:about] SKILLS ICON WALL =====
-// Scatters real tech logos behind the section at faux-depth (size + blur +
-// opacity + a soft glow) with a gentle float. Biased toward the edges/top/
-// bottom so they frame the content instead of hiding behind the opaque cards.
-(function(){
-    const fx=document.getElementById('skillsFx'); if(!fx)return;
-    if(window.matchMedia('(pointer:coarse)').matches) return; // skip the extra paint on phones
-    const BASE=['python','tensorflow','pytorch','opencv','react','cpp','javascript','django',
-                'arduino','opengl','html5','css3','mysql','nodejs','numpy','blender','git','raspberrypi'];
-    const ICONS=BASE.concat(BASE);            // pool of candidates to try to place
-    const rand=(a,b)=>a+Math.random()*(b-a);
-
-    // Work in pixels so we can space icons apart properly, then store positions
-    // as % (responsive). Reject any candidate that lands too close to an
-    // already-placed icon; skip it if no free spot is found — that guarantees
-    // no overlap and lets the wall self-pack to whatever fits.
-    const rect=fx.getBoundingClientRect();
-    const W=rect.width||window.innerWidth, H=rect.height||760;
-    const GAP=18;                              // min clear gap between icons (px)
-    const placed=[];                           // {cx, cy, r} centres in px
-
-    function candidate(band){
-        if(band===0) return [rand(0.01,0.17)*W, rand(0.04,0.94)*H]; // left edge
-        if(band===1) return [rand(0.83,0.99)*W, rand(0.04,0.94)*H]; // right edge
-        if(band===2) return [rand(0.05,0.95)*W, rand(0.02,0.19)*H]; // top edge
-        return            [rand(0.05,0.95)*W, rand(0.80,0.97)*H];   // bottom edge
-    }
-
-    ICONS.forEach((name,i)=>{
-        const depth=Math.random();                 // 0 far → 1 near
-        const sz=32+depth*32;                      // 32..64 px
-        const r=sz*0.5;
-        let cx=null, cy=null;
-        for(let t=0;t<28;t++){
-            const [x,y]=candidate(i%4);
-            let clear=true;
-            for(const p of placed){
-                if(Math.hypot(x-p.cx, y-p.cy) < r + p.r + GAP){ clear=false; break; }
-            }
-            if(clear){ cx=x; cy=y; placed.push({cx:x,cy:y,r}); break; }
-        }
-        if(cx===null) return;                      // no room → skip (no overlap)
-
-        const img=document.createElement('img');
-        img.src='assets/icons/tech/'+name+'.svg'; img.alt=''; img.loading='lazy'; img.className='sfx-ic';
-        img.style.left=((cx - sz/2)/W*100).toFixed(2)+'%';   // top-left corner as %
-        img.style.top =((cy - sz/2)/H*100).toFixed(2)+'%';
-        img.style.setProperty('--sz',sz.toFixed(0)+'px');
-        img.style.setProperty('--op',(0.22+depth*0.34).toFixed(2));   // prominent
-        img.style.setProperty('--bl',((1-depth)*2.2).toFixed(1)+'px');
-        img.style.setProperty('--rot',rand(-9,9).toFixed(1)+'deg');
-        img.style.setProperty('--dur',rand(7,13).toFixed(1)+'s');
-        img.style.setProperty('--dly',rand(0,6).toFixed(1)+'s');
-        fx.appendChild(img);
-    });
-})();
+// retired (and #skillsFx removed): 18 brand-colour SVGs fought the noir palette and cost ~260 KB.
 
 // ===== [x:about] SKILL CARD TILT =====
-document.querySelectorAll('.sk-card').forEach(card=>{
-    let r=null;
-    card.addEventListener('mouseenter',()=>{r=card.getBoundingClientRect();card.style.transition=''});
-    card.addEventListener('mousemove',e=>{
-        if(!r)return;
-        const x=e.clientX-r.left,y=e.clientY-r.top;
-        const rx=((y-r.height/2)/(r.height/2))*4,ry=-((x-r.width/2)/(r.width/2))*4;
-        card.style.transform=`perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
-    });
-    card.addEventListener('mouseleave',()=>{r=null;card.style.transform='';card.style.transition='transform .5s var(--ease)'});
-});
+// retired: inline transforms conflicted with the new layout.
 
 // ===== [x:awards] AWARD CAROUSELS =====
-const awardCarousels=document.querySelectorAll('.aw-carousel');
-awardCarousels.forEach(carousel=>{
+document.querySelectorAll('.aw-carousel').forEach(carousel=>{
     const slides=carousel.querySelectorAll('.aw-slide');
-    if(slides.length<2) return;
-    let activeSlide=0;
-    slides.forEach((slide,i)=>slide.classList.toggle('active',i===0));
+    if(slides.length<2||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    let active=0;
+    slides.forEach((s,i)=>s.classList.toggle('active',i===0));
     setInterval(()=>{
-        slides[activeSlide].classList.remove('active');
-        const currentVideo=slides[activeSlide].querySelector('video');
-        if(currentVideo)currentVideo.pause();
-        activeSlide=(activeSlide+1)%slides.length;
-        slides[activeSlide].classList.add('active');
-        const nextVideo=slides[activeSlide].querySelector('video');
-        if(nextVideo) nextVideo.play().catch(()=>{});
+        if(document.hidden||!carousel.closest('details[open]'))return;   // only rotate while its row is open
+        slides[active].classList.remove('active');
+        active=(active+1)%slides.length;
+        slides[active].classList.add('active');
     },4200);
 });
 
@@ -2326,7 +1920,7 @@ function animateJourneyDrive(now){
     const firstY=window.scrollY+bounds.top;
     const lastY=firstY+journeyDriveWrap.offsetHeight-window.innerHeight;
     const nextY=Math.min(lastY,Math.max(firstY,window.scrollY+driveDirection*620*elapsed));
-    window.scrollTo(0,nextY);
+    if(window.X&&window.X.lenis)window.X.lenis.scrollTo(nextY,{immediate:true,force:true});else window.scrollTo(0,nextY);
     if((nextY===firstY&&driveDirection<0)||(nextY===lastY&&driveDirection>0)){
         stopJourneyDrive();
         return;
@@ -2490,7 +2084,7 @@ if(portraitGuide&&portraitGuideText){
     [contactPortrait,heroPortrait].filter(Boolean).forEach(portrait=>{
         let clickCount=0;
         portrait.addEventListener('pointerenter',event=>{
-            if(event.pointerType!=='mouse')return;
+            if(event.pointerType!=='mouse'||portrait===heroPortrait)return;
             pointer={x:event.clientX,y:event.clientY};
             showMessage("hii");
         });
@@ -2510,7 +2104,7 @@ if(portraitGuide&&portraitGuideText){
             clickCount++;
             const message=clickCount===1?'yeah, thats me !':'wassup!';
             const rect=portrait.getBoundingClientRect();
-            pointer={x:rect.left+rect.width/2,y:rect.top+rect.height/2};
+            pointer={x:rect.left+rect.width/2,y:rect.top+rect.height*(portrait===heroPortrait?0.3:0.5)};
             showMessage(message);
         };
         portrait.addEventListener('click',greet);
