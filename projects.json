@@ -312,5 +312,22 @@
     "mainType": "img",
     "main": "assets/my projects/furti.webp",
     "gallery": []
+  },
+  {
+    "num": "19",
+    "level": "ONGOING VENTURE · PRODUCTIVITY SOFTWARE",
+    "badge": "ONGOING VENTURE",
+    "title": "Akyu — Focus, Without the Guilt",
+    "desc": "A personal assistant for time and focus, built for ADHD brains. Tell Akyu what your day holds and it turns it into timed tasks, replans when things change, and gently helps you stay on track. Ask when you need help with writing or what's on your screen.<br><br><strong>In active development.</strong> Akyu is not released yet. Windows is planned first, with Mac to follow. The demos on the site are scripted previews of the product being built.",
+    "stack": ["AI Assistant", "Desktop App", "Windows First", "Mac Planned", "Time Planning"],
+    "badges": [
+      { "ic": "fas fa-rocket", "t": "ONGOING VENTURE" },
+      { "ic": "fas fa-desktop", "t": "WINDOWS FIRST" },
+      { "ic": "fas fa-clock", "t": "FOCUS + TIME PLANNING" }
+    ],
+    "mainType": "img",
+    "main": "assets/my projects/akyu-og.png",
+    "page": "https://akyu.life/",
+    "gallery": []
   }
 ]
